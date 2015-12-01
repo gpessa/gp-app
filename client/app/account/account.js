@@ -23,6 +23,11 @@ angular.module('gpAppApp')
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
       })
+      .when('/connect', {
+        templateUrl: 'app/account/connect/connect.html',
+        controller: 'ConnectCtrl',
+        authenticate: true
+      })
       .when('/settings', {
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',

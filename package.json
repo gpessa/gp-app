@@ -26,6 +26,7 @@
     "passport-facebook": "latest",
     "passport-twitter": "latest",
     "passport-google-oauth": "latest",
+    "passport-withings": "latest",
     "socket.io": "^1.3.5",
     "socket.io-client": "^1.3.5",
     "socketio-jwt": "^4.2.0",

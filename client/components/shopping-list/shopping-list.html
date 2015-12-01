@@ -1,0 +1,43 @@
+<div>
+
+    <a ng-click="createList()">Create new list</a>
+
+    <div ng-repeat="shoppingList in shoppingLists | orderBy : '-lastupdate'">
+{{shoppingList.lastupdate}} 
+      <h3>
+        <input type="text" ng-model="shoppingList.name" ng-blur="saveList(shoppingList)"/> 
+        <a ng-click="deleteList(shoppingList)">(delete)</a>
+      </h3>
+
+      <form ng-submit="addItem(shoppingList)" ng-init="item = {}"  ng-init="shoppingList.newItem.date = new Date()">
+        <md-input-container>
+          <label>Category</label>
+          <input ng-model="shoppingList.newItem.category" type="text" required/>
+        </md-input-container>
+
+        <div ng-messages="shoppingList.newItem.category.$error" ng-if="shoppingList.submitted">
+          <div ng-message="required">This is required.</div>
+        </div>
+
+        <md-input-container >
+          <label>Price</label>
+          <input ng-model="shoppingList.newItem.price" type="number"  step="any" required/>
+        </md-input-container>
+
+        <md-datepicker ng-model="shoppingList.newItem.date" md-placeholder="Enter date" required></md-datepicker>
+
+        <md-button type="submit" class="md-raised" flex>Submit</md-button>
+      </form>
+
+      <md-list>
+
+        <md-list-item class="md-3-line" ng-repeat="item in shoppingList.list">
+          {{item.category}} - {{item.price | currency : "‎€" : 2}} - {{item.date | date:"dd/MM/yyyy"}}
+          <a ng-click="deleteItem(shoppingList, $index)">(delete item)</a>
+        </md-list-item>
+
+      </md-list>
+
+    </div>
+
+</div>
