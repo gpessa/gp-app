@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('gpApp')
+angular.module('gpAppApp')
   .directive('withingsWidget', function (Auth, Withings, $timeout, $filter) {
     return {
-      templateUrl: 'components/withings-widget/withings-widget.html',
+      templateUrl: 'components/withings/withings.html',
       restrict: 'C',
       scope:{
         type: '@'
-      }, 
+      },  
       link: function (scope, element, attrs) {
 
         Withings.getData()

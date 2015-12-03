@@ -3,7 +3,7 @@
 describe('Service: shoppingList', function () {
 
   // load the service's module
-  beforeEach(module('gpApp'));
+  beforeEach(module('gpAppApp'));
 
   // instantiate service
   var shoppingList;

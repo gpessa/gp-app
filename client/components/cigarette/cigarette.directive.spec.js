@@ -1,10 +1,10 @@
 'use strict';
 
-describe('Directive: shoppingList', function () {
+describe('Directive: cigarette', function () {
 
   // load the directive's module and view
   beforeEach(module('gpAppApp'));
-  beforeEach(module('components/shopping-list/shopping-list.html'));
+  beforeEach(module('components/cigarette/cigarette.html'));
 
   var element, scope;
 
@@ -13,9 +13,9 @@ describe('Directive: shoppingList', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<shopping-list></shopping-list>');
+    element = angular.element('<cigarette></cigarette>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the shoppingList directive');
+    expect(element.text()).toBe('this is the cigarette directive');
   }));
 });

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('gpApp')
+angular.module('gpAppApp')
   .service('Withings', function ($q, $http) {
-
+ 
     var withingsData = {};
 
     return {

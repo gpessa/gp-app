@@ -119,18 +119,16 @@ exports.index = function(req, res) {
 
         result.labels.push( new Date(startDate.valueOf()) );
 
-        var measure = _.filter(measures, {
-          date : startDate
-        });
+        var measure = _.filter(measures, {date : startDate});
 
         if(measure.length){
-          measure = measure[0];
-          
-          var weightValue = getMeasure(measure, 1);
-          result.weights.push(weightValue);
+          result.weights.push(function(){
+            return getMeasure(measure[0], 1);
+          }());
 
-          var fatValue = getMeasure(measure, 8);
-          result.fats.push(fatValue);
+          result.fats.push(function(){
+            return getMeasure(measure[0], 8);
+          }());
         } else {
           result.weights.push(undefined);
           result.fats.push(undefined);

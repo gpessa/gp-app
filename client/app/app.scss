@@ -19,9 +19,10 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 // injector
 @import 'admin/admin.scss';
 @import 'main/main.scss';
+@import '../components/cigarette/cigarette.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
 @import '../components/oauth-buttons/oauth-buttons.scss';
 @import '../components/shopping-list/shopping-list.scss';
-@import '../components/withings-widget/withings-widget.scss';
+@import '../components/withings/withings.scss';
 // endinjector

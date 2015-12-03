@@ -3,7 +3,7 @@
 describe('Directive: withingsWidget', function () {
 
   // load the directive's module and view
-  beforeEach(module('gpApp'));
+  beforeEach(module('gpAppApp'));
   beforeEach(module('components/withings-widget/withings-widget.html'));
 
   var element, scope;

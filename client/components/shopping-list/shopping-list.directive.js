@@ -1,20 +1,22 @@
 'use strict';
 
-angular.module('gpApp')
+angular.module('gpAppApp')
   .directive('shoppingListWidget', function (shoppingListService, socket) {
     return {
       templateUrl: 'components/shopping-list/shopping-list.html',
       restrict: 'EAC',
       link: function (scope, element, attrs) {
 
-        scope.addItem = function(shoppingList){
+        scope.addItem = function(shoppingList, shoppingListForm){
           shoppingList.submitted = true;
 
-          var item = angular.copy(shoppingList.newItem);
-          delete shoppingList.newItem;
+          if(shoppingListForm.$valid){
+            var item = angular.copy(shoppingList.newItem);
+            delete shoppingList.newItem;
 
-          shoppingList.list.push(item);
-          shoppingListService.update(shoppingList);
+            shoppingList.list.push(item);
+            shoppingListService.update(shoppingList);
+          }
         }
 
         scope.deleteItem = function(shoppingList, index){
@@ -29,7 +31,7 @@ angular.module('gpApp')
         scope.deleteList = function(shoppingList){
           shoppingListService.remove(shoppingList);
         }
-
+ 
         scope.saveList = function(shoppingList){
           shoppingListService.update(shoppingList);
         }

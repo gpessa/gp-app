@@ -5,9 +5,11 @@ angular.module('gpAppApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
+  'ngMessages',
   'btford.socket-io',
   'ui.bootstrap',
-  'validation.match'
+  'validation.match',
+  'chart.js'
 ])
   .config(function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

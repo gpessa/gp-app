@@ -21,10 +21,18 @@ exports.setup = function (User, config) {
             refreshToken : refreshToken,
           }
 
-          req.user.save(function(err) {
-            if (err) return done(err);
-            done(err, req.user);
-          });
+console.log('PROFILE');        
+console.log(profile);
+console.log('NEW USER WITHINGS');     
+console.log(req.user);
+
+          req.user.saveAsync()
+            .then(function(user) {
+              return done(null, user);
+            })
+            .catch(function(err) {
+              return done(err);
+            });
 
       } else {
 
@@ -45,11 +53,14 @@ exports.setup = function (User, config) {
               username: profile.username,
               provider: 'withings',
             });
-
-            user.save(function(err) {
-              if (err) return done(err);
-              done(err, user);
-            });
+            
+            user.saveAsync()
+              .then(function(user) {
+                return done(null, user);
+              })
+              .catch(function(err) {
+                return done(err);
+              });
 
           } else {
             return done(err, user);

@@ -3,7 +3,7 @@
 describe('Service: withings', function () {
 
   // load the service's module
-  beforeEach(module('gpApp'));
+  beforeEach(module('gpAppApp'));
 
   // instantiate service
   var withings;

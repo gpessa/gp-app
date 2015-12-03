@@ -20,6 +20,7 @@ import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
 var mongoStore = connectMongo(session);
+import User from '../api/user/user.model';
 
 module.exports = function(app) {
   var env = app.get('env');
@@ -32,7 +33,6 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  app.use(passport.initialize());
 
   // Persist sessions with mongoStore / sequelizeStore
   // We need to enable sessions for passport-twitter because it's an
@@ -46,6 +46,24 @@ module.exports = function(app) {
       db: 'gp-app'
     })
   }));
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+
+  // used to serialize the user for the session
+  passport.serializeUser(function(user, done) {
+    // console.log('serializeUser');
+      done(null, user.id); // where is this user.id going. are we supposed to access this anywhere?
+  });
+
+  // used to deserialize the user
+  passport.deserializeUser(function(id, done) {
+      // console.log('deserializeUser ' + id);
+      User.findById(id, function(err, user) {
+          done(err, user);
+      });
+  });
 
   /**
    * Lusca - express server security

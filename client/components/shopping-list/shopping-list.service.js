@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gpApp')
+angular.module('gpAppApp')
   .service('shoppingListService', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     return {
       get : function(callback) {
@@ -54,7 +54,7 @@ angular.module('gpApp')
              })
 
         return deferred.promise;
-    }
+    } 
   }
 });
 
