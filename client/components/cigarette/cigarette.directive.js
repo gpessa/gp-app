@@ -5,19 +5,22 @@ angular.module('gpAppApp')
     return {
       templateUrl: 'components/cigarette/cigarette.html',
       restrict: 'CEA',
-      link: function (scope, element, attrs) {
+      link: function (scope) {
 
         scope.smoke = function(){
           cigaretteService.create();
-        }
+
+          cigaretteService.get().then(function(cigarettes){
+            scope.cigarettes = cigarettes;
+          });
+        };
+
+        scope.deleteSmoke = function(smoke){
+          cigaretteService.remove(smoke);
+        };
 
         cigaretteService.get().then(function(cigarettes){
           scope.cigarettes = cigarettes;
-          socket.syncUpdates('cigarette', scope.cigarettes);
-        })
-
-        scope.$on('$destroy', function () {
-          socket.unsyncUpdates('cigarette');
         });
         
       }

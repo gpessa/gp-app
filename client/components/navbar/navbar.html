@@ -1,5 +1,6 @@
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
   <div class="container">
+
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
         <span class="sr-only">Toggle navigation</span>
@@ -9,7 +10,8 @@
       </button>
       <a href="/" class="navbar-brand">gp-app</a>
     </div>
-    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+
+    <nav collapse="isCollapsed" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
@@ -25,6 +27,7 @@
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="isLoggedIn()"><a href="/logout">Logout</a></li>
       </ul>
-    </div>
+    </nav>
+
   </div>
 </div>

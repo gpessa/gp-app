@@ -11,7 +11,7 @@ angular.module('gpAppApp')
             success(function(data) {
               deferred.resolve(data);
               return cb();
-            })
+            });
 
             return deferred.promise;
         },
@@ -25,7 +25,7 @@ angular.module('gpAppApp')
             success(function(data) {
               deferred.resolve(data);
               return cb();
-            })
+            });
 
             return deferred.promise;
         },
@@ -37,7 +37,7 @@ angular.module('gpAppApp')
                  .success(function(data) {
                     deferred.resolve(data);
                     return cb();
-                 })
+                 });
 
             return deferred.promise;
         },
@@ -49,9 +49,9 @@ angular.module('gpAppApp')
                  .success(function(data) {
                     deferred.resolve(data);
                     return cb();
-                 })
+                 });
 
             return deferred.promise;
         } 
-  }
+  };
 });

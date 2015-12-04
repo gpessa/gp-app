@@ -8,7 +8,7 @@ angular.module('gpAppApp')
       scope:{
         type: '@'
       },  
-      link: function (scope, element, attrs) {
+      link: function (scope) {
 
         Withings.getData()
           .then( function(result) {
@@ -17,15 +17,15 @@ angular.module('gpAppApp')
               scope.labels = result.labels.map(function (e, index) {
                 var dateNew = new Date(e);
                 var dateOld = new Date(result.labels[index - 1]);
-                return (dateNew.getMonth() != dateOld.getMonth() ? $filter('date')(dateNew, 'MMM yyyy') : '') 
+                return (dateNew.getMonth() !== dateOld.getMonth() ? $filter('date')(dateNew, 'MMM yyyy') : '');
               });
 
               var min = _.min(scope.measures, function(val){ if (val) { return val; }});
               var max = _.max(scope.measures);
 
               scope.options = {
-                scaleFontColor: "#fff",
-                scaleLineColor: "#fff",
+                scaleFontColor: '#fff',
+                scaleLineColor: '#fff',
                 resposinve:true,
                 pointDotRadius : 1,
                 scaleFontFamily : 'Roboto',
@@ -36,20 +36,20 @@ angular.module('gpAppApp')
                 scaleStepWidth : 1,
                 datasetStrokeWidth : 1,
                 showXAxisLabel:false,
-                scaleLabel: "<%= value %>" + (scope.type == 'weights' ? ' kg.' : '%'),
+                scaleLabel: '<%= value %>' + (scope.type === 'weights' ? ' kg.' : '%'),
                 scaleStartValue : min,
                 scaleSteps : Math.floor(max - min) + 1
               };
 
               scope.colours = [{
-                fillColor: "rgba(229, 67, 80, 1)",
-                pointColor: "rgba(255, 255, 255, 1)",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(255, 255, 255, 1)",
-                pointStrokeColor: "#fff",
-                strokeColor: "rgba(255, 255, 255, 1)"
+                fillColor: 'rgba(229, 67, 80, 1)',
+                pointColor: 'rgba(255, 255, 255, 1)',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(255, 255, 255, 1)',
+                pointStrokeColor: '#fff',
+                strokeColor: 'rgba(255, 255, 255, 1)'
               }];
-          })
+          });
         }
     };
   });

@@ -7,6 +7,7 @@
 var EventEmitter = require('events').EventEmitter;
 var Cigarette = require('./cigarette.model');
 var CigaretteEvents = new EventEmitter();
+var CigaretteController = require('./cigarette.controller');
 
 // Set max event listeners (0 == unlimited)
 CigaretteEvents.setMaxListeners(0);

@@ -2,11 +2,7 @@
 
 angular.module('gpAppApp')
   .service('Withings', function ($q, $http) {
- 
-    var withingsData = {};
-
     return {
-
       getData: function(user, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();

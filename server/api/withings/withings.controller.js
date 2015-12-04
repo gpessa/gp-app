@@ -115,20 +115,18 @@ exports.index = function(req, res) {
       var endDate = measures[0].date;
       var startDate = measures[measures.length - 1].date;
 
-      while (startDate.valueOf() != endDate.valueOf()){
+      while (startDate.valueOf() !== endDate.valueOf()){
 
         result.labels.push( new Date(startDate.valueOf()) );
 
         var measure = _.filter(measures, {date : startDate});
 
         if(measure.length){
-          result.weights.push(function(){
-            return getMeasure(measure[0], 1);
-          }());
+          var weight = getMeasure(measure[0], 1);
+          result.weights.push(weight);
 
-          result.fats.push(function(){
-            return getMeasure(measure[0], 8);
-          }());
+          var fat = getMeasure(measure[0], 8);
+          result.fats.push(fat);
         } else {
           result.weights.push(undefined);
           result.fats.push(undefined);
