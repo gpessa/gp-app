@@ -1,105 +1,50 @@
 'use strict';
 
+var WithingsService = require('./withings.service');
 var _ = require('lodash');
-var CryptoJS = require("crypto-js");
-var config = require('../../config/environment');
-var request = require('request');
 
 
-var generateOAuthBaseString = function (protocol, host, resource, parameters){
-    var sortedKeys = Object.keys(parameters);
-    sortedKeys.sort();
 
-    var paramPart = "";
-    var amp = "";
-    for (var i = 0 ; i < sortedKeys.length; i++){
-        paramPart+=amp+sortedKeys[i]+"="+parameters[sortedKeys[i]];
-        amp = "&";
+var getMeasure = function(measures, type) {
+    var result = _.filter(measures.measures, {
+        "type": type
+    });
+
+    if (result.length) {
+        result = result[0].value * Math.pow(10, result[0].unit);
+        result = _.floor(result, 2);
+    } else {
+        result = undefined;
     }
-    return ("GET"+"&"+encodeURIComponent(protocol+"://"+host+"/"+resource)+"&"+encodeURIComponent(paramPart));
+    return result;
 }
 
-var getNonce = function(N){
-  return (Math.random().toString(36)+'00000000000000000').slice(2, N+2)
+var getLastUpdateDate = function() {
+    var start = new Date();
+    start.setDate(start.getDate() - 180);
+    return start.getTime() / 1000
 }
 
-var getQueryString = function(parameters){
-  var urlrequest = "?";
-  var sortedKeys = Object.keys(parameters);
-  var amp = "";
-  sortedKeys.sort();
-  for (var i = 0 ; i < sortedKeys.length; i++){
-      urlrequest+=amp+sortedKeys[i]+"="+parameters[sortedKeys[i]];
-      amp = "&";
-  }
-  return urlrequest;
-}
 
-var getMeasure = function(measures, type){
-  var result = _.filter(measures.measures, { "type" : type });
-
-  if(result.length){
-    result = result[0].value * Math.pow(10, result[0].unit);
-    result = _.floor(result, 2);
-  } else {
-    result = undefined;
-  }
-
-  return result;
-}
-
-var getLastUpdateDate = function(){
-  var start  = new Date();
-
-  start.setDate(start.getDate() - 180);
-
-  return start.getTime() / 1000
-}
 
 // Get list of withings/measures
 exports.index = function(req, res) {
+  if(req.user.withings){
 
-  var withings = req.user.withings;
+    WithingsService.getData({
+      "oauth_token" : req.user.withings.accessToken,
+      "userid" : req.user.withings.id,
+      "refresh_token" : req.user.withings.refreshToken
+    })
+    .then(function(r){
 
-  var protocol = 'http';
-  var host = 'wbsapi.withings.net';
-  var resource = 'measure';
+      var measures = r.body.measuregrps;
 
-  var parameters = {
-    action : 'getmeas',
-    oauth_consumer_key : config.withings.clientID,
-    oauth_nonce : getNonce(10),
-    oauth_signature_method : 'HMAC-SHA1',
-    oauth_timestamp : new Date().getTime(),
-    oauth_token : withings.accessToken,
-    oauth_version : '1.0',
-    userid: withings.id,
-    category : 1
-  };
-
-  var consumerSecret = config.withings.clientID;
-  var tokenSecret = config.withings.WITHINGS_SECRET;
-
-  var baseString = generateOAuthBaseString(protocol, host, resource, parameters);
-  var oAuthSecret = config.withings.clientSecret + "&" + withings.refreshToken;
-  parameters.oauth_signature = encodeURIComponent(CryptoJS.HmacSHA1(baseString, oAuthSecret).toString(CryptoJS.enc.Base64));
-
-  var urlrequest = protocol + "://" + host + "/" + resource + getQueryString(parameters);
-
-  //Lets configure and request
-  request({
-    json:true,
-    url: urlrequest, //URL to hit
-    method: 'GET'
-  }, function(error, response, body){
-    if(error) {
-      console.log(error);
-    } else {
-
-      var measures = response.body.body.measuregrps;
       var result = {
-        weights : [],
-        fats : [],
+        measures : {
+          weights : [],
+          fats : []
+        },
         labels : []
       };
 
@@ -112,36 +57,38 @@ exports.index = function(req, res) {
         measure.date = date;
       });
 
+
       var endDate = measures[0].date;
       var startDate = measures[measures.length - 1].date;
 
       while (startDate.valueOf() !== endDate.valueOf()){
-
         result.labels.push( new Date(startDate.valueOf()) );
 
         var measure = _.filter(measures, {date : startDate});
 
         if(measure.length){
           var weight = getMeasure(measure[0], 1);
-          result.weights.push(weight);
+          result.measures.weights.push(weight);
 
           var fat = getMeasure(measure[0], 8);
-          result.fats.push(fat);
+          result.measures.fats.push(fat);
         } else {
-          result.weights.push(undefined);
-          result.fats.push(undefined);
+          result.measures.weights.push(undefined);
+          result.measures.fats.push(undefined);
         }
 
         startDate.setDate(startDate.getDate() + 1);
       }
 
-      res.status(response.statusCode).json(result);
-    }
-  });
 
+        
+console.log(result);
+
+      res.status(200).json(result);
+
+    })
+
+  }
 };
 
 
-function handleError(res, err) {
-  return res.status(500).send(err);
-}

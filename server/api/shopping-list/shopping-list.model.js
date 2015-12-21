@@ -8,6 +8,7 @@ var ShoppingListSchema = new Schema({
   lastupdate : Date,
   list: [{ 
     name : { type: String, required: true, trim: true },
+    archivied : { type: Boolean, default: false }
   }]
 });
 

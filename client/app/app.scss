@@ -1,7 +1,25 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
-$fa-font-path: "../bower_components/font-awesome/fonts";
+$icon-font-path:  "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$fa-font-path:    "../bower_components/font-awesome/fonts";
+$zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500);
+
+
+$body-bg:                   #fff !default;
+$text-color:                #fff;
+
+$font-family-serif:         'Roboto', sans-serif; 
+$font-family-sans-serif:    'Roboto', sans-serif; 
+
+$headings-font-weight:      300 !default;
+
+$border-radius-base:        0;
+$border-radius-large:       0;
+$border-radius-small:       0;
+
+
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
-@import '../bower_components/bootstrap-social/bootstrap-social.scss';
+@import '../bower_components/material-design-iconic-font/scss/material-design-iconic-font';
 @import '../bower_components/font-awesome/scss/font-awesome';
 
 /**
@@ -19,10 +37,53 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 // injector
 @import 'admin/admin.scss';
 @import 'main/main.scss';
-@import '../components/cigarette/cigarette.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
 @import '../components/oauth-buttons/oauth-buttons.scss';
-@import '../components/shopping-list/shopping-list.scss';
-@import '../components/withings/withings.scss';
+@import '../components/widget-container/widget-container.scss';
+@import '../components/widget/widget.scss';
+@import '../components/widgets/buienradar/buienradar.scss';
+@import '../components/widgets/cigarette/cigarette.scss';
+@import '../components/widgets/shopping-list/shopping-list.scss';
+@import '../components/widgets/withings/withings.scss';
 // endinjector
+
+
+html:after{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  content: "";
+  z-index: -2;
+  
+  background: url('../assets/images/Rice Paddy.jpg') no-repeat center center fixed;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+
+html:before{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  content: "";
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.4);
+} 
+
+.margin{
+  margin: 20px;
+}

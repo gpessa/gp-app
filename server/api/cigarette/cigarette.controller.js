@@ -61,112 +61,83 @@ function removeEntity(res) {
 
 // Gets a list of Cigarettes
 exports.index = function(req, res) {
+  var end = new Date();
+  var start = new Date(end.getTime() - (60*60*24*7*1000));
 
-  Cigarette
-
-    .aggregate([{
-      "$project":{
-         "date":"$date",
-         "_id":0,
-         "h":{
-            "$hour":"$date"
-         },
-         "m":{
-            "$minute":"$date"
-         },
-         "s":{
-            "$second":"$date"
-         },
-         "ml":{
-            "$millisecond":"$date"
-         }
-      }
-    },{
-      "$project":{
-         "date":{
-            "$subtract":[
-               "$date",
-               {
-                  "$add":[
-                     "$ml",
-                     {
-                        "$multiply":[
-                           "$s",
-                           1000
+  Cigarette.aggregate([
+    {
+        "$match": {
+            "date": {
+                "$gt": start,
+                "$lt": end
+            }
+        }
+    }, {
+        "$project": {
+            "date": "$date",
+            "_id": 0,
+            "h": {
+                "$hour": "$date"
+            },
+            "m": {
+                "$minute": "$date"
+            },
+            "s": {
+                "$second": "$date"
+            },
+            "ml": {
+                "$millisecond": "$date"
+            }
+        }
+    }, {
+        "$project": {
+            "date": {
+                "$subtract": [
+                    "$date", {
+                        "$add": [
+                            "$ml", {
+                                "$multiply": [
+                                    "$s",
+                                    1000
+                                ]
+                            }, {
+                                "$multiply": [
+                                    "$m",
+                                    60,
+                                    1000
+                                ]
+                            }, {
+                                "$multiply": [
+                                    "$h",
+                                    60,
+                                    60,
+                                    1000
+                                ]
+                            }
                         ]
-                     },
-                     {
-                        "$multiply":[
-                           "$m",
-                           60,
-                           1000
-                        ]
-                     },
-                     {
-                        "$multiply":[
-                           "$h",
-                           60,
-                           60,
-                           1000
-                        ]
-                     }
-                  ]
-               }
-            ]
-         }
-      }
-   },{
-      "$group":{
-         "_id":"$date",
-         "count":{
-            "$sum":1
-         }
-      }
-   },
-   { "$sort" : { "_id" : -1 } }
-], function (err, result) {
+                    }
+                ]
+            }
+        }
+    }, {
+        "$group": {
+            "_id": "$date",
+            "count": {
+                "$sum": 1
+            }
+        }
+    }, {
+        "$sort": {
+            "_id": -1
+        }
+    }
+  ], function (err, result) {
     if(err) { return handleError(res, err); }
     if(!result) { return res.status(404).send('Not Found'); }
     return res.json(result);
   })
 
 
-
-    // .aggregate([{
-    //   $group : { 
-    //     _id:{ 
-    //         day: {$dayOfMonth: "$date"},
-    //         month: {$month: "$date"},
-    //         year: {$year: "$date"}
-    //     }, 
-    //     total : {
-    //       $sum : 1
-    //     } }
-    //   }], function (err, result) {
-    //     if (err) {
-    //         console.log(err);
-    //         return;
-    //     }
-    //     console.log(result);
-    // })
-
-// .toArray(function(err, result) {
-//      assert.equal(err, null);
-//      console.log(result);
-//      callback(result);
-//    });
-
-         // _id:{ev:'$ev', doy:{$dayOfYear:'$dt'} },
-// .toArray(function(err, result) {
-//      assert.equal(err, null);
-//      console.log(result);
-//      callback(result);
-//    });
-
-
-  // Cigarette.findAsync({created_at: {$not: {$type: 9}}})
-  //   .then(responseWithResult(res))
-  //   .catch(handleError(res));
 };
 
 // Gets a single Cigarette from the DB

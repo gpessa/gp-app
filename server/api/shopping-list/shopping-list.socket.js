@@ -16,7 +16,7 @@ exports.register = function(socket) {
     var listener = createListener('shopping-list:' + event, socket);
 
     ShoppingListEvents.on(event, listener);
-    socket.on('disconnect', removeListener(event, listener));
+    // socket.on('disconnect', removeListener(event, listener));
   }
 };
 

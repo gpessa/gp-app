@@ -1,0 +1,13 @@
+<div>
+  
+  <a ng-click="smoke()">
+    <i class="icon-cigarette"></i>
+  </a>
+
+  <ul>
+    <li ng-repeat="cigarette in cigarettes">
+      {{cigarette._id | date:"dd/MM/yyyy"}} - {{cigarette.count}}
+    </li>
+  </ul>
+
+</div>

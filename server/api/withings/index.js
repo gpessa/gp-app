@@ -1,7 +1,8 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./withings.controller');
+import express from 'express';
+import controller from './withings.controller';
+import auth from '../../auth/auth.service';
 
 var router = express.Router();
 

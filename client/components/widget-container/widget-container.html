@@ -1,0 +1,7 @@
+<div class="clearfix">
+  <add-widget class="pull-right"></add-widget>
+</div>
+
+<div html-sortable="sortable_option" ng-model="widgetContainer.widgets" ng-if="widgetContainer.widgets.length > 0">
+  <div class="widget" data="widget" ng-repeat="widget in widgetContainer.widgets"/>
+</div>

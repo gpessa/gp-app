@@ -224,7 +224,7 @@ module.exports = function (grunt) {
           /font-awesome\.css/,
           /bootstrap\.css/,
           /bootstrap-sass-official/,
-          /bootstrap-social\.css/
+          /material-design-iconic-font/
         ]
       },
       client: {
