@@ -1,18 +1,12 @@
-$icon-dim : 45px;
-
 .btn-social-container{
   text-align: center;
   margin-top:20px;
 
-  .btn-social{
-    width: $icon-dim;
-    height: $icon-dim;
-    line-height: $icon-dim;
-    border:1px solid;
-    border-radius: 100%;
-    padding: 0;
-    border-radius: 100%;
-    font-size: 145%;
-    margin: 0 5px;
+  .btn{
+    color:#fff;
+
+    &:hover{
+      color:darken(#fff, 20);
+    }
   }
 }

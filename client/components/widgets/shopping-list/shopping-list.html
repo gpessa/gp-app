@@ -1,37 +1,31 @@
-<div>
-        
-    <a ng-click="createList()">Create new list</a>
-
-    <div class="" ng-repeat="shoppingList in shoppingLists | orderBy : '-lastupdate'">
-      
-      <h4 class="shopping-list_title">
-        <input type="text" ng-model="shoppingList.name" ng-blur="saveList(shoppingList)"/> 
-        <a ng-click="deleteList(shoppingList)">(delete)</a>
-      </h4>
-
-      <div class="list-group-item-text">
-
-        <form ng-submit="addItem(shoppingList, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
-          <div class="input-group">
-            <input class="form-control" ng-model="shoppingList.item.name" name="item" type="text" required/>
-
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-default btn-primary btn-block">Submit</button>
-            </span>
-          </div>
-        </form>
-
-        <ul class="list-inline">
-          <li ng-repeat="item in shoppingList.list">
-            <button ng-click="archiveItem(shoppingList, $index)" class="btn-link" ng-class="{'btn-disabled' : item.archivied}">
-              {{item.name}} 
-              <i ng-class="{'zmdi zmdi-redo' : item.archivied , 'zmdi zmdi-close' : !item.archivied}"></i>
-            </button>
-          </li>
-        </ul>
-
-      </div>
-
-    </div>
-
+<div class="shopping-list-create">
+  <a class="btn btn-block btn-primary" ng-click="createList()">Create new list</a>
 </div>
+
+<ul class="shopping-list" ng-repeat="shoppingList in shoppingLists | orderBy : '-lastupdate'">
+
+  <li class="shopping-list_item shopping-list_title">
+    <a class="shopping-list_delete fa fa-trash-o" ng-click="deleteList(shoppingList)"></a>
+    <input type="text" ng-model="shoppingList.name" ng-blur="saveList(shoppingList)"/>
+  </li> 
+
+  <li class="shopping-list_item shopping-list_new">
+    <form ng-submit="addItem(shoppingList, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
+      <input class="form-control" 
+             placeholder="Add item"
+             ng-model="shoppingList.item.name" 
+             name="item" 
+             type="text" 
+             required/>
+    </form>
+  </li>
+
+  <li class="shopping-list_item" ng-repeat="item in shoppingList.list" ng-class="{'archived' : item.archivied}">
+    <a class="shopping-list_delete fa fa-trash-o"
+       ng-click="archiveItem(shoppingList, $index)">
+    </a>
+    {{item.name}}
+  </li>
+
+</ul>
+

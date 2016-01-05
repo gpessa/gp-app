@@ -10,6 +10,7 @@ angular.module('gpAppApp').directive('buienradarWidget', function($location, $ro
                     lat: coordinates.coords.latitude,
                     lon: coordinates.coords.longitude
                 }).then(function(buienradar) {
+                    scope.widget.loading = false;
                     scope.labels = buienradar.labels;
                     scope.rainfalls = buienradar.rainfalls;
                 });

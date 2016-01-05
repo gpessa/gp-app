@@ -1,22 +1,43 @@
-@font-face {
-  font-family: "Flaticon";
-  src: url("/components/cigarette/fonts/flaticon.eot");
-  src: url("/components/cigarette/fonts/flaticon.eot#iefix") format("embedded-opentype"),
-  url("/components/cigarette/fonts/flaticon.woff") format("woff"),
-  url("/components/cigarette/fonts/flaticon.ttf") format("truetype"),
-  url("/components/cigarette/fonts/flaticon.svg") format("svg");
-  font-weight: normal;
-  font-style: normal;
+.widget-cigarette .widget-body{
+  padding: 0;
 }
 
-[class^="icon-cigarette"]:before, [class*=" icon-cigarette"]:before,
-[class^="icon-cigarette"]:after, [class*=" icon-cigarette"]:after {   
-  font-family: Flaticon;
-  font-size: 20px;
-  font-style: normal;
-  margin-left: 20px;
+.widget-cigarette_add{
+  display: inline-block;
+  height: 70px;
+  width: 70px;
+  line-height: 70px;
+  text-align: center;
+  padding: 0; 
+  left: 0;
+  top: 0;
+  position: absolute;
+
+  &:before{
+    font-size: 200%;
+  } 
 }
 
-.icon-cigarette:before {
-  content: "\e000";
+.widget-cigarette_today{
+  padding: 9px 0 9px 85px;
+  
+  label{
+
+  }
+  h1{
+    margin: 0;
+    line-height: 0.8em;
+  }
+}
+
+.widget-cigarette_list{
+  margin: 0;
+}
+
+.widget-cigarette_list-item{
+  padding: $padding-base-vertical $padding-base-horizontal;
+  
+  small{
+    color:inherit;
+  }
 }

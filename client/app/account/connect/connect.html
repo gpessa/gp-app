@@ -1,35 +1,13 @@
 <navbar></navbar>
 
-<widget title="Connect">
+<div class="col-md-4 col-md-offset-4">
+
+  <h3>Connect</h3>
+
+  <p>Connect your account:</p>
 
   <form class="form" name="form" ng-submit="login(form)" novalidate>
-
-    <p class="text-danger" ng-if="errors.other">{{errors.other}}</p>
-
-    <div class="form-group" ng-class="{'has-error has-feedback' : submitted && form.email.$error}">
-      <label class="control-label">Email</label>
-      <input type="email" name="email" class="form-control" ng-model="user.email" required>
-
-      <div ng-messages="form.email.$error" ng-if="submitted" class="help-block">
-        <div ng-message="required">This is required.</div>
-      </div>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error has-feedback' : submitted && form.password.$error}">
-      <label class="control-label">Password</label>
-      <input type="password" name="password" class="form-control" ng-model="user.password" required>
-
-      <div ng-messages="form.password.$error" ng-if="submitted" class="help-block">
-        <div ng-message="required">This is required.</div>
-      </div>
-    </div>
-
-    <div class="form-group text-center">
-      <button class="btn btn-primary btn-block" type="submit">Login</button>
-      <a class="btn btn-block btn-link" href="/signup">Register</a>
-    </div>
-
     <oauth-buttons/>
   </form>
 
-</widget>
+</div>

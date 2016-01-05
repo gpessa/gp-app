@@ -1,13 +1,12 @@
-<div>
-  
-  <a ng-click="smoke()">
-    <i class="icon-cigarette"></i>
-  </a>
+<a ng-click="smoke()" class="widget-cigarette_add btn btn-secondary icon icon-cigarette"></a>
 
-  <ul>
-    <li ng-repeat="cigarette in cigarettes">
-      {{cigarette._id | date:"dd/MM/yyyy"}} - {{cigarette.count}}
-    </li>
-  </ul>
-
+<div class="widget-cigarette_today">
+  <p>Today smoked:</p>
+  <h1 ng-class="{'text-danger' : cigarettes[0].count > widget.configuration.threshold}">{{cigarettes[0].count}}</h1>
 </div>
+
+<ul class="widget-cigarette_list list-unstyled" ng-if="cigarettes.length > 1">
+  <li class="widget-cigarette_list-item" ng-repeat="cigarette in cigarettes" ng-if="$index > 0">
+    <strong>{{cigarette.count}}</strong> <small class="pull-right">{{cigarette._id | date: dateFormat.day}}</small>
+  </li>
+</ul>

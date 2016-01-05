@@ -1,24 +1,36 @@
 'use strict';
 
 angular.module('gpAppApp')
-  .directive('withingsWidget', function (Auth, Withings, $timeout, $filter, chartConfiguration) {
+  .directive('withingsWidget', function (Auth, Withings, $timeout, $filter, chartConfiguration, dateFormat) {
     return {
       templateUrl: 'components/widgets/withings/withings.html',
-      restrict: 'C', 
-      scope: {
-        type : "@"
-      },
+      restrict: 'C',
       link: function (scope) {
-        scope.type = scope.type || "weights";
+
+        scope.schema.properties.configuration = {
+          "type" : "object",
+          "title" : "Preferences",
+          "properties": {
+            "type" : {
+              type: "string",
+              title: "Type",
+              enum: ["fats", "weights"]
+            }
+          },
+        }
+
+        scope.type = scope.widget.configuration.type || "weights";
+        scope.dateFormat = dateFormat;
         scope.chartConfiguration = angular.copy(chartConfiguration);
 
         var unit = {
           "fats"  : "%",
-          "weights" : "kg."
+          "weights" : " kg."
         }[scope.type];
 
         Withings.getData()
           .then( function(result) {
+              scope.widget.loading = false;
               scope.measures = result.measures[scope.type];
 
               var lastIndex = function(){
@@ -43,7 +55,7 @@ angular.module('gpAppApp')
 
               angular.extend(scope.chartConfiguration.options, { 
                 scaleOverride : true,
-                scaleLabel: '<%= value %>' + unit,
+                scaleLabel: ' <%= value %>' + unit,
                 scaleStartValue : min,
                 scaleSteps : Math.floor(max - min) + 1
               });

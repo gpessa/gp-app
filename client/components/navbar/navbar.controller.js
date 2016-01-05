@@ -2,10 +2,10 @@
 
 angular.module('gpAppApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
+    $scope.menu = [/**{
       'title': 'Home',
       'link': '/'
-    }];
+    }**/];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;

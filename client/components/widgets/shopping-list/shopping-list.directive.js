@@ -43,6 +43,7 @@ angular.module('gpAppApp')
         shoppingListService.get().then(function(lists){
           scope.shoppingLists = lists;
           socket.syncUpdates('shopping-list', scope.shoppingLists);
+          scope.widget.loading = false;
         });
 
         scope.$on('$destroy', function () {

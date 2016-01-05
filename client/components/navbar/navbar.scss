@@ -1,0 +1,47 @@
+.navbar{
+  border:0;
+
+  .navbar-brand{
+    margin-left:0!important;
+    padding:0;
+
+    img{
+      height: 100%;
+      display: inline-block;
+      border-radius: 50%;
+      padding: 5px;
+    }
+
+    .navbar-brand-user{
+      display: inline-block;
+      float: right;
+      margin: 12px;
+
+      h5{
+        margin:0; 
+      }
+
+      h6{
+        color:$text-muted;
+        margin:0; 
+      }
+    }
+  }
+
+  .navbar-right{
+    margin-right: 0!important;
+
+    a {
+      text-align: center;
+      padding-bottom: 6px;
+      padding-top: 6px;
+      
+      small{
+        display: block;
+        margin-top: -2px;
+        color: #000;
+        font-weight: 400;
+      }
+    }
+  }
+}

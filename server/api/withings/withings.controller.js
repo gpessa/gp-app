@@ -81,8 +81,14 @@ exports.index = function(req, res) {
       }
 
 
-        
-console.log(result);
+      // var prev = result.measures.weights[0];
+      // _.forEach(result.measures.weights, function(measure, index) {
+      //   var prevTemp = result.measures.weights[index - 1];
+      //   var actual = measure;
+
+      //     result.measures.weights[index] = (measure + prev) / 2;
+          
+      // })
 
       res.status(200).json(result);
 

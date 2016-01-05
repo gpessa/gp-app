@@ -26,7 +26,19 @@ angular.module('gpAppApp')
                });
 
           return deferred.promise;
-      } 
+      },
+      update  : function(widget, callback){
+          var cb = callback || angular.noop;
+          var deferred = $q.defer();
+
+          $http.put('/api/widget/' + widget._id, widget)
+               .success(function(data) {
+                  deferred.resolve(data);
+                  return cb(data);
+               });
+
+          return deferred.promise;
+      }
   };
 });
 

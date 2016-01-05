@@ -10,7 +10,8 @@ angular.module('gpAppApp', [
     'ui.bootstrap',
     'validation.match',
     'chart.js',
-    'html5.sortable'
+    'html5.sortable',
+    'schemaForm'
   ])
 
   .factory("chartConfiguration", function() {
@@ -21,8 +22,8 @@ angular.module('gpAppApp', [
           scaleLineColor: '#fff',
           resposinve:true,
           pointDotRadius : 2,
-          scaleFontFamily : 'Roboto',
-          tooltipFontFamily : 'Roboto',
+          scaleFontFamily : 'inherit',
+          tooltipFontFamily : 'inherit',
           animation: false,
           showTooltips: false,
           scaleStepWidth : 1,
@@ -38,6 +39,12 @@ angular.module('gpAppApp', [
           pointStrokeColor: 'rgba(65, 215, 185, 1)',
           strokeColor: 'rgba(255, 255, 255, 1)'
         }]
+    }
+  })
+
+  .factory("dateFormat", function() {
+    return {
+      day : "dd MMM yyyy"
     }
   })
 

@@ -4,7 +4,8 @@ angular.module('gpAppApp')
   .directive('widgetContainer', function (widgetContainerService, socket) {
     return {
       templateUrl: 'components/widget-container/widget-container.html',
-      restrict: 'EA',
+      restrict: 'E',
+      replace:true,
       scope: {
         id : '@'
       },
@@ -30,7 +31,7 @@ angular.module('gpAppApp')
         };
 
         $scope.showWidgetContainer = function(){
-             widgetContainerService.show( $scope.id )
+          widgetContainerService.show( $scope.id )
           .then(function(widgetContainer){
             $scope.widgetContainer = widgetContainer;
             socket.syncUpdates('widget-container', $scope.widgetContainer); 

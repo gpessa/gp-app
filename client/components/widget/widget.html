@@ -1,15 +1,33 @@
-<div class="widget-header">
-    <h4>
-      {{data.type}}
-      <div class="widget-header-buttons">
-        <a ng-click="remove()" class="btn btn-link btn-sm">
-          <i class="fa fa-times"></i>
-        </a>
-        <a ng-click="setting()" class="btn btn-link btn-sm">
-          <i class="fa fa-cog"></i>
-        </a>
-      </div>
-  </h4>
+<div class="widget widget-{{widget.type}}">
+
+  <div class="widget-header">
+      <h4>
+        {{widget.name}} &nbsp;
+        <div class="widget-header-buttons">
+          <a ng-click="setting()" class="btn btn-link btn-sm">
+            <i class="fa fa-cog"></i>
+          </a>
+          <a ng-click="remove()" class="btn btn-link btn-sm">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+    </h4>
+  </div>
+
+  <div class="widget-loader" ng-show="!widget.isSettingsOpen && widget.loading">
+    <i class="fa fa-3x fa-spin fa-circle-o-notch"></i>
+  </div>
+
+  <div class="widget-body clearfix" ng-show="!widget.isSettingsOpen && !widget.loading"></div>
+
+  <div class="widget-settings clearfix" ng-if="widget.isSettingsOpen">
+    <form name="form" 
+          sf-schema="schema" 
+          sf-form="formcontrols" 
+          sf-model="conf" 
+          ng-submit="saveConfiguration(form)"></form>
+  </div>
+
+  <div class="widget-footer"></div>
+
 </div>
-<div class="widget-body clearfix"></div>
-<div class="widget-footer"></div>

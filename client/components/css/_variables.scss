@@ -1,0 +1,50 @@
+$brand-primary:             #3193c6;
+$brand-secondary:           #40d7b9;
+
+$input-bg:                  rgba(255,255,255,0.1);
+$input-border:              #fff;
+$input-color:               #fff;
+
+$body-bg:                   #fff;
+$text-color:                #fff;
+
+$font-family-serif:         'Roboto', sans-serif; 
+$font-family-sans-serif:    'Roboto', sans-serif; 
+$headings-font-family:      'Roboto Condensed', sans-serif;
+
+$headings-font-weight:      400;
+
+$border-radius-base:        0;
+$border-radius-large:       0;
+$border-radius-small:       0;
+
+
+
+$btn-secondary-color: #fff;
+$btn-secondary-bg: $brand-secondary;
+$btn-secondary-border: $brand-secondary;
+
+
+// Basics of a navbar
+$navbar-default-color:             inherit;
+$navbar-default-bg:                #fff;
+$navbar-default-border:            darken($navbar-default-bg, 6.5%);
+
+// Navbar links
+$navbar-default-link-color:                $brand-primary;
+$navbar-default-link-hover-color:          darken($navbar-default-link-color, 5%);
+$navbar-default-link-hover-bg:             transparent;
+$navbar-default-link-active-color:         darken($navbar-default-link-color, 10%);
+$navbar-default-link-active-bg:            transparent;
+$navbar-default-link-disabled-color:       lighten($navbar-default-link-color, 10%);
+$navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+$navbar-default-brand-color:               #000;
+$navbar-default-brand-hover-color:         #000;
+$navbar-default-brand-hover-bg:            transparent;
+
+// Navbar toggle
+$navbar-default-toggle-hover-bg:           #ddd;
+$navbar-default-toggle-icon-bar-bg:        #888;
+$navbar-default-toggle-border-color:       #ddd;

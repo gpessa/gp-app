@@ -1,0 +1,53 @@
+.widget-container{
+  margin-top: -$navbar-margin-bottom;
+  position: relative;
+
+  > .container-fluid > .row{
+    margin-top: -$navbar-margin-bottom;
+  }
+
+  widget{
+    margin-top: $navbar-margin-bottom;
+  }
+}
+
+.add-widget{
+  padding: 10px;
+  border: 2px dashed #fff;
+  opacity: 0;
+  height: 20px;
+  transition: all 0.7s;
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
+
+  ul{
+    margin: 10px 0 0 0;
+  }
+
+  .add-widget_item{
+    cursor: pointer;
+    color:#fff;
+    text-align: center;
+    
+    .add-widget_icon{
+      display: block;
+      font-size: 150%;
+      margin-bottom: 5px;
+    }
+
+    .add-widget_title{
+      display: block;  
+    }
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
+
+  &:hover{
+    opacity: 1;
+    height: 100px;
+    margin: ($grid-gutter-width/2) 0;
+  }
+}

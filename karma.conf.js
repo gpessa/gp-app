@@ -25,6 +25,12 @@ module.exports = function(config) {
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
+      'client/bower_components/html5-sortable-angularjs/lib/html5-sortable.js',
+      'client/bower_components/tv4/tv4.js',
+      'client/bower_components/objectpath/lib/ObjectPath.js',
+      'client/bower_components/angular-schema-form/dist/schema-form.js',
+      'client/bower_components/angular-schema-form/dist/bootstrap-decorator.js',
+      'client/bower_components/angular-schema-form-bootstrap/bootstrap-decorator.min.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

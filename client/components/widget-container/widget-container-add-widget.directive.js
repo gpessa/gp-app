@@ -4,38 +4,40 @@ angular.module('gpAppApp')
   .directive('addWidget', function (widgetContainerService, widgetService, socket) {
     return {
       templateUrl: 'components/widget-container/widget-container-add-widget.html',
-      restrict: 'EA',
+      restrict: 'E',
       scope: true,
+      replace:true,
       require: '^widgetContainer',
       link: function (scope, element, attrs, widgetContainer) {
         
-        scope.addWidget = function(){
-
+        scope.addWidget = function(widget){
           var widget = {
-            "type" : scope.widgetToAdd.id
+            'type' : widget.id
           };
 
           widgetService.create(widget, function(widget){
-            scope.widgetToAdd.id = undefined;
             scope.widgetContainer.widgets.push(widget);
             scope.updateWidgetContainer();
           })
         };
 
         scope.availablewidgets = [{
-          name : 'Shopping List',
-          id : 'shopping-list'
+          'name' : 'Shopping List',
+          'id' : 'shopping-list',
+          'icon' : 'fa fa-shopping-cart'
         },{
-          name : 'Cigarette',
-          id : 'cigarette'
+          'name' : 'Cigarette',
+          'id' : 'cigarette',
+          'icon' : 'icon icon-cigarette'
         },{
-          name : 'Withings',
-          id : 'withings'
+          'name' : 'Withings',
+          'id' : 'withings',
+          'icon' : 'fa fa-line-chart'
         },{
-          name : 'Buienradar',
-          id : 'buienradar'
+          'name' : 'Buienradar',
+          'id' : 'buienradar',
+          'icon' : 'fa fa-sun-o'
         }];
-
 
       }
     };

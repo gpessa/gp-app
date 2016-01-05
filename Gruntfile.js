@@ -223,8 +223,7 @@ module.exports = function (grunt) {
           '/es5-shim/',
           /font-awesome\.css/,
           /bootstrap\.css/,
-          /bootstrap-sass-official/,
-          /material-design-iconic-font/
+          /bootstrap-sass-official/
         ]
       },
       client: {

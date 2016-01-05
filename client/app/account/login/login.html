@@ -1,6 +1,8 @@
 <navbar></navbar>
 
-<widget title="Login">
+<div class="col-md-4 col-md-offset-4">
+
+  <h3>Login</h3>
 
   <form class="form" name="form" ng-submit="login(form)" novalidate>
 
@@ -26,10 +28,12 @@
 
     <div class="form-group text-center">
       <button class="btn btn-primary btn-block" type="submit">Login</button>
-      <a class="btn btn-block btn-link" href="/signup">Register</a>
+      <a class="btn btn-block btn-secondary btn-small" href="/signup">Register</a>
     </div>
 
     <oauth-buttons/>
+
   </form>
 
-</widget>
+  
+</div>
