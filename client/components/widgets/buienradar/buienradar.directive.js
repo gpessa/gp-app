@@ -5,6 +5,8 @@ angular.module('gpAppApp').directive('buienradarWidget', function($location, $ro
         restrict: 'CEA',
         link: function(scope, element, attrs) {
             scope.chartConfiguration = chartConfiguration;
+            scope.widget.loading = true;
+
             var getData = function(coordinates) {
                 buienradarService.get({
                     lat: coordinates.coords.latitude,

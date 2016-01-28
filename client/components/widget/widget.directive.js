@@ -9,10 +9,8 @@ angular.module('gpAppApp').directive('widget', function($compile, widgetService)
         },
         link: function(scope, element, attrs, widgetContainer) {
             scope.widget.isSettingsOpen = false;
-            scope.widget.loading = true;
-            
-            var template = '<div class="' + scope.widget.type + '-widget"></div>';
-            var content = $compile(template)(scope);
+
+            var content = $compile('<div class="' + scope.widget.type + '-widget"></div>')(scope);
             element.find('.widget-body').append(content);
             
             scope.remove = function() {
@@ -20,6 +18,7 @@ angular.module('gpAppApp').directive('widget', function($compile, widgetService)
             };
             
             scope.setting = function() {
+                scope.conf = angular.copy(scope.widget || {});
                 scope.widget.isSettingsOpen = !scope.widget.isSettingsOpen;
             };
 
@@ -39,10 +38,8 @@ angular.module('gpAppApp').directive('widget', function($compile, widgetService)
             };
 
             scope.cancelConfiguration = function(form){
-                  scope.widget.isSettingsOpen = false;
+                scope.widget.isSettingsOpen = false;
             }
-
-            scope.conf = angular.copy(scope.widget || {});
 
             scope.schema = {
                 "type" : "object",
@@ -52,22 +49,21 @@ angular.module('gpAppApp').directive('widget', function($compile, widgetService)
                         "title" : "Name"
                     },
                     "dimension"  : {
-                        "type" : "number",
+                        "type" : "range",
                         "title" : "Dimension",
                         "enum" : [1,2,3,4,5,6,7,8,9,10,11,12]
                     }
                 }
             };
 
-            scope.formcontrols = [
-            "*", {
+            scope.formcontrols = ["*", {
                 type: "submit",
                 title: "Save",
                 style: 'btn btn-block btn-primary'
             },{
                 type : "submit", 
                 title : "Cancel",
-                style: 'btn btn-block btn-link',
+                style: 'btn btn-block btn-secondary',
                 onClick: "cancelConfiguration()"
             }];
         }

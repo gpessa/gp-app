@@ -1,5 +1,9 @@
 $brand-primary:             #3193c6;
 $brand-secondary:           #40d7b9;
+$brand-success:             #5cb85c;
+$brand-info:                #5bc0de;
+$brand-warning:             #f0ad4e;
+$brand-danger:              #FB6D69;
 
 $input-bg:                  rgba(255,255,255,0.1);
 $input-border:              #fff;
@@ -9,7 +13,7 @@ $body-bg:                   #fff;
 $text-color:                #fff;
 
 $font-family-serif:         'Roboto', sans-serif; 
-$font-family-sans-serif:    'Roboto', sans-serif; 
+$font-family-sans-serif:    'Helvetica Neue', sans-serif; 
 $headings-font-family:      'Roboto Condensed', sans-serif;
 
 $headings-font-weight:      400;
@@ -23,6 +27,10 @@ $border-radius-small:       0;
 $btn-secondary-color: #fff;
 $btn-secondary-bg: $brand-secondary;
 $btn-secondary-border: $brand-secondary;
+
+$btn-light-color: #fff;
+$btn-light-bg: transparent;
+$btn-light-border: #fff;
 
 
 // Basics of a navbar
@@ -48,3 +56,24 @@ $navbar-default-brand-hover-bg:            transparent;
 $navbar-default-toggle-hover-bg:           #ddd;
 $navbar-default-toggle-icon-bar-bg:        #888;
 $navbar-default-toggle-border-color:       #ddd;
+
+
+$a: #FF7370;
+
+
+
+$state-success-text:             #3c763d;
+$state-success-bg:               #dff0d8;
+$state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%);
+
+$state-info-text:                #31708f;
+$state-info-bg:                  #d9edf7;
+$state-info-border:              darken(adjust-hue($state-info-bg, -10), 7%);
+
+$state-warning-text:             $brand-warning;
+$state-warning-bg:               #fcf8e3;
+$state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%);
+
+$state-danger-text:              $brand-danger;
+$state-danger-bg:                #f2dede;
+$state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%);

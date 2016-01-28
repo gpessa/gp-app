@@ -18,6 +18,13 @@
       <p>{{lastMeasureDate | date: dateFormat.day}}</p>
     </div>
 
+    <div class="withings-widget_selector">
+      <button class="btn btn-block btn-light" 
+              ng-class="{'active' : type == selectedType}"
+              ng-repeat="type in types" 
+              ng-click="select(type)">{{type.label}}</button>
+    </div>
+
   </div>
 
 </div>

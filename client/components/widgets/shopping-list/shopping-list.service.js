@@ -7,9 +7,7 @@ angular.module('gpAppApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.get('/api/shopping-list', {
-          
-        }).
+        $http.get('/api/shopping-list').
         success(function(data) {
           deferred.resolve(data);
           return cb();

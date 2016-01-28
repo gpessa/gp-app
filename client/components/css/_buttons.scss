@@ -1,0 +1,7 @@
+
+.btn-secondary {
+  @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+}
+.btn-light {
+  @include button-variant($btn-light-color, $btn-light-bg, $btn-light-border);
+}
