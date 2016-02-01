@@ -37,7 +37,7 @@ describe('User API:', function() {
         })
         .expect(200)
         .expect('Content-Type', /json/)
-        .end(function(err, res) {
+        .end((err, res) => {
           token = res.body.token;
           done();
         });
@@ -49,7 +49,7 @@ describe('User API:', function() {
         .set('authorization', 'Bearer ' + token)
         .expect(200)
         .expect('Content-Type', /json/)
-        .end(function(err, res) {
+        .end((err, res) => {
           res.body._id.toString().should.equal(user._id.toString());
           done();
         });

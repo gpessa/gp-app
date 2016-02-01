@@ -2,7 +2,7 @@
 
 import express from 'express';
 import passport from 'passport';
-import auth from '../auth.service';
+import * as auth from '../auth.service';
 
 var router = express.Router();
 

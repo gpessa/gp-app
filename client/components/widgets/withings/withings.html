@@ -3,25 +3,25 @@
   <div class="col-md-10">
 
     <canvas class="chart chart-line" 
-            chart-data="[measures]" 
-            chart-labels="labels" 
-            chart-options="chartConfiguration.options"
-            chart-colours="chartConfiguration.colours" 
-            ng-if="measures.length"></canvas>
+            chart-data="[withings.measures]" 
+            chart-labels="withings.labels" 
+            chart-options="withings.chartConfiguration.options"
+            chart-colours="withings.chartConfiguration.colours" 
+            ng-if="withings.measures.length"></canvas>
   </div>
 
   <div class="col-md-2">
 
     <div class="withings-widget_last-measure">
       <p>Last measure</p>
-      <h1>{{lastMeasure}}</h1>
-      <p>{{lastMeasureDate | date: dateFormat.day}}</p>
+      <h1>{{withings.lastMeasure}}</h1>
+      <p>{{withings.lastMeasureDate | date: withings.dateFormat.day}}</p>
     </div>
 
     <div class="withings-widget_selector">
       <button class="btn btn-block btn-light" 
-              ng-class="{'active' : type == selectedType}"
-              ng-repeat="type in types" 
+              ng-class="{'active' : withings.type == selectedType}"
+              ng-repeat="type in withings.types" 
               ng-click="select(type)">{{type.label}}</button>
     </div>
 

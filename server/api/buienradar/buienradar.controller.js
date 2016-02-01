@@ -1,15 +1,6 @@
-/**
- * Using Rails-like standard naming convention for endpoints.
- * GET     /api/cigarettes              ->  index
- * POST    /api/cigarettes              ->  create
- * GET     /api/cigarettes/:id          ->  show
- * PUT     /api/cigarettes/:id          ->  update
- * DELETE  /api/cigarettes/:id          ->  destroy
- */
-
 'use strict';
 
-var _ = require('lodash');
+import _ from 'lodash';
 var request = require('request');
 
 function handleError(res, statusCode) {

@@ -5,6 +5,7 @@ angular.module('gpAppApp')
     $routeProvider
       .when('/', {
         templateUrl: 'app/main/main.html',
-        authenticate: true
+        controller: 'MainController',
+        controllerAs: 'main'
       });
   });

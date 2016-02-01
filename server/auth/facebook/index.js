@@ -2,7 +2,7 @@
 
 import express from 'express';
 import passport from 'passport';
-import auth from '../auth.service';
+import * as auth from '../auth.service';
 
 var router = express.Router();
 
@@ -12,10 +12,9 @@ router
     failureRedirect: '/signup',
     session: true
   }))
-
   .get('/callback', passport.authenticate('facebook', {
     failureRedirect: '/signup',
     session: true
   }), auth.setTokenCookie);
 
-module.exports = router;
+export default router;

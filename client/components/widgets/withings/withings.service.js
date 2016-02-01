@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('gpAppApp')
-  .service('Withings', function ($q, $http) {
+(function() {
+
+  function Withings($q, $http) {
     // var response;
 
     return {
@@ -25,4 +26,10 @@ angular.module('gpAppApp')
       }
     };
 
-  });
+  }
+
+  angular.module('gpAppApp')
+    .service('Withings', Withings);
+
+})();
+
