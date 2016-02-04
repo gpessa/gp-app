@@ -1,7 +1,7 @@
 import passport from 'passport';
 import {Strategy as FacebookStrategy} from 'passport-facebook';
 
-exports.setup = function(User, config) {
+export function setup(User, config) {
   passport.use(new FacebookStrategy({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
@@ -39,4 +39,4 @@ exports.setup = function(User, config) {
         return done(err);
       });
   }));
-};
+}

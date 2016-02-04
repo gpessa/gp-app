@@ -2,9 +2,12 @@
 
   <div class="container-fluid"> 
 
-    <add-widget></add-widget>
+    <widget-container-add-widget></widget-container-add-widget>
 
-    <div class="row" html-sortable="sortable_option" ng-model="widgetContainer.widgets" ng-if="widgetContainer.widgets.length > 0">
+    <div class="row" 
+         html-sortable="sortable_option" 
+         ng-model="widgetContainer.widgets" 
+         ng-if="widgetContainer.widgets.length > 0">
       
       <widget data="widget" ng-repeat="widget in widgetContainer.widgets"/>
 

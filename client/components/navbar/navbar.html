@@ -1,9 +1,9 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
   <div class="container-fluid">
 
     <div class="navbar-header">
 
-      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -11,62 +11,74 @@
       </button>
 
       <div class="navbar-brand">
-        <img ng-src="http://graph.facebook.com/{{getCurrentUser().facebook.id}}/picture?type=large" />
+        <img ng-src="http://graph.facebook.com/{{nav.getCurrentUser().facebook.id}}/picture?type=large" />
         <div class="navbar-brand-user">
-          <h5>{{getCurrentUser().facebook.name}}</h5>
-          <h6>{{getCurrentUser().email}}</h6>
+          <h5>{{nav.getCurrentUser().facebook.name}}</h5>
+          <h6>{{nav.getCurrentUser().email}}</h6>
         </div>
       </div>
 
     </div>
 
-    <nav uib-collapse="isCollapsed" class="navbar-collapse collapse">
-      
-      <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
+    <nav uib-collapse="nav.isCollapsed" class="navbar-collapse">
+
+      <!--ul class="nav navbar-nav navbar-right">
+        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}">
+            <a ng-href="{{item.link}}">
+              <i class="{{item.icon}}"></i>
+              <small>{{item.title}}</small>
+            </a>
         </li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-      </ul>
+        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/admin')}"><a href="/admin">Admin</a></li>
+      </ul-->
 
       <ul class="nav navbar-nav navbar-right">
+
+        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}">
+            <a ng-href="{{item.link}}">
+              <i class="{{item.icon}}"></i>
+              <small>{{item.title}}</small>
+            </a>
+        </li>
         
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}">
+        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/admin')}"><a href="/admin">Admin</a></li>
+
+        <li ng-hide="nav.isLoggedIn()" ng-class="{active: nav.isActive('/signup')}">
           <a href="/signup">
             <i class="fa fa-user-plus"></i>
             <small>Sign up</small>
           </a>
         </li>
-        
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}">
+
+        <li ng-hide="nav.isLoggedIn()" ng-class="{active: nav.isActive('/login')}">
           <a href="/login">
             <i class="fa fa-sign-in"></i>
             <small>Login</small>
           </a>
         </li>
-        
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/connect')}">
+
+        <li ng-show="nav.isLoggedIn()" ng-class="{active: nav.isActive('/connect')}">
           <a href="/connect">
             <i class="fa fa-link"></i>
             <small>Connect</small>
           </a>
         </li>
 
-        
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}">
+
+        <li ng-show="nav.isLoggedIn()" ng-class="{active: nav.isActive('/settings')}">
           <a href="/settings">
             <i class="glyphicon glyphicon-cog"></i>
             <small>Settings</small>
           </a>
         </li>
-        
-        <li ng-show="isLoggedIn()">
+
+        <li ng-show="nav.isLoggedIn()">
           <a href="/logout">
             <i class="fa fa-sign-out"></i>
             <small>Logout</small>
           </a>
         </li>
-        
+
       </ul>
     </nav>
 

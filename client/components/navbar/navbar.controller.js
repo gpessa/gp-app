@@ -1,18 +1,27 @@
 'use strict';
 
+class NavbarController {
+  //start-non-standard
+  menu = [{
+    'title': 'Dashboard',
+    'link' : '/',
+    'icon' : 'fa fa-tachometer'
+  }];
+
+  isCollapsed = true;
+  //end-non-standard
+
+  constructor($location, Auth) {
+    this.$location = $location;
+    this.isLoggedIn = Auth.isLoggedIn;
+    this.isAdmin = Auth.isAdmin;
+    this.getCurrentUser = Auth.getCurrentUser;
+  }
+
+  isActive(route) {
+    return route === this.$location.path();
+  }
+}
+
 angular.module('gpAppApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [/**{
-      'title': 'Home',
-      'link': '/'
-    }**/];
-
-    $scope.isCollapsed = true;
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
-
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    };
-  });
+  .controller('NavbarController', NavbarController);

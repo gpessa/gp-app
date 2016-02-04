@@ -1,15 +1,6 @@
-/**
- * Using Rails-like standard naming convention for endpoints.
- * GET     /api/cigarettes              ->  index
- * POST    /api/cigarettes              ->  create
- * GET     /api/cigarettes/:id          ->  show
- * PUT     /api/cigarettes/:id          ->  update
- * DELETE  /api/cigarettes/:id          ->  destroy
- */
-
 'use strict';
 
-var _ = require('lodash');
+import _ from 'lodash';
 var request = require('request');
 
 function handleError(res, statusCode) {
@@ -43,7 +34,7 @@ exports.index = function(req, res) {
     var result = response.body.split(/\n/);
 
     _.each(result, function(element){
-      var element = element.trim().split('|');
+      element = element.trim().split('|');
 
       if(element[1]){
         var rainfall = parseFloat(element[0]);
@@ -64,4 +55,3 @@ exports.index = function(req, res) {
   });
 
 };
-

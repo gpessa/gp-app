@@ -1,6 +1,14 @@
 'use strict';
 
+(function() {
+
+class MainController {
+
+  constructor($http, $scope, socket) {
+  }
+}
+
 angular.module('gpAppApp')
-  .controller('MainController', function () {
-    
-  });
+  .controller('MainController', MainController);
+
+})();

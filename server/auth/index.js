@@ -20,4 +20,4 @@ router.use('/twitter', require('./twitter'));
 router.use('/google', require('./google'));
 router.use('/withings', require('./withings'));
 
-module.exports = router;
+export default router;

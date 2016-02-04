@@ -12,51 +12,37 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
-      'client/bower_components/jquery/dist/jquery.js',
-      'client/bower_components/angular/angular.js',
-      'client/bower_components/angular-resource/angular-resource.js',
-      'client/bower_components/angular-cookies/angular-cookies.js',
-      'client/bower_components/angular-sanitize/angular-sanitize.js',
-      'client/bower_components/angular-route/angular-route.js',
-      'client/bower_components/angular-messages/angular-messages.js',
-      'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'client/bower_components/Chart.js/Chart.js',
-      'client/bower_components/angular-chart.js/dist/angular-chart.js',
-      'client/bower_components/lodash/dist/lodash.compat.js',
-      'client/bower_components/angular-socket-io/socket.js',
-      'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
-      'client/bower_components/html5-sortable-angularjs/lib/html5-sortable.js',
-      'client/bower_components/tv4/tv4.js',
-      'client/bower_components/objectpath/lib/ObjectPath.js',
-      'client/bower_components/angular-schema-form/dist/schema-form.js',
-      'client/bower_components/angular-schema-form/dist/bootstrap-decorator.js',
-      'client/bower_components/angular-schema-form-bootstrap/bootstrap-decorator.min.js',
-      'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',
       'client/app/app.js',
-      'client/app/**/*.js',
-      'client/components/**/*.js',
-      'client/app/**/*.jade',
-      'client/components/**/*.jade',
-      'client/app/**/*.html',
-      'client/components/**/*.html'
+      'client/{app,components}/**/*.module.js',
+      'client/{app,components}/**/*.js',
+      'client/{app,components}/**/*.html'
     ],
 
     preprocessors: {
-      '**/*.jade': 'ng-jade2js',
-      '**/*.html': 'html2js',
+      '**/*.html': 'ng-html2js',
+      'client/{app,components}/**/*.js': 'babel'
     },
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'client/'
     },
 
-    ngJade2JsPreprocessor: {
-      stripPrefix: 'client/'
+    babelPreprocessor: {
+      options: {
+        sourceMap: 'inline',
+        optional: [
+          'es7.classProperties'
+        ]
+      },
+      filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.es5.js');
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
     },
-
-    
 
     // list of files / patterns to exclude
     exclude: [],
@@ -80,7 +66,6 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
-
     // Start these browsers, currently available:
     // - Chrome
     // - ChromeCanary
@@ -90,7 +75,6 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: ['PhantomJS'],
-
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit

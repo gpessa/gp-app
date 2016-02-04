@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('gpAppApp')
-  .service('widgetService', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
-    return {
-      create : function(widget, callback){
+(function() {
+
+  function WidgetService($location, $rootScope, $http, User, $cookieStore, $q) {
+      return {
+        create : function(widget, callback){
           var cb = callback || angular.noop;
           var deferred = $q.defer();
 
@@ -14,8 +15,8 @@ angular.module('gpAppApp')
           });
 
           return deferred.promise;
-      },
-      remove  : function(widget, callback){
+        },
+        remove  : function(widget, callback){
           var cb = callback || angular.noop;
           var deferred = $q.defer();
 
@@ -26,8 +27,8 @@ angular.module('gpAppApp')
                });
 
           return deferred.promise;
-      },
-      update  : function(widget, callback){
+        },
+        update  : function(widget, callback){
           var cb = callback || angular.noop;
           var deferred = $q.defer();
 
@@ -38,7 +39,11 @@ angular.module('gpAppApp')
                });
 
           return deferred.promise;
+        }
       }
   };
-});
 
+  angular.module('gpAppApp')
+         .service('WidgetService', WidgetService);
+
+})();

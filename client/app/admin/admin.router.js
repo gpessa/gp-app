@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('gpAppApp')
+angular.module('gpAppApp.admin')
   .config(function($routeProvider) {
     $routeProvider
       .when('/admin', {
         templateUrl: 'app/admin/admin.html',
-        controller: 'AdminCtrl'
+        controller: 'AdminController',
+        controllerAs: 'admin',
+        authenticate: 'admin'
       });
   });

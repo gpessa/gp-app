@@ -80,8 +80,8 @@ exports.show = function(req, res) {
 // Creates a new WidgetContainer in the DB
 exports.create = function(req, res) {
   WidgetContainer.createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+                 .then(responseWithResult(res, 201))
+                 .catch(handleError(res));
 };
 
 // Updates an existing WidgetContainer in the DB

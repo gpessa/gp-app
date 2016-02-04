@@ -1,47 +1,35 @@
 'use strict';
 
-angular.module('gpAppApp')
-  .directive('addWidget', function (widgetContainerService, widgetService, socket) {
-    return {
-      templateUrl: 'components/widget-container/widget-container-add-widget.html',
-      restrict: 'E',
-      scope: true,
-      replace:true,
-      require: '^widgetContainer',
-      link: function (scope, element, attrs, widgetContainer) {
-        
-        scope.addWidget = function(widget){
-          var widget = {
-            'type' : widget.id
-          };
+angular.module('gpAppApp').directive('widgetContainerAddWidget', (WidgetService) => {
+  return {
+    'templateUrl' : 'components/widget-container/widget-container-add-widget.html',
+    'restrict' : 'E',
+    'replace' : true,
+    'require' : '^widgetContainer',
+    'link' : function (scope, element, attrs, widgetContainer) {
+      scope.availablewidgets = [{
+        'name' : 'Shopping List',
+        'type' : 'shopping-list',
+        'icon' : 'fa fa-shopping-cart'
+      },{
+        'name' : 'Cigarette',
+        'type' : 'cigarette',
+        'icon' : 'icon icon-cigarette'
+      },{
+        'name' : 'Withings',
+        'type' : 'withings',
+        'icon' : 'fa fa-line-chart'
+      },{
+        'name' : 'Buienradar',
+        'type' : 'buienradar',
+        'icon' : 'fa fa-sun-o'
+      }];
 
-          widgetService.create(widget, function(widget){
-            scope.widgetContainer.widgets.push(widget);
-            scope.updateWidgetContainer();
-          })
-        };
-
-        scope.availablewidgets = [{
-          'name' : 'Shopping List',
-          'id' : 'shopping-list',
-          'icon' : 'fa fa-shopping-cart'
-        },{
-          'name' : 'Cigarette',
-          'id' : 'cigarette',
-          'icon' : 'icon icon-cigarette'
-        },{
-          'name' : 'Withings',
-          'id' : 'withings',
-          'icon' : 'fa fa-line-chart'
-        },{
-          'name' : 'Buienradar',
-          'id' : 'buienradar',
-          'icon' : 'fa fa-sun-o'
-        }];
-
-      }
-    };
-  });
-
-
-//'cigarette', 'buienradar', 
+      scope.addWidget = function(widget){
+        WidgetService.create(widget, function(widget){
+          widgetContainer.addWidget(widget);
+        })
+      };
+    }
+  }
+});

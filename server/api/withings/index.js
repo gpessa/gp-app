@@ -2,7 +2,7 @@
 
 import express from 'express';
 import controller from './withings.controller';
-import auth from '../../auth/auth.service';
+import * as auth from '../../auth/auth.service';
 
 var router = express.Router();
 

@@ -28,12 +28,12 @@ $zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
 @import '../components/widgets/withings/withings.scss';
 // endinjector
 
-// Font 
-// @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700,300italic,400italic,700italic|Roboto:400,500,100,100italic);
+// Font
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700,300italic,400italic,700italic|Roboto:400,500,100,100italic);
 
 
 
- 
+
 @font-face {
   font-family: "Roboto";
   font-style: normal;
@@ -51,7 +51,7 @@ $zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
   padding: 0.2em 0;
 }
 
-html{ 
+html{
 
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
@@ -59,7 +59,7 @@ html{
     -webkit-tap-highlight-color: transparent;
   font-weight: 300;
   padding-bottom: 30px;
-  
+
   &:after{
     position: fixed;
     top: 0;
@@ -68,14 +68,14 @@ html{
     bottom: 0;
     content: "";
     z-index: -2;
-    
+
     background: url('../assets/images/Rice Paddy.jpg') no-repeat center center fixed;
     -moz-background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
   }
-  
+
   &:before{
     position: fixed;
     top: 0;
@@ -86,7 +86,7 @@ html{
     z-index: -1;
     background-color: rgba(0, 0, 0, 0.5);
   }
-} 
+}
 
 .margin{
   margin: 20px;

@@ -5,7 +5,8 @@ angular.module('gpAppApp')
     $routeProvider
       .when('/login', {
         templateUrl: 'app/account/login/login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginController',
+        controllerAs: 'vm'
       })
       .when('/logout', {
         name: 'logout',
@@ -21,16 +22,19 @@ angular.module('gpAppApp')
       })
       .when('/signup', {
         templateUrl: 'app/account/signup/signup.html',
-        controller: 'SignupCtrl'
+        controller: 'SignupController',
+        controllerAs: 'vm'
       })
       .when('/connect', {
         templateUrl: 'app/account/connect/connect.html',
-        controller: 'ConnectCtrl',
+        controller: 'ConnectController',
+        controllerAs: 'vm',
         authenticate: true
       })
       .when('/settings', {
         templateUrl: 'app/account/settings/settings.html',
-        controller: 'SettingsCtrl',
+        controller: 'SettingsController',
+        controllerAs: 'vm',
         authenticate: true
       });
   })
