@@ -34,7 +34,7 @@ exports.index = function(req, res) {
     var result = response.body.split(/\n/);
 
     _.each(result, function(element){
-      var element = element.trim().split('|');
+      element = element.trim().split('|');
 
       if(element[1]){
         var rainfall = parseFloat(element[0]);
@@ -55,4 +55,3 @@ exports.index = function(req, res) {
   });
 
 };
-
