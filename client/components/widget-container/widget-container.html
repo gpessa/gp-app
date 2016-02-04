@@ -6,10 +6,10 @@
 
     <div class="row" 
          html-sortable="sortable_option" 
-         ng-model="vm.widgetContainer.widgets" 
-         ng-if="vm.widgetContainer.widgets.length > 0">
+         ng-model="widgetContainer.widgets" 
+         ng-if="widgetContainer.widgets.length > 0">
       
-      <widget data="widget" ng-repeat="widget in vm.widgetContainer.widgets"/>
+      <widget data="widget" ng-repeat="widget in widgetContainer.widgets"/>
 
     </div>
   </div>

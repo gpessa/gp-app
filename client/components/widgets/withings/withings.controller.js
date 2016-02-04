@@ -22,10 +22,7 @@ class WithingsController {
   }
 
   createChart(){
-    //this.widget.loading = true;
-    
     this.Withings.getData().then(angular.bind(this, function(result) {
-      //this.widget.loading = false;
       this.measures = result.measures[this.selectedType.value];
 
       var unit = {
@@ -53,7 +50,7 @@ class WithingsController {
       var min = _.min(this.measures, function(val){ if (val) { return val; }});
       var max = _.max(this.measures);
 
-      angular.extend(this.chartConfiguration.options, { 
+      angular.extend(this.chartConfiguration.options, {
         scaleOverride : true,
         scaleLabel: ' <%= value %>' + unit,
         scaleStartValue : min,
@@ -64,6 +61,7 @@ class WithingsController {
 
   select(type){
     this.selectedType = type;
+    this.createChart();
   }
 }
 

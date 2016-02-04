@@ -3,8 +3,9 @@
 class NavbarController {
   //start-non-standard
   menu = [{
-    'title': 'Home',
-    'link': '/'
+    'title': 'Dashboard',
+    'link' : '/',
+    'icon' : 'fa fa-tachometer'
   }];
 
   isCollapsed = true;

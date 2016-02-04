@@ -5,6 +5,7 @@ angular.module('gpAppApp').service('buienradarService', function($location, $roo
             var cb = callback || angular.noop;
             var deferred = $q.defer();
             $http.post('/api/buienradar', {
+                cache : true,
                 params: coordinates
             }).
             success(function(data) {
