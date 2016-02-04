@@ -6,7 +6,7 @@
 
   <form class="form" name="form" ng-submit="vm.login(form)" novalidate>
 
-    <p class="text-danger" ng-if="errors.other">{{errors.other}}</p>
+    <p class="text-danger" ng-if="vm.errors.other">{{vm.errors.other}}</p>
 
     <div class="form-group" ng-class="{'has-error has-feedback' : vm.submitted && form.email.$error}">
       <label class="control-label">Email</label>
@@ -35,5 +35,5 @@
 
   </form>
 
-  
+
 </div>

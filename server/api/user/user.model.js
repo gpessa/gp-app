@@ -4,7 +4,7 @@ import crypto from 'crypto';
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 import {Schema} from 'mongoose';
 
-const authTypes = ['github', 'twitter', 'facebook', 'google'];
+const authTypes = ['facebook', 'google', 'twitter', 'withings'];
 
 var UserSchema = new Schema({
   name: String,
@@ -141,6 +141,10 @@ UserSchema.methods = {
    */
   authenticate(password, callback) {
     if (!callback) {
+      console.log('this.password ' + this.password);
+        console.log('this.encryptPassword(password) ' + this.encryptPassword(password));
+
+
       return this.password === this.encryptPassword(password);
     }
 
@@ -202,7 +206,10 @@ UserSchema.methods = {
    */
   encryptPassword(password, callback) {
     if (!password || !this.salt) {
-      return null;
+      // i return undefined so if i registered with facebook and i
+      // dont have a passoword i can still change password by leaving
+      // the field empty
+      return undefined;
     }
 
     var defaultIterations = 10000;

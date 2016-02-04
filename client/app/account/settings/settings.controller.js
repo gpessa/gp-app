@@ -6,7 +6,7 @@ class SettingsController {
   submitted = false;
   //end-non-standard
 
-  constructor(Auth) {
+  constructor($filter, Auth) {
     this.Auth = Auth;
   }
 

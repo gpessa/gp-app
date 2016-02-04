@@ -12,8 +12,8 @@ $input-color:               #fff;
 $body-bg:                   #fff;
 $text-color:                #fff;
 
-$font-family-serif:         'Roboto', sans-serif; 
-$font-family-sans-serif:    'Helvetica Neue', sans-serif; 
+$font-family-serif:         'Roboto', sans-serif;
+$font-family-sans-serif:    'Helvetica Neue', sans-serif;
 $headings-font-family:      'Roboto Condensed', sans-serif;
 
 $headings-font-weight:      400;
@@ -53,12 +53,9 @@ $navbar-default-brand-hover-color:         #000;
 $navbar-default-brand-hover-bg:            transparent;
 
 // Navbar toggle
-$navbar-default-toggle-hover-bg:           #ddd;
-$navbar-default-toggle-icon-bar-bg:        #888;
-$navbar-default-toggle-border-color:       #ddd;
-
-
-$a: #FF7370;
+$navbar-default-toggle-hover-bg:           transparent;
+$navbar-default-toggle-icon-bar-bg:        $brand-primary;
+$navbar-default-toggle-border-color:       transparent;
 
 
 

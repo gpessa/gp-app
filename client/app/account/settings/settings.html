@@ -1,37 +1,35 @@
 <navbar></navbar>
 
 <div class="col-md-4 col-md-offset-4">
-
   <h3>Settings</h3>
 
-  <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+  <form class="form" name="form" ng-submit="vm.changePassword(form)" novalidate>
+    <p class="text-danger" ng-if="vm.errors.other">{{message}}</p>
 
-    <p class="text-danger" ng-if="errors.other">{{message}}</p>
-
-    <div class="form-group" ng-class="{ 'has-error': form.oldPassword.$invalid && vm.submitted }">
+    <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && vm.submitted }">
       <label class="control-label">Current Password</label>
-      <input type="password" name="oldPassword" class="form-control" ng-model="vm.user.oldPassword" mongoose-error required/>
-      
-      <div ng-messages="form.oldPassword.$error" ng-if="vm.submitted" class="help-block">
+      <input type="password" name="password" class="form-control" ng-model="vm.user.password" mongoose-error />
+
+      <div ng-messages="form.password.$error" ng-if="vm.submitted" class="help-block">
         <div ng-message="required">This is required.</div>
-        <div ng-message="mongoose">{{ errors.other }}</div>
+        <div ng-message="mongoose">{{ vm.errors.other }}</div>
       </div>
     </div>
 
     <div class="form-group" ng-class="{ 'has-error': form.newPassword.$invalid && vm.submitted }">
       <label class="control-label">New Password</label>
       <input type="password" name="newPassword" class="form-control" ng-model="vm.user.newPassword" ng-minlength="3" required/>
-      
+
       <div ng-messages="form.newPassword.$error" ng-if="vm.submitted" class="help-block">
         <div ng-message="minlength">Password must be at least 3 characters.</div>
         <div ng-message="required">Password must be at least 3 characters.</div>
       </div>
     </div>
-    
+
     <div class="form-group" ng-class="{ 'has-error': form.confirmPassword.$invalid && vm.submitted }">
       <label class="control-label">Confirm New Password</label>
       <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.newPassword" ng-minlength="3" required=""/>
-      
+
       <div ng-messages="form.confirmPassword.$error" ng-if="vm.submitted" class="help-block">
         <div ng-message="required">Password must be at least 3 characters.</div>
         <div ng-message="match">Passwords must match.</div>

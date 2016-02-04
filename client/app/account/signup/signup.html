@@ -39,7 +39,7 @@
 
     <div class="form-group" ng-class="{ 'has-error': form.confirmPassword.$invalid && vm.submitted }">
       <label class="control-label">Confirm Password</label>
-      <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="cm.user.password" ng-minlength="3" required/>
+      <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.password" ng-minlength="3" required/>
 
       <div ng-messages="form.confirmPassword.$error" ng-if="vm.submitted" class="help-block">
         <div ng-message="minlength">Password must be at least 3 characters.</div>
