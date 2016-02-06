@@ -35,15 +35,16 @@ angular.module('gpAppApp')
         scope.deleteList = function(shoppingList){
           shoppingListService.remove(shoppingList);
         };
- 
+
         scope.saveList = function(shoppingList){
           shoppingListService.update(shoppingList);
         };
 
         shoppingListService.get().then(function(lists){
           scope.shoppingLists = lists;
-          socket.syncUpdates('shopping-list', scope.shoppingLists);
-          scope.widget.loading = false;
+          socket.syncUpdates('shopping-list', function(){
+            debugger;
+          });
         });
 
         scope.$on('$destroy', function () {

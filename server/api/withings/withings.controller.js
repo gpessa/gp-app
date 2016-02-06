@@ -57,7 +57,6 @@ exports.index = function(req, res) {
         measure.date = date;
       });
 
-
       var endDate = measures[0].date;
       var startDate = measures[measures.length - 1].date;
 
@@ -80,21 +79,12 @@ exports.index = function(req, res) {
         startDate.setDate(startDate.getDate() + 1);
       }
 
-
-      // var prev = result.measures.weights[0];
-      // _.forEach(result.measures.weights, function(measure, index) {
-      //   var prevTemp = result.measures.weights[index - 1];
-      //   var actual = measure;
-
-      //     result.measures.weights[index] = (measure + prev) / 2;
-          
-      // })
-
       res.status(200).json(result);
 
     })
-
+  }else {
+    res.status(412).send({
+      'message' : 'Withings account not configured'
+    });
   }
 };
-
-

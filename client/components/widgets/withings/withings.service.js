@@ -2,34 +2,28 @@
 
 (function() {
 
-  function Withings($q, $http) {
-    // var response;
+  class Withings {
+    url = '/api/withings';
 
-    return {
-      getData: function(user, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
+    constructor($q, $http){
+      this.$http = $http;
+      this.deferred = $q.defer();
+    }
 
-        $http.get('/api/withings', {
-                cache : true
-              })
-              .success(function(data) {
-                // response = data;
-                deferred.resolve(data);
-                return cb();
-              })
-              .error(function(err) {
-                return cb(err);
-              }.bind(this));
+    getData() {
+      this.$http.get(this.url, {'cache' : true})
+                .success(data => {
+                  this.deferred.resolve(data);
+                })
+                .error(err => {
+                  this.deferred.reject(err);
+                });
 
-              return deferred.promise;
-      }
-    };
-
+      return this.deferred.promise;
+    }
   }
 
   angular.module('gpAppApp')
-    .service('Withings', Withings);
+         .service('Withings', Withings);
 
 })();
-

@@ -11,36 +11,22 @@
       </button>
 
       <div class="navbar-brand">
-        <img ng-src="http://graph.facebook.com/{{nav.getCurrentUser().facebook.id}}/picture?type=large" />
-        <div class="navbar-brand-user">
-          <h5>{{nav.getCurrentUser().facebook.name}}</h5>
-          <h6>{{nav.getCurrentUser().email}}</h6>
-        </div>
+        <user data="nav.getCurrentUser()" ng-if="nav.isLoggedIn()"/>
       </div>
 
     </div>
 
     <nav uib-collapse="nav.isCollapsed" class="navbar-collapse">
 
-      <!--ul class="nav navbar-nav navbar-right">
-        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}">
-            <a ng-href="{{item.link}}">
-              <i class="{{item.icon}}"></i>
-              <small>{{item.title}}</small>
-            </a>
-        </li>
-        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/admin')}"><a href="/admin">Admin</a></li>
-      </ul-->
-
       <ul class="nav navbar-nav navbar-right">
 
-        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}">
+        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}" ng-show="nav.isLoggedIn()">
             <a ng-href="{{item.link}}">
               <i class="{{item.icon}}"></i>
               <small>{{item.title}}</small>
             </a>
         </li>
-        
+
         <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/admin')}"><a href="/admin">Admin</a></li>
 
         <li ng-hide="nav.isLoggedIn()" ng-class="{active: nav.isActive('/signup')}">

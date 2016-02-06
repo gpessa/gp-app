@@ -1,17 +1,15 @@
-<div class="row">
-
+<div class="row" ng-if="!withing.error" ng-show="!withings.error">
   <div class="col-md-10 col-sm-9">
-
     <canvas class="chart chart-line"
             chart-data="[withings.measures]"
             chart-labels="withings.labels"
             chart-options="withings.chartConfiguration.options"
             chart-colours="withings.chartConfiguration.colours"
-            ng-if="withings.measures.length"></canvas>
+            ng-if="withings.measures.length">
+    </canvas>
   </div>
 
   <div class="col-md-2 col-sm-3">
-
     <div class="withings-widget_last-measure">
       <p>Last measure</p>
       <h1>{{withings.lastMeasure}}</h1>
@@ -22,9 +20,14 @@
       <button class="btn btn-block btn-light"
               ng-class="{'active' : withings.type == selectedType}"
               ng-repeat="type in withings.types"
-              ng-click="withings.select(type)">{{type.label}}</button>
+              ng-click="withings.select(type)">
+              {{type.label}}
+      </button>
     </div>
-
   </div>
-
 </div>
+
+<error error="" class="error" ng-show="withings.error">
+  <p>{{withings.error}}</p>
+  <p>Connect your account <a href="/connect">here</a></p>
+</error>

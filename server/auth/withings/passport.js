@@ -21,11 +21,6 @@ exports.setup = function (User, config) {
             refreshToken : refreshToken,
           }
 
-console.log('PROFILE');        
-console.log(profile);
-console.log('NEW USER WITHINGS');     
-console.log(req.user);
-
           req.user.saveAsync()
             .then(function(user) {
               return done(null, user);
@@ -53,7 +48,7 @@ console.log(req.user);
               username: profile.username,
               provider: 'withings',
             });
-            
+
             user.saveAsync()
               .then(function(user) {
                 return done(null, user);

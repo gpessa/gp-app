@@ -1,0 +1,39 @@
+.user{
+  display: inline-block;
+  float: right;
+  height: 100%;
+
+  .user-name{
+    display: inline-block;
+    position: relative;
+    top: 13px;
+    margin-left: 3px;
+
+    h5{
+      margin:0;
+    }
+
+    h6{
+      color:$text-muted;
+      margin:0;
+    }
+  }
+
+  .user-image{
+    height: 100%;
+    display: inline-block;
+    padding: 8px;
+    text-align: center;
+    line-height: 40px;
+    float: left;
+
+    .user-image-element{
+      display: inline-block;
+      width: 40px;
+      background: $gray-lighter;
+      border-radius: 50%;
+      height: 100%;
+      color: $text-muted;
+    }
+  }
+}

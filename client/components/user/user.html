@@ -1,0 +1,15 @@
+<div class="user">
+  <div class="user-image">
+    <img  class="user-image-element" ng-src="http://graph.facebook.com/{{user.facebook.id}}/picture?type=large" ng-if="user.facebook"/>
+
+    <span class="user-image-element" ng-if="!user.facebook">
+      <i class="fa fa-user"></i>
+    </span>
+  </div>
+
+  <div class="user-name">
+    <h5 ng-if="user.facebook.name">{{user.facebook.name}}</h5>
+    <h6>{{user.email}}</h6>
+  </div>
+
+</div>
