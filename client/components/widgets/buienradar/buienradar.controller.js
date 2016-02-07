@@ -4,7 +4,7 @@
 
   class BuienradarController {
 
-    constructor($timeout, $filter, $scope, $geolocation, Buienradar, chartConfiguration) {
+    constructor($geolocation, Buienradar, chartConfiguration) {
       this.chartConfiguration = chartConfiguration;
       this.Buienradar = Buienradar;
 

@@ -1,33 +1,33 @@
-<div class="row" ng-if="!withing.error" ng-show="!withings.error">
+<div class="row" ng-if="!withing.error" ng-show="!vm.error">
   <div class="col-md-10 col-sm-9">
     <canvas class="chart chart-line"
-            chart-data="[withings.measures]"
-            chart-labels="withings.labels"
-            chart-options="withings.chartConfiguration.options"
-            chart-colours="withings.chartConfiguration.colours"
-            ng-if="withings.measures.length">
+            chart-data="[vm.measures]"
+            chart-labels="vm.labels"
+            chart-options="vm.chartConfiguration.options"
+            chart-colours="vm.chartConfiguration.colours"
+            ng-if="vm.measures.length">
     </canvas>
   </div>
 
   <div class="col-md-2 col-sm-3">
     <div class="withings-widget_last-measure">
       <p>Last measure</p>
-      <h1>{{withings.lastMeasure}}</h1>
-      <p class="small">{{withings.lastMeasureDate | date: withings.dateFormat.day}}</p>
+      <h1>{{vm.lastMeasure}}</h1>
+      <p class="small">{{vm.lastMeasureDate | date: vm.dateFormat.day}}</p>
     </div>
 
     <div class="withings-widget_selector">
       <button class="btn btn-block btn-light"
-              ng-class="{'active' : withings.type == selectedType}"
-              ng-repeat="type in withings.types"
-              ng-click="withings.select(type)">
+              ng-class="{'active' : vm.type == selectedType}"
+              ng-repeat="type in vm.types"
+              ng-click="vm.select(type)">
               {{type.label}}
       </button>
     </div>
   </div>
 </div>
 
-<error error="" class="error" ng-show="withings.error">
-  <p>{{withings.error}}</p>
+<error error="" class="error" ng-show="vm.error">
+  <p>{{vm.error}}</p>
   <p>Connect your account <a href="/connect">here</a></p>
 </error>
