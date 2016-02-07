@@ -9,6 +9,7 @@ angular.module('gpAppApp', [
   'ngSanitize',
   'ngRoute',
   'ngMessages',
+  'ngGeolocation',
   'btford.socket-io',
   'ui.bootstrap',
   'validation.match',
@@ -24,7 +25,7 @@ angular.module('gpAppApp', [
 
   $locationProvider.html5Mode(true);
 })
-.constant("chartConfiguration", {
+.constant('chartConfiguration', {
   options : {
     bezierCurve : false,
     scaleFontColor: '#fff',
@@ -49,7 +50,7 @@ angular.module('gpAppApp', [
     strokeColor: 'rgba(255, 255, 255, 1)'
   }]
 })
-.constant("dateFormat", {
-  day : "dd MMM yyyy"
+.constant('dateFormat', {
+  day : 'dd MMM yyyy'
 })
 ;

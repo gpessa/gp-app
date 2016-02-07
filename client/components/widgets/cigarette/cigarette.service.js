@@ -1,64 +1,40 @@
 'use strict';
 
-
 (function() {
 
-  function CigaretteService($http, $q) {
-    return {
-      get : function(callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
+  class Cigarette {
 
-        $http.get('/api/cigarette').
-        success(function(data) {
-          deferred.resolve(data);
-          return cb();
-        });
-
-        return deferred.promise;
-      },
-      create : function(callback){
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
-
-        $http.post('/api/cigarette/', {
-
-        }).
-        success(function(data) {
-          deferred.resolve(data);
-          return cb();
-        });
-
-        return deferred.promise;
-      },
-      update  : function(list, callback){
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
-
-        $http.put('/api/cigarette/' + list._id, list)
-             .success(function(data) {
-                deferred.resolve(data);
-                return cb();
-             });
-
-        return deferred.promise;
-      },
-      remove  : function(list, callback){
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
-
-        $http.delete('/api/cigarette/' + list._id, list)
-             .success(function(data) {
-                deferred.resolve(data);
-                return cb();
-             });
-
-        return deferred.promise;
-      }
+    constructor($q, $http){
+      this.url = '/api/cigarette';
+      this.$http = $http;
+      this.$q = $q;
     }
-  };
+
+    get() {
+      let deferred = this.$q.defer();
+      this.$http.get(this.url)
+        .success(data => {
+          deferred.resolve(data);
+        })
+        .error(err => {
+          deferred.reject(err);
+        });
+
+      return deferred.promise;
+    }
+
+    create(){
+      let deferred = this.$q.defer();
+      this.$http.post('/api/cigarette/')
+        .success((data) => {
+          deferred.resolve(data);
+        });
+
+      return deferred.promise;
+    }
+  }
 
   angular.module('gpAppApp')
-         .service('CigaretteService', CigaretteService);
+         .service('Cigarette', Cigarette);
 
 })();

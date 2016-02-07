@@ -3,51 +3,51 @@
 angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
 
   var schema = {
-      "type" : "object",
-      "properties" : {
-          "name" : {
-              "type" : "string",
-              "title" : "Name"
+      'type' : 'object',
+      'properties' : {
+          'name' : {
+              'type' : 'string',
+              'title' : 'Name'
           },
-          "dimension"  : {
-              "type" : "number",
-              "title" : "Dimension",
-              "enum" : [1,2,3,4,5,6,7,8,9,10,11,12]
+          'dimension'  : {
+              'type' : 'number',
+              'title' : 'Dimension',
+              'enum' : [1,2,3,4,5,6,7,8,9,10,11,12]
           }
       }
   };
 
-  var formcontrols = ["*", {
-      type: "submit",
-      title: "Save",
+  var formcontrols = ['*', {
+      type: 'submit',
+      title: 'Save',
       style: 'btn btn-block btn-primary'
   },{
-      type : "submit",
-      title : "Cancel",
+      type : 'submit',
+      title : 'Cancel',
       style: 'btn btn-block btn-secondary',
-      onClick: "toggleSettings()"
+      onClick: 'toggleSettings()'
   }];
 
   return {
     templateUrl: 'components/widget/widget.html',
     restrict: 'E',
-    require: "^^widgetContainer",
+    require: '^^widgetContainer',
     scope: {
         widget: '=data'
     },
     controller : function($scope){
       this.extendConfigurationProperties = function(property){
         $scope.schema.properties.configuration = {
-          "type" : "object",
-          "title" : "Preferences",
-          "properties": {}
+          'type' : 'object',
+          'title' : 'Preferences',
+          'properties': {}
         };
         angular.extend($scope.schema.properties.configuration.properties, property);
-      }
+      };
 
       this.toggleLoading = function(){
         $scope.isWidgetLoading = !$scope.isWidgetLoading;
-      }
+      };
     },
     link : function(scope, element, attrs, widgetContainer){
       var dom = $compile('<div class="' + scope.widget.type + '-widget"></div>')(scope);
@@ -64,7 +64,7 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
 
       scope.removeWidget = function() {
           WidgetService.remove(scope.widget, function(){
-            widgetContainer.refreshContainer()
+            widgetContainer.refreshContainer();
           });
       };
 
@@ -82,5 +82,5 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
           }
       };
     }
-  }
+  };
 });

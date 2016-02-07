@@ -15,13 +15,13 @@
         }).
         catch(function(){
           $http.post('/api/widget-container/', {
-            "_id" : id
+            '_id' : id
           }).
           success(function(data) {
             deferred.resolve(data);
             return cb(data);
           });
-        })
+        });
 
         return deferred.promise;
       },
@@ -30,7 +30,7 @@
           var deferred = $q.defer();
 
           $http.post('/api/widget-container/', {
-            "_id" : id
+            '_id' : id
           }).
           success(function(data) {
             deferred.resolve(data);
@@ -62,13 +62,11 @@
                });
 
           return deferred.promise;
-      } 
-    }
-  };
+      }
+    };
+  }
 
   angular.module('gpAppApp')
          .service('WidgetContainerService', WidgetContainerService);
 
 })();
-
-

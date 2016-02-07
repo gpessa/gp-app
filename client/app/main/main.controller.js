@@ -3,8 +3,7 @@
 (function() {
 
 class MainController {
-
-  constructor($http, $scope, socket) {
+  constructor() {
   }
 }
 

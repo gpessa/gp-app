@@ -22,7 +22,7 @@ angular.module('gpAppApp')
         scope.archiveItem = function(shoppingList, index){
           shoppingList.list[index].archivied = !shoppingList.list[index].archivied;
           shoppingList.list.sort(function(a, b){
-            return a.archivied > b.archivied
+            return a.archivied > b.archivied;
           });
 
           shoppingListService.update(shoppingList);
@@ -43,7 +43,7 @@ angular.module('gpAppApp')
         shoppingListService.get().then(function(lists){
           scope.shoppingLists = lists;
           socket.syncUpdates('shopping-list', function(){
-            debugger;
+            // debugger;
           });
         });
 

@@ -1,32 +1,19 @@
 'use strict';
 
 angular.module('gpAppApp')
-  .directive('cigaretteWidget', function (CigaretteService, dateFormat) {
+  .directive('cigaretteWidget', function () {
     return {
       'templateUrl' : 'components/widgets/cigarette/cigarette.html',
-      'restrict' : 'CEA',
+      'restrict' : 'C',
       'require' : '^^widget',
+      'controller' : 'CigaretteController',
+      'controllerAs' : 'cigarette',
       'link' : function (scope, attr, element, widget) {
-
         widget.extendConfigurationProperties({
-          "threshold" : {
-            type: "number",
-            title: "Threshold"
+          'threshold' : {
+            type: 'number',
+            title: 'Threshold'
           }
-        });
-
-        scope.dateFormat = dateFormat;
-
-        scope.smoke = function(){
-          CigaretteService.create();
-
-          CigaretteService.get().then(function(cigarettes){
-            scope.cigarettes = cigarettes;
-          });
-        };
-
-        CigaretteService.get().then(function(cigarettes){
-          scope.cigarettes = cigarettes;
         });
       }
     };

@@ -40,8 +40,8 @@
 
           return deferred.promise;
         }
-      }
-  };
+      };
+  }
 
   angular.module('gpAppApp')
          .service('WidgetService', WidgetService);

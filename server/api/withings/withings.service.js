@@ -2,7 +2,6 @@ var CryptoJS = require("crypto-js");
 var request = require('request');
 var config = require('../../config/environment');
 var _ = require('lodash');
-var Promise = require('promise');
 
 var WithingsService = (function() {
     var protocol = 'http';
@@ -64,8 +63,9 @@ var WithingsService = (function() {
                     url: urlrequest, //URL to hit
                     method: 'GET'
                 }, function(err, res, body) {
+
                     if (err) reject(err);
-                    else resolve(eval(body));
+                    else resolve(body);
                 });
             });
             return promise;

@@ -1,18 +1,33 @@
 'use strict';
-angular.module('gpAppApp').service('buienradarService', function($location, $rootScope, $http, User, $cookieStore, $q) {
-    return {
-        get: function(coordinates, callback) {
-            var cb = callback || angular.noop;
-            var deferred = $q.defer();
-            $http.post('/api/buienradar', {
-                cache : true,
-                params: coordinates
-            }).
-            success(function(data) {
-                deferred.resolve(data);
-                return cb(data);
-            });
-            return deferred.promise;
-        }
-    };
-});
+
+(function() {
+
+  class Buienradar {
+
+    constructor($q, $http){
+      this.url = '/api/buienradar';
+      this.$http = $http;
+      this.$q = $q;
+    }
+
+    get(coordinates) {
+      let deferred = this.$q.defer();
+      this.$http.post(this.url, {
+        'cache' : true,
+        'params' : coordinates
+      })
+        .success(data => {
+          deferred.resolve(data);
+        })
+        .error(err => {
+          deferred.reject(err);
+        });
+
+      return deferred.promise;
+    }
+  }
+
+  angular.module('gpAppApp')
+         .service('Buienradar', Buienradar);
+
+})();

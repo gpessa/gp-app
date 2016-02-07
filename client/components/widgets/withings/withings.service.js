@@ -3,23 +3,24 @@
 (function() {
 
   class Withings {
-    url = '/api/withings';
 
     constructor($q, $http){
+      this.url = '/api/withings';
       this.$http = $http;
-      this.deferred = $q.defer();
+      this.$q = $q;
     }
 
-    getData() {
+    get() {
+      let deferred = this.$q.defer();
       this.$http.get(this.url, {'cache' : true})
-                .success(data => {
-                  this.deferred.resolve(data);
-                })
-                .error(err => {
-                  this.deferred.reject(err);
-                });
+        .success(data => {
+          deferred.resolve(data);
+        })
+        .error(err => {
+          deferred.reject(err);
+        });
 
-      return this.deferred.promise;
+      return deferred.promise;
     }
   }
 

@@ -28,8 +28,8 @@ angular.module('gpAppApp').directive('widgetContainerAddWidget', (WidgetService)
       scope.addWidget = function(widget){
         WidgetService.create(widget, function(widget){
           widgetContainer.addWidget(widget);
-        })
+        });
       };
     }
-  }
+  };
 });
