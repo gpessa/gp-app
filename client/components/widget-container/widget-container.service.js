@@ -43,7 +43,7 @@
           var cb = callback || angular.noop;
           var deferred = $q.defer();
 
-          $http.put('/api/widget-container/' + widgetContainer._id, widgetContainer)
+          $http.put('/api/widget-container/' + widgetContainer.id, widgetContainer)
                .success(function(data) {
                   deferred.resolve(data);
                   return cb(data);
@@ -55,7 +55,7 @@
           var cb = callback || angular.noop;
           var deferred = $q.defer();
 
-          $http.delete('/api/widget-container/' + widgetContainer._id, widgetContainer)
+          $http.delete('/api/widget-container/' + widgetContainer.id, widgetContainer)
                .success(function(data) {
                   deferred.resolve(data);
                   return cb(data);

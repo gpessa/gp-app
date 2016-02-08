@@ -5,7 +5,7 @@
 
 'use strict';
 
-// /**
+/**
 
 import User from '../api/user/user.model';
 import WidgetContainer from '../api/widget-container/widget-container.model';
@@ -27,4 +27,4 @@ User.find({}).removeAsync()
   });
 
 
-// **/
+**/

@@ -60,17 +60,12 @@ function removeEntity(res) {
   };
 }
 
-// Gets a list of WidgetContainers
-exports.index = function(req, res) {
-  WidgetContainer.findAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
-};
-
 // Gets a single WidgetContainer from the DB
 exports.show = function(req, res) {
-  WidgetContainer.findOne({ 'id' : req.params.id })
-                //  .findById(req.params.id)
+  WidgetContainer.findOne({
+                    'id' : req.params.id,
+                    'user' : req.user._id
+                  })
                  .populate('widgets')
                  .execAsync()
                  .then(handleEntityNotFound(res))
@@ -80,6 +75,8 @@ exports.show = function(req, res) {
 
 // Creates a new WidgetContainer in the DB
 exports.create = function(req, res) {
+  req.body.user = req.user._id;
+
   WidgetContainer.createAsync(req.body)
                  .then(responseWithResult(res, 201))
                  .catch(handleError(res));
@@ -87,11 +84,10 @@ exports.create = function(req, res) {
 
 // Updates an existing WidgetContainer in the DB
 exports.update = function(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-
-  WidgetContainer.findById(req.params.id)
+  WidgetContainer.findOne({
+                    'id' : req.params.id,
+                    'user' : req.user._id
+                  })
                  .populate('widgets')
                  .execAsync()
                  .then(handleEntityNotFound(res))
@@ -102,8 +98,11 @@ exports.update = function(req, res) {
 
 // Deletes a WidgetContainer from the DB
 exports.destroy = function(req, res) {
-  WidgetContainer.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  WidgetContainer.findOne({
+                    'id' : req.params.id,
+                    'user' : req.user._id
+                  })
+                  .then(handleEntityNotFound(res))
+                  .then(removeEntity(res))
+                  .catch(handleError(res));
 };

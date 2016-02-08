@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var WidgetContainerSchema = new Schema({
   id: String,
+  user : String,
   widgets : [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Widget'

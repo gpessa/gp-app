@@ -9,10 +9,10 @@ exports.setup = function (User, config) {
       passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
-      console.log('WITHINGS');
-      console.log(req.user);
 
       if(req.user){
+          console.log('estendo user');
+
           // Logged in, add information to the user
           req.user.withings = {
             provider : profile.provider,
@@ -30,6 +30,7 @@ exports.setup = function (User, config) {
             });
 
       } else {
+        console.log('cerco user');
 
         // Not logged in, i look for the user or i create one
         User.findOne({
