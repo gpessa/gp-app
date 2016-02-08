@@ -27,7 +27,12 @@
             </a>
         </li>
 
-        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/admin')}"><a href="/admin">Admin</a></li>
+        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive('/admin')}" ng-show="nav.isAdmin()">
+            <a ng-href="/admin">
+              <i class="fa fa-users"></i>
+              <small>Admin</small>
+            </a>
+        </li>
 
         <li ng-hide="nav.isLoggedIn()" ng-class="{active: nav.isActive('/signup')}">
           <a href="/signup">

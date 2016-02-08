@@ -69,7 +69,8 @@ exports.index = function(req, res) {
 
 // Gets a single WidgetContainer from the DB
 exports.show = function(req, res) {
-  WidgetContainer.findById(req.params.id)
+  WidgetContainer.findOne({ 'id' : req.params.id })
+                //  .findById(req.params.id)
                  .populate('widgets')
                  .execAsync()
                  .then(handleEntityNotFound(res))
@@ -89,7 +90,7 @@ exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  
+
   WidgetContainer.findById(req.params.id)
                  .populate('widgets')
                  .execAsync()

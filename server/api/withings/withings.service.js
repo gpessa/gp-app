@@ -1,18 +1,13 @@
 var CryptoJS = require("crypto-js");
 var request = require('request');
 var config = require('../../config/environment');
-var _ = require('lodash');
+var nonce = require('nonce');
 
 var WithingsService = (function() {
     var protocol = 'http';
     var host = 'wbsapi.withings.net';
     var resource = 'measure';
-    // return a random string
-
-    var getNonce = function(N) {
-            return (Math.random().toString(36) + '00000000000000000').slice(2, N + 2)
-        }
-        // transform a json to a query string
+    // transform a json to a query string
 
     var getQueryString = function(parameters) {
         var urlrequest = "?";
@@ -43,7 +38,7 @@ var WithingsService = (function() {
             var param = {
                 "action": 'getmeas',
                 "oauth_consumer_key": config.withings.clientID,
-                "oauth_nonce": getNonce(10),
+                "oauth_nonce": nonce(10)(),
                 "oauth_signature_method": 'HMAC-SHA1',
                 "oauth_timestamp": new Date().getTime(),
                 "oauth_token": user.oauth_token,
@@ -51,6 +46,7 @@ var WithingsService = (function() {
                 "userid": user.userid,
                 "category": 1
             };
+
             var consumerSecret = param.oauth_consumer_key;
             var tokenSecret = config.withings.WITHINGS_SECRET;
             var baseString = generateOAuthBaseString(protocol, host, resource, param);
@@ -63,7 +59,6 @@ var WithingsService = (function() {
                     url: urlrequest, //URL to hit
                     method: 'GET'
                 }, function(err, res, body) {
-
                     if (err) reject(err);
                     else resolve(body);
                 });

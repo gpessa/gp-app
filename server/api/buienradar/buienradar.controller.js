@@ -3,20 +3,30 @@
 import _ from 'lodash';
 var request = require('request');
 
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
-}
+function parseResponse(response){
+  var labels =[];
+  var rainfalls = [];
 
-function responseWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
-      res.status(statusCode).json(entity);
+  var results = response.split(/\n/);
+
+  results.forEach((result) => {
+    result = result.trim().split('|');
+
+    if(result[1]){
+      let rainfall = parseFloat(result[0]);
+      let label = result[1];
+
+      rainfall = Math.pow(10, ((rainfall -109) / 32)) ;
+
+      labels.push( label );
+      rainfalls.push( rainfall );
     }
-  };
+  });
+
+  return {
+    rainfalls,
+    labels
+  }
 }
 
 // Gets a list of Cigarettes
@@ -28,30 +38,7 @@ exports.index = function(req, res) {
     url: urlrequest, //URL to hit
     method: 'GET'
   }, function(error, response, body){
-    var labels =[];
-    var rainfalls = [];
-
-    var result = response.body.split(/\n/);
-
-    _.each(result, function(element){
-      element = element.trim().split('|');
-
-      if(element[1]){
-        var rainfall = parseFloat(element[0]);
-        var label = element[1];
-
-        rainfall = Math.pow(10, ((rainfall -109) / 32)) ;
-
-        labels.push( label );
-        rainfalls.push( rainfall );
-      }
-    });
-
-    res.status(response.statusCode).json({
-      "rainfalls": rainfalls,
-      "labels": labels
-    });
-
+    response.body = parseResponse(response.body);
+    res.status(response.statusCode).json(response.body);
   });
-
 };

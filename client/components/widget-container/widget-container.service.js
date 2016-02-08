@@ -15,7 +15,7 @@
         }).
         catch(function(){
           $http.post('/api/widget-container/', {
-            '_id' : id
+            'id' : id
           }).
           success(function(data) {
             deferred.resolve(data);
@@ -30,7 +30,7 @@
           var deferred = $q.defer();
 
           $http.post('/api/widget-container/', {
-            '_id' : id
+            'id' : id
           }).
           success(function(data) {
             deferred.resolve(data);
