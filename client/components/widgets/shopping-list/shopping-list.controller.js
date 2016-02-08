@@ -7,7 +7,7 @@
     constructor($scope, socket, shoppingListService) {
       this.shoppingListService = shoppingListService;
       this.socket = socket;
-      
+
       this.getLists();
 
       $scope.$on('$destroy', function () {
@@ -49,7 +49,9 @@
       this.shoppingListService.get()
         .then((lists) => {
           this.shoppingLists = lists;
-          this.socket.syncUpdates('shopping-list', 'this.shoppingLists');
+          this.socket.syncUpdates('shopping-list', function(){
+            debugger;
+          });
         });
     }
   }

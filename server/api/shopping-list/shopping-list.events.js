@@ -4,12 +4,12 @@
 
 'use strict';
 
-var EventEmitter = require('events').EventEmitter;
+import {EventEmitter} from 'events';
 var ShoppingList = require('./shopping-list.model');
 var ShoppingListEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
-ShoppingList.setMaxListeners(0);
+ShoppingListEvents.setMaxListeners(0);
 
 // Model events
 var events = {
@@ -24,10 +24,11 @@ for (var e in events) {
 }
 
 function emitEvent(event) {
+  console.log('event1');
   return function(doc) {
     ShoppingListEvents.emit(event + ':' + doc._id, doc);
     ShoppingListEvents.emit(event, doc);
   }
 }
 
-module.exports = ShoppingListEvents;
+export default ShoppingListEvents;
