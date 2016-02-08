@@ -20,11 +20,14 @@ $widget-background : #fff;
     left:-10px;
     bottom:-10px;
     z-index: -1;
-    background: url('../assets/images/RicePaddy.jpg') no-repeat center center fixed;
-    background-position: 50% 50%;
-    transform: scale(1.5);
-    filter: blur(10px);
-    -webkit-filter: blur(10px);
+
+    opacity: 0.1;
+    background: #000;
+    // background-position: 50% 50%;
+    // transform: scale(1.5);
+    // background: url('../assets/images/RicePaddy.jpg') no-repeat center center fixed;
+    // filter: blur(10px);
+    // -webkit-filter: blur(10px);
   }
 
   .widget-header{

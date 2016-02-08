@@ -30,6 +30,7 @@ module.exports = function(config) {
       'client/bower_components/angular-schema-form/dist/schema-form.js',
       'client/bower_components/angular-schema-form/dist/bootstrap-decorator.js',
       'client/bower_components/angular-schema-form-bootstrap/bootstrap-decorator.min.js',
+      'client/bower_components/ngGeolocation/ngGeolocation.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

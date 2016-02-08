@@ -10,7 +10,7 @@
 
       $geolocation.getCurrentPosition()
                   .then(this.getData.bind(this));
-    };
+    }
 
     getData (coordinates) {
       this.Buienradar.get({
@@ -20,7 +20,7 @@
         this.labels = buienradar.labels;
         this.rainfalls = buienradar.rainfalls;
       });
-    };
+    }
   }
 
   angular.module('gpAppApp')

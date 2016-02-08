@@ -9,12 +9,12 @@
       this.dateFormat = dateFormat;
 
       this.render();
-    };
+    }
 
     smoke(){
       this.Cigarette.create()
-        .then(this.render.bind(this))
-    };
+        .then(this.render.bind(this));
+    }
 
     render(){
       this.Cigarette.get()

@@ -10,7 +10,7 @@
 
       this.getLists();
 
-      $scope.$on('$destroy', function () {
+      $scope.$on('$destroy', () => {
         this.socket.unsyncUpdates('shopping-list');
       });
     }
@@ -50,7 +50,7 @@
         .then((lists) => {
           this.shoppingLists = lists;
           this.socket.syncUpdates('shopping-list', function(){
-            debugger;
+            console.log('socket');
           });
         });
     }

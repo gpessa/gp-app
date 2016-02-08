@@ -7,5 +7,5 @@ angular.module('gpAppApp').directive('withingsWidget', () => {
     'require' : '^^widget',
     'controller' : 'WithingsController',
     'controllerAs' : 'vm'
-  }
+  };
 });
