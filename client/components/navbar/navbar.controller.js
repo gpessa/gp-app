@@ -1,12 +1,6 @@
 'use strict';
 
 class NavbarController {
-  //start-non-standard
-  menu = [{
-    'title': 'Dashboard',
-    'link' : '/',
-    'icon' : 'fa fa-tachometer'
-  }];
 
   isCollapsed = true;
   //end-non-standard
@@ -16,6 +10,38 @@ class NavbarController {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
     this.getCurrentUser = Auth.getCurrentUser;
+
+    this.menu = [{
+      'title': 'Dashboard',
+      'link' : '/',
+      'icon' : 'fa fa-tachometer',
+      'show' : this.isLoggedIn()
+    },{
+      'title': 'Admin',
+      'link' : '/admin',
+      'icon' : 'fa fa-users',
+      'show' : this.isAdmin()
+    },{
+      'title': 'Sign up',
+      'link' : '/signup',
+      'icon' : 'fa fa-user-plus',
+      'show' : !this.isLoggedIn()
+    },{
+      'title': 'Login',
+      'link' : '/login',
+      'icon' : 'fa fa-sign-in',
+      'show' : !this.isLoggedIn()
+    },{
+      'title': 'Settings',
+      'link' : '/settings',
+      'icon' : 'fa fa-cogs',
+      'show' : this.isLoggedIn()
+    },{
+      'title': 'Logout',
+      'link' : '/logout',
+      'icon' : 'fa fa-sign-out',
+      'show' : this.isLoggedIn()
+    }];
   }
 
   isActive(route) {
