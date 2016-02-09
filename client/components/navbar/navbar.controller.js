@@ -22,15 +22,10 @@ class NavbarController {
       'icon' : 'fa fa-users',
       'show' : this.isAdmin()
     },{
-      'title': 'Sign up',
-      'link' : '/signup',
-      'icon' : 'fa fa-user-plus',
-      'show' : !this.isLoggedIn()
-    },{
-      'title': 'Login',
-      'link' : '/login',
-      'icon' : 'fa fa-sign-in',
-      'show' : !this.isLoggedIn()
+      'title': 'Connect',
+      'link' : '/connect',
+      'icon' : 'fa fa fa-compress',
+      'show' : this.isLoggedIn()
     },{
       'title': 'Settings',
       'link' : '/settings',
@@ -41,6 +36,16 @@ class NavbarController {
       'link' : '/logout',
       'icon' : 'fa fa-sign-out',
       'show' : this.isLoggedIn()
+    },{
+      'title': 'Sign up',
+      'link' : '/signup',
+      'icon' : 'fa fa-user-plus',
+      'show' : !this.isLoggedIn()
+    },{
+      'title': 'Login',
+      'link' : '/login',
+      'icon' : 'fa fa-sign-in',
+      'show' : !this.isLoggedIn()
     }];
   }
 
