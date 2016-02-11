@@ -9,9 +9,16 @@ export function setup(User, config) {
     profileFields: [
       'displayName',
       'emails'
-    ]
+    ],
+    session: true,
+    passReqToCallback: true
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req, accessToken, refreshToken, profile, done) {
+    console.log('FACEBOOK CALLBACK');
+    console.log('USER IN SESSION:');
+    console.log(req.user);
+    console.log('- - - - - - - - - - - - - - - - -');
+
     User.findOneAsync({
       'facebook.id': profile.id
     })

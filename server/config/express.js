@@ -53,13 +53,16 @@ export default function(app) {
 
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
-    // console.log('serializeUser');
-      done(null, user.id); // where is this user.id going. are we supposed to access this anywhere?
+      console.log('SERIALIZE USER');
+      user = user.length ? user[0] : user;
+      console.log(user);
+
+      done(null, user._id);
   });
 
   // used to deserialize the user
   passport.deserializeUser(function(id, done) {
-      // console.log('deserializeUser ' + id);
+      console.log('deserializeUser ' + id);
       User.findById(id, function(err, user) {
           done(err, user);
       });

@@ -9,10 +9,12 @@ exports.setup = function (User, config) {
       passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
+      console.log('WITHINGS CALLBACK');
+      console.log('USER IN SESSION:');
+      console.log(req.user);
+      console.log('- - - - - - - - - - - - - - - - -');
 
       if(req.user){
-          console.log('estendo user');
-
           // Logged in, add information to the user
           req.user.withings = {
             provider : profile.provider,
@@ -29,10 +31,7 @@ exports.setup = function (User, config) {
               return done(err);
             });
 
-      } else {
-        console.log('cerco user');
-
-        // Not logged in, i look for the user or i create one
+      } else {        // Not logged in, i look for the user or i create one
         User.findOne({
           'withings.id': profile.id
         },

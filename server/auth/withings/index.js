@@ -13,7 +13,6 @@ router
     session: true,
     passReqToCallback: true
   }))
-
   .get('/callback', passport.authorize('withings', {
     failureRedirect: '/signup',
     session: true,

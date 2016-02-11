@@ -16,10 +16,15 @@ var validateJwt = expressJwt({
  * Otherwise returns 403
  */
 export function isAuthenticated() {
+
   return compose()
     // Validate jwt
     .use(function(req, res, next) {
       // allow access_token to be passed through query parameter as well
+      console.log('IS AUTHENTCATED : attach user to request');
+      console.log(req.user);
+      console.log('- - - - - - - - - - - - - - - - -');
+
       if (req.query && req.query.hasOwnProperty('access_token')) {
         req.headers.authorization = 'Bearer ' + req.query.access_token;
       }
@@ -27,6 +32,8 @@ export function isAuthenticated() {
     })
     // Attach user to request
     .use(function(req, res, next) {
+      console.log('IS AUTHENTCATED : find user : ' + req.user._id);
+
       User.findByIdAsync(req.user._id)
         .then(user => {
           if (!user) {
@@ -72,6 +79,9 @@ export function signToken(id, role) {
  * Set token cookie directly for oAuth strategies
  */
 export function setTokenCookie(req, res) {
+  console.log('SET TOKEN COOKIE');
+  console.log('- - - - - - - - - - - - - - - - -');
+
   if (!req.user) {
     return res.status(404).send('It looks like you aren\'t logged in, please try again.');
   }
