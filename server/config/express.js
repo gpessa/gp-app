@@ -62,7 +62,7 @@ export default function(app) {
 
   // used to deserialize the user
   passport.deserializeUser(function(id, done) {
-      console.log('deserializeUser ' + id);
+      console.log('DESERIALIZE USER ' + id);
       User.findById(id, function(err, user) {
           done(err, user);
       });

@@ -8,46 +8,8 @@ angular.module('gpAppApp').directive('widgetContainer', (WidgetContainerService,
     'scope' : {
       'id' : '@'
     },
-    'controller' : function ($scope) {
-      $scope.sortableOption = {
-        'handle' : '.widget-header',
-        'stop' : function(){
-          $scope.updateWidgetContainer(false);
-        }
-      };
-
-      $scope.renderWidgetContainer = function(){
-        WidgetContainerService
-          .show( $scope.id )
-          .then(function(widgetContainer){
-            $scope.widgetContainer = widgetContainer;
-            socket.syncUpdates('widget-container', $scope.widgetContainer);
-          });
-      };
-
-      $scope.removeWidgetContainer = function(){
-        WidgetContainerService.remove( $scope.widgetContainer , function(widgetContainer){
-          $scope.widgetContainer = widgetContainer;
-        });
-      };
-
-      $scope.updateWidgetContainer = function(){
-        WidgetContainerService.update( $scope.widgetContainer , function(widgetContainer){
-            $scope.widgetContainer = widgetContainer;
-        });
-      };
-
-      $scope.addWidget = function(widget){
-        $scope.widgetContainer.widgets.push(widget);
-        $scope.updateWidgetContainer();
-      };
-
-      $scope.renderWidgetContainer();
-
-      return {
-        'addWidget' : $scope.addWidget,
-        'refreshContainer' : $scope.renderWidgetContainer
-      };
-    }
+    'bindToController' : true,
+    'controller' : 'WidgetContainerController',
+    'controllerAs' : 'vm'
   };
 });
