@@ -1,15 +1,17 @@
-<div class="shopping-list-create">
+<div class="widget-body-top-button">
   <a class="btn btn-block btn-primary" ng-click="vm.createList()">Create new list</a>
 </div>
 
 <ul class="shopping-list" ng-repeat="shoppingList in vm.shoppingLists | orderBy : '-lastupdate'">
 
-  <li class="shopping-list_item shopping-list_title">
-    <a class="shopping-list_delete fa fa-trash-o" ng-click="vm.deleteList(shoppingList)"></a>
-    <input type="text" ng-model="shoppingList.name" ng-blur="vm.saveList(shoppingList)"/>
+  <li class="shopping-list-item title">
+    <a class="shopping-list_delete btn btn-link-light" ng-click="vm.deleteList(shoppingList)">
+      <o class="fa fa-trash-o"></o>
+    </a>
+    <input type="text" class="form-control" ng-model="shoppingList.name" ng-blur="vm.saveList(shoppingList)"/>
   </li>
 
-  <li class="shopping-list_item shopping-list_new">
+  <li class="shopping-list-item new">
     <form ng-submit="vm.addItem(shoppingList, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
       <input class="form-control"
              placeholder="Add item"
@@ -20,8 +22,10 @@
     </form>
   </li>
 
-  <li class="shopping-list_item" ng-repeat="item in shoppingList.list" ng-class="{'archived' : item.archivied}">
-    <a class="shopping-list_delete fa fa-trash-o" ng-click="vm.archiveItem(shoppingList, $index)"></a>
+  <li class="shopping-list-item" ng-repeat="item in shoppingList.list" ng-class="{'archived' : item.archivied}">
+    <a class="shopping-list_delete btn btn-link-light" ng-click="vm.archiveItem(shoppingList, $index)">
+      <i class="fa fa-trash-o"></i>
+    </a>
     {{item.name}}
   </li>
 

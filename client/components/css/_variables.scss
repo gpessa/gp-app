@@ -1,6 +1,6 @@
 $brand-primary:             #3193c6;
 $brand-secondary:           #40d7b9;
-$brand-success:             #5cb85c;
+$brand-success:             #48B74A;
 $brand-info:                #5bc0de;
 $brand-warning:             #f0ad4e;
 $brand-danger:              #FB6D69;
@@ -14,6 +14,7 @@ $input-border-radius-small:      7px !default;
 
 $body-bg:                   #fff;
 $text-color:                #fff;
+$text-muted:                darken(#fff, 20%);
 
 $font-family-serif:         'Roboto', sans-serif;
 $font-family-sans-serif:    'Helvetica Neue', sans-serif;
@@ -62,7 +63,7 @@ $navbar-default-toggle-border-color:       transparent;
 
 
 
-$state-success-text:             #3c763d;
+$state-success-text:             $brand-success;
 $state-success-bg:               #dff0d8;
 $state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%);
 

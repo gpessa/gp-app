@@ -64,7 +64,7 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
 
       scope.removeWidget = function() {
           WidgetService.remove(scope.widget, function(){
-            widgetContainer.refreshContainer();
+            widgetContainer.render();
           });
       };
 

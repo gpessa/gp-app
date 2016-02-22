@@ -1,0 +1,77 @@
+.stock-widget{
+  .widget-body-top-button{
+    .btn{
+      &:first-child{
+        padding-right: 40px;
+      }
+      &:last-child{
+        position: absolute;
+        right:0;
+        top:0;
+      }
+    }
+  }
+}
+
+.stock-list{
+  @include  list-unstyled;
+  margin-left: -$padding-base-horizontal;
+  margin-right: -$padding-base-horizontal;
+  margin-bottom: 0;
+
+  & + .stock-list{
+    margin-top: $line-height-computed;
+  }
+}
+
+.stock{
+
+  .row{
+      padding-left: 45px;
+      padding-top: 11px;
+      padding-bottom: 11px;
+      padding-right: 15px;
+  }
+
+  .stock_btn{
+    display: inline-block;
+    position: absolute;
+
+    .btn{
+      display: block;
+    }
+  }
+
+  .stock_data{
+    h4{
+      margin: 0;
+      margin-bottom: 8px;
+    }
+    text-transform: capitalize;
+  }
+
+  .stock_variation{
+    text-align: right;
+    h4{
+      margin: 0;
+      margin-bottom: 8px;
+    }
+  }
+
+  .stock_price{
+    text-align: right;
+
+    span{
+      position: relative;
+      font-size: 38px;
+      display: inline-block;
+      line-height: 1;
+    }
+  }
+
+  .stock_details{
+    margin:$grid-gutter-width / 2;
+    padding-top: $grid-gutter-width / 2;
+    border-top: 1px solid $input-border;
+  }
+}

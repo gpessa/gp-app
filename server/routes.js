@@ -9,13 +9,14 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
-  app.use('/api/widget', require('./api/widget'));
   app.use('/api/widget-container', require('./api/widget-container'));
   app.use('/api/shopping-list', require('./api/shopping-list'));
   app.use('/api/buienradar', require('./api/buienradar'));
   app.use('/api/cigarette', require('./api/cigarette'));
   app.use('/api/withings', require('./api/withings'));
   app.use('/api/things', require('./api/thing'));
+  app.use('/api/widget', require('./api/widget'));
+  app.use('/api/stock', require('./api/stock'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));

@@ -53,7 +53,7 @@ export default function(app) {
 
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
-      console.log('SERIALIZE USER');
+      //console.log('SERIALIZE USER');
       user = user.length ? user[0] : user;
       console.log(user);
 
@@ -62,7 +62,7 @@ export default function(app) {
 
   // used to deserialize the user
   passport.deserializeUser(function(id, done) {
-      console.log('DESERIALIZE USER ' + id);
+      //console.log('DESERIALIZE USER ' + id);
       User.findById(id, function(err, user) {
           done(err, user);
       });

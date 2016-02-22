@@ -33,7 +33,8 @@
     "socketio-jwt": "^4.2.0",
     "serve-favicon": "^2.3.0",
     "request": "2.67.0",
-    "nonce": "latest"
+    "nonce": "latest",
+    "yahoo-finance": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.0",

@@ -19,31 +19,47 @@ export function setup(User, config) {
     console.log(req.user);
     console.log('- - - - - - - - - - - - - - - - -');
 
-    User.findOneAsync({
-      'facebook.id': profile.id
-    })
-      .then(function(user) {
-        if (!user) {
-          user = new User({
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            role: 'user',
-            provider: 'facebook',
-            facebook: profile._json
-          });
-          user.saveAsync()
-            .then(function(user) {
-              return done(null, user);
-            })
-            .catch(function(err) {
-              return done(err);
-            });
-        } else {
+    if(req.user){
+
+      // Logged in, add information to the user
+      req.user.facebook = profile._json;
+
+      req.user.saveAsync()
+        .then(function(user) {
           return done(null, user);
-        }
-      })
-      .catch(function(err) {
-        return done(err);
-      });
+        })
+        .catch(function(err) {
+          return done(err);
+        });
+
+    } else{
+        User.findOneAsync({
+          'facebook.id': profile.id
+        })
+        .then(function(user) {
+          if (!user) {
+            user = new User({
+              name: profile.displayName,
+              email: profile.emails[0].value,
+              role: 'user',
+              provider: 'facebook',
+              facebook: profile._json
+            });
+            user.saveAsync()
+              .then(function(user) {
+                return done(null, user);
+              })
+              .catch(function(err) {
+                return done(err);
+              });
+          } else {
+            return done(null, user);
+          }
+        })
+        .catch(function(err) {
+          return done(err);
+        });
+    }
+
   }));
 }

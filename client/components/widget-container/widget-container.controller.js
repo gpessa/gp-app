@@ -8,14 +8,15 @@
       this.socket = socket;
       this.WidgetContainerService = WidgetContainerService;
       this.sortableOption = {
-        'handle' : '.widget-header',
-        'stop' : this.updateWidgetContainer
+        'stop' : () => {
+          this.update()
+        }
       }
 
-      this.renderWidgetContainer();
+      this.render();
     }
 
-    renderWidgetContainer(){
+    render(){
       this.WidgetContainerService
         .show( this.id )
         .then((widgetContainer) => {
@@ -24,13 +25,13 @@
         });
     };
 
-    removeWidgetContainer(){
+    remove(){
       this.WidgetContainerService.remove( this.widgetContainer , (widgetContainer) => {
         this.widgetContainer = widgetContainer;
       });
     };
 
-    updateWidgetContainer(){
+    update(){
       this.WidgetContainerService.update( this.widgetContainer , (widgetContainer) => {
           this.widgetContainer = widgetContainer;
       });
@@ -38,13 +39,8 @@
 
     addWidget(widget){
       this.widgetContainer.widgets.push(widget);
-      this.updateWidgetContainer();
+      this.update();
     };
-
-    // return {
-    //   'addWidget' : this.addWidget,
-    //   'refreshContainer' : this.renderWidgetContainer
-    // };
 
 
   }

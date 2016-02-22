@@ -27,6 +27,7 @@ $zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
 @import '../components/widgets/buienradar/buienradar.scss';
 @import '../components/widgets/cigarette/cigarette.scss';
 @import '../components/widgets/shopping-list/shopping-list.scss';
+@import '../components/widgets/stock/stock.scss';
 @import '../components/widgets/withings/withings.scss';
 // endinjector
 
@@ -101,4 +102,7 @@ label{
 
 footer{
   height: 30px;
+}
+.dl-horizontal dt{
+  text-align: left;
 }

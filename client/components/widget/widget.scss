@@ -3,32 +3,29 @@ $widget-background : #fff;
 .widget{
   position: relative;
   overflow: hidden;
-  // border: 2px solid rgba(0,0,0,0.1);
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(94,94,94,0.6);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(94,94,94,0.6);
   box-shadow: 0px 0px 5px 0px rgba(94,94,94,0.6);
 
   &.over{
     opacity: 0.4;
   }
 
-  &:before{
-    content: ' ';
-    position: absolute;
-    top:-10px;
-    right:-10px;
-    left:-10px;
-    bottom:-10px;
-    z-index: -1;
-
-    opacity: 0.1;
-    background: #000;
-    // background-position: 50% 50%;
-    // transform: scale(1.5);
-    // background: url('../assets/images/RicePaddy.jpg') no-repeat center center fixed;
-    // filter: blur(10px);
-    // -webkit-filter: blur(10px);
-  }
+  // &:before{
+  //   content: ' ';
+  //   position: absolute;
+  //   top:-10px;
+  //   right:-10px;
+  //   left:-10px;
+  //   bottom:-10px;
+  //   z-index: -1;
+  //
+  //   opacity: 0.1;
+  //   background: #000;
+  //   background-position: 50% 50%;
+  //   transform: scale(1.5);
+  //   background: url('../assets/images/RicePaddy.jpg') no-repeat center center fixed;
+  //   filter: blur(10px);
+  //   -webkit-filter: blur(10px);
+  // }
 
   .widget-header{
     background-color: $widget-background;
@@ -48,6 +45,12 @@ $widget-background : #fff;
 
   .widget-body{
     position: relative;
+
+    .widget-body-top-button{
+      margin-left: -$padding-base-horizontal;
+      margin-right: -$padding-base-horizontal;
+      margin-top: -$padding-base-vertical;
+    }
   }
 
   .widget-body,

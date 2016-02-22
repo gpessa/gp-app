@@ -23,6 +23,10 @@ angular.module('gpAppApp').directive('widgetContainerAddWidget', (WidgetService)
         'name' : 'Buienradar',
         'type' : 'buienradar',
         'icon' : 'fa fa-sun-o'
+      },{
+        'name' : 'Stocks',
+        'type' : 'stock',
+        'icon' : 'fa fa-university'
       }];
 
       scope.addWidget = function(widget){

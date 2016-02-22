@@ -12,18 +12,18 @@
 import User from '../api/user/user.model';
 import WidgetContainer from '../api/widget-container/widget-container.model';
 
-WidgetContainer.find({}).removeAsync();
-
-User.find({}).removeAsync()
-  .then(() => {
-    User.createAsync({
-      provider: 'local',
-      role: 'admin',
-      name: 'Admin',
-      email: 'nomeecognome@gmail.com',
-      password: 'password'
-    })
-    .then(() => {
-      console.log('finished populating users');
-    });
-  });
+// WidgetContainer.find({}).removeAsync();
+//
+// User.find({}).removeAsync()
+//   .then(() => {
+//     User.createAsync({
+//       provider: 'local',
+//       role: 'admin',
+//       name: 'Admin',
+//       email: 'nomeecognome@gmail.com',
+//       password: 'password'
+//     })
+//     .then(() => {
+//       console.log('finished populating users');
+//     });
+//   });

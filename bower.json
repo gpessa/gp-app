@@ -20,9 +20,15 @@
     "angular-validation-match": "~1.5.2",
     "html5-sortable-angularjs": "latest",
     "angular-schema-form-bootstrap": "latest",
-    "ngGeolocation": "latest"
+    "ngGeolocation": "latest",
+    "angular-i18n" : "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"
+  },
+  "overrides":{
+    "angular-i18n" : {
+      "main": ["angular-locale_it-it.js"]
+    }
   }
 }

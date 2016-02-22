@@ -1,7 +1,5 @@
 .user{
-  display: inline-block;
-  float: right;
-  height: 100%;
+  @extend .clearfix;
 
   .user-name{
     display: inline-block;
@@ -20,19 +18,18 @@
   }
 
   .user-image{
-    height: 100%;
-    display: inline-block;
+    display: block;
     padding: 5px;
     text-align: center;
-    line-height: 40px;
     float: left;
 
     .user-image-element{
-      display: inline-block;
+      display: block;
       width: 40px;
-      background: $gray-lighter;
+      height: 40px;
+      line-height: 40px;
       border-radius: 50%;
-      height: 100%;
+      background: $gray-lighter;
       color: $text-muted;
     }
   }

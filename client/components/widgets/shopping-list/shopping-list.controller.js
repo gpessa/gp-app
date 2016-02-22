@@ -21,7 +21,7 @@
         delete shoppingList.item;
 
         shoppingList.list.push(item);
-        this.shoppingListService.update(shoppingList);
+        this.shoppingListService.update(shoppingList)
       }
     }
 
@@ -34,11 +34,15 @@
     }
 
     createList(){
-      this.shoppingListService.create();
+      this.shoppingListService.create().then(() => {
+        this.getLists()
+      });
     }
 
     deleteList(shoppingList){
-      this.shoppingListService.remove(shoppingList);
+      this.shoppingListService.remove(shoppingList).then(() => {
+        this.getLists()
+      });
     }
 
     saveList(shoppingList){
@@ -49,9 +53,7 @@
       this.shoppingListService.get()
         .then((lists) => {
           this.shoppingLists = lists;
-          this.socket.syncUpdates('shopping-list', function(){
-            console.log('socket');
-          });
+          this.socket.syncUpdates('shopping-list');
         });
     }
   }

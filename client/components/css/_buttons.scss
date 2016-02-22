@@ -5,3 +5,6 @@
 .btn-light {
   @include button-variant($btn-light-color, $btn-light-bg, $btn-light-border);
 }
+.btn-link-light{
+  color:$btn-light-color;
+}
