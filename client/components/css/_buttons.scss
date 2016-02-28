@@ -1,6 +1,6 @@
 
 .btn-secondary {
-  @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+  @include button-variant($btn-secondary-color, $btn-secondary-bg, darken($btn-secondary-border, 5%));
 }
 .btn-light {
   @include button-variant($btn-light-color, $btn-light-bg, $btn-light-border);

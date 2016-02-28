@@ -7,7 +7,8 @@ var StockSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  symbol : String
+  symbol : String,
+  date : Date
 });
 
 export default mongoose.model('Stock', StockSchema);

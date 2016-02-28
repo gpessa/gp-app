@@ -12,7 +12,10 @@ $zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
 @import 'admin/admin.scss';
 @import 'main/main.scss';
 @import '../components/css/_buttons.scss';
+@import '../components/css/_dot.scss';
 @import '../components/css/_icons.scss';
+@import '../components/css/_list.scss';
+@import '../components/css/_mixins.scss';
 @import '../components/css/_same-height-columns.scss';
 @import '../components/css/_variables.scss';
 @import '../components/error/error.scss';
@@ -21,11 +24,13 @@ $zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
 @import '../components/navbar/navbar.scss';
 @import '../components/oauth-buttons/oauth-buttons.scss';
 @import '../components/user/user.scss';
+@import '../components/util/util.scss';
 @import '../components/widget-container/widget-container-add-widget.scss';
 @import '../components/widget-container/widget-container.scss';
 @import '../components/widget/widget.scss';
 @import '../components/widgets/buienradar/buienradar.scss';
 @import '../components/widgets/cigarette/cigarette.scss';
+@import '../components/widgets/portfolio/portfolio.scss';
 @import '../components/widgets/shopping-list/shopping-list.scss';
 @import '../components/widgets/stock/stock.scss';
 @import '../components/widgets/withings/withings.scss';
@@ -55,11 +60,10 @@ $zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
 }
 
 html{
-
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
   font-weight: 300;
   padding-bottom: 30px;
 
@@ -103,6 +107,45 @@ label{
 footer{
   height: 30px;
 }
-.dl-horizontal dt{
-  text-align: left;
+
+.dl-horizontal {
+  margin-bottom: 0;
+
+  dt{
+    font-weight: normal;
+    text-align: left;
+  }
+}
+
+.uib-daypicker {
+  .btn{
+    background: transparent;
+    border:transparent;
+  }
+}
+
+
+hr {
+  margin-top:    $line-height-computed / 2;
+  margin-bottom: $line-height-computed / 2;
+}
+
+.btn{
+  .fa{
+    width: 12px;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}
+
+select{
+   -webkit-appearance: none;
+   -moz-appearance:    none;
+   appearance:         none;
 }

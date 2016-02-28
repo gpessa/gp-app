@@ -4,11 +4,11 @@
 
   class WithingsController {
 
-    constructor($filter, Withings, chartConfiguration, dateFormat) {
+    constructor($filter, Withings, chartConfiguration, formats) {
       this.chartConfiguration = angular.copy(chartConfiguration);
       this.Withings = Withings;
       this.$filter = $filter;
-      this.dateFormat = dateFormat;
+      this.formats = formats;
 
       this.types = [{
         'label' : 'Weight',
@@ -59,7 +59,7 @@
           scaleSteps : Math.floor(max - min) + 1
         });
       })
-      .catch(err => this.error = err.message);
+      .catch(error => this.error = error);
     }
 
     select(type){

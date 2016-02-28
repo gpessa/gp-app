@@ -1,72 +1,75 @@
-<div class="widget-body-top-button">
-  <button class="btn btn-primary btn-block" ng-click="openAdd = !openAdd">Add Stock</button>
-  <button class="btn btn-secondary" ng-click="vm.get()">
-    <i class="fa fa-refresh"></i>
-  </button>
-</div>
-
-<form ng-submit="vm.add(form)" name="form" novalidate ng-if="openAdd">
-
-  <div class="form-group" ng-class="{'has-error has-feedback' : vm.submitted && form.symbol.$error}">
-    <label class="control-label">Stock symbol</label>
-    <input type="text" class="form-control" name="symbol" ng-model="vm.stock.symbol" required>
-
-    <div ng-messages="form.symbol.$error" ng-if="vm.submitted" class="help-block">
-      <div ng-message="required">This is required.</div>
-    </div>
+<div ng-show="!error">
+  <div class="widget-body-top-button">
+    <button class="btn btn-primary btn-block" ng-init="openAdd = false;" ng-click="openAdd = !openAdd">Add Stock</button>
+    <button class="btn btn-secondary" ng-click="get()">
+      <i class="fa fa-refresh"></i>
+    </button>
   </div>
 
-  <div class="form-group">
-    <button class="btn btn-block btn-primary" type="submit">Add</button>
-  </div>
 
-</form>
+  <ul class="list" ng-if="openAdd">
 
-<ul class="stock-list">
-  <li class="stock-list_item stock" ng-repeat="stock in vm.stocks" ng-init="open = false">
-
-    <span class="stock_btn">
-      <a class="btn btn-link-light" ng-click="vm.remove(stock)">
-        <i class="fa fa-trash-o"></i>
-      </a>
-      <a class="btn btn-link-light" ng-click="open = !open">
-        <i class="fa fa-ellipsis-v"></i>
-      </a>
-    </span>
-
-    <div class="row">
-      <hgroup class="col-md-5 stock_data">
-        <h4>{{stock.data.name | lowercase}}</h4>
-        <div>{{stock.symbol}}</h5>
-      </hgroup>
-
-      <div class="col-md-2 stock_variation">
-        <h4><value ng-model="stock.data.change" filter="currency"/></h4>
-        <div><value ng-model="stock.data.changeInPercent" filter="percentage"/></div>
+    <li class="list_item active">
+      <div class="list_item_btn">
+        <a class="btn btn-secondary" ng-click="remove(stock)">
+          <i class="fa fa-file-o"></i>
+        </a>
       </div>
 
-      <div class="col-md-5 stock_price">
-        <value ng-model="stock.data.bid" filter="currency" is-positive="stock.data.change > 0"/>
+      <div class="list_item_data">
+        <form ng-submit="add(form)" name="form" novalidate ng-if="openAdd">
+          <input type="text" placeholder="Stock symbol" class="form-control" name="symbol" ng-model="stock.symbol" required>
+        </form>
       </div>
-    </div>
+    </li>
+  </ul>
 
+  <ul class="list" ng-repeat="stock in stocks">
+    <li class="list_item active">
+      <div class="list_item_btn">
+        <a class="btn btn-secondary" ng-click="remove(stock)">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </div>
 
-    <div class="stock_details" ng-if="open">
+      <div class="list_item_data">
+        <div class="row">
+          <div class="col-md-6">{{stock.data.name | capitalize}} ({{stock.symbol}})</div>
+
+          <div class="col-md-2 text-right">
+            <span val="stock.data.change" filter="currency"></span>
+          </div>
+
+          <div class="col-md-2 text-right">
+            <span val="stock.data.changeInPercent" filter="percentage"></span>
+          </div>
+
+          <div class="col-md-2 text-right">
+            {{stock.data.bid | currency}}
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="list_item extra">
       <dl class="dl-horizontal">
-        <dt>Last Trade Date</dt>
-        <dd>{{stock.data.lastTradeDate | date}}</dd>
+        <dt>Daily volume</dt>
+        <dd>{{stock.data.volume | number}} ({{stock.data.averageDailyVolume | number}})</dd>
+
+        <dt>Last trade</dt>
+        <dd>{{stock.data.lastTradeTime | date:medium}}</dd>
 
         <dt>Days low</dt>
         <dd>{{stock.data.daysLow | currency}}</dd>
 
         <dt>Days high</dt>
         <dd>{{stock.data.daysHigh | currency}}</dd>
-
-        <dt>Daily volume</dt>
-        <dd>{{stock.data.volume | number}} ({{stock.data.averageDailyVolume | number}})</dd>
       </dl>
-    </div>
+    </li>
 
+  </ul>
+</div>
 
-  </li>
-</ul>
+<error error="" class="error" ng-show="error">
+  <p>{{error.message}}</p>
+</error>

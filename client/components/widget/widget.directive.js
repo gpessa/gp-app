@@ -48,6 +48,10 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
       this.toggleLoading = function(){
         $scope.isWidgetLoading = !$scope.isWidgetLoading;
       };
+
+      this.getConfiguration = function(){
+        return $scope.widget.configuration;
+      }
     },
     link : function(scope, element, attrs, widgetContainer){
       var dom = $compile('<div class="' + scope.widget.type + '-widget"></div>')(scope);

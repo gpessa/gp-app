@@ -27,6 +27,10 @@ angular.module('gpAppApp').directive('widgetContainerAddWidget', (WidgetService)
         'name' : 'Stocks',
         'type' : 'stock',
         'icon' : 'fa fa-university'
+      },{
+        'name' : 'Portfolio',
+        'type' : 'portfolio',
+        'icon' : 'fa fa-exchange'
       }];
 
       scope.addWidget = function(widget){

@@ -19,7 +19,7 @@
         .success(data => {
           deferred.resolve(data);
         })
-        .error(err => {
+        .catch(err => {
           deferred.reject(err);
         });
 

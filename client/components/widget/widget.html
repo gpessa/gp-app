@@ -1,5 +1,5 @@
-<div class="widget widget-{{widget.type}}">
-  
+<div class="widget widget-{{widget.type}}" ng-class="{'loading' : isWidgetLoading}">
+
   <div class="widget-header">
       <h4>
         {{widget.name}} &nbsp;
@@ -14,11 +14,11 @@
     </h4>
   </div>
 
-  <div class="widget-loader" ng-show="!isSettingsOpen && isWidgetLoading">
+  <!-- <div class="widget-loader">
     <i class="fa fa-3x fa-spin fa-circle-o-notch"></i>
-  </div>
+  </div> -->
 
-  <div class="widget-body clearfix" ng-show="!isSettingsOpen && !isWidgetLoading"></div>
+  <div class="widget-body clearfix" ng-show="!isSettingsOpen"></div>
 
   <div class="widget-settings clearfix" ng-if="isSettingsOpen">
     <form name="form"

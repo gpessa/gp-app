@@ -4,9 +4,9 @@
 
   class CigaretteController {
 
-    constructor(Cigarette, dateFormat) {
+    constructor(Cigarette, formats) {
       this.Cigarette = Cigarette;
-      this.dateFormat = dateFormat;
+      this.formats = formats;
 
       this.render();
     }

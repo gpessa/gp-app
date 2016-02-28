@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var ShoppingListSchema = new Schema({
-  name: { type: String, default: 'Add a name' },
+  name: { type: String },
   lastupdate : Date,
-  list: [{ 
+  list: [{
     name : { type: String, required: true, trim: true },
     archivied : { type: Boolean, default: false }
   }]

@@ -7,6 +7,6 @@
 
 <ul class="widget-cigarette_list list-unstyled" ng-if="cigarette.cigarettes.length > 1">
   <li class="widget-cigarette_list-item" ng-repeat="cigarette in cigarette.cigarettes" ng-if="$index > 0">
-    <strong>{{cigarette.count}}</strong> <small class="pull-right">{{cigarette._id | date: dateFormat.day}}</small>
+    <strong>{{cigarette.count}}</strong> <small class="pull-right">{{cigarette._id | date: dateFormat.date}}</small>
   </li>
 </ul>

@@ -3,5 +3,10 @@
         chart-labels="buienradar.labels"
         chart-options="buienradar.chartConfiguration.options"
         chart-colours="buienradar.chartConfiguration.colours"
-        ng-if="buienradar.rainfalls.length">
+        ng-if="buienradar.rainfalls.length"
+        ng-show="!buienradar.error">
 </canvas>
+
+<error error="" class="error" ng-show="buienradar.error">
+  <p>{{buienradar.error.message}}</p>
+</error>

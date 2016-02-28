@@ -2,30 +2,30 @@ $widget-background : #fff;
 
 .widget{
   position: relative;
-  overflow: hidden;
   box-shadow: 0px 0px 5px 0px rgba(94,94,94,0.6);
 
   &.over{
     opacity: 0.4;
   }
 
-  // &:before{
-  //   content: ' ';
-  //   position: absolute;
-  //   top:-10px;
-  //   right:-10px;
-  //   left:-10px;
-  //   bottom:-10px;
-  //   z-index: -1;
-  //
-  //   opacity: 0.1;
-  //   background: #000;
-  //   background-position: 50% 50%;
-  //   transform: scale(1.5);
-  //   background: url('../assets/images/RicePaddy.jpg') no-repeat center center fixed;
-  //   filter: blur(10px);
-  //   -webkit-filter: blur(10px);
-  // }
+  &.loading {
+    &:after{
+      @extend .fa;
+      @extend .fa-3x;
+      @extend .fa-spin;
+      content: $fa-var-circle-o-notch;
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -21px;
+    }
+
+    .widget-body > *{
+      opacity: 0;
+    }
+  }
 
   .widget-header{
     background-color: $widget-background;
@@ -45,6 +45,7 @@ $widget-background : #fff;
 
   .widget-body{
     position: relative;
+    min-height: 80px;
 
     .widget-body-top-button{
       margin-left: -$padding-base-horizontal;
@@ -54,15 +55,9 @@ $widget-background : #fff;
   }
 
   .widget-body,
-  .widget-settings,
-  .widget-loader{
+  .widget-settings{
     background: linear-gradient(0deg,rgba(255,255,255,0.3),rgba(255,255,255,0.3));
     padding: $padding-base-vertical $padding-base-horizontal;
-  }
-
-  .widget-loader{
-    text-align: center;
-    padding: (2 * $padding-large-vertical) (2 * $padding-large-horizontal);
   }
 
   .widget-footer{
@@ -77,5 +72,23 @@ $widget-background : #fff;
     }
   }
 
+  .form-control{
+    border-width: 0;
+    border-bottom-width: 1px;
+    background: transparent;
+    border-radius: 0;
+    padding-left: 0;
+    box-shadow: none;
+    padding-right: 0;
+    color:$text-color;
+    @include placeholder-color(darken($input-color, 0%));
+  }
 
+  .input-group-addon{
+    border-width: 0;
+    border-bottom-width: 1px;
+    background: transparent;
+    padding-left: 0;
+    border-radius: 0;
+  }
 }

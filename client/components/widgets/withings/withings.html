@@ -13,11 +13,11 @@
     <div class="withings-widget_last-measure">
       <p>Last measure</p>
       <h1>{{vm.lastMeasure}}</h1>
-      <p class="small">{{vm.lastMeasureDate | date: vm.dateFormat.day}}</p>
+      <p class="small">{{vm.lastMeasureDate | date: vm.formats.date}}</p>
     </div>
 
     <div class="withings-widget_selector">
-      <button class="btn btn-block btn-light"
+      <button class="btn btn-sm btn-block btn-light"
               ng-class="{'active' : vm.type == selectedType}"
               ng-repeat="type in vm.types"
               ng-click="vm.select(type)">
@@ -28,6 +28,6 @@
 </div>
 
 <error error="" class="error" ng-show="vm.error">
-  <p>{{vm.error}}</p>
+  <p>{{vm.error.message}}</p>
   <p>Connect your account <a href="/connect">here</a></p>
 </error>

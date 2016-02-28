@@ -82,7 +82,13 @@ exports.index = function(req, res) {
       res.status(200).json(result);
 
     })
-  }else {
+    .catch(function(){
+      res.status(404).send({
+        'message' : 'Service not available'
+      });
+    });
+
+  } else {
     res.status(412).send({
       'message' : 'Withings account not configured'
     });

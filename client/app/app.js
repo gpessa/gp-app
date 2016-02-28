@@ -15,16 +15,18 @@ angular.module('gpAppApp', [
   'validation.match',
   'chart.js',
   'html5.sortable',
-  'schemaForm'
+  'schemaForm',
+  'angular-click-outside'
 ])
+
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
     .otherwise({
       redirectTo: '/'
     });
-
   $locationProvider.html5Mode(true);
 })
+
 .constant('chartConfiguration', {
   options : {
     bezierCurve : false,
@@ -50,7 +52,50 @@ angular.module('gpAppApp', [
     strokeColor: 'rgba(255, 255, 255, 1)'
   }]
 })
-.constant('dateFormat', {
-  day : 'dd MMM yyyy'
+
+.constant('formats', {
+  date : 'dd MMM yyyy',
+  dateTime : 'dd MMM yyyy h:mm:ss a'
+})
+
+.config(function (uibDatepickerConfig, uibDatepickerPopupConfig, formats) {
+    uibDatepickerConfig.showWeeks = false;
+    uibDatepickerConfig.showButtonBar = false;
+    uibDatepickerPopupConfig.showButtonBar = false;
+    uibDatepickerPopupConfig.datepickerPopup = formats.date;
+})
+
+.config(function($httpProvider){
+  var dateRegex = /^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d(\.\d+)?([+-][0-2]\d(:?[0-5]\d)?|Z)$/;
+
+  function recurseObject(object) {
+    var result = object;
+    if (object != null) {
+      result = angular.copy(object);
+      for (var key in result) {
+        var property = result[key];
+        if (typeof property === 'object') {
+          result[key] = recurseObject(property);
+        } else if (typeof property === 'string' && dateRegex.test(property)) {
+          result[key] = new Date(property);
+        }
+      }
+    }
+    return result;
+  }
+
+  $httpProvider.defaults.transformResponse = function(data) {
+    try {
+      var object;
+      if (typeof data === 'object') {
+        object = data;
+      } else {
+        object = JSON.parse(data);
+      }
+      return recurseObject(object);
+    } catch(e) {
+      return data;
+    }
+  };
 })
 ;

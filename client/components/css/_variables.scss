@@ -6,6 +6,7 @@ $brand-warning:             #f0ad4e;
 $brand-danger:              #FB6D69;
 
 $input-bg:                  rgba(255, 255, 255, 0.3);
+$input-group-addon-bg:      rgba(255, 255, 255, 0.4);
 $input-border:              rgba(255, 255, 255, 0.3);
 $input-color:               #fff;
 $input-border-radius:            3px !default;
@@ -78,3 +79,23 @@ $state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%);
 $state-danger-text:              $brand-danger;
 $state-danger-bg:                #f2dede;
 $state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%);
+
+
+$hr-border:                   $input-border;
+
+
+
+
+//== Modals
+$modal-inner-padding:         15px !default;
+$modal-title-padding:         15px !default;
+$modal-title-line-height:     1;
+$modal-content-bg:                             linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7));
+// $modal-content-border-color:                   $modal-content-bg;
+// $modal-content-fallback-border-color:          $modal-content-bg;
+$modal-backdrop-bg:           #000 !default;
+$modal-backdrop-opacity:      0.4 !default;
+$modal-header-border-color:   #e5e5e5 !default;
+$modal-footer-border-color:   $modal-header-border-color !default;
+
+$grid-gutter-width:         20px !default;

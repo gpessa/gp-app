@@ -38,6 +38,12 @@ exports.index = function(req, res) {
     url: urlrequest, //URL to hit
     method: 'GET'
   }, function(error, response, body){
+
+    if(error)
+      res.status(404).send({
+        'message' : 'Service not available'
+      });
+
     response.body = parseResponse(response.body);
     res.status(response.statusCode).json(response.body);
   });

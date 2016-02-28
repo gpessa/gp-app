@@ -14,10 +14,10 @@ export function setup(User, config) {
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {
-    console.log('FACEBOOK CALLBACK');
-    console.log('USER IN SESSION:');
-    console.log(req.user);
-    console.log('- - - - - - - - - - - - - - - - -');
+    // console.log('FACEBOOK CALLBACK');
+    // console.log('USER IN SESSION:');
+    // console.log(req.user);
+    // console.log('- - - - - - - - - - - - - - - - -');
 
     if(req.user){
 

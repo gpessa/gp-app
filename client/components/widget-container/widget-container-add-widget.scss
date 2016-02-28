@@ -17,6 +17,7 @@
     cursor: pointer;
     color:#fff;
     text-align: center;
+    display: block;
     margin-top: $grid-gutter-width;
 
     .add-widget_icon{
@@ -37,7 +38,7 @@
 
   &:hover{
     opacity: 1;
-    height: 116px;
+    height: 140px;
     margin: ($grid-gutter-width/2) 0;
   }
 }
