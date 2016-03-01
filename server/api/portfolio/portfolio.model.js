@@ -10,12 +10,13 @@ var PortfolioSchema = new mongoose.Schema({
     name : String,
     transactions : [{
       date : Date,
-      price: Number,
+      buyprice: Number,
+      sellprice: Number,
+      marketprice: Number,
       quantity : Number,
       symbol : String,
       txcost : Number,
-      operation : String,
-      value : Number
+      operation : String
     }]
   });
 

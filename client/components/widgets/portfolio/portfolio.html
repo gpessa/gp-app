@@ -1,9 +1,7 @@
 <div ng-show="!error">
   <div class="widget-body-top-button">
     <a class="btn btn-block btn-primary" ng-click="create()">Add Portfolio</a>
-    <button class="btn btn-secondary" ng-click="get()">
-      <i class="fa fa-refresh"></i>
-    </button>
+    <a class="btn btn-secondary" icon="fa fa-refresh" ng-click="get()"></a>
   </div>
 
   <ul class="list" ng-repeat="portfolio in portfolios">
@@ -12,9 +10,7 @@
 
     <li class="list_item active">
       <div class="list_item_btn">
-        <a class="btn btn-secondary" ng-click="remove(portfolio)">
-          <o class="fa fa-trash-o"></o>
-        </a>
+        <a class="btn btn-secondary" ng-click="remove(portfolio)" icon="fa fa-trash"></a>
       </div>
 
       <div class="list_item_data">
@@ -24,47 +20,55 @@
 
     <li class="list_item">
       <div class="list_item_btn">
-        <a class="btn btn-link-light">
-          <i class="fa fa-file-o"></i>
-        </a>
+        <a class="btn btn-link-light" icon="fa fa-file-o"></a>
       </div>
 
       <div class="list_item_data">
         <form ng-submit="addTransaction(portfolio, forms['form' + $index])" name="forms.form{{$index}}" novalidate>
           <div class="row">
-            <div class="col-md-1">
-              <input class="form-control" placeholder="Symbol" ng-model="portfolio.newTransaction.symbol" name="item" type="text" required/>
+
+            <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].symbol.$error}">
+              <input class="form-control" placeholder="Symbol" ng-model="portfolio.newTransaction.symbol" name="symbol" type="text" required/>
             </div>
-            <div class="col-md-1">
+
+            <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].date.$error}">
               <input type="text" placeholder="Tx date" class="form-control" uib-datepicker-popup ng-model="portfolio.newTransaction.date" is-open="open" ng-focus="open = true" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-              <!-- <input class="form-control" placeholder="Date" ng-model="portfolio.newTransaction.date" name="date" type="date" required/> -->
             </div>
-            <div class="col-md-1">
+
+            <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].operation.$error}">
               <select class="form-control" placeholder="Type" ng-model="portfolio.newTransaction.operation" name="type" ng-options="operation.id as operation.label for operation in operations" required>
                 <option value="">Type</option>
               </select>
             </div>
-            <div class="col-md-1">
+
+            <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].quantity.$error}">
               <input class="form-control" placeholder="Quantity" ng-model="portfolio.newTransaction.quantity" name="quantity" type="number" max="portfolio.newTransaction.quantitymax" required/>
             </div>
-            <div class="col-md-1">
-              <input class="form-control" placeholder="Price" ng-model="portfolio.newTransaction.price" name="price" type="number" required/>
-            </div>
-            <div class="col-md-1">
+
+            <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].txcost.$error}">
               <input class="form-control" placeholder="Tx cost" ng-model="portfolio.newTransaction.txcost" name="txcost" type="number" required/>
             </div>
-            <div class="col-md-1">
+
+            <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].buyprice.$error}">
+              <input class="form-control" placeholder="Buy price" ng-model="portfolio.newTransaction.buyprice" name="buyprice" type="number" required/>
+            </div>
+
+            <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].sellprice.$error}">
               <input class="form-control" placeholder="Sell price" ng-model="portfolio.newTransaction.sellprice" name="sellprice" type="number" />
             </div>
+
             <div class="col-md-1">
-              Mkt Price
+              <!-- Mkt Price -->
             </div>
+
             <div class="col-md-2 text-right">
-              Market Value
+              <!-- Market Value -->
             </div>
-            <div class="col-md-1 text-right">
-              Return
+
+            <div class="col-md-2 text-right">
+              <!-- Return -->
             </div>
+
           </div>
           <input type="submit" class="hidden"/>
         </form>
@@ -73,17 +77,20 @@
 
     <li class="list_item" ng-repeat="transaction in portfolio.transactions">
       <div class="list_item_btn">
-        <sub-menu-btn>
-          <a class="btn btn-link-light" ng-click="updateTransaction(portfolio, transaction)">
-            <i class="fa fa-pencil"></i>
-          </a>
-          <a class="btn btn-link-light" ng-click="splitTransaction(portfolio, transaction)">
-            <i class="fa fa-chevron-right"></i>
-          </a>
-          <a class="btn btn-link-light" ng-click="removeTransaction(portfolio, transaction)">
-            <i class="fa fa-trash"></i>
-          </a>
-        </sub-menu>
+        <ul class="sub-menu-btn">
+          <li>
+            <a class="btn btn-link-light" icon="fa fa-pencil" ng-click="updateTransaction(portfolio, transaction)">Edit transaction</a>
+          </li>
+          <li>
+            <a class="btn btn-link-light" icon="fa fa-trash" ng-click="removeTransaction(portfolio, transaction)">Delete transaction</a>
+          </li>
+          <li>
+            <a class="btn btn-link-light" icon="fa fa-chevron-right" ng-click="splitTransaction(portfolio, transaction)">Sell stock</a>
+          </li>
+          <li>
+            <a class="btn btn-link-light" icon="fa fa-money" ng-click="addDividend(portfolio, transaction)">Add dividend stock</a>
+          </li>
+        </ul>
       </div>
 
       <div class="list_item_data">
@@ -101,21 +108,21 @@
             {{transaction.quantity}}
           </div>
           <div class="col-md-1">
-            {{transaction.price | currency}}
+            {{transaction.txcost | currency}}
           </div>
           <div class="col-md-1">
-            {{transaction.txcost | currency}}
+            {{transaction.buyprice | currency}}
           </div>
           <div class="col-md-1">
             {{transaction.sellprice | currency}}
           </div>
           <div class="col-md-1">
-            {{transaction.value | currency}}
+            {{transaction.marketprice | currency}}
           </div>
-          <div class="col-md-2 text-right" ng-init="transaction.total = (transaction.price * transaction.quantity)">
+          <div class="col-md-2 text-right" ng-init="transaction.value = (transaction.sellprice || transaction.marketprice); transaction.total = (transaction.value * transaction.quantity);">
             {{transaction.total | currency}}
           </div>
-          <div class="col-md-1 text-right" ng-init="transaction.delta = (transaction.value - transaction.price) * transaction.quantity">
+          <div class="col-md-2 text-right" ng-init="transaction.delta = (transaction.value - transaction.buyprice) * transaction.quantity">
             <span val="transaction.delta" filter="currency"></span>
           </div>
         </div>
@@ -125,7 +132,10 @@
     <li class="list_item extra">
       <dl class="dl-horizontal">
         <dt>Total</dt>
-        <span val="getTotal(portfolio)" filter="currency"></span>
+        <dd ng-bind="getRecap(portfolio, 'total') | currency"></dd>
+
+        <dt>Overral return</dt>
+        <dd val="getRecap(portfolio, 'delta')" filter="currency"></dd>
       </dl>
     </li>
 

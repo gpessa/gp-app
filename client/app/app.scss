@@ -81,6 +81,7 @@ html{
     -webkit-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    -webkit-filter: blur(4px);
   }
 
   &:before{
@@ -114,6 +115,9 @@ footer{
   dt{
     font-weight: normal;
     text-align: left;
+  }
+  dd{
+    text-align: right;
   }
 }
 

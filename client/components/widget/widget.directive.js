@@ -29,61 +29,64 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
   }];
 
   return {
-    templateUrl: 'components/widget/widget.html',
-    restrict: 'E',
-    require: '^^widgetContainer',
-    scope: {
-        widget: '=data'
+    'templateUrl' : 'components/widget/widget.html',
+    'restrict' : 'E',
+    'require' : '^^widgetContainer',
+    'replace' :true,
+    'scope' : {
+        'data' : '=data'
     },
-    controller : function($scope){
-      this.extendConfigurationProperties = function(property){
-        $scope.schema.properties.configuration = {
+    'controller'  : function($scope){
+
+      this.$scope = $scope;
+      this.$scope.isWidgetLoading = false;
+
+      this.extendConfigurationProperties = (property) => {
+        this.$scope.schema.properties.configuration = {
           'type' : 'object',
           'title' : 'Preferences',
           'properties': {}
         };
-        angular.extend($scope.schema.properties.configuration.properties, property);
+        angular.extend(this.$scope.schema.properties.configuration.properties, property);
       };
 
-      this.toggleLoading = function(){
-        $scope.isWidgetLoading = !$scope.isWidgetLoading;
-      };
-
-      this.getConfiguration = function(){
-        return $scope.widget.configuration;
+      this.toggleLoading = () => {
+        this.$scope.toggleLoading()
       }
+
+      this.getConfiguration = () => {
+        return this.$scope.data.configuration;
+      }
+
+      return this;
     },
-    link : function(scope, element, attrs, widgetContainer){
-      var dom = $compile('<div class="' + scope.widget.type + '-widget"></div>')(scope);
-      angular.element(element[0].querySelector('.widget-body')).append(dom);
+    'link' : function(scope, element, attrs, widgetContainer){
+      var template = $compile('<div class="' + scope.data.type + '-widget"></div>')(scope);
+      angular.element(element[0].querySelector('.widget-body')).append(template);
 
-      scope.$watch('widget.dimension', function(newVal, oldVal){
-          element.removeClass('col-md-' + oldVal)
-                 .addClass('col-md-' + newVal);
-      });
-
-      scope.isWidgetLoading = false;
       scope.schema = angular.copy(schema);
       scope.formcontrols = formcontrols;
 
-      scope.removeWidget = function() {
-          WidgetService.remove(scope.widget, function(){
-            widgetContainer.render();
-          });
-      };
-
       scope.toggleSettings = function() {
-          scope.conf = angular.copy(scope.widget || {});
-          scope.isSettingsOpen = !scope.isSettingsOpen;
+        scope.conf = angular.copy(scope.data || {});
+        scope.isSettingsOpen = !scope.isSettingsOpen;
       };
 
-      scope.saveSettings = function(form){
-          scope.$broadcast('schemaFormValidate');
-          if (form.$valid) {
-            scope.widget = scope.conf;
-            WidgetService.update(scope.widget);
-            scope.isSettingsOpen = false;
-          }
+      scope.toggleLoading = function(){
+        scope.isWidgetLoading = !scope.isWidgetLoading;
+      }
+
+      scope.remove = function() {
+        WidgetService.remove(scope.data, widgetContainer.render);
+      };
+
+      scope.update = function(form){
+        scope.$broadcast('schemaFormValidate');
+        if (form.$valid) {
+          scope.data = scope.conf;
+          WidgetService.update(scope.data);
+          scope.isSettingsOpen = false;
+        }
       };
     }
   };

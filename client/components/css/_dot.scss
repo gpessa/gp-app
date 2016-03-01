@@ -4,6 +4,8 @@
   height: 10px;
   border-radius: 100%;
   border:1px solid $input-border;
+  position: relative;
+  top: 1px;
 
   &.dot-success{
     background: $brand-success;

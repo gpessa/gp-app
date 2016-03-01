@@ -1,22 +1,14 @@
-<div class="widget widget-{{widget.type}}" ng-class="{'loading' : isWidgetLoading}">
+<div class="widget widget-{{data.type}} col-md-{{data.dimension}}" ng-class="{'loading' : isWidgetLoading}">
 
   <div class="widget-header">
       <h4>
-        {{widget.name}} &nbsp;
+        {{data.name}} &nbsp;
         <div class="widget-header-buttons">
-          <a ng-click="toggleSettings()" class="btn btn-link btn-sm">
-            <i class="fa fa-cog"></i>
-          </a>
-          <a ng-click="removeWidget()" class="btn btn-link btn-sm">
-            <i class="fa fa-times"></i>
-          </a>
+          <a ng-click="toggleSettings()" class="btn btn-link btn-sm" icon="fa fa-cog"></a>
+          <a ng-click="remove()" class="btn btn-link btn-sm" icon="fa fa-times"></a>
         </div>
     </h4>
   </div>
-
-  <!-- <div class="widget-loader">
-    <i class="fa fa-3x fa-spin fa-circle-o-notch"></i>
-  </div> -->
 
   <div class="widget-body clearfix" ng-show="!isSettingsOpen"></div>
 
@@ -25,7 +17,7 @@
           sf-schema="schema"
           sf-form="formcontrols"
           sf-model="conf"
-          ng-submit="saveSettings(form)">
+          ng-submit="update(form)">
     </form>
   </div>
 

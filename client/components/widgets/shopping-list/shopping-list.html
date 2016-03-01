@@ -1,30 +1,26 @@
 <div class="widget-body-top-button">
-  <a class="btn btn-block btn-primary" ng-click="vm.createList()">Add List</a>
+  <a class="btn btn-block btn-primary" ng-click="create()">Add List</a>
 </div>
 
-<ul class="list" ng-repeat="shoppingList in vm.shoppingLists | orderBy : '-lastupdate'">
+<ul class="list" ng-repeat="shoppingList in shoppingLists | orderBy : '-lastupdate'">
 
   <li class="list_item active">
     <div class="list_item_btn">
-      <a class="btn btn-secondary" ng-click="vm.deleteList(shoppingList)">
-        <o class="fa fa-trash-o"></o>
-      </a>
+      <a class="btn btn-secondary" ng-click="delete(shoppingList)" icon="fa fa-trash-o"></a>
     </div>
 
     <div class="list_item_data">
-      <input type="text" class="form-control" ng-model="shoppingList.name" ng-blur="vm.saveList(shoppingList)" placeholder="Name"/>
+      <input type="text" class="form-control" ng-model="shoppingList.name" ng-blur="update(shoppingList)" placeholder="Name"/>
     </div>
   </li>
 
   <li class="list_item">
     <div class="list_item_btn">
-      <a class="btn btn-link-light">
-        <i class="fa fa-file-o"></i>
-      </a>
+      <a class="btn btn-link-light" icon="fa fa-file-o"></a>
     </div>
 
     <div class="list_item_data">
-      <form ng-submit="vm.addItem(shoppingList, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
+      <form ng-submit="createItem(shoppingList, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
         <input class="form-control" placeholder="Item name" ng-model="shoppingList.item.name" name="item" type="text" required/>
       </form>
     </div>
@@ -32,9 +28,7 @@
 
   <li class="list_item" ng-repeat="item in shoppingList.list" ng-class="{'disabled' : item.archivied}">
     <div class="list_item_btn">
-      <a class="btn btn-link-light" ng-click="vm.archiveItem(shoppingList, $index)">
-        <i class="fa fa-trash-o"></i>
-      </a>
+      <a class="btn btn-link-light" ng-click="deleteItem(shoppingList, item)" icon="fa fa-trash-o"  ></a>
     </div>
 
     <div class="list_item_data">

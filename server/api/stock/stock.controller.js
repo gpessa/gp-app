@@ -59,43 +59,35 @@ function removeEntity(res) {
 
 function responseWithDecoratedResult(res, statusCode){
   statusCode = statusCode || 200;
+
   return function(entity) {
+
     if (entity) {
+      var FIELDS = ['n', 'c6', 'c1', 'c', 'p2', 'b', 'v', 'a2', 't1', 'g', 'h'];
+      var SYMBOLS = entity.map((stock) => { return stock.symbol; })
+                          .filter((stock) => { return stock != undefined; });
 
-      var SYMBOLS = entity.map(function(stock){
-        return stock.symbol
-      })
-
-      var FIELDS = _.flatten([
-        ['a', 'b', 'b2', 'b3', 'p', 'o'], // Pricing
-        ['y', 'd', 'r1', 'q'], // Dividends
-        ['c1', 'c', 'c6', 'k2', 'p2', 'd1', 'd2', 't1'], // Date
-        ['c8', 'c3', 'g', 'h', 'k1', 'l', 'l1', 't8', 'm5', 'm6', 'm7', 'm8', 'm3', 'm4'], // Averages
-        ['i', 'j1', 'j3', 'f6', 'n', 'n4', 's1', 'x', 'j2'], // System
-        ['v', 'a5', 'b6', 'k3', 'a2'], // Volume
-        ['e', 'e7', 'e8', 'e9', 'b4', 'j4', 'p5', 'p6', 'r', 'r2', 'r5', 'r6', 'r7', 's7'], // Ratio
-        ['t7', 't6', 'i5', 'l2', 'l3', 'v1', 'v7', 's6', 'e1'] // Misc
-      ]);
+      if(SYMBOLS.length == 0)
+        res.status(200).json(entity);
 
       yahooFinance.snapshot({
         fields: FIELDS,
         symbols: SYMBOLS
       }, function (err, result) {
-        if (err) {
-          res.status(404).send({
-            'message' : 'Service not available'
-          });
-        } else {
-
-          entity = entity.map(function(stock, index){
-            stock = stock.toObject();
-            stock.data = result[index];
-            return stock;
-          })
-
+        if (err)
           res.status(200).json(entity);
-        }
+
+        entity = entity.map(function(stock, index){
+          stock = stock.toObject();
+          stock.data = result.find(function(s){
+            return s.symbol == stock.symbol;
+          });
+          return stock;
+        })
+
+        res.status(200).json(entity);
       });
+
     }
   };
 }

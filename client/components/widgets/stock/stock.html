@@ -1,24 +1,18 @@
 <div ng-show="!error">
   <div class="widget-body-top-button">
     <button class="btn btn-primary btn-block" ng-init="openAdd = false;" ng-click="openAdd = !openAdd">Add Stock</button>
-    <button class="btn btn-secondary" ng-click="get()">
-      <i class="fa fa-refresh"></i>
-    </button>
+    <button class="btn btn-secondary" ng-click="get()" icon="fa fa-refresh"></button>
   </div>
 
-
-  <ul class="list" ng-if="openAdd">
-
+  <ul class="list" ng-show="openAdd">
     <li class="list_item active">
       <div class="list_item_btn">
-        <a class="btn btn-secondary" ng-click="remove(stock)">
-          <i class="fa fa-file-o"></i>
-        </a>
+        <a class="btn btn-secondary" icon="fa fa-file-o"></a>
       </div>
 
       <div class="list_item_data">
-        <form ng-submit="add(form)" name="form" novalidate ng-if="openAdd">
-          <input type="text" placeholder="Stock symbol" class="form-control" name="symbol" ng-model="stock.symbol" required>
+        <form ng-submit="create(form)" name="form" novalidate ng-show="openAdd" >
+          <input type="text" placeholder="Stock symbol" class="form-control" name="symbol" ng-model="newStock.symbol" required>
         </form>
       </div>
     </li>
@@ -27,9 +21,7 @@
   <ul class="list" ng-repeat="stock in stocks">
     <li class="list_item active">
       <div class="list_item_btn">
-        <a class="btn btn-secondary" ng-click="remove(stock)">
-          <i class="fa fa-trash-o"></i>
-        </a>
+        <a class="btn btn-secondary" ng-click="remove(stock)" icon="fa fa-trash-o"></a>
       </div>
 
       <div class="list_item_data">
@@ -51,20 +43,32 @@
       </div>
     </li>
 
-    <li class="list_item extra">
-      <dl class="dl-horizontal">
-        <dt>Daily volume</dt>
-        <dd>{{stock.data.volume | number}} ({{stock.data.averageDailyVolume | number}})</dd>
+    <li class="list_item extra" ng-if="stock.data">
 
-        <dt>Last trade</dt>
-        <dd>{{stock.data.lastTradeTime | date:medium}}</dd>
+      <div class="row">
 
-        <dt>Days low</dt>
-        <dd>{{stock.data.daysLow | currency}}</dd>
+        <div class="col-md-6">
+          <dl class="dl-horizontal">
+            <dt>Daily volume</dt>
+            <dd>{{stock.data.volume | number}} ({{stock.data.averageDailyVolume | number}})</dd>
 
-        <dt>Days high</dt>
-        <dd>{{stock.data.daysHigh | currency}}</dd>
-      </dl>
+            <dt>Last trade</dt>
+            <dd>{{stock.data.lastTradeTime | date:medium}}</dd>
+          </dl>
+        </div>
+
+        <div class="col-md-6">
+          <dl class="dl-horizontal">
+            <dt>Days low</dt>
+            <dd>{{stock.data.daysLow | currency}}</dd>
+
+            <dt>Days high</dt>
+            <dd>{{stock.data.daysHigh | currency}}</dd>
+          </dl>
+        </div>
+
+      </div>
+
     </li>
 
   </ul>

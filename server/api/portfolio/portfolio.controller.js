@@ -62,10 +62,8 @@ function responseWithDecoratedResult(res, statusCode){
               transaction = transaction.toObject();
               var symbol = transaction.symbol;
               var price = _.filter(result, {'symbol' : symbol})[0].bid;
-              transaction.value = price;
+              transaction.marketprice = price;
               transaction.date = new Date(transaction.date);
-
-              console.log(typeof transaction.date);
 
               return transaction;
             });

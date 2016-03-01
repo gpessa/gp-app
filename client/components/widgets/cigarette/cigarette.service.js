@@ -2,7 +2,7 @@
 
 (function() {
 
-  class Cigarette {
+  class cigaretteService {
 
     constructor($q, $http){
       this.url = '/api/cigarette';
@@ -35,6 +35,6 @@
   }
 
   angular.module('gpAppApp')
-         .service('Cigarette', Cigarette);
+         .service('cigaretteService', cigaretteService);
 
 })();

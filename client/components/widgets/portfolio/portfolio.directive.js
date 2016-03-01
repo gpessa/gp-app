@@ -26,6 +26,9 @@ angular.module('gpAppApp')
         }, {
           id: 'buy',
           label: 'Buy'
+        },{
+          id: 'dividend',
+          label: 'Dividend'
         }];
 
         scope.get = function(){
@@ -38,9 +41,7 @@ angular.module('gpAppApp')
             .catch(error => {
               scope.error = error;
             })
-            .finally(() => {
-              widget.toggleLoading();
-            });
+            .finally(widget.toggleLoading);
         };
 
         scope.create = function(){
@@ -56,12 +57,16 @@ angular.module('gpAppApp')
         };
 
         scope.addTransaction = function(portfolio, form){
+          form.submitted = true;
+
           if(form.$valid){
             removeWatch();
             var newTransaction = angular.copy(portfolio.newTransaction);
             delete portfolio.newTransaction;
             portfolio.transactions.push(newTransaction);
             portfolioService.update(portfolio).then(scope.get);
+
+            form.submitted = false;
           }
         }
 
@@ -92,14 +97,14 @@ angular.module('gpAppApp')
           portfolio.newTransaction.date = new Date();
         }
 
-        scope.getTotal = function(portfolio){
-          var deltas = 0;
+        scope.getRecap = function(portfolio, key){
+          var recap = 0;
 
           angular.forEach(portfolio.transactions,function(transaction){
-              deltas += transaction.delta;
+              recap += transaction[key];
           });
 
-          return deltas;
+          return recap;
         }
 
         var configuration = widget.getConfiguration();

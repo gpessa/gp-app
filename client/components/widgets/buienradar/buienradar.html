@@ -1,12 +1,12 @@
 <canvas class="chart chart-line"
-        chart-data="[buienradar.rainfalls]"
-        chart-labels="buienradar.labels"
-        chart-options="buienradar.chartConfiguration.options"
-        chart-colours="buienradar.chartConfiguration.colours"
-        ng-if="buienradar.rainfalls.length"
-        ng-show="!buienradar.error">
+        chart-data="[rainfalls]"
+        chart-labels="labels"
+        chart-options="chartConfiguration.options"
+        chart-colours="chartConfiguration.colours"
+        ng-if="rainfalls.length"
+        ng-show="!error">
 </canvas>
 
-<error error="" class="error" ng-show="buienradar.error">
-  <p>{{buienradar.error.message}}</p>
+<error error="" class="error" ng-show="error">
+  <p>{{error.message}}</p>
 </error>

@@ -8,11 +8,11 @@ angular.module('gpAppApp')
       'require' : '^^widget',
       'link' : function(scope, element, attr, widget) {
 
-        scope.add = function(form){
+        scope.create = function(form){
           scope.submitted = true;
 
           if (form.$valid) {
-            stockService.create(scope.stock)
+            stockService.create(scope.newStock)
             .then(() => {
               scope.get();
               scope.resetForm();
@@ -23,7 +23,7 @@ angular.module('gpAppApp')
         scope.resetForm = function(){
           scope.submitted = false;
           scope.openAdd = false;
-          scope.stock.symbol = '';
+          scope.newStock.symbol = '';
         };
 
         scope.remove = function(stock){

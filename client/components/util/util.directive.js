@@ -2,7 +2,7 @@
 
 angular.module('gpAppApp').directive('val', ($filter) => {
   return {
-    'template' : '<span>{{value}} <i class="dot" ng-class="cls"></i></span>',
+    'template' : '<span ng-if="value"><i class="dot" ng-class="cls"></i> {{value}}</span>',
     'restrict' : 'A',
     'scope' : {
         val : '=',
@@ -37,26 +37,26 @@ angular.module('gpAppApp').directive('val', ($filter) => {
   };
 });
 
-angular.module('gpAppApp').directive('subMenuBtn', ($filter) => {
+angular.module('gpAppApp').directive('subMenuBtn', ($filter, $templateCache) => {
   return {
-    'template' : '<span click-outside="close()" class="sub-menu-btn">\
-                    <a class="btn btn-link-light" ng-click="toggle();$event.stopPropagation();">\
-                      <i class="fa fa-ellipsis-h"></i>\
-                    </a>\
-                    <span ng-transclude ng-show="isOpen" ng-click="close()"></span>\
+    'template' : '<span uib-dropdown dropdown-append-to-body>\
+                    <a class="btn btn-link-light sub-menu-btn_toggle" icon="fa fa-ellipsis-h" uib-dropdown-toggle title="Show actions menu" on-toggle="toggled(open)"></a>\
+                    <ul class="sub-menu-btn_dropdown" uib-dropdown-menu ng-transclude></ul>\
                   </span>',
-    'restrict' : 'E',
+    'restrict' : 'C',
     'transclude' : true,
     'replace' : true,
     'link' : function(scope, element, attr){
-      scope.open = function(){
-        scope.isOpen = true;
-      }
-      scope.close = function(){
-        scope.isOpen = false;
-      }
-      scope.toggle = function(){
-        scope.isOpen = !scope.isOpen;
+    }
+  };
+});
+
+angular.module('gpAppApp').directive('btn', ($filter, $templateCache) => {
+  return {
+    'restrict' : 'C',
+    'link' : function(scope, element, attr){
+      if(attr.icon){
+        element.prepend('<i class="' + attr.icon + '"></i>');
       }
     }
   };

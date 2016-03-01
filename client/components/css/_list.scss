@@ -4,7 +4,7 @@ ul.list{
   margin-left: -$padding-base-horizontal;
   margin-right: -$padding-base-horizontal;
 
-  & + .list{
+  &:not(.ng-hide) + .list:not(.ng-hide){
     margin-top: $line-height-computed;
   }
 
@@ -23,9 +23,11 @@ ul.list{
     }
 
     &.extra{
-      margin: $padding-base-horizontal $padding-base-horizontal;
-      padding-left: 38px;
+      display: block;
+      padding: 10px 0;
       font-size: $font-size-small;
+      margin-left: ($grid-gutter-width / 2) + 38;
+      margin-right: $grid-gutter-width / 2;
     }
 
     &.active{
