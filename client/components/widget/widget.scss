@@ -56,7 +56,7 @@ $widget-background : #fff;
 
   .widget-body,
   .widget-settings{
-    background: linear-gradient(0deg,rgba(255,255,255,0.3),rgba(255,255,255,0.3));
+    background: $semi-transparent-bg;
     padding: $padding-base-vertical $padding-base-horizontal;
   }
 

@@ -42,7 +42,7 @@ function responseWithDecoratedResult(res, statusCode){
         return transaction.symbol;
       }));
 
-      var FIELDS = _.flatten(['b']);
+      var FIELDS = ['b'];
 
       yahooFinance.snapshot({
         fields: FIELDS,
