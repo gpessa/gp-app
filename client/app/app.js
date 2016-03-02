@@ -55,6 +55,7 @@ angular.module('gpAppApp', [
 
 .constant('formats', {
   date : 'dd MMM yyyy',
+  month : 'MMM yyyy',
   dateTime : 'dd MMM yyyy h:mm:ss a'
 })
 

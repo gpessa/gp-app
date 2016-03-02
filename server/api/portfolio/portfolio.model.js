@@ -8,6 +8,7 @@ var PortfolioSchema = new mongoose.Schema({
       ref: 'User'
     },
     name : String,
+    recap : Object,
     transactions : [{
       date : Date,
       buyprice: Number,
@@ -16,8 +17,17 @@ var PortfolioSchema = new mongoose.Schema({
       quantity : Number,
       symbol : String,
       txcost : Number,
-      operation : String
+      operation : String,
+      delta : Number,
+      total : Number,
+      value : Number
     }]
-  });
+  },{
+    toObject: {
+      transform: function (doc, ret, game) {
+        delete ret.user;
+      }
+    }
+});
 
 export default mongoose.model('Portfolio', PortfolioSchema);

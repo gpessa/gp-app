@@ -1,0 +1,10 @@
+.balance-widget{
+  canvas{
+    width: 100%;
+    height: 200px;
+  }
+
+  .list_item.extra{
+    margin-left: ($grid-gutter-width / 2)!important;
+  }
+}

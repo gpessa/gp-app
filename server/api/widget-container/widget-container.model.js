@@ -13,6 +13,12 @@ var WidgetContainerSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Widget'
   }]
+},{
+  toObject: {
+    transform: function (doc, ret, game) {
+      delete ret.user;
+    }
+  }
 });
 
 module.exports = mongoose.model('WidgetContainer', WidgetContainerSchema);

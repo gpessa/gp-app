@@ -5,6 +5,7 @@ angular.module('gpAppApp').directive('shoppingListWidget', (socket, shoppingList
     'templateUrl' : 'components/widgets/shopping-list/shopping-list.html',
     'restrict' : 'C',
     'require' : '^^widget',
+    'scope' : true,
     'link' : function(scope, element, attr, widget) {
       scope.$on('$destroy', () => {
         socket.unsyncUpdates('shopping-list');

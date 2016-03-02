@@ -21,11 +21,6 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
       type: 'submit',
       title: 'Save',
       style: 'btn btn-block btn-primary'
-  },{
-      type : 'submit',
-      title : 'Cancel',
-      style: 'btn btn-block btn-secondary',
-      onClick: 'toggleSettings()'
   }];
 
   return {
@@ -68,6 +63,7 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
       scope.formcontrols = formcontrols;
 
       scope.toggleSettings = function() {
+        console.log('toggle');
         scope.conf = angular.copy(scope.data || {});
         scope.isSettingsOpen = !scope.isSettingsOpen;
       };
@@ -77,7 +73,7 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
       }
 
       scope.remove = function() {
-        WidgetService.remove(scope.data, widgetContainer.render);
+        WidgetService.remove(scope.data);
       };
 
       scope.update = function(form){

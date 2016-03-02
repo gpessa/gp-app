@@ -31,6 +31,10 @@ angular.module('gpAppApp').directive('widgetContainerAddWidget', (WidgetService)
         'name' : 'Portfolio',
         'type' : 'portfolio',
         'icon' : 'fa fa-exchange'
+      },{
+        'name' : 'Balance',
+        'type' : 'balance',
+        'icon' : 'fa fa-line-chart'
       }];
 
       scope.addWidget = function(widget){

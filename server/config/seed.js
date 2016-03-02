@@ -11,7 +11,9 @@
 
 import User from '../api/user/user.model';
 import WidgetContainer from '../api/widget-container/widget-container.model';
+import Balance from '../api/balance/balance.model';
 
+// Balance.find({}).removeAsync();
 // WidgetContainer.find({}).removeAsync();
 //
 // User.find({}).removeAsync()

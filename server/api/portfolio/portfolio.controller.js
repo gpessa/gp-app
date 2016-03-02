@@ -31,10 +31,10 @@ function responseWithResult(res, statusCode) {
 
 function responseWithDecoratedResult(res, statusCode){
   statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
+  return function(portfolios) {
+    if (portfolios) {
 
-      var transactions = _.flattenDeep(entity.map(function(portfolio){
+      var transactions = _.flattenDeep(portfolios.map(function(portfolio){
         return portfolio.transactions;
       }));
 
@@ -54,19 +54,36 @@ function responseWithDecoratedResult(res, statusCode){
           });
         } else {
 
-          var portfolios = Array.prototype.slice.call(entity);
+          // var portfolios = entity.toObject();
 
-          portfolios = entity.map(function(portfolio, index){
-
+          portfolios = portfolios.map(function(portfolio, index){
             portfolio.transactions = portfolio.transactions.map(function(transaction){
-              transaction = transaction.toObject();
-              var symbol = transaction.symbol;
-              var price = _.filter(result, {'symbol' : symbol})[0].bid;
-              transaction.marketprice = price;
-              transaction.date = new Date(transaction.date);
+              var marketprice = _.filter(result, {'symbol' : transaction.symbol})[0].bid;
+              var value = (transaction.sellprice || marketprice);
+              var total = value * transaction.quantity;
+              var delta = (value - transaction.buyprice) * transaction.quantity
 
+              transaction = transaction.toObject();
+              transaction = _.extend(transaction, {
+                'marketprice' : marketprice,
+                'value' : value,
+                'total' : total,
+                'delta' : delta
+              })
               return transaction;
             });
+
+            var txcost = _.sum(portfolio.transactions, function(t) { return t.txcost; });
+            var total = _.sum(portfolio.transactions, function(t) { return t.total; });
+            var delta = _.sum(portfolio.transactions, function(t) { return t.delta; });
+            var overralreturn = delta - txcost;
+
+            portfolio.recap = {
+              'txcost' : txcost,
+              'total' : total,
+              'delta' : delta,
+              'overralreturn' : overralreturn
+            }
 
             return portfolio;
           });

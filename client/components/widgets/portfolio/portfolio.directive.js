@@ -6,6 +6,7 @@ angular.module('gpAppApp')
       'templateUrl' : 'components/widgets/portfolio/portfolio.html',
       'restrict' : 'C',
       'require' : '^^widget',
+      'scope' : true,
       'link' : function(scope, element, attr, widget) {
         var removeWatch = function(){};
 
@@ -95,16 +96,6 @@ angular.module('gpAppApp')
           portfolio.newTransaction.operation = 'sell';
           portfolio.newTransaction.quantitymax = portfolio.newTransaction.quantity;
           portfolio.newTransaction.date = new Date();
-        }
-
-        scope.getRecap = function(portfolio, key){
-          var recap = 0;
-
-          angular.forEach(portfolio.transactions,function(transaction){
-              recap += transaction[key];
-          });
-
-          return recap;
         }
 
         var configuration = widget.getConfiguration();

@@ -119,10 +119,10 @@
           <div class="col-md-1">
             {{transaction.marketprice | currency}}
           </div>
-          <div class="col-md-2 text-right" ng-init="transaction.value = (transaction.sellprice || transaction.marketprice); transaction.total = (transaction.value * transaction.quantity);">
+          <div class="col-md-2 text-right">
             {{transaction.total | currency}}
           </div>
-          <div class="col-md-2 text-right" ng-init="transaction.delta = (transaction.value - transaction.buyprice) * transaction.quantity">
+          <div class="col-md-2 text-right">
             <span val="transaction.delta" filter="currency"></span>
           </div>
         </div>
@@ -132,10 +132,13 @@
     <li class="list_item extra">
       <dl class="dl-horizontal">
         <dt>Total</dt>
-        <dd ng-bind="getRecap(portfolio, 'total') | currency"></dd>
+        <dd ng-bind="portfolio.recap.total | currency"></dd>
+
+        <dt>Transactions cost</dt>
+        <dd>{{portfolio.recap.txcost | currency}}</dd>
 
         <dt>Overral return</dt>
-        <dd val="getRecap(portfolio, 'delta')" filter="currency"></dd>
+        <dd val="portfolio.recap.overralreturn" filter="currency"></dd>
       </dl>
     </li>
 

@@ -6,7 +6,7 @@ angular.module('gpAppApp').directive('cigaretteWidget', (cigaretteService) => {
     'restrict' : 'C',
     'require' : '^^widget',
     'link' : function (scope, attr, element, widget) {
-      scope.widget = widget;
+      scope.widget = widget.getConfiguration();
 
       widget.extendConfigurationProperties({
         'threshold' : {

@@ -63,7 +63,7 @@ function responseWithDecoratedResult(res, statusCode){
   return function(entity) {
 
     if (entity) {
-      var FIELDS = ['n', 'c6', 'c1', 'c', 'p2', 'b', 'v', 'a2', 't1', 'g', 'h'];
+      var FIELDS = ['n', 'c6', 'c1', 'c', 'p2', 'b', 'v', 'a2', 't1', 'g', 'h', 'b3'];
       var SYMBOLS = entity.map((stock) => { return stock.symbol; })
                           .filter((stock) => { return stock != undefined; });
 

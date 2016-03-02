@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, Buienradar, chartConfiguration) => {
+angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, Buienradar, userStatus, chartConfiguration) => {
   return {
     'templateUrl' : 'components/widgets/buienradar/buienradar.html',
     'restrict' : 'C',
@@ -8,10 +8,7 @@ angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, Buienrad
     'link' : function(scope, element, attr, widget) {
       scope.chartConfiguration = chartConfiguration;
 
-      widget.toggleLoading();
-
-      scope.getData = function(coordinates) {
-
+      scope.get = function(coordinates) {
         Buienradar.get({
           'lat' : coordinates.coords.latitude,
           'lon' : coordinates.coords.longitude
@@ -26,12 +23,20 @@ angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, Buienrad
         .finally(widget.toggleLoading);
       }
 
-      $geolocation.getCurrentPosition()
-                  .then(scope.getData)
-                  .catch((exception) => {
-                    scope.error = exception.error;
-                  });
+      scope.createChart = function(){
+        widget.toggleLoading();
+        $geolocation.getCurrentPosition()
+                    .then(scope.get)
+                    .catch((exception) => {
+                      scope.error = exception.error;
+                    });
+      }
+
+
+      userStatus.focus(scope.createChart);
+      scope.createChart();
 
     }
   };
 });
+ 

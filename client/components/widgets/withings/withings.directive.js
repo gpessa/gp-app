@@ -41,7 +41,7 @@ angular.module('gpAppApp').directive('withingsWidget', ($filter, chartConfigurat
             scope.labels = result.labels.map(function (e, index) {
               var dateNew = new Date(e);
               var dateOld = new Date(result.labels[index - 1]);
-              return (dateNew.getMonth() !== dateOld.getMonth() ? $filter('date')(dateNew, 'MMM yyyy') : '');
+              return (dateNew.getMonth() !== dateOld.getMonth() ? $filter('date')(dateNew, formats.month) : '');
             }.bind(this));
 
             var min = _.min(scope.measures, function(val){ if (val) { return val; }});
@@ -49,7 +49,7 @@ angular.module('gpAppApp').directive('withingsWidget', ($filter, chartConfigurat
 
             angular.extend(scope.chartConfiguration.options, {
               scaleOverride : true,
-              scaleLabel: ' <%= value %>' + unit,
+              scaleLabel: '<%= value %>' + unit,
               scaleStartValue : min,
               scaleSteps : Math.floor(max - min) + 1
             });

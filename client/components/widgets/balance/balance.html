@@ -1,0 +1,51 @@
+<ul class="list" ng-repeat="balance in balances">
+
+  <li class="list_item">
+    <div class="list_item_btn">
+      <a class="btn btn-link-light" icon="fa fa-file-o"></a>
+    </div>
+
+    <div class="list_item_data">
+      <form ng-submit="addReport(balance, forms['form' + $index])" name="forms.form{{$index}}" novalidate>
+        <div class="row">
+          <div class="col-md-3" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].date.$error}">
+            <input type="text" placeholder="Date" class="form-control" uib-datepicker-popup ng-model="balance.newReport.date" is-open="open" ng-focus="open = true" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          </div>
+          <div class="col-md-3" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].current.$error}">
+            <input class="form-control" placeholder="Current Account" ng-model="balance.newReport.current" name="current" type="number" required/>
+          </div>
+          <div class="col-md-3" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].current.$error}">
+            <input class="form-control" placeholder="Saving Account" ng-model="balance.newReport.saving" name="saving" type="number" required/>
+          </div>
+        </div>
+        <input type="submit" class="hidden"/>
+      </form>
+    </div>
+  </li>
+
+  <li class="list_item" ng-repeat="report in balance.reports">
+    <div class="list_item_btn">
+      <a class="btn btn-link-light" icon="fa fa-trash" ng-click="removeReport(balance, report)"></a>
+    </div>
+    <div class="list_item_data">
+      <div class="row">
+          <div class="col-md-3">{{report.date | date}}</div>
+          <div class="col-md-3">{{report.current | currency}}</div>
+          <div class="col-md-3">{{report.saving | currency}}</div>
+          <div class="col-md-3 text-right">{{(report.saving + report.current) | currency}}</div>
+      </div>
+    </div>
+  </li>
+
+  <li class="list_item extra" ng-init="balance.chart = getChartData(balance);">
+    <canvas class="chart chart-line"
+            chart-data="[balance.chart.data]"
+            chart-labels="balance.chart.labels"
+            chart-options="chartConfiguration.options"
+            chart-colours="chartConfiguration.colours"
+            ng-if="balance.reports.length">
+
+    </canvas>
+  </li>
+
+</ul>
