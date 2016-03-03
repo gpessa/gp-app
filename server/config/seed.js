@@ -29,3 +29,22 @@ import Balance from '../api/balance/balance.model';
 //       console.log('finished populating users');
 //     });
 //   });
+
+// User.find({"email": "gaetano@backbase.com"}, function (err, user) {
+//     delete user.facebook;
+//
+//     user.save(function (err) {
+//         if(err) {
+//             console.error('ERROR!');
+//         }
+//     });
+// });
+User.findOne({"email": "nomeecognome@gmail.com"}, function (err, user) {
+  delete user.facebook;
+
+  user.saveAsync(function (err) {
+      if(err) {
+          console.error('ERROR!');
+      }
+  });
+});

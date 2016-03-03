@@ -10,6 +10,13 @@ class SignupController {
   constructor(Auth, $location) {
     this.Auth = Auth;
     this.$location = $location;
+
+    // this.user = {
+    //   name : 'g',
+    //   email : 'gaetano@backbase.com',
+    //   password : 'password',
+    //   confirmPassword :  'password'
+    // };
   }
 
   register(form) {

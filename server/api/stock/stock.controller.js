@@ -65,9 +65,9 @@ function responseWithDecoratedResult(res, statusCode){
     if (entity) {
       var FIELDS = ['n', 'c6', 'c1', 'c', 'p2', 'b', 'v', 'a2', 't1', 'g', 'h', 'b3'];
       var SYMBOLS = entity.map((stock) => { return stock.symbol; })
-                          .filter((stock) => { return stock != undefined; });
+                          .filter((stock) => { return stock !== undefined; });
 
-      if(SYMBOLS.length == 0)
+      if(SYMBOLS.length === 0)
         res.status(200).json(entity);
 
       yahooFinance.snapshot({
@@ -80,7 +80,7 @@ function responseWithDecoratedResult(res, statusCode){
         entity = entity.map(function(stock, index){
           stock = stock.toObject();
           stock.data = result.find(function(s){
-            return s.symbol == stock.symbol;
+            return s.symbol === stock.symbol;
           });
           return stock;
         })
