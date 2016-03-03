@@ -69,19 +69,18 @@ angular.module('gpAppApp')
 
             form.submitted = false;
           }
-        }
+        };
 
         scope.removeTransaction = function(portfolio, transaction){
-          var index = portfolio.transactions.indexOf(transaction);
-          portfolio.transactions.splice(index, 1);
+          portfolio.transactions.remove(item);
           portfolioService.update(portfolio).then(scope.get);
-        }
+        };
 
         scope.updateTransaction = function(portfolio, transaction){
           var index = portfolio.transactions.indexOf(transaction);
           portfolio.transactions.splice(index, 1);
           portfolio.newTransaction = angular.copy(transaction);
-        }
+        };
 
         scope.splitTransaction = function(portfolio, transaction){
           portfolio.newTransaction = angular.copy(transaction);
@@ -90,15 +89,15 @@ angular.module('gpAppApp')
             return portfolio.newTransaction.quantity;
           }, function(){
             transaction.quantity = portfolio.newTransaction.quantitymax - (portfolio.newTransaction.quantity || 0);
-          })
+          });
 
           delete portfolio.newTransaction._id;
           portfolio.newTransaction.operation = 'sell';
           portfolio.newTransaction.quantitymax = portfolio.newTransaction.quantity;
           portfolio.newTransaction.date = new Date();
-        }
+        };
 
-        var configuration = widget.getConfiguration();
+        scope.configuration = widget.getConfiguration();
 
         scope.get();
         userStatus.focus(scope.get);

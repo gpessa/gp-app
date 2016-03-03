@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 
   class WidgetContainerController {
 
@@ -9,9 +9,9 @@
       this.WidgetContainerService = WidgetContainerService;
       this.sortableOption = {
         'stop' : () => {
-          this.update()
+          this.update();
         }
-      }
+      };
 
       this.render();
     }
@@ -23,24 +23,24 @@
           this.widgetContainer = widgetContainer;
           this.socket.syncUpdates('widget-container', this.widgetContainer);
         });
-    };
+    }
 
     remove(){
       this.WidgetContainerService.remove( this.widgetContainer , (widgetContainer) => {
         this.widgetContainer = widgetContainer;
       });
-    };
+    }
 
     update(){
       this.WidgetContainerService.update( this.widgetContainer , (widgetContainer) => {
           this.widgetContainer = widgetContainer;
       });
-    };
+    }
 
     addWidget(widget){
       this.widgetContainer.widgets.push(widget);
       this.update();
-    };
+    }
 
 
   }

@@ -5,6 +5,7 @@ angular.module('gpAppApp').directive('withingsWidget', ($filter, chartConfigurat
     'templateUrl' : 'components/widgets/withings/withings.html',
     'restrict' : 'C',
     'require' : '^^widget',
+    'scope' : true,
     'link' : function(scope, element, attr, widget) {
       scope.chartConfiguration = angular.copy(chartConfiguration);
 
@@ -18,7 +19,7 @@ angular.module('gpAppApp').directive('withingsWidget', ($filter, chartConfigurat
 
       scope.createChart = function(){
         Withings.get()
-          .then(result => {
+          .then((result) => {
             scope.measures = result.measures[scope.selectedType.value];
 
             function getLastMeasure(measures){
@@ -48,23 +49,23 @@ angular.module('gpAppApp').directive('withingsWidget', ($filter, chartConfigurat
             var max = _.max(scope.measures);
 
             angular.extend(scope.chartConfiguration.options, {
-              scaleOverride : true,
-              scaleLabel: '<%= value %>' + unit,
-              scaleStartValue : min,
-              scaleSteps : Math.floor(max - min) + 1
+              'scaleOverride' : true,
+              'scaleLabel': '<%= value %>' + unit,
+              'scaleStartValue' : min,
+              'scaleSteps' : Math.floor(max - min) + 1
             });
           })
-          .catch(error => scope.error = error)
+          .catch(error => {scope.error = error;})
           .finally(widget.toggleLoading);
-      }
+      };
 
       scope.select = function(type){
         widget.toggleLoading();
         scope.selectedType = type;
         scope.createChart();
-      }
+      };
 
       scope.select(scope.types[0]);
     }
-  }
+  };
 });

@@ -46,16 +46,16 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
       };
 
       this.toggleLoading = () => {
-        this.$scope.toggleLoading()
-      }
+        this.$scope.toggleLoading();
+      };
 
       this.getConfiguration = () => {
         return this.$scope.data.configuration;
-      }
+      };
 
       return this;
     },
-    'link' : function(scope, element, attrs, widgetContainer){
+    'link' : function(scope, element){
       var template = $compile('<div class="' + scope.data.type + '-widget"></div>')(scope);
       angular.element(element[0].querySelector('.widget-body')).append(template);
 
@@ -70,7 +70,7 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
 
       scope.toggleLoading = function(){
         scope.isWidgetLoading = !scope.isWidgetLoading;
-      }
+      };
 
       scope.remove = function() {
         WidgetService.remove(scope.data);

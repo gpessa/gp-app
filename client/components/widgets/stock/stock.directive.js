@@ -16,7 +16,7 @@ angular.module('gpAppApp')
             .then(() => {
               scope.get();
               scope.resetForm();
-            })
+            });
           }
         };
 
@@ -41,7 +41,7 @@ angular.module('gpAppApp')
             })
             .finally(() => {
               widget.toggleLoading();
-            })
+            });
         };
 
         userStatus.focus(scope.get);

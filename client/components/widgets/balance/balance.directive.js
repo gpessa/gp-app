@@ -23,7 +23,7 @@ angular.module('gpAppApp').directive('balanceWidget', ($filter, balanceService, 
         widget.toggleLoading();
         balanceService.get()
           .then((balances) => {
-            if(balances.length == 0){
+            if(balances.length === 0){
               scope.create();
             } else {
               scope.balances = balances;
@@ -55,32 +55,31 @@ angular.module('gpAppApp').directive('balanceWidget', ($filter, balanceService, 
 
           form.submitted = false;
         }
-      }
+      };
 
       scope.removeReport = function(balance, transaction){
-        var index = balance.reports.indexOf(transaction);
-        balance.reports.splice(index, 1);
+        balance.reports.remove(item);
         balanceService.update(balance).then(scope.get);
-      }
+      };
 
       scope.getReportData = function(balance){
         return balance.reports.map(function(report){
           return (report.current + report.saving);
-        })
-      }
+        });
+      };
 
       scope.getReportLabels = function(balance){
         return balance.reports.map(function(report){
           return $filter('date')(report.date, formats.month) ;
-        })
-      }
+        });
+      };
 
       scope.getChartData = function(balance){
         return {
           data : scope.getReportData(balance),
           labels : scope.getReportLabels(balance)
-        }
-      }
+        };
+      };
 
       scope.get();
     }

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gpAppApp').directive('widgetContainer', (WidgetContainerService, socket) => {
+angular.module('gpAppApp').directive('widgetContainer', () => {
   return {
     'templateUrl' : 'components/widget-container/widget-container.html',
     'restrict' : 'E',

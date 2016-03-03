@@ -32,26 +32,25 @@ angular.module('gpAppApp').directive('val', ($filter) => {
                 scope.value = value;
           }
         }
-      })
+      });
     }
   };
 });
 
-angular.module('gpAppApp').directive('subMenuBtn', ($filter, $templateCache) => {
+angular.module('gpAppApp').directive('subMenuBtn', () => {
   return {
+    /*jshint multistr: true */
     'template' : '<span uib-dropdown dropdown-append-to-body>\
                     <a class="btn btn-link-light sub-menu-btn_toggle" icon="fa fa-ellipsis-h" uib-dropdown-toggle title="Show actions menu" on-toggle="toggled(open)"></a>\
                     <ul class="sub-menu-btn_dropdown" uib-dropdown-menu ng-transclude></ul>\
                   </span>',
     'restrict' : 'C',
     'transclude' : true,
-    'replace' : true,
-    'link' : function(scope, element, attr){
-    }
+    'replace' : true
   };
 });
 
-angular.module('gpAppApp').directive('btn', ($filter, $templateCache) => {
+angular.module('gpAppApp').directive('btn', () => {
   return {
     'restrict' : 'C',
     'link' : function(scope, element, attr){

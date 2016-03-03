@@ -2,10 +2,8 @@
 
 class NavbarController {
 
-  isCollapsed = true;
-  //end-non-standard
-
   constructor($location, Auth) {
+    this.isCollapsed = true;
     this.$location = $location;
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;

@@ -71,7 +71,7 @@ angular.module('gpAppApp', [
 
   function recurseObject(object) {
     var result = object;
-    if (object != null) {
+    if (object !== null) {
       result = angular.copy(object);
       for (var key in result) {
         var property = result[key];

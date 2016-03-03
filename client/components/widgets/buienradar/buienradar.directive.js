@@ -21,7 +21,7 @@ angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, Buienrad
           scope.error = error;
         })
         .finally(widget.toggleLoading);
-      }
+      };
 
       scope.createChart = function(){
         widget.toggleLoading();
@@ -30,7 +30,7 @@ angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, Buienrad
                     .catch((exception) => {
                       scope.error = exception.error;
                     });
-      }
+      };
 
 
       userStatus.focus(scope.createChart);
@@ -39,4 +39,3 @@ angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, Buienrad
     }
   };
 });
- 

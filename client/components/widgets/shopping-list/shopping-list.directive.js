@@ -17,28 +17,26 @@ angular.module('gpAppApp').directive('shoppingListWidget', (socket, shoppingList
           delete shoppingList.item;
 
           shoppingList.list.push(item);
-          shoppingListService.update(shoppingList)
+          shoppingListService.update(shoppingList);
         }
-      }
+      };
 
       scope.deleteItem = function(shoppingList, item){
-        var index = shoppingList.list.indexOf(item);
-        shoppingList.list.splice(index, 1);
-
+        shoppingList.list.remove(item);
         shoppingListService.update(shoppingList).then(scope.get);
-      }
+      };
 
       scope.create = function(){
         shoppingListService.create().then(scope.get);
-      }
+      };
 
       scope.delete = function(shoppingList){
         shoppingListService.remove(shoppingList).then(scope.get);
-      }
+      };
 
       scope.update = function(shoppingList){
         shoppingListService.update(shoppingList);
-      }
+      };
 
       scope.get = function(){
         widget.toggleLoading();
@@ -48,7 +46,7 @@ angular.module('gpAppApp').directive('shoppingListWidget', (socket, shoppingList
             socket.syncUpdates('shopping-list');
           })
           .finally(widget.toggleLoading);
-      }
+      };
 
       scope.get();
     }

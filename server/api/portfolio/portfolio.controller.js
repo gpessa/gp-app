@@ -60,7 +60,7 @@ function responseWithDecoratedResult(res, statusCode){
             portfolio.transactions = portfolio.transactions.map(function(transaction){
               var marketprice = _.filter(result, {'symbol' : transaction.symbol})[0].bid;
               var value = (transaction.sellprice || marketprice);
-              var total = value * transaction.quantity;
+              var total = (transaction.operation === 'sell') ? 0 : (value * transaction.quantity);
               var delta = (value - transaction.buyprice) * transaction.quantity
 
               transaction = transaction.toObject();

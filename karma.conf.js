@@ -21,7 +21,7 @@ module.exports = function(config) {
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/Chart.js/Chart.js',
       'client/bower_components/angular-chart.js/dist/angular-chart.js',
-      'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/bower_components/lodash/lodash.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
       'client/bower_components/html5-sortable-angularjs/lib/html5-sortable.js',
@@ -33,6 +33,7 @@ module.exports = function(config) {
       'client/bower_components/ngGeolocation/ngGeolocation.js',
       'client/bower_components/angular-i18n/angular-locale_it-it.js',
       'client/bower_components/ifvisible.js/src/ifvisible.js',
+      'client/bower_components/angular-click-outside/clickoutside.directive.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

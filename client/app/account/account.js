@@ -10,12 +10,12 @@ angular.module('gpAppApp')
       })
       .when('/logout', {
         name: 'logout',
-        referrer: '/',
+        referrer: '/login',
         template: '',
         controller: function($location, $route, Auth) {
           var referrer = $route.current.params.referrer ||
-                          $route.current.referrer ||
-                          '/';
+                         $route.current.referrer ||
+                         '/login';
           Auth.logout();
           $location.path(referrer);
         }
