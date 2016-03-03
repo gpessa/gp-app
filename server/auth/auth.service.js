@@ -20,25 +20,25 @@ export function isAuthenticated() {
   return compose()
     // Validate jwt
     .use(function(req, res, next) {
-
-      // allow access_token to be passed through query parameter as well
-      console.log('IS AUTHENTCATED : attach user to request');
+      console.log('isAuthenticated() : attach user to request');
       console.log(req.user);
       console.log('- - - - - - - - - - - - - - - - -');
 
-      // if (req.query && req.query.hasOwnProperty('access_token')) {
-      //   req.headers.authorization = 'Bearer ' + req.query.access_token;
-      // }
+      // allow access_token to be passed through query parameter as well
+
+      if (req.query && req.query.hasOwnProperty('access_token')) {
+        req.headers.authorization = 'Bearer ' + req.query.access_token;
+      }
 
       // if (!req.headers.authorization) {
-      if(req.query && req.query.hasOwnProperty('access_token')) {
-        req.headers.authorization = 'Bearer ' + req.query.access_token;
-      } else if (req.cookies.token) {
-        try {
-          req.headers.authorization = 'Bearer ' + req.cookies.token;
-        }
-        finally {}
-      }
+      // if(req.query && req.query.hasOwnProperty('access_token')) {
+      //   req.headers.authorization = 'Bearer ' + req.query.access_token;
+      // } else if (req.cookies.token) {
+      //   try {
+      //     req.headers.authorization = 'Bearer ' + req.cookies.token;
+      //   }
+      //   finally {}
+      // }
       // }
 
       validateJwt(req, res, next);
@@ -47,17 +47,18 @@ export function isAuthenticated() {
     // Attach user to request
     .use(function(req, res, next) {
       if(!req.user){
-        console.log('NO USER 1');
+        console.log('isAuthenticated() : user not found');
+        console.log('- - - - - - - - - - - - - - - - -');
         next(req, res, next);
       } else {
-        console.log('IS AUTHENTCATED : find user : ');
+        console.log('isAuthenticated() : find user');
         console.log(req.user);
         console.log('- - - - - - - - - - - - - - - - -');
 
         User.findByIdAsync(req.user._id)
           .then(user => {
 
-            console.log('USER FOUND ');
+            console.log('isAuthenticated() : user found');
             console.log(user);
             console.log('- - - - - - - - - - - - - - - - -');
 
@@ -100,6 +101,9 @@ export function hasRole(roleRequired) {
 export function signToken(id, role) {
   console.log('signToken() : ' + id);
   console.log('token');
+  console.log(jwt.sign({ _id: id, role: role }, config.secrets.session, {
+    expiresIn: 60 * 60 * 5
+  }));
   return jwt.sign({ _id: id, role: role }, config.secrets.session, {
     expiresIn: 60 * 60 * 5
   });
