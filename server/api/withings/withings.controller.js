@@ -16,6 +16,7 @@ var getMeasure = function(measures, type) {
     } else {
         result = undefined;
     }
+
     return result;
 }
 
@@ -48,19 +49,15 @@ exports.index = function(req, res) {
         labels : []
       };
 
-      _.forEach(measures, function(measure) {
-        var date = new Date(measure.date * 1000);
-        date.setHours(0);
-        date.setSeconds(0);
-        date.setMinutes(0);
-
-        measure.date = date;
+      measures = _.map(measures, function(measure) {
+        measure.date = new Date(new Date(measure.date * 1000).toString().substring(0,15));
+        return measure;
       });
 
-      var endDate = measures[0].date;
-      var startDate = measures[measures.length - 1].date;
+      var endDate = _.first(measures).date;
+      var startDate = _.last(measures).date;
 
-      while (startDate.valueOf() !== endDate.valueOf()){
+      while (startDate.valueOf() <= endDate.valueOf()){
         result.labels.push( new Date(startDate.valueOf()) );
 
         var measure = _.filter(measures, {date : startDate});

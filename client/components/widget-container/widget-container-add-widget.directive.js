@@ -35,6 +35,10 @@ angular.module('gpAppApp').directive('widgetContainerAddWidget', (WidgetService)
         'name' : 'Balance',
         'type' : 'balance',
         'icon' : 'fa fa-line-chart'
+      },{
+        'name' : 'Positive Thing',
+        'type' : 'positive-thing',
+        'icon' : 'fa fa-plus'
       }];
 
       scope.addWidget = function(widget){

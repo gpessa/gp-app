@@ -1,0 +1,39 @@
+<div class="widget-body-top-button">
+  <a class="btn btn-block btn-primary" ng-click="create()">Add List</a>
+</div>
+
+<ul class="list" ng-repeat="positiveThing in positiveThings">
+
+  <li class="list_item active">
+    <div class="list_item_btn">
+      <a class="btn btn-secondary" ng-click="remove(positiveThing)" icon="fa fa-trash-o"></a>
+    </div>
+
+    <div class="list_item_data">
+      {{positiveThing.date | date}}
+    </div>
+  </li>
+
+  <li class="list_item">
+    <div class="list_item_btn">
+      <a class="btn btn-link-light" icon="fa fa-file-o"></a>
+    </div>
+
+    <div class="list_item_data">
+      <form ng-submit="addThing(positiveThing, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
+        <input class="form-control" placeholder="Item name" ng-model="positiveThing.newThing.name" name="name" type="text" required/>
+      </form>
+    </div>
+  </li>
+
+  <li class="list_item" ng-repeat="thing in positiveThing.list">
+    <div class="list_item_btn">
+      <a class="btn btn-link-light" ng-click="removeThing(positiveThing, thing)" icon="fa fa-trash-o"  ></a>
+    </div>
+
+    <div class="list_item_data">
+      {{thing.name}}
+    </div>
+  </li>
+
+</ul>

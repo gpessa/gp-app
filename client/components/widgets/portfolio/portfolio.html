@@ -6,8 +6,6 @@
 
   <ul class="list" ng-repeat="portfolio in portfolios">
 
-    <!-- <pre ng-repeat="transaction in portfolio.transactions">{{transaction || json}}</pre> -->
-
     <li class="list_item active">
       <div class="list_item_btn">
         <a class="btn btn-secondary" ng-click="remove(portfolio)" icon="fa fa-trash"></a>
@@ -18,9 +16,29 @@
       </div>
     </li>
 
-    <li class="list_item">
+    <li class="list_item header">
       <div class="list_item_btn">
-        <a class="btn btn-link-light" icon="fa fa-file-o"></a>
+        <a class="btn btn-link-light" icon="fa fa-file-o" ng-click="addNew = true;"></a>
+      </div>
+      <div class="list_item_data">
+          <div class="row">
+            <div class="col-md-1">Symbol</div>
+            <div class="col-md-1">Tx date</div>
+            <div class="col-md-1">Type</div>
+            <div class="col-md-1">Quantity</div>
+            <div class="col-md-1">Tx cost</div>
+            <div class="col-md-1">Buy Price</div>
+            <div class="col-md-1">Sell Price</div>
+            <div class="col-md-1">Mkt Price</div>
+            <div class="col-md-2 text-right">Market Value</div>
+            <div class="col-md-2 text-right">Return</div>
+          </div>
+      </div>
+    </li>
+
+    <li class="list_item" ng-show="addNew">
+      <div class="list_item_btn">
+        <a class="btn btn-link-light" icon="fa fa-times" ng-click="addNew = false;"></a>
       </div>
 
       <div class="list_item_data">

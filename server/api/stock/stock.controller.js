@@ -67,15 +67,20 @@ function responseWithDecoratedResult(res, statusCode){
       var SYMBOLS = entity.map((stock) => { return stock.symbol; })
                           .filter((stock) => { return stock != undefined; });
 
-      if(SYMBOLS.length == 0)
+      if(SYMBOLS.length == 0){
         res.status(200).json(entity);
+        return null;
+      }
 
       yahooFinance.snapshot({
         fields: FIELDS,
         symbols: SYMBOLS
       }, function (err, result) {
-        if (err)
+
+        if(!result){
           res.status(200).json(entity);
+          return null;
+        }
 
         entity = entity.map(function(stock, index){
           stock = stock.toObject();

@@ -10,6 +10,13 @@ class SignupController {
   constructor(Auth, $location) {
     this.Auth = Auth;
     this.$location = $location;
+
+    this.user = {
+      name: 'Gaetano Pessa',
+      email: 'nomeecognome@gmail.com',
+      password: 'password',
+      confirmPassword: 'password'
+    }
   }
 
   register(form) {

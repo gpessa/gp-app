@@ -5,10 +5,10 @@
 
 <div class="text-center">
   <h5>Today smoked</h5>
-  <h1 ng-class="{'text-danger' : cigarettes[0].count > widget.threshold}">{{cigarettes[0].count}}</h1>
+  <h1 ng-class="{'text-danger' : cigarettes[0].count > widget.threshold}">{{cigarettes[0].count || 0}}</h1>
 </div>
 
-<hr/>
+<hr  ng-if="cigarettes.length"/>
 
 <ul class="list">
   <li class="list_item" ng-repeat="cigarette in cigarettes" ng-if="$index != 0">

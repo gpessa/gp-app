@@ -9,12 +9,23 @@
 
 **/
 
-import User from '../api/user/user.model';
-import WidgetContainer from '../api/widget-container/widget-container.model';
 import Balance from '../api/balance/balance.model';
+import Cigarette from '../api/cigarette/cigarette.model';
+import ShoppingList from '../api/shopping-list/shopping-list.model';
+import Stock from '../api/stock/stock.model';
+import User from '../api/user/user.model';
+import Widget from '../api/widget/widget.model';
+import WidgetContainer from '../api/widget-container/widget-container.model';
+
 
 // Balance.find({}).removeAsync();
 // WidgetContainer.find({}).removeAsync();
+// Balance.find({}).removeAsync();
+// Cigarette.find({}).removeAsync();
+// ShoppingList.find({}).removeAsync();
+// Stock.find({}).removeAsync();
+// User.find({}).removeAsync();
+// Widget.find({}).removeAsync();
 //
 // User.find({}).removeAsync()
 //   .then(() => {

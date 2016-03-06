@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gpAppApp')
-  .directive('portfolioWidget', function ($window, $interval, $uibModal, socket, userStatus, portfolioService) {
+  .directive('portfolioWidget', function ($window, $interval, socket, userStatus, portfolioService) {
     return {
       'templateUrl' : 'components/widgets/portfolio/portfolio.html',
       'restrict' : 'C',

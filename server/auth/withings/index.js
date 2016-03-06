@@ -7,13 +7,13 @@ import * as auth from '../auth.service';
 var router = express.Router();
 
 router
-  .get('/', passport.authenticate('withings', {
+  .get('/connect', passport.authenticate('withings', {
     scope: [],
     failureRedirect: '/signup',
     session: true,
     passReqToCallback: true
   }))
-  .get('/callback', passport.authorize('withings', {
+  .get('/callback', auth.isAuthenticated(), passport.authorize('withings', {
     failureRedirect: '/signup',
     session: true,
     passReqToCallback: true

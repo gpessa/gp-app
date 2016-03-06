@@ -1,8 +1,22 @@
 <ul class="list" ng-repeat="balance in balances">
 
-  <li class="list_item">
+  <li class="list_item header">
     <div class="list_item_btn">
-      <a class="btn btn-link-light" icon="fa fa-file-o"></a>
+      <a class="btn btn-link-light" icon="fa fa-file-o" ng-click="addNew = true;"></a>
+    </div>
+    <div class="list_item_data">
+      <div class="row">
+          <div class="col-md-3">Date</div>
+          <div class="col-md-3">Current account</div>
+          <div class="col-md-3">Saving account</div>
+          <div class="col-md-3 text-right">Total</div>
+      </div>
+    </div>
+  </li>
+
+  <li class="list_item" ng-show="addNew">
+    <div class="list_item_btn">
+      <a class="btn btn-link-light" icon="fa fa-times" ng-click="addNew = false;"></a>
     </div>
 
     <div class="list_item_data">
@@ -32,7 +46,7 @@
           <div class="col-md-3">{{report.date | date}}</div>
           <div class="col-md-3">{{report.current | currency}}</div>
           <div class="col-md-3">{{report.saving | currency}}</div>
-          <div class="col-md-3 text-right">{{(report.saving + report.current) | currency}}</div>
+          <div class="col-md-3 text-right" ng-init="report.total = (report.saving + report.current)">{{report.total | currency}}</div>
       </div>
     </div>
   </li>

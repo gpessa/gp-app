@@ -8,6 +8,7 @@ angular.module('gpAppApp').directive('balanceWidget', ($filter, balanceService, 
     'require' : '^^widget',
     'link' : function(scope, element, attr, widget) {
       scope.chartConfiguration = angular.copy(chartConfiguration);
+      
       angular.extend(scope.chartConfiguration.options, {
         scaleStartValue : 0,
         showTooltips : true,

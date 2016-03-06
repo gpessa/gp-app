@@ -7,6 +7,10 @@ angular.module('gpAppApp')
       restrict: 'EA',
       controller: 'OauthButtonsCtrl',
       controllerAs: 'OauthButtons',
-      replace:true
+      replace:true,
+      bindToController : true,
+      scope : {
+        type : '@'
+      }
     };
   });
