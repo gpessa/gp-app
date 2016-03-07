@@ -18,7 +18,7 @@
 
     <li class="list_item header">
       <div class="list_item_btn">
-        <a class="btn btn-link-light" icon="fa fa-file-o" ng-click="addNew = true;"></a>
+        <a class="btn btn-link-light" icon="fa fa-file-o" ng-click="portfolio.addNew = true;"></a>
       </div>
       <div class="list_item_data">
           <div class="row">
@@ -36,9 +36,9 @@
       </div>
     </li>
 
-    <li class="list_item" ng-show="addNew">
+    <li class="list_item" ng-show="portfolio.addNew">
       <div class="list_item_btn">
-        <a class="btn btn-link-light" icon="fa fa-times" ng-click="addNew = false;"></a>
+        <a class="btn btn-link-light" icon="fa fa-times" ng-click="portfolio.addNew = false;"></a>
       </div>
 
       <div class="list_item_data">
@@ -68,11 +68,11 @@
             </div>
 
             <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].buyprice.$error}">
-              <input class="form-control" placeholder="Buy price" ng-model="portfolio.newTransaction.buyprice" name="buyprice" type="number" required/>
+              <input ng-show="portfolio.newTransaction.operation == 'buy'" class="form-control" placeholder="Buy price" ng-model="portfolio.newTransaction.buyprice" name="buyprice" type="number"/>
             </div>
 
             <div class="col-md-1" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].sellprice.$error}">
-              <input class="form-control" placeholder="Sell price" ng-model="portfolio.newTransaction.sellprice" name="sellprice" type="number" />
+              <input ng-show="portfolio.newTransaction.operation == 'sell'" class="form-control" placeholder="Sell price" ng-model="portfolio.newTransaction.sellprice" name="sellprice" type="number" />
             </div>
 
             <div class="col-md-1">
@@ -150,14 +150,20 @@
 
     <li class="list_item extra">
       <dl class="dl-horizontal">
-        <dt>Total</dt>
-        <dd ng-bind="portfolio.recap.total | currency"></dd>
+        <!-- <dt>Portfolio market value</dt>
+        <dd ng-bind="portfolio.recap.total | currency"></dd> -->
 
-        <dt>Transactions cost</dt>
+        <dt>Portfolio overral return</dt>
+        <dd val="portfolio.recap.overralreturn" filter="currency"></dd>
+
+        <dt>Portfolio transactions cost</dt>
         <dd>{{portfolio.recap.txcost | currency}}</dd>
 
-        <dt>Overral return</dt>
-        <dd val="portfolio.recap.overralreturn" filter="currency"></dd>
+        <dt>Portfolio taxes</dt>
+        <dd ng-init="portfolio.tax = ((portfolio.recap.overralreturn - portfolio.recap.txcost) / 100 * taxation)">{{portfolio.tax | currency}}</dd>
+
+        <dt>portfolio net overral return<dt>
+        <dd val="(portfolio.recap.overralreturn - portfolio.tax)" filter="currency"></dd>
       </dl>
     </li>
 

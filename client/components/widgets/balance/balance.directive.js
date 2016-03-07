@@ -8,7 +8,7 @@ angular.module('gpAppApp').directive('balanceWidget', ($filter, balanceService, 
     'require' : '^^widget',
     'link' : function(scope, element, attr, widget) {
       scope.chartConfiguration = angular.copy(chartConfiguration);
-      
+
       angular.extend(scope.chartConfiguration.options, {
         scaleStartValue : 0,
         showTooltips : true,
@@ -58,8 +58,8 @@ angular.module('gpAppApp').directive('balanceWidget', ($filter, balanceService, 
         }
       };
 
-      scope.removeReport = function(balance, transaction){
-        balance.reports.remove(item);
+      scope.removeReport = function(balance, report){
+        balance.reports.remove(report);
         balanceService.update(balance).then(scope.get);
       };
 

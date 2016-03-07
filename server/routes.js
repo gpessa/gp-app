@@ -13,7 +13,7 @@ export default function(app) {
   app.use('/api/balances', require('./api/balance'));
   app.use('/api/portfolios', require('./api/portfolio'));
   app.use('/api/widget-container', require('./api/widget-container'));
-  app.use('/api/shopping-list', require('./api/shopping-list'));
+  app.use('/api/todo-list', require('./api/todo-list'));
   app.use('/api/buienradar', require('./api/buienradar'));
   app.use('/api/cigarette', require('./api/cigarette'));
   app.use('/api/withings', require('./api/withings'));

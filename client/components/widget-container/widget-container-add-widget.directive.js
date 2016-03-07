@@ -8,9 +8,9 @@ angular.module('gpAppApp').directive('widgetContainerAddWidget', (WidgetService)
     'require' : '^widgetContainer',
     'link' : function (scope, element, attrs, widgetContainer) {
       scope.availablewidgets = [{
-        'name' : 'Shopping List',
-        'type' : 'shopping-list',
-        'icon' : 'fa fa-shopping-cart'
+        'name' : 'Todo List',
+        'type' : 'todo-list',
+        'icon' : 'fa fa-list'
       },{
         'name' : 'Cigarette',
         'type' : 'cigarette',

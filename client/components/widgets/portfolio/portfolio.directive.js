@@ -10,11 +10,9 @@ angular.module('gpAppApp')
       'link' : function(scope, element, attr, widget) {
         var removeWatch = function(){};
 
+        scope.taxation = widget.getConfiguration().taxation;
+
         widget.extendConfigurationProperties({
-          'transaction' : {
-            type: 'number',
-            title: 'Transaction cost'
-          },
           'taxation' : {
             type: 'number',
             title: 'Taxation'
@@ -72,17 +70,18 @@ angular.module('gpAppApp')
         };
 
         scope.removeTransaction = function(portfolio, transaction){
-          portfolio.transactions.remove(item);
+          portfolio.transactions.remove(transaction);
           portfolioService.update(portfolio).then(scope.get);
         };
 
         scope.updateTransaction = function(portfolio, transaction){
-          var index = portfolio.transactions.indexOf(transaction);
-          portfolio.transactions.splice(index, 1);
+          portfolio.addNew = true;
+          portfolio.transactions.remove(transaction);
           portfolio.newTransaction = angular.copy(transaction);
         };
 
         scope.splitTransaction = function(portfolio, transaction){
+          portfolio.addNew = true;
           portfolio.newTransaction = angular.copy(transaction);
 
           removeWatch = scope.$watch(function(){
@@ -100,7 +99,7 @@ angular.module('gpAppApp')
         scope.configuration = widget.getConfiguration();
 
         scope.get();
-        userStatus.focus(scope.get);
+        //userStatus.focus(scope.get);
       }
   };
 });

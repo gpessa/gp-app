@@ -11,7 +11,7 @@
 
 import Balance from '../api/balance/balance.model';
 import Cigarette from '../api/cigarette/cigarette.model';
-import ShoppingList from '../api/shopping-list/shopping-list.model';
+import TodoList from '../api/todo-list/todo-list.model';
 import Stock from '../api/stock/stock.model';
 import User from '../api/user/user.model';
 import Widget from '../api/widget/widget.model';
