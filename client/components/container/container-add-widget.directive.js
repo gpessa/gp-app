@@ -8,7 +8,7 @@ angular
       'restrict' : 'E',
       'replace' : true,
       'require' : '^widgetContainer',
-      'link' : function (scope, element, attrs, widgetContainer) {
+      'link' : function (scope, element, attrs, container) {
         scope.availablewidgets = [{
           'name' : 'Todo List',
           'type' : 'todo-list',
@@ -53,7 +53,7 @@ angular
 
         scope.addWidget = function(widget){
           WidgetService.create(widget, function(widget){
-            widgetContainer.addWidget(widget);
+            container.addWidget(widget);
           });
         };
       }

@@ -59,10 +59,10 @@ function responseWithDecoratedResult(res, statusCode){
           portfolios = portfolios.map(function(portfolio, index){
             portfolio.transactions = portfolio.transactions.map(function(transaction){
               var marketprice = _.filter(result, {'symbol' : transaction.symbol})[0].bid;
-              var total = (transaction.operation === 'sell') ? 0 : (value * transaction.quantity);
-              var delta = (value - transaction.buyprice) * transaction.quantity;
-              var value = (transaction.sellprice || marketprice);
+              var value  = (transaction.sellprice || marketprice);
+              var total  = (transaction.operation === 'sell') ? 0 : (value * transaction.quantity);
               var status = (transaction.operation === 'sell' || transaction.quantity === 0) ? 'close' : 'open';
+              var delta  = (value - transaction.buyprice) * transaction.quantity;
 
               transaction = transaction.toObject();
               transaction = _.extend(transaction, {

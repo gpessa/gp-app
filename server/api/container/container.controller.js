@@ -23,7 +23,7 @@ function responseWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
-      res.status(statusCode).json(entity);
+      res.status(statusCode).json(entity.toObject());
     }
   };
 }

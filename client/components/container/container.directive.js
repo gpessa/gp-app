@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gpAppApp').directive('widgetContainer', () => {
+angular.module('gpAppApp').directive('container', () => {
   return {
     'templateUrl' : 'components/container/container.html',
     'restrict' : 'E',

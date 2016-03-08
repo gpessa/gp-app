@@ -16,7 +16,7 @@ var ContainerSchema = new Schema({
 },{
   toObject: {
     transform: function (doc, ret, game) {
-      delete ret.user;
+      delete ret.__v;
     }
   }
 });
