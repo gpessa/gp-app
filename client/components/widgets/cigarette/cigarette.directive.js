@@ -1,17 +1,11 @@
 'use strict';
 
-angular.module('gpAppApp').directive('cigaretteWidget', (cigaretteService, widgetList) => {
+angular.module('gpAppApp').directive('cigaretteWidget', (cigaretteService) => {
   return {
     'templateUrl' : 'components/widgets/cigarette/cigarette.html',
     'restrict' : 'C',
     'require' : '^^widget',
     'link' : function (scope, attr, element, widget) {
-      widgetList.add({
-        'name' : 'Cigarette',
-        'type' : 'cigarette',
-        'icon' : 'icon icon-cigarette'
-      });
-      
       scope.widget = widget.getConfiguration();
 
       widget.extendConfigurationProperties({

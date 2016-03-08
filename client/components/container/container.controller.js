@@ -2,11 +2,11 @@
 
 (function () {
 
-  class WidgetContainerController {
+  class ContainerController {
 
-    constructor(socket, WidgetContainerService) {
+    constructor(socket, ContainerService) {
       this.socket = socket;
-      this.WidgetContainerService = WidgetContainerService;
+      this.ContainerService = ContainerService;
       this.sortableOption = {
         'stop' : () => {
           this.update();
@@ -17,7 +17,7 @@
     }
 
     render(){
-      this.WidgetContainerService
+      this.ContainerService
         .show( this.id )
         .then((widgetContainer) => {
           this.widgetContainer = widgetContainer;
@@ -26,13 +26,13 @@
     }
 
     remove(){
-      this.WidgetContainerService.remove( this.widgetContainer , (widgetContainer) => {
+      this.ContainerService.remove( this.widgetContainer , (widgetContainer) => {
         this.widgetContainer = widgetContainer;
       });
     }
 
     update(){
-      this.WidgetContainerService.update( this.widgetContainer , (widgetContainer) => {
+      this.ContainerService.update( this.widgetContainer , (widgetContainer) => {
           this.widgetContainer = widgetContainer;
       });
     }
@@ -46,6 +46,6 @@
   }
 
   angular.module('gpAppApp')
-         .controller('WidgetContainerController', WidgetContainerController);
+         .controller('ContainerController', ContainerController);
 
 })();

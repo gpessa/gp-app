@@ -1,18 +1,12 @@
 'use strict';
 
-angular.module('gpAppApp').directive('todoListWidget', (socket, todoListService, widgetList) => {
+angular.module('gpAppApp').directive('todoListWidget', (socket, todoListService) => {
   return {
     'templateUrl' : 'components/widgets/todo-list/todo-list.html',
     'restrict' : 'C',
     'require' : '^^widget',
     'scope' : true,
     'link' : function(scope, element, attr, widget) {
-      widgetList.add({
-        'name' : 'Todo List',
-        'type' : 'todo-list',
-        'icon' : 'fa fa-list'
-      });
-
       scope.$on('$destroy', () => {
         socket.unsyncUpdates('todo-list');
       });

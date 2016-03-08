@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./widget-container.controller');
+var controller = require('./container.controller');
 import * as auth from '../../auth/auth.service';
 
 var router = express.Router();

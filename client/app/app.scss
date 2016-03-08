@@ -11,6 +11,8 @@ $weather-font-path:    "../assets/fonts";
 // injector
 @import 'admin/admin.scss';
 @import 'main/main.scss';
+@import '../components/container/container-add-widget.scss';
+@import '../components/container/container.scss';
 @import '../components/css/_buttons.scss';
 @import '../components/css/_dot.scss';
 @import '../components/css/_icons.scss';
@@ -26,8 +28,6 @@ $weather-font-path:    "../assets/fonts";
 @import '../components/oauth-buttons/oauth-buttons.scss';
 @import '../components/user/user.scss';
 @import '../components/util/util.scss';
-@import '../components/widget-container/widget-container-add-widget.scss';
-@import '../components/widget-container/widget-container.scss';
 @import '../components/widget/widget.scss';
 @import '../components/widgets/balance/balance.scss';
 @import '../components/widgets/buienradar/buienradar.scss';

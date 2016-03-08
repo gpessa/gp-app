@@ -1,17 +1,11 @@
 'use strict';
 
-angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, buienradarService, userStatus, chartConfiguration, formats, widgetList) => {
+angular.module('gpAppApp').directive('buienradarWidget', ($geolocation, buienradarService, userStatus, chartConfiguration, formats) => {
   return {
     'templateUrl' : 'components/widgets/buienradar/buienradar.html',
     'restrict' : 'C',
     'require' : '^^widget',
     'link' : function(scope, element, attr, widget) {
-      widgetList.add({
-        'name' : 'Forecast',
-        'type' : 'forecast',
-        'icon' : 'fa fa-sun-o'
-      });
-
       scope.chartConfiguration = chartConfiguration;
 
       scope.get = function(coordinates) {

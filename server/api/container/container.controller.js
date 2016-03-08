@@ -1,16 +1,16 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/widget-containers              ->  index
- * POST    /api/widget-containers              ->  create
- * GET     /api/widget-containers/:id          ->  show
- * PUT     /api/widget-containers/:id          ->  update
- * DELETE  /api/widget-containers/:id          ->  destroy
+ * GET     /api/containers              ->  index
+ * POST    /api/containers              ->  create
+ * GET     /api/containers/:id          ->  show
+ * PUT     /api/containers/:id          ->  update
+ * DELETE  /api/containers/:id          ->  destroy
  */
 
 'use strict';
 
 var _ = require('lodash');
-var WidgetContainer = require('./widget-container.model');
+var Container = require('./container.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -60,9 +60,9 @@ function removeEntity(res) {
   };
 }
 
-// Gets a single WidgetContainer from the DB
+// Gets a single Container from the DB
 exports.show = function(req, res) {
-  WidgetContainer.findOne({
+  Container.findOne({
                     'id' : req.params.id,
                     'user' : req.user._id
                   })
@@ -73,18 +73,18 @@ exports.show = function(req, res) {
                  .catch(handleError(res));
 };
 
-// Creates a new WidgetContainer in the DB
+// Creates a new Container in the DB
 exports.create = function(req, res) {
   req.body.user = req.user._id;
 
-  WidgetContainer.createAsync(req.body)
+  Container.createAsync(req.body)
                  .then(responseWithResult(res, 201))
                  .catch(handleError(res));
 };
 
-// Updates an existing WidgetContainer in the DB
+// Updates an existing Container in the DB
 exports.update = function(req, res) {
-  WidgetContainer.findOne({
+  Container.findOne({
                     'id' : req.params.id,
                     'user' : req.user._id
                   })
@@ -96,9 +96,9 @@ exports.update = function(req, res) {
                  .catch(handleError(res));
 };
 
-// Deletes a WidgetContainer from the DB
+// Deletes a Container from the DB
 exports.destroy = function(req, res) {
-  WidgetContainer.findOne({
+  Container.findOne({
                     'id' : req.params.id,
                     'user' : req.user._id
                   })

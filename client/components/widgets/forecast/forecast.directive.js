@@ -1,16 +1,11 @@
 'use strict';
 
-angular.module('gpAppApp').directive('forecastWidget', ($geolocation, forecastService, userStatus, formats, widgetList) => {
+angular.module('gpAppApp').directive('forecastWidget', ($geolocation, forecastService, userStatus, formats) => {
   return {
     'templateUrl' : 'components/widgets/forecast/forecast.html',
     'restrict' : 'C',
     'require' : '^^widget',
     'link' : function(scope, element, attr, widget) {
-      widgetList.add({
-        'name' : 'Forecast',
-        'type' : 'forecast',
-        'icon' : 'fa fa-sun-o'
-      });
       scope.formats = formats;
 
       scope.getIcon = function(icon){

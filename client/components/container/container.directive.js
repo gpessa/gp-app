@@ -2,14 +2,14 @@
 
 angular.module('gpAppApp').directive('widgetContainer', () => {
   return {
-    'templateUrl' : 'components/widget-container/widget-container.html',
+    'templateUrl' : 'components/container/container.html',
     'restrict' : 'E',
     'replace' : true,
     'scope' : {
       'id' : '@'
     },
     'bindToController' : true,
-    'controller' : 'WidgetContainerController',
+    'controller' : 'ContainerController',
     'controllerAs' : 'vm'
   };
 });

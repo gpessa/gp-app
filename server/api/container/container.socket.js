@@ -4,7 +4,7 @@
 
 'use strict';
 
-var WidgetContainerEvents = require('./widget-container.events');
+var WidgetContainerEvents = require('./container.events');
 
 // Model events to emit
 var events = ['save', 'remove'];
@@ -13,7 +13,7 @@ exports.register = function(socket) {
   // Bind model events to socket events
   for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
-    var listener = createListener('widgetContainer:' + event, socket);
+    var listener = createListener('Container:' + event, socket);
 
     WidgetContainerEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));

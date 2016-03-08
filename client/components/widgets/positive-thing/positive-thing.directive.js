@@ -2,19 +2,13 @@
 'use strict';
 
 angular.module('gpAppApp')
-  .directive('positiveThingWidget', function ($window, $interval, socket, positiveThingService, widgetList) {
+  .directive('positiveThingWidget', function ($window, $interval, socket, positiveThingService) {
     return {
       'templateUrl' : 'components/widgets/positive-thing/positive-thing.html',
       'restrict' : 'C',
       'require' : '^^widget',
       'scope' : true,
       'link' : function(scope, element, attr, widget) {
-        widgetList.add({
-          'name' : 'Positive Thing',
-          'type' : 'positive-thing',
-          'icon' : 'fa fa-plus'
-        });
-
         widget.extendConfigurationProperties({
           'Thing' : {
             type: 'number',

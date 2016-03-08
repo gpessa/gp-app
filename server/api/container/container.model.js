@@ -3,7 +3,7 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 
-var WidgetContainerSchema = new Schema({
+var ContainerSchema = new Schema({
   id: String,
   user : {
     type: mongoose.Schema.Types.ObjectId,
@@ -21,4 +21,4 @@ var WidgetContainerSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('WidgetContainer', WidgetContainerSchema);
+module.exports = mongoose.model('Container', ContainerSchema);

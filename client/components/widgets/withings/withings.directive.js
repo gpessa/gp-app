@@ -1,17 +1,12 @@
 'use strict';
 
-angular.module('gpAppApp').directive('withingsWidget', ($filter, chartConfiguration, Withings, formats, widgetList) => {
+angular.module('gpAppApp').directive('withingsWidget', ($filter, chartConfiguration, Withings, formats) => {
   return {
     'templateUrl' : 'components/widgets/withings/withings.html',
     'restrict' : 'C',
     'require' : '^^widget',
     'scope' : true,
     'link' : function(scope, element, attr, widget) {
-      widgetList.add({
-        'name' : 'Withings',
-        'type' : 'withings',
-        'icon' : 'fa fa-line-chart'
-      });
       scope.chartConfiguration = angular.copy(chartConfiguration);
 
       scope.types = [{

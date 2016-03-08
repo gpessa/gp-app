@@ -15,7 +15,6 @@ import TodoList from '../api/todo-list/todo-list.model';
 import Stock from '../api/stock/stock.model';
 import User from '../api/user/user.model';
 import Widget from '../api/widget/widget.model';
-import WidgetContainer from '../api/widget-container/widget-container.model';
 
 
 // Balance.find({}).removeAsync();

@@ -1,18 +1,13 @@
 'use strict';
 
 angular.module('gpAppApp')
-  .directive('portfolioWidget', function ($window, $interval, socket, userStatus, portfolioService, widgetList) {
+  .directive('portfolioWidget', function ($window, $interval, socket, userStatus, portfolioService) {
     return {
       'templateUrl' : 'components/widgets/portfolio/portfolio.html',
       'restrict' : 'C',
       'require' : '^^widget',
       'scope' : true,
       'link' : function(scope, element, attr, widget) {
-        widgetList.add({
-          'name' : 'Portfolio',
-          'type' : 'portfolio',
-          'icon' : 'fa fa-exchange'
-        });
         var removeWatch = angular.noop;
 
         scope.taxation = widget.getConfiguration().taxation;
