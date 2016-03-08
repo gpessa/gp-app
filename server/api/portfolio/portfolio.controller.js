@@ -130,7 +130,10 @@ function removeEntity(res) {
 
 // Gets a list of Portfolios
 export function index(req, res) {
-  Portfolio.findAsync()
+  Portfolio
+    .findAsync({
+      'user' : req.user._id
+    })
     .then(responseWithDecoratedResult(res))
     .catch(handleError(res));
 }
@@ -145,6 +148,8 @@ export function show(req, res) {
 
 // Creates a new Portfolio in the DB
 export function create(req, res) {
+  req.body.user = req.user._id;
+  
   Portfolio.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
@@ -152,9 +157,6 @@ export function create(req, res) {
 
 // Updates an existing Portfolio in the DB
 export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
   Portfolio.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))

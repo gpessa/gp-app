@@ -16,11 +16,6 @@ function onConnect(socket) {
     socket.log(JSON.stringify(data, null, 2));
   });
 
-  // Insert sockets below
-  require('../api/positive-thing/positive-thing.socket').register(socket);
-  require('../api/balance/balance.socket').register(socket);
-  require('../api/portfolio/portfolio.socket').register(socket);
-  require('../api/stock/stock.socket').register(socket);
 }
 
 export default function(socketio) {

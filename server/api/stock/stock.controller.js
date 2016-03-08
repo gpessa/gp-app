@@ -99,7 +99,8 @@ function responseWithDecoratedResult(res, statusCode){
 
 // Gets a list of Stocks
 export function index(req, res) {
-  Stock.findAsync({
+  Stock
+    .findAsync({
       'user' : req.user._id
     })
     .then(responseWithDecoratedResult(res))

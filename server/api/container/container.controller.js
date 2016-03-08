@@ -40,9 +40,9 @@ function handleEntityNotFound(res) {
 
 function saveUpdates(updates) {
   return function(entity) {
-    var updated = _.extend(entity, updates);
+    entity.widgets = updates.widgets;
 
-    return updated.saveAsync()
+    return entity.saveAsync()
       .spread(function(updated) {
         return updated;
       });

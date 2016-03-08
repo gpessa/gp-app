@@ -6,6 +6,7 @@ angular.module('gpAppApp')
       'templateUrl' : 'components/widgets/stock/stock.html',
       'restrict' : 'C',
       'require' : '^^widget',
+      'scope' : true,
       'link' : function(scope, element, attr, widget) {
         scope.create = function(form){
           scope.submitted = true;

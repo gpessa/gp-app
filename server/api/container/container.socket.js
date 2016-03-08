@@ -13,7 +13,7 @@ exports.register = function(socket) {
   // Bind model events to socket events
   for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
-    var listener = createListener('Container:' + event, socket);
+    var listener = createListener('container:' + event, socket);
 
     WidgetContainerEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));

@@ -55,7 +55,7 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
 
       return this;
     },
-    'link' : function(scope, element){
+    'link' : function(scope, element, attr, widgetContainer){
       var template = $compile('<div class="' + scope.data.type + '-widget"></div>')(scope);
       angular.element(element[0].querySelector('.widget-body')).append(template);
 
@@ -74,7 +74,7 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
       };
 
       scope.remove = () => {
-        WidgetService.remove(scope.data);
+        WidgetService.remove(scope.data).then(() => widgetContainer.render());
       };
 
       scope.update = (form) => {
