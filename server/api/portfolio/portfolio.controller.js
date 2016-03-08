@@ -59,16 +59,18 @@ function responseWithDecoratedResult(res, statusCode){
           portfolios = portfolios.map(function(portfolio, index){
             portfolio.transactions = portfolio.transactions.map(function(transaction){
               var marketprice = _.filter(result, {'symbol' : transaction.symbol})[0].bid;
-              var value = (transaction.sellprice || marketprice);
               var total = (transaction.operation === 'sell') ? 0 : (value * transaction.quantity);
-              var delta = (value - transaction.buyprice) * transaction.quantity
+              var delta = (value - transaction.buyprice) * transaction.quantity;
+              var value = (transaction.sellprice || marketprice);
+              var status = (transaction.operation === 'sell' || transaction.quantity === 0) ? 'close' : 'open';
 
               transaction = transaction.toObject();
               transaction = _.extend(transaction, {
                 'marketprice' : marketprice,
                 'value' : value,
                 'total' : total,
-                'delta' : delta
+                'delta' : delta,
+                'status' : status
               })
               return transaction;
             });
@@ -149,7 +151,7 @@ export function show(req, res) {
 // Creates a new Portfolio in the DB
 export function create(req, res) {
   req.body.user = req.user._id;
-  
+
   Portfolio.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

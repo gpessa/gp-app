@@ -20,7 +20,8 @@ var PortfolioSchema = new mongoose.Schema({
     operation : String,
     delta : Number,
     total : Number,
-    value : Number
+    value : Number,
+    status : String
   }]
 });
 

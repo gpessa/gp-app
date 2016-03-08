@@ -34,7 +34,7 @@
             <div class="col-md-2 text-right">Return</div>
           </div>
       </div>
-    </li> 
+    </li>
 
     <li class="list_item" ng-show="portfolio.addNew">
       <div class="list_item_btn">
@@ -93,7 +93,7 @@
       </div>
     </li>
 
-    <li class="list_item" ng-repeat="transaction in portfolio.transactions">
+    <li class="list_item" ng-repeat="transaction in portfolio.transactions"  ng-class="{'disabled' : transaction.status == 'close'}">
       <!-- <pre>{{transaction | json}}</pre> -->
       <div class="list_item_btn">
         <ul class="sub-menu-btn">

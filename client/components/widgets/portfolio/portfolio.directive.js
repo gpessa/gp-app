@@ -10,14 +10,14 @@ angular.module('gpAppApp')
       'link' : function(scope, element, attr, widget) {
         var removeWatch = angular.noop;
 
-        scope.taxation = widget.getConfiguration().taxation;
-
         widget.extendConfigurationProperties({
           'taxation' : {
             type: 'number',
             title: 'Taxation'
           }
         });
+
+        scope.taxation = widget.getConfiguration().taxation;
 
         scope.operations = [{
           id: 'sell',
