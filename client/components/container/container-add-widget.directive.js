@@ -2,12 +2,12 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetContainerAddWidget', (WidgetService) => {
+  .directive('containerAddWidget', (WidgetService) => {
     return {
       'templateUrl' : 'components/container/container-add-widget.html',
       'restrict' : 'E',
       'replace' : true,
-      'require' : '^widgetContainer',
+      'require' : '^container',
       'link' : function (scope, element, attrs, container) {
         scope.availablewidgets = [{
           'name' : 'Todo List',

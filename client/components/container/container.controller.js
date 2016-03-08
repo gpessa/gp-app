@@ -19,26 +19,26 @@
     render(){
       this.ContainerService
         .show( this.id )
-        .then((widgetContainer) => {
-          this.widgetContainer = widgetContainer;
-          this.socket.syncUpdates('widget-container', this.widgetContainer);
+        .then((container) => {
+          this.container = container;
+          this.socket.syncUpdates('widget-container', this.container);
         });
     }
 
     remove(){
-      this.ContainerService.remove( this.widgetContainer , (widgetContainer) => {
-        this.widgetContainer = widgetContainer;
+      this.ContainerService.remove( this.container , (container) => {
+        this.container = container;
       });
     }
 
     update(){
-      this.ContainerService.update( this.widgetContainer , (widgetContainer) => {
-          this.widgetContainer = widgetContainer;
+      this.ContainerService.update( this.container , (container) => {
+        this.container = container;
       });
     }
 
     addWidget(widget){
-      this.widgetContainer.widgets.push(widget);
+      this.container.widgets.push(widget);
       this.update();
     }
 
