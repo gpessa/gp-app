@@ -1,12 +1,17 @@
 'use strict';
 
-angular.module('gpAppApp').directive('balanceWidget', ($filter, balanceService, socket, formats,chartConfiguration) => {
+angular.module('gpAppApp').directive('balanceWidget', ($filter, balanceService, socket, formats,chartConfiguration, widgetList) => {
   return {
     'templateUrl' : 'components/widgets/balance/balance.html',
     'restrict' : 'C',
     'scope'  : true,
     'require' : '^^widget',
     'link' : function(scope, element, attr, widget) {
+      widgetList.add({
+        'name' : 'Buienradar',
+        'type' : 'buienradar',
+        'icon' : 'fa fa-sun-o'
+      });
       scope.chartConfiguration = angular.copy(chartConfiguration);
 
       angular.extend(scope.chartConfiguration.options, {

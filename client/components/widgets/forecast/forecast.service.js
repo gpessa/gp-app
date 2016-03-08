@@ -2,10 +2,10 @@
 
 (function() {
 
-  class buienradarService {
+  class forecastService {
 
     constructor($q, $http){
-      this.url = '/api/buienradar';
+      this.url = '/api/forecast';
       this.$http = $http;
       this.$q = $q;
     }
@@ -14,7 +14,6 @@
       let deferred = this.$q.defer();
       this.$http
         .post(this.url, {
-          'cache' : true,
           'params' : coordinates
         })
         .success(data => {
@@ -29,6 +28,6 @@
   }
 
   angular.module('gpAppApp')
-         .service('buienradarService', buienradarService);
+         .service('forecastService', forecastService);
 
 })();

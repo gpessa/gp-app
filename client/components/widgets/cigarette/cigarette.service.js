@@ -12,7 +12,8 @@
 
     get() {
       let deferred = this.$q.defer();
-      this.$http.get(this.url)
+      this.$http
+        .get(this.url)
         .success(data => {
           deferred.resolve(data);
         })
@@ -25,7 +26,8 @@
 
     create(){
       let deferred = this.$q.defer();
-      this.$http.post('/api/cigarette/')
+      this.$http
+        .post('/api/cigarette/')
         .success((data) => {
           deferred.resolve(data);
         });

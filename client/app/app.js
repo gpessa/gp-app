@@ -41,9 +41,10 @@ angular.module('gpAppApp', [
     scaleStepWidth : 1,
     datasetStrokeWidth : 1,
     showXAxisLabel:false,
-    maintainAspectRatio: true
+    maintainAspectRatio: true,
+    responsive: true
   },
-    colours : [{
+  colours : [{
     fillColor: 'rgba(49, 147, 198, 0.3)',
     pointColor: 'rgba(27, 188, 157, 1)',
     pointHighlightFill: 'rgba(26, 188, 156, 1)',
@@ -54,6 +55,7 @@ angular.module('gpAppApp', [
 })
 
 .constant('formats', {
+  time : 'H:MM',
   date : 'dd MMM yyyy',
   month : 'MMM yyyy',
   dateTime : 'dd MMM yyyy h:mm:ss a'
@@ -64,6 +66,20 @@ angular.module('gpAppApp', [
     uibDatepickerConfig.showButtonBar = false;
     uibDatepickerPopupConfig.showButtonBar = false;
     uibDatepickerPopupConfig.datepickerPopup = formats.date;
+})
+
+.config(function ($provide) {
+  $provide.factory("widgetList", function () {
+    var widgetList = [];
+    return {
+      'get' : function(){
+        return widgetList;
+      },
+      'add' : function(widget){
+        widgetList.push(widget);
+      }
+    };
+  });
 })
 
 .config(function($httpProvider){

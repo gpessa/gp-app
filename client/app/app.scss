@@ -1,6 +1,6 @@
-$icon-font-path:  "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-$fa-font-path:    "../bower_components/font-awesome/fonts";
-$zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
+$icon-font-path:       "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$fa-font-path:         "../bower_components/font-awesome/fonts";
+$weather-font-path:    "../assets/fonts";
 
 
 @import '../components/css/_variables.scss';
@@ -18,6 +18,7 @@ $zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
 @import '../components/css/_mixins.scss';
 @import '../components/css/_same-height-columns.scss';
 @import '../components/css/_variables.scss';
+@import '../components/css/_weather-icon.scss';
 @import '../components/error/error.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
@@ -25,12 +26,13 @@ $zmdi-font-path:  "../bower_components/material-design-iconic-font/dist/fonts/";
 @import '../components/oauth-buttons/oauth-buttons.scss';
 @import '../components/user/user.scss';
 @import '../components/util/util.scss';
-@import '../components/widget-container/widget-container-add-widget.scss';
-@import '../components/widget-container/widget-container.scss';
 @import '../components/widget/widget.scss';
 @import '../components/widgets/balance/balance.scss';
 @import '../components/widgets/buienradar/buienradar.scss';
 @import '../components/widgets/cigarette/cigarette.scss';
+@import '../components/widgets/container/container-add-widget.scss';
+@import '../components/widgets/container/container.scss';
+@import '../components/widgets/forecast/forecast.scss';
 @import '../components/widgets/portfolio/portfolio.scss';
 @import '../components/widgets/positive-thing/positive-thing.scss';
 @import '../components/widgets/stock/stock.scss';

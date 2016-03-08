@@ -21,8 +21,6 @@ function onConnect(socket) {
   require('../api/balance/balance.socket').register(socket);
   require('../api/portfolio/portfolio.socket').register(socket);
   require('../api/stock/stock.socket').register(socket);
-  require('../api/thing/thing.socket').register(socket);
-
 }
 
 export default function(socketio) {

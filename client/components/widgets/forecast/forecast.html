@@ -1,0 +1,53 @@
+<div class="row">
+
+  <div class="col-md-3">
+    <i class="iw iw-4x {{getIcon(forecast.currently.icon)}}"></i>
+  </div>
+
+  <div class="col-md-9">
+    <hgroup>
+      <h1>{{forecast.currently.temperature | number : 0}}°</h1>
+      <h5>{{forecast.city}}</h5>
+    </hgroup>
+  </div>
+
+</div>
+
+<hr/>
+
+<!-- <ul class="col-md-12">
+  <li ng-repeat="hour in forecast.hourly.data">
+    {{hour.time * 1000 | date:formats.time}}
+    <i class="iw {{getIcon(hour.icon)}}"></i>
+    {{hour.temperature}}°
+  </li>
+</ul> -->
+
+
+<ul class="list">
+
+  <li class="list_item header">
+    <div class="list_item_data">
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-7">Day</div>
+          <div class="col-md-2 text-right">Min</div>
+          <div class="col-md-2 text-right">Max</div>
+        </div>
+    </div>
+  </li>
+
+  <li class="list_item" ng-repeat="day in forecast.daily.data">
+    <div class="list_item_data">
+      <div class="row">
+        <div class="col-md-1">
+          <i class="iw {{getIcon(day.icon)}}"></i>
+        </div>
+        <div class="col-md-7">{{day.time * 1000 | date:'EEEE' | capitalize}}</div>
+        <div class="col-md-2 text-right">{{day.temperatureMin | number : 0}}°</div>
+        <div class="col-md-2 text-right">{{day.temperatureMax | number : 0}}°</div>
+      </div>
+    </div>
+  </li>
+
+</ul>

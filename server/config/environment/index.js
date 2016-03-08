@@ -63,6 +63,10 @@ var all = {
     clientID:     process.env.WITHINGS_ID || 'id',
     clientSecret: process.env.WITHINGS_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/withings/callback'
+  },
+
+  forecast: {
+    clientSecret : process.env.FORECAST_SECRET
   }
 };
 

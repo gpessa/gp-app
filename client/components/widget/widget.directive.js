@@ -61,22 +61,23 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
 
       scope.schema = angular.copy(schema);
       scope.formcontrols = formcontrols;
+      scope.isWidgetLoading = false;
+      scope.isSettingsOpen = false;
 
-      scope.toggleSettings = function() {
-        console.log('toggle');
+      scope.toggleSettings = () => {
         scope.conf = angular.copy(scope.data || {});
         scope.isSettingsOpen = !scope.isSettingsOpen;
       };
 
-      scope.toggleLoading = function(){
+      scope.toggleLoading = () => {
         scope.isWidgetLoading = !scope.isWidgetLoading;
       };
 
-      scope.remove = function() {
+      scope.remove = () => {
         WidgetService.remove(scope.data);
       };
 
-      scope.update = function(form){
+      scope.update = (form) => {
         scope.$broadcast('schemaFormValidate');
         if (form.$valid) {
           scope.data = scope.conf;

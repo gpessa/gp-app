@@ -1,12 +1,17 @@
 'use strict';
 
 angular.module('gpAppApp')
-  .directive('stockWidget', function (socket, stockService, userStatus) {
+  .directive('stockWidget', function (socket, stockService, userStatus, widgetList) {
     return {
       'templateUrl' : 'components/widgets/stock/stock.html',
       'restrict' : 'C',
       'require' : '^^widget',
       'link' : function(scope, element, attr, widget) {
+        widgetList.add({
+          'name' : 'Stocks',
+          'type' : 'stock',
+          'icon' : 'fa fa-university'
+        });
 
         scope.create = function(form){
           scope.submitted = true;
