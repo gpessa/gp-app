@@ -12,7 +12,7 @@
          ng-model="vm.container.children"
          ng-if="vm.container.children.length > 0">
 
-      <widget data="w" ng-repeat="w in vm.container.children"/>
+      <container-child data="child" ng-repeat="child in vm.container.children"></container-child>
 
     </div>
   </div>

@@ -59,6 +59,11 @@ angular
           'type' : 'container',
           'name' : 'Container',
           'icon' : 'fa fa-sun-o'
+        },{
+          'element' : 'container',
+          'type' : 'container',
+          'name' : 'Container',
+          'icon' : ''
         }];
 
         scope.addWidget = function(widget){
