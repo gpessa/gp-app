@@ -38,7 +38,7 @@
     }
 
     addWidget(widget){
-      this.container.widgets.push(widget);
+      this.container.children.push(widget);
       this.update();
     }
 

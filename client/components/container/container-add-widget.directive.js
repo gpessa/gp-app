@@ -10,44 +10,54 @@ angular
       'require' : '^container',
       'link' : function (scope, element, attrs, container) {
         scope.availablewidgets = [{
-          'name' : 'Todo List',
+          'element' : 'widget',
           'type' : 'todo-list',
+          'name' : 'Todo List',
           'icon' : 'fa fa-list'
         },{
-          'name' : 'Cigarette',
+          'element' : 'widget',
           'type' : 'cigarette',
+          'name' : 'Cigarette',
           'icon' : 'icon icon-cigarette'
         },{
-          'name' : 'Withings',
+          'element' : 'widget',
           'type' : 'withings',
+          'name' : 'Withings',
           'icon' : 'fa fa-line-chart'
         },{
-          'name' : 'Buienradar',
+          'element' : 'widget',
           'type' : 'buienradar',
+          'name' : 'Buienradar',
           'icon' : 'fa fa-sun-o'
         },{
-          'name' : 'Stocks',
+          'element' : 'widget',
           'type' : 'stock',
+          'name' : 'Stocks',
           'icon' : 'fa fa-university'
         },{
-          'name' : 'Portfolio',
+          'element' : 'widget',
           'type' : 'portfolio',
+          'name' : 'Portfolio',
           'icon' : 'fa fa-exchange'
         },{
-          'name' : 'Balance',
+          'element' : 'widget',
           'type' : 'balance',
+          'name' : 'Balance',
           'icon' : 'fa fa-line-chart'
         },{
-          'name' : 'Positive Thing',
+          'element' : 'widget',
           'type' : 'positive-thing',
+          'name' : 'Positive Thing',
           'icon' : 'fa fa-plus'
         },{
-          'name' : 'Forecast',
+          'element' : 'widget',
           'type' : 'forecast',
+          'name' : 'Forecast',
           'icon' : 'fa fa-sun-o'
         },{
-          'name' : 'Container',
+          'element' : 'widget',
           'type' : 'container',
+          'name' : 'Container',
           'icon' : 'fa fa-sun-o'
         }];
 

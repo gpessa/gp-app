@@ -1,4 +1,7 @@
 <div class="widget-container">
+  <pre>
+      {{vm.container | json}}
+  </pre>
 
   <div class="container-fluid">
 
@@ -6,10 +9,10 @@
 
     <div class="row"
          html-sortable="vm.sortableOption"
-         ng-model="vm.container.widgets"
-         ng-if="vm.container.widgets.length > 0">
+         ng-model="vm.container.children"
+         ng-if="vm.container.children.length > 0">
 
-      <widget data="w" ng-repeat="w in vm.container.widgets"/>
+      <widget data="w" ng-repeat="w in vm.container.children"/>
 
     </div>
   </div>

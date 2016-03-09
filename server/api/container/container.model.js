@@ -9,13 +9,14 @@ var ContainerSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  widgets : [{
+  children : [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Widget'
   }]
 },{
   toObject: {
     transform: function (doc, ret, game) {
+      delete ret.user;
       delete ret.__v;
     }
   }

@@ -15,16 +15,35 @@ import TodoList from '../api/todo-list/todo-list.model';
 import Stock from '../api/stock/stock.model';
 import User from '../api/user/user.model';
 import Widget from '../api/widget/widget.model';
+import Container from '../api/container/container.model';
 
+// Widget.find({}).update( {}, {
+//   $set : {
+//     subtype : type
+//   }
+// });
+
+// Container.findOne({}).then( function (container) {
+//   container.childrens = container.widgets;
+//   container.saveAsync();
+// });
+
+// Widget.find({}).removeAsync();
+// Widget.find({}).then( function (widgets) {
+//   console.log(widgets.length);
+//   // widgets.forEach(widgets, function(widget){
+//   //   widget.element = widget.type;
+//   //   widget.update();
+//   // })
+// });
 
 // Balance.find({}).removeAsync();
-// WidgetContainer.find({}).removeAsync();
+// Container.find({}).removeAsync();
 // Balance.find({}).removeAsync();
 // Cigarette.find({}).removeAsync();
 // ShoppingList.find({}).removeAsync();
 // Stock.find({}).removeAsync();
 // User.find({}).removeAsync();
-// Widget.find({}).removeAsync();
 //
 // User.find({}).removeAsync()
 //   .then(() => {

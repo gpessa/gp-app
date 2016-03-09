@@ -12,8 +12,9 @@ angular.module('gpAppApp')
 
         widget.extendConfigurationProperties({
           'taxation' : {
-            type: 'number',
-            title: 'Taxation'
+            'type' : 'number',
+            'title' : 'Taxation',
+            'default' : 0
           }
         });
 

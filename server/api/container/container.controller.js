@@ -40,7 +40,7 @@ function handleEntityNotFound(res) {
 
 function saveUpdates(updates) {
   return function(entity) {
-    entity.widgets = updates.widgets;
+    entity.children = updates.children;
 
     return entity.saveAsync()
       .spread(function(updated) {
@@ -66,7 +66,7 @@ exports.show = function(req, res) {
                     'id' : req.params.id,
                     'user' : req.user._id
                   })
-                 .populate('widgets')
+                 .populate('children')
                  .execAsync()
                  .then(handleEntityNotFound(res))
                  .then(responseWithResult(res))
@@ -88,7 +88,7 @@ exports.update = function(req, res) {
                     'id' : req.params.id,
                     'user' : req.user._id
                   })
-                 .populate('widgets')
+                 .populate('children')
                  .execAsync()
                  .then(handleEntityNotFound(res))
                  .then(saveUpdates(req.body))
