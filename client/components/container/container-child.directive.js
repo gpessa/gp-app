@@ -6,12 +6,13 @@ angular
     return {
       'restrict' : 'E',
       'scope' : {
-        'data' : '='
+        'child' : '=data'
       },
+      replace : true,
       link : function(scope, element){
-        var html ='<' + scope.data.element + ' data="data"></' + scope.data.element + '>';
+        var html ='<' + scope.child.__t + ' data="child"></' + scope.child.__t + '>';
         var e = $compile(html)(scope);
-        element.replaceWith(e);
+        element.append(e);
       }
     };
   });

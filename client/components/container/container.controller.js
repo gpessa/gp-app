@@ -4,42 +4,31 @@
 
   class ContainerController {
 
-    constructor(socket, ContainerService) {
+    constructor(socket, ContainerResource) {
       this.socket = socket;
-      this.ContainerService = ContainerService;
+      this.ContainerResource = ContainerResource;
       this.sortableOption = {
         'stop' : () => {
           this.update();
         }
       };
-
-      this.render();
+      this.get();
     }
 
-    render(){
-      this.ContainerService
-        .show( this.id )
-        .then((container) => {
-          this.container = container;
-          this.socket.syncUpdates('widget-container', this.container);
-        });
-    }
-
-    remove(){
-      this.ContainerService.remove( this.container , (container) => {
-        this.container = container;
+    get(){
+      this.container = this.ContainerResource.get({
+        'id' : this.id
       });
     }
 
-    update(){
-      this.ContainerService.update( this.container , (container) => {
-        this.container = container;
-      });
+    linkChild(child, type){
+      this.container.children.push(child);
+      this.container.$update();
     }
 
-    addWidget(widget){
-      this.container.children.push(widget);
-      this.update();
+    unlinkChild(child){
+      this.container.children.remove(child);
+      this.container.$update();
     }
 
 

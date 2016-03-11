@@ -74,7 +74,8 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
       };
 
       scope.remove = () => {
-        WidgetService.remove(scope.data).then(() => container.render());
+        container.unlinkChild(scope.data);
+        WidgetService.remove(scope.data);
       };
 
       scope.update = (form) => {

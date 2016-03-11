@@ -1,9 +1,11 @@
 'use strict';
 
+import * as base from '../../config/base.schema';
+
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 
-var ContainerSchema = new Schema({
+var ContainerSchema = new base.BaseSchema({
   id: String,
   user : {
     type: mongoose.Schema.Types.ObjectId,
@@ -11,7 +13,7 @@ var ContainerSchema = new Schema({
   },
   children : [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Widget'
+    ref: 'Child'
   }]
 },{
   toObject: {
@@ -22,4 +24,4 @@ var ContainerSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Container', ContainerSchema);
+module.exports = base.Child.discriminator('Container', ContainerSchema); //module.exports = mongoose.model('Container', ContainerSchema);

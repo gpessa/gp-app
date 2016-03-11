@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Container = require('./container.model');
+var Widget = require('../widget/widget.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -42,7 +43,9 @@ function saveUpdates(updates) {
   return function(entity) {
     entity.children = updates.children;
 
-    return entity.saveAsync()
+    return entity
+      .saveAsync()
+      .populate('children')
       .spread(function(updated) {
         return updated;
       });
@@ -62,47 +65,49 @@ function removeEntity(res) {
 
 // Gets a single Container from the DB
 exports.show = function(req, res) {
-  Container.findOne({
-                    'id' : req.params.id,
-                    'user' : req.user._id
-                  })
-                 .populate('children')
-                 .execAsync()
-                 .then(handleEntityNotFound(res))
-                 .then(responseWithResult(res))
-                 .catch(handleError(res));
+  Container
+    .findOne({
+      'id' : req.params.id,
+      'user' : req.user._id
+    })
+    .populate('children')
+    .execAsync()
+    .then(handleEntityNotFound(res))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };
 
 // Creates a new Container in the DB
 exports.create = function(req, res) {
   req.body.user = req.user._id;
-
-  Container.createAsync(req.body)
-                 .then(responseWithResult(res, 201))
-                 .catch(handleError(res));
+  Container
+    .createAsync(req.body)
+    .then(responseWithResult(res, 201))
+    .catch(handleError(res));
 };
 
 // Updates an existing Container in the DB
 exports.update = function(req, res) {
-  Container.findOne({
-                    'id' : req.params.id,
-                    'user' : req.user._id
-                  })
-                 .populate('children')
-                 .execAsync()
-                 .then(handleEntityNotFound(res))
-                 .then(saveUpdates(req.body))
-                 .then(responseWithResult(res))
-                 .catch(handleError(res));
+  Container
+    .findOne({
+      '_id' : req.body._id,
+      'user' : req.user._id
+    })
+    .execAsync()
+    .then(handleEntityNotFound(res))
+    .then(saveUpdates(req.body))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };
 
 // Deletes a Container from the DB
 exports.destroy = function(req, res) {
-  Container.findOne({
-                    'id' : req.params.id,
-                    'user' : req.user._id
-                  })
-                  .then(handleEntityNotFound(res))
-                  .then(removeEntity(res))
-                  .catch(handleError(res));
+  Container
+    .findOne({
+      '_id' : req.params._id,
+      'user' : req.user._id
+    })
+    .then(handleEntityNotFound(res))
+    .then(removeEntity(res))
+    .catch(handleError(res));
 };

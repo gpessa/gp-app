@@ -1,14 +1,15 @@
-<div href="#" class="add-widget">
+<div class="add-widget">
 
-    <h5 class="text-center">Add widget</h5>
-
-    <ul class="list-unstyled row">
-      <li class="col-md-1" ng-repeat="availablewidget in availablewidgets">
-        <a class="add-widget_item" ng-click="addWidget(availablewidget)">
-          <i class="add-widget_icon {{availablewidget.icon}}"></i>
-          <small class="add-widget_title">{{availablewidget.name}}</small>
-        </a>
-      </li>
-    </ul>
+    <div ng-repeat="(key, availablechildren) in availablechildrentypes" ng-if="availablechildren.length > 0">
+      <h4 class="text-center">{{key}}</h4>
+      <ul class="list-unstyled row">
+        <li class="col-md-1" ng-repeat="availablechild in availablechildren">
+          <a class="add-widget_item" ng-click="addChild(availablechild, key)">
+            <i class="add-widget_icon {{availablechild.icon}}"></i>
+            <small class="add-widget_title">{{availablechild.name}}</small>
+          </a>
+        </li>
+      </ul>
+    </div>
 
 </div>

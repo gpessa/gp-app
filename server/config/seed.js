@@ -28,6 +28,7 @@ import Container from '../api/container/container.model';
 //   container.saveAsync();
 // });
 
+// Container.find({}).removeAsync();
 // Widget.find({}).removeAsync();
 // Widget.find({}).then( function (widgets) {
 //   console.log(widgets.length);

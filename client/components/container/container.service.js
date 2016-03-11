@@ -2,6 +2,23 @@
 
 (function() {
 
+  function ContainerResource($resource) {
+    return $resource('/api/container/:id', { id: '@_id'}, {
+      update: {
+        method: 'PUT'
+      },
+      createChild : {
+        method: 'PUT',
+        url : '/api/container/:id/create-child/type/:type',
+        params:{ id: '@_id', type: '@_type' }
+      }
+    });
+  }
+
+  angular.module('gpAppApp')
+         .factory('ContainerResource', ContainerResource);
+
+
   function ContainerService($http, $q) {
     return {
       show : function(id) {
@@ -15,7 +32,7 @@
           .catch(function(){
             $http
               .post('/api/container/', {'id' : id})
-              .success(function(data) {
+              .success((data) => {
                 deferred.resolve(data);
               });
           });
@@ -35,23 +52,35 @@
 
           return deferred.promise;
       },
-      update  : function(widgetContainer){
+      update  : function(container){
           var deferred = $q.defer();
 
           $http
-            .put('/api/container/' + widgetContainer.id, widgetContainer)
+            .put('/api/container/' + container.id, container)
             .success(function(data) {
               deferred.resolve(data);
             });
 
           return deferred.promise;
       },
-      remove  : function(widgetContainer){
+      remove  : function(container){
           var deferred = $q.defer();
 
           $http
-            .delete('/api/container/' + widgetContainer.id, widgetContainer)
+            .delete('/api/container/' + container.id, container)
             .success(function(data) {
+              deferred.resolve(data);
+            });
+
+          return deferred.promise;
+      },
+      removeChild : function(container, child){
+          var deferred = $q.defer();
+
+          $http
+            .delete('/api/container/' + container.id + '/child/' + child._id)
+            .success(function(data) {
+              debugger;
               deferred.resolve(data);
             });
 
