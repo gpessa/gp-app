@@ -1,19 +1,23 @@
 <span class="add-child">
 
-    <a class="btn btn-link-light btn-sm" icon="fa fa-plus" ></a>
+  <a class="btn btn-link-light btn-sm" icon="fa fa-plus" ng-click="open()"></a>
 
-    <ul ng-repeat="(key, availablechildren) in availablechildrentypes" class="nav nav-pills add-child-type-{{key | lowercase}}">
+  <script type="text/ng-template" id="add-child-modal.html">
+    <div class="modal-body">
+      <div ng-repeat="(key, children) in availablechildren" class="nav">
+        <h3 class="text-center">{{key}}</h3>
+        <div class="row">
+          <div class="col-md-2 text-center" ng-repeat="child in children">
 
-      <li ng-repeat="availablechild in availablechildren" >
+            <a class="btn btn-add-child" ng-click="addChild(child, key)" >
+              <i class="fa-fw fa-3x {{child.icon}}"></i>
+              <small>{{child.name}}</small>
+            </a>
 
-        <a class="add-child_item btn" ng-click="addChild(availablechild, key)">
-          <i class="add-child_icon {{availablechild.icon}}"></i>
-        </a>
-
-        <small class="add-child_title">{{availablechild.name}}</small>
-        
-      </li>
-
-    </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
 
 </span>

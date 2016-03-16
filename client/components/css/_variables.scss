@@ -100,7 +100,7 @@ $modal-content-bg:                             linear-gradient(0deg, rgba(255, 2
 // $modal-content-border-color:                   $modal-content-bg;
 // $modal-content-fallback-border-color:          $modal-content-bg;
 $modal-backdrop-bg:           #000;
-$modal-backdrop-opacity:      0.4;
+$modal-backdrop-opacity:      0.9;
 $modal-header-border-color:   #e5e5e5;
 $modal-footer-border-color:   $modal-header-border-color;
 
@@ -126,3 +126,8 @@ $modal-backdrop-bg:                            transparent;
 $modal-backdrop-opacity:                       .5 !default;
 $modal-header-border-color:                    transparent;
 $modal-footer-border-color:                    transparent;
+
+
+
+$legend-color:                                 $text-color;
+$legend-border-color:                          transparent;

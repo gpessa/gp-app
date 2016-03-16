@@ -6,6 +6,10 @@ var Schema = mongoose.Schema;
 
 export function BaseSchema() {
   Schema.apply(this, arguments);
+
+  this.add({
+    "type": String
+  });
 }
 
 util.inherits(BaseSchema, Schema);

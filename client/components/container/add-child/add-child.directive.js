@@ -2,7 +2,21 @@
 
 angular
   .module('gpAppApp')
-  .directive('containerAddChild', (WidgetResource, ContainerResource) => {
+  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, availablechildren) {
+    $scope.availablechildren = availablechildren;
+
+    $scope.addChild = function (child, type) {
+      $uibModalInstance.close({
+        child,
+        type
+      });
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+  })
+  .directive('addChild', ($uibModal, WidgetResource, ContainerResource) => {
     return {
       'templateUrl' : 'components/container/add-child/add-child.html',
       'restrict' : 'E',
@@ -10,12 +24,7 @@ angular
       'require' : '^container',
       'link' : function (scope, element, attrs, container) {
 
-        scope.availablechildrentypes = {
-            'Container' : [{
-                'icon' : 'fa fa-square-o',
-                'type' : 'basic',
-                'name' : 'Container'
-            }],
+        scope.availablechildren = {
             'Widget' : [{
                 'icon' : 'fa fa-list',
                 'type' : 'todo-list',
@@ -52,10 +61,30 @@ angular
                 'icon' : 'fa fa-sun-o',
                 'type' : 'forecast',
                 'name' : 'Forecast'
+            }],
+            'Container' : [{
+                'icon' : 'fa fa-square-o',
+                'type' : 'basic',
+                'name' : 'Basic'
             }]
         }
 
-        scope.addChild = (child, type) => {
+        scope.open = () => {
+          var modalInstance = $uibModal.open({
+            'templateUrl' : 'add-child-modal.html',
+            'controller' : 'ModalInstanceCtrl',
+            'size' : 'lg',
+            'animation'  : false,
+            'resolve' : {
+              'availablechildren' : scope.availablechildren
+            }
+          });
+          modalInstance.result.then((result) => {
+            addChild(result.child, result.type);
+          });
+        }
+
+        var addChild = (child, type) => {
           switch (type) {
 
             case 'Widget':

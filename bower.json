@@ -19,7 +19,7 @@
     "angular-socket-io": "~0.7.0",
     "angular-validation-match": "~1.5.2",
     "html5-sortable-angularjs": "latest",
-    "angular-schema-form-bootstrap": "latest",
+    "angular-schema-form-bootstrap": "*",
     "ngGeolocation": "latest",
     "angular-i18n": "*",
     "ifvisible.js": "*",

@@ -12,7 +12,7 @@
           'dimension' : {
             'type'  : 'number',
             'title' : 'Dimension',
-            'enum'  : [1,2,3,4,5,6,7,8,9,10,11,12]
+            'enum' : [1,2,3,4,5,6,7,8,9,10,11,12]
           }
       }
   };
@@ -37,6 +37,7 @@
     addConfigurations(property){
       this.schema.properties.configuration = {
         'type' : 'object',
+        'title' : 'Configuration',
         'properties': {}
       };
       angular.extend(this.schema.properties.configuration.properties, property);

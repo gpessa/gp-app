@@ -1,0 +1,12 @@
+<div class="form-group" ng-class="{'has-error': hasError()}">
+  <label class="control-label" ng-show="showTitle()">{{form.title}}</label>
+
+  <input ng-show="form.key"
+         type="range"
+         class="form-control"
+         schema-validate="form"
+         ng-model="$$value$$"
+         format="form.format" />
+
+  <span class="help-block" sf-message="form.description"></span>
+</div>

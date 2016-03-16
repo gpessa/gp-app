@@ -21,9 +21,12 @@ $widget-background : #fff;
       margin-left: -21px;
     }
 
-    .widget-body > *{
-      opacity: 0;
+    .widget-body{
       min-height: 80px;
+
+      > * {
+        opacity: 0;
+      }
     }
   }
 

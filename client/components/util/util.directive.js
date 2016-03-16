@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  
+
   .directive('val', ($filter) => {
     return {
       'template' : '<span ng-if="value"><i class="dot" ng-class="cls"></i> {{value}}</span>',
@@ -58,7 +58,7 @@ angular
       'restrict' : 'C',
       'link' : function(scope, element, attr){
         if(attr.icon){
-          element.prepend('<i class="' + attr.icon + '"></i>');
+          element.prepend('<i class="fa-fw ' + attr.icon + '"></i>');
         }
       }
     };
