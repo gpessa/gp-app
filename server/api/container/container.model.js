@@ -6,7 +6,6 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 
 var ContainerSchema = new base.BaseSchema({
-  id: String,
   user : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

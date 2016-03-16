@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('gpAppApp')
-  .directive('stockWidget', function (socket, stockService, userStatus) {
+angular
+  .module('gpAppApp')
+  .directive('widgetStock', function (socket, stockService, userStatus) {
     return {
       'templateUrl' : 'components/widgets/stock/stock.html',
-      'restrict' : 'C',
       'require' : '^^widget',
-      'scope' : true,
+      'restrict' : 'C',
+      'scope'  : true,
       'link' : function(scope, element, attr, widget) {
         scope.create = function(form){
           scope.submitted = true;
@@ -39,9 +40,7 @@ angular.module('gpAppApp')
             .catch(error => {
               scope.error = error;
             })
-            .finally(() => {
-              widget.toggleLoading();
-            });
+            .finally(widget.toggleLoading());
         };
 
         userStatus.focus(scope.get);

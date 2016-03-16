@@ -21,7 +21,7 @@ Object.defineProperty(Array.prototype, "remove", {
         // Iterate every array item
         for (var index = 0; index < this.length; index++) {
             // If current array item equals itemToRemove then
-            if (this[index] === itemToRemove) {
+            if ( angular.equals(this[index],  itemToRemove) ) {
                 // Remove array item at current index
                 this.splice(index, 1);
 

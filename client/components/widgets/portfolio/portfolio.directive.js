@@ -1,20 +1,21 @@
 'use strict';
 
-angular.module('gpAppApp')
-  .directive('portfolioWidget', function ($window, $interval, socket, userStatus, portfolioService) {
+angular
+  .module('gpAppApp')
+  .directive('widgetPortfolio', function ($window, $interval, socket, userStatus, portfolioService) {
     return {
       'templateUrl' : 'components/widgets/portfolio/portfolio.html',
-      'restrict' : 'C',
       'require' : '^^widget',
-      'scope' : true,
+      'restrict' : 'C',
+      'scope'  : true,
       'link' : function(scope, element, attr, widget) {
         var removeWatch = angular.noop;
 
-        widget.extendConfigurationProperties({
+        widget.addConfigurations({
           'taxation' : {
             'type' : 'number',
             'title' : 'Taxation',
-            'default' : 0
+            'default' : 26
           }
         });
 
@@ -41,7 +42,7 @@ angular.module('gpAppApp')
             .catch(error => {
               scope.error = error;
             })
-            .finally(widget.toggleLoading);
+            .finally(widget.toggleLoading());
         };
 
         scope.create = function(){

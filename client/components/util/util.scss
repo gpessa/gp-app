@@ -17,39 +17,3 @@
     }
   }
 }
-
-/**
-.uib-dropdown-open{
-  &:after{
-    content: '';
-    position: fixed;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background-color:lightblue;
-    -webkit-filter: blur(15px);
-  }
-
-  &:before{
-    content: '';
-    position: fixed;
-    top: -30px;
-    left: -30px;
-    right: -30px;
-    bottom: -30px;
-    display: block;
-    background: url("../assets/images/RicePaddy.jpg") no-repeat center center fixed;
-    opacity: 0.6;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: 1001;
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(15px);
-    -o-filter: blur(15px);
-    -ms-filter: blur(15px);
-    filter: blur(15px);
-    opacity: 0.95;
-  }
-}
-**/

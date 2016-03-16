@@ -1,19 +1,13 @@
 .widget-container{
-  margin-top: -$navbar-margin-bottom;
-  position: relative;
-
-  > .container-fluid > .row{
-    margin-top: -$navbar-margin-bottom;
-  }
-
   .widget{
 
     &.over{
       opacity: 0.6;
     }
-    
+
     &.moving{
       opacity: 0.6;
     }
+  
   }
 }

@@ -1,0 +1,19 @@
+<span class="add-child">
+
+    <a class="btn btn-link-light btn-sm" icon="fa fa-plus" ></a>
+
+    <ul ng-repeat="(key, availablechildren) in availablechildrentypes" class="nav nav-pills add-child-type-{{key | lowercase}}">
+
+      <li ng-repeat="availablechild in availablechildren" >
+
+        <a class="add-child_item btn" ng-click="addChild(availablechild, key)">
+          <i class="add-child_icon {{availablechild.icon}}"></i>
+        </a>
+
+        <small class="add-child_title">{{availablechild.name}}</small>
+        
+      </li>
+
+    </ul>
+
+</span>

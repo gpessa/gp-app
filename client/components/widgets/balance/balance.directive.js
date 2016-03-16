@@ -2,12 +2,12 @@
 
 angular
   .module('gpAppApp')
-  .directive('balanceWidget', ($filter, balanceService, socket, formats,chartConfiguration) => {
+  .directive('widgetBalance', ($filter, balanceService, socket, formats,chartConfiguration) => {
     return {
       'templateUrl' : 'components/widgets/balance/balance.html',
+      'require' : '^^widget',
       'restrict' : 'C',
       'scope'  : true,
-      'require' : '^^widget',
       'link' : function(scope, element, attr, widget) {
         scope.chartConfiguration = angular.copy(chartConfiguration);
 
@@ -36,7 +36,7 @@ angular
             .catch(error => {
               scope.error = error;
             })
-            .finally(widget.toggleLoading);
+            .finally(widget.toggleLoading());
         };
 
         scope.create = function(){

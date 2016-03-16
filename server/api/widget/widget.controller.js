@@ -83,9 +83,6 @@ exports.create = function(req, res) {
 
 // Updates an existing Widget in the DB
 exports.update = function(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
   Widget.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))

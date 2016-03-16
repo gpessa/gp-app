@@ -1,15 +1,16 @@
 
 'use strict';
 
-angular.module('gpAppApp')
-  .directive('positiveThingWidget', function ($window, $interval, socket, positiveThingService) {
+angular
+  .module('gpAppApp')
+  .directive('widgetPositiveThing', function ($window, $interval, socket, positiveThingService) {
     return {
       'templateUrl' : 'components/widgets/positive-thing/positive-thing.html',
-      'restrict' : 'C',
       'require' : '^^widget',
-      'scope' : true,
+      'restrict' : 'C',
+      'scope'  : true,
       'link' : function(scope, element, attr, widget) {
-        widget.extendConfigurationProperties({
+        widget.addConfigurations({
           'Thing' : {
             type: 'number',
             title: 'Positive things to show'
@@ -26,7 +27,7 @@ angular.module('gpAppApp')
             .catch(error => {
               scope.error = error;
             })
-            .finally(widget.toggleLoading);
+            .finally(widget.toggleLoading());
         };
 
         scope.create = function(){

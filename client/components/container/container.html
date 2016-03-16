@@ -1,20 +1,19 @@
 <div class="widget-container">
-  <pre>
-      {{vm.container | json}}
-  </pre>
+  <!-- <pre>
+      {{$ctrl.container | json}}
+  </pre> -->
+
+  <div class="container-header-buttons text-right">
+      <container-add-child></container-add-child>
+    <a class="btn btn-link-light btn-sm" icon="fa fa-times" ng-click="remove()" ></a>
+  </div>
 
   <div class="container-fluid">
 
-    <container-add-widget></container-add-widget>
-
-    <div class="row"
-         html-sortable="vm.sortableOption"
-         ng-model="vm.container.children"
-         ng-if="vm.container.children.length > 0">
-
-      <container-child data="child" ng-repeat="child in vm.container.children"></container-child>
-
+    <div class="row" html-sortable="$ctrl.sortableOption" ng-model="$ctrl.container.children" ng-if="$ctrl.container.children.length">
+      <container-child data="child" ng-repeat="child in $ctrl.container.children"></container-child>
     </div>
+
   </div>
 
 </div>

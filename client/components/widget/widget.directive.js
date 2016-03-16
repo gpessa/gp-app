@@ -1,91 +1,33 @@
 'use strict';
 
-angular.module('gpAppApp').directive('widget', ($compile, WidgetService) => {
-
-  var schema = {
-      'type' : 'object',
-      'properties' : {
-          'name' : {
-              'type' : 'string',
-              'title' : 'Name'
-          },
-          'dimension'  : {
-              'type' : 'number',
-              'title' : 'Dimension',
-              'enum' : [1,2,3,4,5,6,7,8,9,10,11,12]
-          }
-      }
-  };
-
-  var formcontrols = ['*', {
-      type: 'submit',
-      title: 'Save',
-      style: 'btn btn-block btn-primary'
-  }];
-
+angular.module('gpAppApp').directive('widget', ($compile, WidgetResource) => {
   return {
     'templateUrl' : 'components/widget/widget.html',
+    'require' : '^^?container',
+    'bindToController' : true,
+    'controllerAs' : '$ctrl',
     'restrict' : 'E',
-    'require' : '^^container',
-    'replace' :true,
+    'replace' : true,
     'scope' : {
-        'data' : '=data'
+      'widget' : '=data'
     },
-    'controller'  : function($scope){
-
-      this.$scope = $scope;
-      this.$scope.isWidgetLoading = false;
-
-      this.extendConfigurationProperties = (property) => {
-        this.$scope.schema.properties.configuration = {
-          'type' : 'object',
-          'title' : 'Preferences',
-          'properties': {}
-        };
-        angular.extend(this.$scope.schema.properties.configuration.properties, property);
-      };
-
-      this.toggleLoading = () => {
-        this.$scope.toggleLoading();
-      };
-
-      this.getConfiguration = () => {
-        return this.$scope.data.configuration;
-      };
-
-      return this;
-    },
+    'controller'  : 'WidgetController',
     'link' : function(scope, element, attr, container){
-      var template = $compile('<div class="' + scope.data.type + '-widget"></div>')(scope);
-      angular.element(element[0].querySelector('.widget-body')).append(template);
-
-      scope.schema = angular.copy(schema);
-      scope.formcontrols = formcontrols;
-      scope.isWidgetLoading = false;
-      scope.isSettingsOpen = false;
-
-      scope.toggleSettings = () => {
-        scope.conf = angular.copy(scope.data || {});
-        scope.isSettingsOpen = !scope.isSettingsOpen;
-      };
-
-      scope.toggleLoading = () => {
-        scope.isWidgetLoading = !scope.isWidgetLoading;
-      };
+      var widgetBody = angular.element(element[0].querySelector('.widget-body')).addClass('widget-' + scope.$ctrl.widget.type);
+      $compile(widgetBody)(scope);
 
       scope.remove = () => {
-        container.unlinkChild(scope.data);
-        WidgetService.remove(scope.data);
+        container.unlinkChild(scope.$ctrl.widget);
+        scope.$ctrl.remove();
       };
 
-      scope.update = (form) => {
-        scope.$broadcast('schemaFormValidate');
+      scope.update = function(form){
         if (form.$valid) {
-          scope.data = scope.conf;
-          WidgetService.update(scope.data);
-          scope.isSettingsOpen = false;
+          scope.$ctrl.save();
+          scope.$ctrl.toggleSettings();
         }
       };
+
     }
   };
 });

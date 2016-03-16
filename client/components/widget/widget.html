@@ -1,25 +1,25 @@
-<div class="widget widget-{{data.type}} col-md-{{data.dimension}}" ng-class="{'loading' : isWidgetLoading}">
+<div class="widget col-md-{{$ctrl.widget.dimension}}" ng-class="{'loading' : $ctrl.isWidgetLoading}">
 
   <div class="widget-header">
       <h4>
-        {{data.name}} &nbsp;
+        {{$ctrl.widget.name}} &nbsp;
         <div class="widget-header-buttons">
-          <a ng-click="toggleSettings()" class="btn btn-link btn-sm" icon="fa fa-cog"></a>
-          <a ng-click="remove()" class="btn btn-link btn-sm" icon="fa fa-times"></a>
+          <a class="btn btn-link btn-sm" icon="fa fa-cog"   ng-click="$ctrl.toggleSettings()"> </a>
+          <a class="btn btn-link btn-sm" icon="fa fa-times" ng-click="remove()" ></a>
         </div>
     </h4>
   </div>
 
-  <div class="widget-body clearfix" ng-show="!isSettingsOpen"></div>
+  <div class="widget-body clearfix" ng-show="!$ctrl.isSettingsOpen"></div>
 
-  <div class="widget-settings clearfix" ng-if="isSettingsOpen">
-    <form name="form"
-          sf-schema="schema"
-          sf-form="formcontrols"
-          sf-model="conf"
-          ng-submit="update(form)">
-    </form>
-  </div>
+  <form name="form"
+        class="widget-settings clearfix"
+        ng-if="$ctrl.isSettingsOpen"
+        sf-schema="$ctrl.schema"
+        sf-form="$ctrl.formcontrols"
+        sf-model="$ctrl.widget"
+        ng-submit="update(form)">
+  </form>
 
   <div class="widget-footer"></div>
 

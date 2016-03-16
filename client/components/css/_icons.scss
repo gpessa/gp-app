@@ -10,9 +10,8 @@
 }
 
 .icon {
-  font-family: Flaticon;
-  font-size: 20px;
-  font-style: normal;
+  @extend .fa;
+  font-family: "Flaticon";
 }
 
 .icon-cigarette:before {

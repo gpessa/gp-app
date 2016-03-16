@@ -2,13 +2,14 @@
 
 angular
   .module('gpAppApp')
-  .directive('containerAddWidget', (WidgetService, ContainerService) => {
+  .directive('containerAddChild', (WidgetResource, ContainerResource) => {
     return {
-      'templateUrl' : 'components/container/container-add-widget.html',
+      'templateUrl' : 'components/container/add-child/add-child.html',
       'restrict' : 'E',
       'replace' : true,
       'require' : '^container',
       'link' : function (scope, element, attrs, container) {
+
         scope.availablechildrentypes = {
             'Container' : [{
                 'icon' : 'fa fa-square-o',
@@ -56,16 +57,20 @@ angular
 
         scope.addChild = (child, type) => {
           switch (type) {
+
             case 'Widget':
-              WidgetService.create(child).then(widget => {
-                container.linkChild(widget);
+              var newWidget = new WidgetResource(child);
+              newWidget.$create().then(child => {
+                container.linkChild(child);
               });
               break;
-            case 'Widget':
-              ContainerService.create(child).then(container => {
-                container.linkChild(container);
-              });
 
+            case 'Container':
+              var newContainer = new ContainerResource(child);
+              newContainer.$create().then(child => {
+                container.linkChild(child);
+              });
+              break;
           }
         };
       }

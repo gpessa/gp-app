@@ -4,33 +4,39 @@
 
   class ContainerController {
 
-    constructor(socket, ContainerResource) {
-      this.socket = socket;
-      this.ContainerResource = ContainerResource;
+    constructor(ContainerResource) {
+      this.container = new ContainerResource(this.container);
+
       this.sortableOption = {
         'stop' : () => {
-          this.update();
+          this.container.$save();
         }
       };
+
       this.get();
     }
 
     get(){
-      this.container = this.ContainerResource.get({
-        'id' : this.id
-      });
+      this.container.$get();
     }
 
-    linkChild(child, type){
+    linkChild(child){
       this.container.children.push(child);
-      this.container.$update();
+      this.container.$save();
     }
 
     unlinkChild(child){
       this.container.children.remove(child);
-      this.container.$update();
+      this.container.$save();
     }
 
+    remove(){
+      this.container.$remove();
+    }
+
+    save(){
+      this.container.$save();
+    }
 
   }
 

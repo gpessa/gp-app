@@ -1,0 +1,6 @@
+.add-child{
+
+  .add-child_item{
+    @include button-variant($btn-light-color, $semi-transparent-bg-light, $semi-transparent-bg-light);
+  }
+}
