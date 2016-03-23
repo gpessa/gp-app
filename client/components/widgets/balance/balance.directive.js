@@ -36,7 +36,7 @@ angular
             .catch(error => {
               scope.error = error;
             })
-            .finally(widget.toggleLoading());
+            .finally(() => widget.toggleLoading());
         };
 
         scope.create = function(){

@@ -2,10 +2,30 @@
 
 (function () {
 
+  var schema = {
+      'type' : 'object',
+      'properties' : {
+          'dimension' : {
+            'type'  : 'number',
+            'title' : 'Dimension',
+            'enum' : [1,2,3,4,5,6,7,8,9,10,11,12]
+          }
+      }
+  };
+
+  var formcontrols = ['*', {
+      type: 'submit',
+      title: 'Save',
+      style: 'btn btn-block btn-primary'
+  }];
+
   class ContainerController {
 
     constructor(ContainerResource) {
       this.container = new ContainerResource(this.container);
+
+      this.schema = angular.copy(schema);
+      this.formcontrols = formcontrols;
 
       this.sortableOption = {
         'stop' : () => {
@@ -15,6 +35,10 @@
 
       this.get();
     }
+
+    toggleSettings() {
+      this.isSettingsOpen = !this.isSettingsOpen;
+    };
 
     get(){
       this.container.$get();

@@ -1,13 +1,8 @@
-.add-child{
-}
-
-
 .btn-add-child{
   @include button-variant(#fff, $semi-transparent-bg, $semi-transparent-bg);
   margin-bottom: $grid-gutter-width;
   border-radius: 10px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 20px;
 
   small{
     display: block;

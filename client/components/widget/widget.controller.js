@@ -24,6 +24,7 @@
   }];
 
   class WidgetController {
+
     constructor(WidgetResource) {
       this.widget = new WidgetResource(this.widget);
 
@@ -61,6 +62,7 @@
 
     save(){
       this.widget.$save();
+      this.toggleSettings();
     }
   }
 

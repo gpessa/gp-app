@@ -40,7 +40,7 @@ angular
             .catch(error => {
               scope.error = error;
             })
-            .finally(widget.toggleLoading());
+            .finally(() => widget.toggleLoading());
         };
 
         userStatus.focus(scope.get);

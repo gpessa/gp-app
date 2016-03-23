@@ -1,0 +1,24 @@
+<form name="pages" ng-submit="save(pages)">
+
+  <ul class="nav navbar-nav navigation">
+    <li>
+      <a ng-click=add()>
+          <i class="fa fa-file-o"></i>
+          <small>Add new</small>
+      </a>
+    <li>
+
+    <li class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: nav.isActive(page.link)}">
+        <a class="navigation-page-delete" icon="fa fa-times-circle" ng-click="remove(page)"></a>
+        <a ng-href="/{{page.id}}">
+          <icon-picker icon="page.icon" on-select="save($parent.pages)"/>
+          <small>
+            <input type="text" class="navigation-page-input" placeholder="Name" ng-model="page.title" required pu-elastic-input/>
+          </small>
+        </a>
+    </li>
+
+  </ul>
+  <input type="submit" class="hidden"/>
+
+</form>

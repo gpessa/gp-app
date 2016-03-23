@@ -16,6 +16,7 @@ import Stock from '../api/stock/stock.model';
 import User from '../api/user/user.model';
 import Widget from '../api/widget/widget.model';
 import Container from '../api/container/container.model';
+import Page from '../api/page/page.model';
 
 // Widget.find({}).update( {}, {
 //   $set : {
@@ -28,6 +29,7 @@ import Container from '../api/container/container.model';
 //   container.saveAsync();
 // });
 
+// Page.find({}).removeAsync();
 // Container.find({}).removeAsync();
 // Widget.find({}).removeAsync();
 // Widget.find({}).then( function (widgets) {

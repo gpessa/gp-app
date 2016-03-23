@@ -10,7 +10,7 @@ $weather-font-path:    "../assets/fonts";
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.scss';
-@import 'main/main.scss';
+@import 'page/page.scss';
 @import '../components/container/add-child/add-child.scss';
 @import '../components/container/container.scss';
 @import '../components/css/_buttons.scss';
@@ -25,6 +25,7 @@ $weather-font-path:    "../assets/fonts";
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
 @import '../components/navbar/navbar.scss';
+@import '../components/navigation/navigation.scss';
 @import '../components/oauth-buttons/oauth-buttons.scss';
 @import '../components/user/user.scss';
 @import '../components/util/util.scss';
@@ -164,4 +165,17 @@ select{
 
 .modal-content{
   box-shadow:none;
+}
+
+.#{$fa-css-prefix}-fw {
+  width: (18em / 18);
+  text-align: center;
+}
+
+.dropdown-menu{
+  color:$dropdown-link-color;
+
+  .form-control{
+    color:$dropdown-link-color;
+  }
 }

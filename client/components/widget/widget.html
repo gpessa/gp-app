@@ -1,4 +1,4 @@
-<div class="widget col-md-{{$ctrl.widget.dimension}}" ng-class="{'loading' : $ctrl.isWidgetLoading}">
+<div class="widget col-md-{{$ctrl.widget.dimension}}">
 
   <div class="widget-header">
       <h4>
@@ -10,16 +10,20 @@
     </h4>
   </div>
 
-  <div class="widget-body clearfix" ng-show="!$ctrl.isSettingsOpen"></div>
+  <div class="widget-body" ng-show="!$ctrl.isSettingsOpen && !$ctrl.isWidgetLoading"></div>
 
   <form name="form"
-        class="widget-settings clearfix"
+        class="widget-settings"
         ng-if="$ctrl.isSettingsOpen"
         sf-schema="$ctrl.schema"
         sf-form="$ctrl.formcontrols"
         sf-model="$ctrl.widget"
-        ng-submit="update(form)">
+        ng-submit="$ctrl.save(form)">
   </form>
+
+  <div class="widget-loading" ng-if="$ctrl.isWidgetLoading">
+    <div class="spinner"></div>
+  </div>
 
   <div class="widget-footer"></div>
 

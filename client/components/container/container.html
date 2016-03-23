@@ -1,19 +1,28 @@
-<div class="widget-container">
-  <!-- <pre>
-      {{$ctrl.container | json}}
-  </pre> -->
+<div class="app-container col-md-{{$ctrl.container.dimension}}" >
 
-  <div class="container-header-buttons text-right">
-      <add-child></add-child>
+  <!-- <pre>{{$ctrl.container | json}}</pre> -->
+
+  <div class="app-container-header-buttons text-right">
+    <add-child></add-child>
+    <a class="btn btn-link-light btn-sm" icon="fa fa-cog"   ng-click="$ctrl.toggleSettings()"> </a>
     <a class="btn btn-link-light btn-sm" icon="fa fa-times" ng-click="remove()" ></a>
   </div>
 
-  <div class="container-fluid">
+  <div ng-show="!$ctrl.isSettingsOpen" ng-class="{'container-fluid' : !$ctrl.container.dimension }">
 
     <div class="row" html-sortable="$ctrl.sortableOption" ng-model="$ctrl.container.children" ng-if="$ctrl.container.children.length">
-      <container-child data="child" ng-repeat="child in $ctrl.container.children"></container-child>
+      <child data="child" ng-repeat="child in $ctrl.container.children"></child>
     </div>
 
   </div>
+
+  <form name="form"
+        class="widget-settings clearfix"
+        ng-if="$ctrl.isSettingsOpen"
+        sf-schema="$ctrl.schema"
+        sf-form="$ctrl.formcontrols"
+        sf-model="$ctrl.container"
+        ng-submit="$ctrl.save(form)">
+  </form>
 
 </div>

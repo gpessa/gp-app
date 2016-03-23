@@ -16,13 +16,14 @@ angular.module('gpAppApp', [
   'chart.js',
   'html5.sortable',
   'schemaForm',
-  'angular-click-outside'
+  'angular-click-outside',
+  'puElasticInput'
 ])
 
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/index'
     });
   $locationProvider.html5Mode(true);
 })
@@ -101,4 +102,5 @@ angular.module('gpAppApp', [
     }
   };
 })
+
 ;

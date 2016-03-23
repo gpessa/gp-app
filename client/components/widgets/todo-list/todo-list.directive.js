@@ -47,7 +47,7 @@ angular
               scope.todoLists = lists;
               socket.syncUpdates('todo-list');
             })
-            .finally(widget.toggleLoading());
+            .finally(() => widget.toggleLoading());
         };
 
         scope.get();

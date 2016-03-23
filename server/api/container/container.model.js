@@ -13,7 +13,8 @@ var ContainerSchema = new base.BaseSchema({
   children : [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Child'
-  }]
+  }],
+  dimension : { type: Number },
 },{
   toObject: {
     transform: function (doc, ret, game) {

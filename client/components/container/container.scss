@@ -1,4 +1,4 @@
-.widget-container{
+.container{
   .widget{
 
     &.over{
@@ -8,6 +8,6 @@
     &.moving{
       opacity: 0.6;
     }
-  
+
   }
 }

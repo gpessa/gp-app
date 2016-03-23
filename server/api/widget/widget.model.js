@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 var WidgetSchema = new base.BaseSchema({
   name : { type: String, default: 'Widget Name' },
-  dimension : { type: Number, default: 6 },
+  dimension : { type: Number, default: 12 },
   configuration : Object
 },{
   toObject: {

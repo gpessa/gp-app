@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('containerChild', ($compile) => {
+  .directive('child', ($compile) => {
     return {
       'restrict' : 'E',
       'scope' : {

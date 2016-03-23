@@ -10,11 +10,6 @@ class NavbarController {
     this.getCurrentUser = Auth.getCurrentUser;
 
     this.menu = [{
-      'title': 'Dashboard',
-      'link' : '/',
-      'icon' : 'fa fa-tachometer',
-      'show' : this.isLoggedIn()
-    },{
       'title': 'Admin',
       'link' : '/admin',
       'icon' : 'fa fa-users',

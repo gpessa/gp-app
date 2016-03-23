@@ -33,7 +33,7 @@ angular
           .catch((error) => {
             scope.error = error;
           })
-          .finally(widget.toggleLoading());
+          .finally(() => widget.toggleLoading());
         };
 
         scope.getData = function(){

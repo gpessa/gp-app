@@ -19,7 +19,7 @@ angular
           }
         });
 
-        scope.taxation = widget.getConfiguration().taxation;
+        scope.taxation = widget.getConfiguration().taxation || 0;
 
         scope.operations = [{
           id: 'sell',
@@ -42,7 +42,7 @@ angular
             .catch(error => {
               scope.error = error;
             })
-            .finally(widget.toggleLoading());
+            .finally(() => widget.toggleLoading());
         };
 
         scope.create = function(){
@@ -101,7 +101,6 @@ angular
         scope.configuration = widget.getConfiguration();
 
         scope.get();
-        //userStatus.focus(scope.get);
       }
   };
 });

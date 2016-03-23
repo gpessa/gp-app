@@ -1,0 +1,22 @@
+.navigation{
+  position: relative;
+
+  .navigation-page-delete{
+    position: absolute;
+    top: 0;
+    right: 50%;
+    padding: 0;
+    line-height: 1;
+    padding: 0!important;
+    color: $brand-danger!important;
+    z-index: 1;
+    margin-right: -20px;
+  }
+
+  .navigation-page-input{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    text-align: center;
+  }
+}

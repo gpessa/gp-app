@@ -23,7 +23,8 @@
     "ngGeolocation": "latest",
     "angular-i18n": "*",
     "ifvisible.js": "*",
-    "angular-click-outside": "^2.6.1"
+    "angular-click-outside": "^2.6.1",
+    "angular-elastic-input": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"

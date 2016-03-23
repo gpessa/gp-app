@@ -35,7 +35,7 @@ function handleEntityNotFoundCreateOne(req, res) {
   return function(entity) {
     if (!entity) {
       req.body = {
-        _id : req.params._id
+        '_id' : req.params._id
       }
       exports.create(req, res);
     }
@@ -46,6 +46,7 @@ function handleEntityNotFoundCreateOne(req, res) {
 function saveUpdates(updates) {
   return function(entity) {
     entity.children = updates.children;
+    entity.dimension = updates.dimension;
 
     return entity
       .saveAsync()
@@ -77,7 +78,8 @@ function responseWithResult(res, statusCode) {
 
 // Creates a new Container in the DB
 exports.create = function(req, res) {
-  req.body.user = req.user;
+  req.body.user = req.user._id;
+  
   Container
     .createAsync(req.body)
     .then(responseWithResult(res, 201))
@@ -86,15 +88,7 @@ exports.create = function(req, res) {
 
 // Gets a single Container from the DB
 exports.show = function(req, res) {
-  console.log('SHOW');
-  console.log(req.params);
-
-  if(req.params._id ){
-    var _id = new mongoose.mongo.ObjectID(req.params._id);
-  } else {
-    _id = undefined;
-  }
-
+  var _id = req.params._id ? new mongoose.mongo.ObjectID(req.params._id) : undefined;
 
   Container
     .findOne({
@@ -110,14 +104,7 @@ exports.show = function(req, res) {
 
 // Updates an existing Container in the DB
 exports.update = function(req, res) {
-  console.log('UPDATE');
-  console.log(req.params);
-
-  if(req.params._id ){
-    var _id = new mongoose.mongo.ObjectID(req.params._id);
-  } else {
-    _id = undefined;
-  }
+  var _id = req.params._id ? new mongoose.mongo.ObjectID(req.params._id) : undefined;
 
   Container
     .findOne({
@@ -134,7 +121,7 @@ exports.update = function(req, res) {
 
 // Deletes a Container from the DB
 exports.destroy = function(req, res) {
-  var _id = new mongoose.mongo.ObjectID(req.params._id);
+  var _id = req.params._id ? new mongoose.mongo.ObjectID(req.params._id) : undefined;
 
   Container
     .findOne({
