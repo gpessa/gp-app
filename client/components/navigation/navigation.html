@@ -8,7 +8,7 @@
       </a>
     <li>
 
-    <li class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: nav.isActive(page.link)}">
+    <li class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: isActive('/' + page.id)}">
         <a class="navigation-page-delete" icon="fa fa-times-circle" ng-click="remove(page)"></a>
         <a ng-href="/{{page.id}}">
           <icon-picker icon="page.icon" on-select="save($parent.pages)"/>

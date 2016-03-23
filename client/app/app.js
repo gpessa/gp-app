@@ -103,4 +103,12 @@ angular.module('gpAppApp', [
   };
 })
 
+.service('editMode', function() {
+  this.editMode = false;
+
+  this.toggle = function() {
+    this.editMode = !this.editMode;
+  };
+});
+
 ;

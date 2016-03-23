@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gpAppApp')
-  .directive('navigation', function (PagesResource) {
+  .directive('navigation', function ($location, PagesResource, editMode) {
     return {
       'templateUrl' : 'components/navigation/navigation.html',
       'controllerAs' : '$ctrl',
@@ -9,6 +9,7 @@ angular.module('gpAppApp')
       'replace' :true,
       'scope' : true,
       'link' : function(scope, attrs, element){
+        console.log(editMode);
         scope.app = new PagesResource();
         scope.app.$get()
 
@@ -30,7 +31,7 @@ angular.module('gpAppApp')
         }
 
         scope.isActive = function(route){
-          return route === this.$location.path();
+          return route === $location.path();
         }
       }
     };

@@ -2,7 +2,6 @@
 
 angular
   .module('gpAppApp')
-
   .directive('val', ($filter) => {
     return {
       'template' : '<span ng-if="value"><i class="dot" ng-class="cls"></i> {{value}}</span>',
