@@ -11,6 +11,7 @@ angular.module('gpAppApp').directive('widget', ($compile, WidgetResource) => {
     'scope' : {
       'widget' : '=data'
     },
+    'prority' : -1,
     'controller'  : 'WidgetController',
     'link' : function(scope, element, attr, container){
       var widgetBody = angular.element(element[0].querySelector('.widget-body')).addClass('widget-' + scope.$ctrl.widget.type);

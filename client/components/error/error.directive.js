@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('gpAppApp')
+angular
+  .module('gpAppApp')
   .directive('error', function () {
     return {
       templateUrl: 'components/error/error.html',

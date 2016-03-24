@@ -19,12 +19,21 @@
     <nav uib-collapse="nav.isCollapsed" class="navbar-collapse">
 
       <ul class="navbar-right nav navbar-nav">
+
         <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}" ng-show="item.show">
             <a ng-href="{{item.link}}">
               <i class="{{item.icon}}"></i>
               <small>{{item.title}}</small>
             </a>
         </li>
+
+        <li>
+          <edit-mode>
+            <i class="fa fa-pencil"></i>
+            <small>Edit</small>
+          </edit-mode>
+        </li>
+        
       </ul>
 
       <navigation class="navbar-right"/>
