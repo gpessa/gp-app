@@ -35,7 +35,6 @@ module.exports = function(config) {
       'client/bower_components/ifvisible.js/src/ifvisible.js',
       'client/bower_components/angular-click-outside/clickoutside.directive.js',
       'client/bower_components/angular-elastic-input/dist/angular-elastic-input.min.js',
-      'client/bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

@@ -46,7 +46,11 @@
           <div class="col-md-3">{{report.date | date}}</div>
           <div class="col-md-3">{{report.current | currency}}</div>
           <div class="col-md-3">{{report.saving | currency}}</div>
-          <div class="col-md-3 text-right" ng-init="report.total = (report.saving + report.current)">{{report.total | currency}}</div>
+          <div class="col-md-3 text-right"
+               ng-init="report.total = (report.saving + report.current)"
+               title="{{report.total - balance.reports[$index-1].total | currency}}">
+            {{report.total | currency}}
+          </div>
       </div>
     </div>
   </li>

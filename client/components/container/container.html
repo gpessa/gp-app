@@ -11,7 +11,7 @@
   <div ng-show="!$ctrl.isSettingsOpen" ng-class="{'container-fluid' : !$ctrl.container.dimension }">
 
     <div class="row" html-sortable="$ctrl.sortableOption" ng-model="$ctrl.container.children" ng-if="$ctrl.container.children.length">
-      <child data="child" ng-repeat="child in $ctrl.container.children"></child>
+      <child class="child col-md-{{child.dimension}}" data="child" ng-repeat="child in $ctrl.container.children"></child>
     </div>
 
   </div>
