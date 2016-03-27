@@ -1,0 +1,25 @@
+<span class="icon-picker" uib-dropdown on-toggle="toggled(open)">
+
+  <i uib-dropdown-toggle class="{{icon || 'fa fa-file-o'}}"></i>
+
+  <ul uib-dropdown-menu>
+    <li>
+      <a class="btn"
+         icon="fa {{icon}}"
+         ng-click="select(icon)"
+         ng-repeat="icon in icons | offset: currentPage * iconsPerPage | limitTo: iconsPerPage"></a>
+    </li>
+
+    <li>
+        <ul class="pager">
+          <li ng-class="prevPageDisabled()">
+            <a href ng-click="prevPage($event)">« Prev</a>
+          </li>
+          <li ng-class="nextPageDisabled()">
+            <a href ng-click="nextPage($event)">Next »</a>
+          </li>
+        </ul>
+    </li>
+  </ul>
+
+</span>

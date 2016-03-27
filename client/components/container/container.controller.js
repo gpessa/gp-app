@@ -28,7 +28,11 @@
       this.formcontrols = formcontrols;
 
       this.sortableOption = {
-        'stop' : () => {
+        'allow_cross' : true,
+        'update' : () => {
+          debugger;
+        },
+        'stop' : (children, dropped_index) => {
           this.container.$save();
         }
       };

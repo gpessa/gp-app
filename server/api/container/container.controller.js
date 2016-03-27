@@ -45,10 +45,27 @@ function handleEntityNotFoundCreateOne(req, res) {
 
 function saveUpdates(updates) {
   return function(entity) {
-    entity.children = updates.children;
-    entity.dimension = updates.dimension;
 
-    return entity
+    var updated = _.merge(entity, updates, function(oldVal, newVal, key){
+      if(key == 'children'){
+
+        newVal = newVal.map(function(child){
+          if(child.__t == 'Widget'){
+            child = new Widget(child);
+          }
+          if(child.__t == 'Container'){
+            child = new Container(child);
+          }
+          child.save();
+          return child;
+        })
+      }
+      return newVal;
+    });
+
+console.log(updated);
+
+    return updated
       .saveAsync()
       .spread(function(updated) {
         return updated;
@@ -79,7 +96,7 @@ function responseWithResult(res, statusCode) {
 // Creates a new Container in the DB
 exports.create = function(req, res) {
   req.body.user = req.user._id;
-  
+
   Container
     .createAsync(req.body)
     .then(responseWithResult(res, 201))

@@ -11,7 +11,7 @@ $weather-font-path:    "../assets/fonts";
 // injector
 @import 'admin/admin.scss';
 @import 'page/page.scss';
-@import '../components/container/add-child/add-child.scss';
+@import '../components/add-child/add-child.scss';
 @import '../components/container/child/child.scss';
 @import '../components/container/container.scss';
 @import '../components/css/_buttons.scss';
@@ -19,7 +19,6 @@ $weather-font-path:    "../assets/fonts";
 @import '../components/css/_icons.scss';
 @import '../components/css/_list.scss';
 @import '../components/css/_mixins.scss';
-@import '../components/css/_same-height-columns.scss';
 @import '../components/css/_variables.scss';
 @import '../components/css/_weather-icon.scss';
 @import '../components/error/error.scss';

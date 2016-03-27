@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gpAppApp').directive('container', () => {
+angular.module('gpAppApp').directive('container', (editMode) => {
   return {
     'templateUrl' : 'components/container/container.html',
     'require' : '^^?container',
@@ -13,6 +13,7 @@ angular.module('gpAppApp').directive('container', () => {
     },
     'controller' : 'ContainerController',
     'link' : function(scope, element, attr, container){
+      scope.editMode = editMode;
 
       scope.remove = () => {
         container.unlinkChild(scope.$ctrl.container);

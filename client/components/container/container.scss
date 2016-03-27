@@ -1,6 +1,6 @@
-.container{
-  .widget{
+.app-container{
 
+  .widget{
     &.over{
       opacity: 0.6;
     }
@@ -8,6 +8,26 @@
     &.moving{
       opacity: 0.6;
     }
-
   }
+
+
+  > .container-fluid{
+    margin-right: 0;
+    margin-left: 0;
+    transition: margin $animation-time;
+  }
+
+  .app-container-empty{
+    text-align: center;
+    min-height: 100px;
+    line-height: 100px;
+    padding-bottom: $child-margin - 2;
+  }
+}
+
+
+.editable{
+  border: 2px dashed $semi-transparent-bg-light;
+  padding-top: $child-margin - 2;
+  margin: 0;
 }

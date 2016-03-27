@@ -15,8 +15,8 @@ class NavbarController {
       'icon' : 'fa fa-users',
       'show' : this.isAdmin()
     },{
-      'title': 'Connect',
-      'link' : '/connect',
+      'title': 'Link',
+      'link' : '/link',
       'icon' : 'fa fa fa-compress',
       'show' : this.isLoggedIn()
     },{

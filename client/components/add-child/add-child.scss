@@ -1,0 +1,52 @@
+.add-child{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  animation:appear $animation-time;
+  animation-iteration-count:1;
+
+  @keyframes appear {
+    from {transform: translateY(100%)}
+    to {transform: translateY(0%)}
+  }
+
+  .add-child-item{
+    @include button-variant($dropdown-link-color, transparent, transparent);
+  }
+
+  .nav-tabs {
+    border: none;
+
+    > li {
+      margin-bottom: 0px;
+
+      > a {
+        color: $dropdown-link-color;
+        background: $semi-transparent-bg;
+
+        &:hover {
+          border-color: $nav-tabs-link-hover-border-color $nav-tabs-link-hover-border-color $nav-tabs-border-color;
+        }
+      }
+
+      &.active > a {
+        &,
+        &:hover,
+        &:focus {
+          color: $dropdown-link-color;
+          background: $semi-transparent-bg-light;
+          border-bottom-color:transparent;
+        }
+      }
+    }
+  }
+
+  .tab-content{
+    background: $semi-transparent-bg-light;
+    color:$dropdown-link-color;
+
+    .list-inline{
+      margin-bottom: 0;
+    }
+  }
+}

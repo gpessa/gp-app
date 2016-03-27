@@ -25,9 +25,9 @@ angular.module('gpAppApp')
         controller: 'SignupController',
         controllerAs: 'vm'
       })
-      .when('/connect', {
-        templateUrl: 'app/account/connect/connect.html',
-        controller: 'ConnectController',
+      .when('/link', {
+        templateUrl: 'app/account/link/link.html',
+        controller: 'LinkController',
         controllerAs: 'vm',
         authenticate: true
       })
