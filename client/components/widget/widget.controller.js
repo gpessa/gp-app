@@ -31,8 +31,8 @@
 
   class WidgetController {
 
-    constructor(ChildResource) {
-      this.widget = new ChildResource(this.widget);
+    constructor(ItemResource) {
+      this.widget = new ItemResource(this.widget);
 
       this.schema = angular.copy(schema);
       this.formcontrols = formcontrols;

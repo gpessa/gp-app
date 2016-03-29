@@ -13,7 +13,7 @@ var PageSchema = new mongoose.Schema({
     icon : String,
     child : {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Child'
+      ref: 'Item'
     }
   }]
 });

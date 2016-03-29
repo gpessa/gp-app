@@ -6,7 +6,6 @@
     <a class="btn btn-link-light btn-sm" icon="fa fa-cog"   ng-click="$ctrl.toggleSettings()"> </a>
     <a class="btn btn-link-light btn-sm" icon="fa fa-times" ng-click="remove()" ></a>
   </div> -->
-  {{$ctrl.container}}
 
   <div ng-show="!$ctrl.isSettingsOpen"
        html-sortable="$ctrl.sortableOption"
@@ -15,9 +14,9 @@
        ng-class="{ 'editable' : editMode.enabled }"
        class="row" >
 
-    <alert type="warning" class="droppable col-md-12" ng-show="$ctrl.container.children == 0 && editMode.enabled">Drag &amp; drop here an item</alert>
+    <alert type="warning" class="col-md-12" ng-show="$ctrl.container.children == 0 && editMode.enabled">Drag &amp; drop here an item</alert>
 
-    <child class="child col-md-{{child.attributes.dimension}}" data="child" ng-repeat="child in $ctrl.container.children"></child>
+    <item class="app-container-item col-md-{{child.attributes.dimension}}" data="child" ng-repeat="child in $ctrl.container.children"></child>
 
   </div>
 

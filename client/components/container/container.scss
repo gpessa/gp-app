@@ -16,18 +16,16 @@
     margin-left: 0;
     transition: margin $animation-time;
   }
-
-  .app-container-empty{
-    text-align: center;
-    min-height: 100px;
-    line-height: 100px;
-    padding-bottom: $child-margin - 2;
+  
+  .app-container-item{
+    margin-bottom:  $item-margin;
   }
+
 }
 
 
 .editable{
   border: 2px dashed $semi-transparent-bg-light;
-  padding-top: $child-margin - 2;
+  padding-top: $item-margin - 2;
   margin: 0;
 }

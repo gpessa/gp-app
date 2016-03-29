@@ -11,7 +11,7 @@
 
 import _ from 'lodash';
 import Page from './page.model';
-import Child from '../child/child.model';
+import Item from '../item/item.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -34,13 +34,13 @@ function saveUpdates(updates) {
       page.set('id', id);
 
       if(!page.child){
-        var child = new Child({
-          'user' : entity.user,
+        var item = new Item({
           'type' : 'container',
           'subtype' : 'base',
           'children' : []
         });
-        page.set('child', child);
+
+        page.set('child', item);
       }
     })
 
@@ -104,7 +104,8 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.user = req.user._id;
 
-  Page.createAsync(req.body)
+  Page
+    .createAsync(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }

@@ -21,8 +21,8 @@
 
   class ContainerController {
 
-    constructor(ChildResource) {
-      this.container = new ChildResource(this.container);
+    constructor(ItemResource) {
+      this.container = new ItemResource(this.container);
 
       this.schema = angular.copy(schema);
       this.formcontrols = formcontrols;

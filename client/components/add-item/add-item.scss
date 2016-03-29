@@ -1,4 +1,4 @@
-.add-child{
+.add-item{
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -10,7 +10,7 @@
     to {transform: translateY(0%)}
   }
 
-  .add-child-item{
+  .add-item-item{
     @include button-variant($dropdown-link-color, transparent, transparent);
   }
 

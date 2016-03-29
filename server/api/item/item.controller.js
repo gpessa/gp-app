@@ -1,16 +1,16 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/childs              ->  index
- * POST    /api/childs              ->  create
- * GET     /api/childs/:id          ->  show
- * PUT     /api/childs/:id          ->  update
- * DELETE  /api/childs/:id          ->  destroy
+ * GET     /api/items              ->  index
+ * POST    /api/items              ->  create
+ * GET     /api/items/:id          ->  show
+ * PUT     /api/items/:id          ->  update
+ * DELETE  /api/items/:id          ->  destroy
  */
 
 'use strict';
 
 import _ from 'lodash';
-import Child from './child.model';
+import Item from './item.model';
 import mongoose from 'mongoose';
 
 
@@ -26,28 +26,20 @@ function responseWithResult(res, statusCode) {
 function saveUpdates(updates) {
   return function(entity) {
 
-    console.log(entity);
-    console.log(updates);
-
     var updated = _.merge(entity, updates, function(oldVal, newVal, key){
       if(key == 'children'){
 
-        newVal = newVal.map(function(child){
-          if(!child._id){
-            var child = new Child(child);
-            child.save();
+        newVal = newVal.map(function(item){
+          if(!item._id){
+            var item = new Item(item);
+            item.save();
           }
-          console.log('child');
-          console.log(child);
 
-
-          return child;
+          return item;
         })
       }
       return newVal;
     });
-
-    console.log(updated);
 
     return updated
       .saveAsync()
@@ -71,7 +63,6 @@ function removeEntity(res) {
 function handleEntityNotFound(res) {
   return function(entity) {
     if (!entity) {
-      console.log('handleEntityNotFound');
       res.status(404).end();
       return null;
     }
@@ -98,18 +89,18 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Childs
+// Gets a list of Items
 export function index(req, res) {
-  Child.findAsync()
+  Item.findAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single Child from the DB
+// Gets a single Item from the DB
 export function show(req, res) {
   var _id = req.params._id ? new mongoose.mongo.ObjectID(req.params._id) : undefined;
 
-  Child
+  Item
     .findOne({
       '_id': _id
     })
@@ -120,24 +111,22 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-// Creates a new Child in the DB
+// Creates a new Item in the DB
 export function create(req, res) {
-  Child
+  Item
     .createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Updates an existing Child in the DB
+// Updates an existing Item in the DB
 export function update(req, res) {
   var _id = req.params._id ? new mongoose.mongo.ObjectID(req.params._id) : undefined;
-
-  console.log(_id);
 
   if (req.body._id) {
     delete req.body._id;
   }
-  Child
+  Item
     .findOne({
       '_id': _id
     })
@@ -148,11 +137,11 @@ export function update(req, res) {
     })
 }
 
-// Deletes a Child from the DB
+// Deletes a Item from the DB
 export function destroy(req, res) {
   var _id = req.params._id ? new mongoose.mongo.ObjectID(req.params._id) : undefined;
 
-  Child
+  Item
     .findOne({
       '_id': _id
     })

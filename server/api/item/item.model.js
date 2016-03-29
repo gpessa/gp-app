@@ -2,12 +2,12 @@
 
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
-var ChildSchema = new mongoose.Schema({
+var ItemSchema = new mongoose.Schema({
   "type" : String,
   "subtype" : String,
   "children" : [{
     "type" : mongoose.Schema.Types.ObjectId,
-    "ref" : 'Child'
+    "ref" : 'Item'
   }],
   "attributes" : {
     "dimension"  : { type: Number, default: 12 },
@@ -23,4 +23,4 @@ var ChildSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model('Child', ChildSchema);
+export default mongoose.model('Item', ItemSchema);

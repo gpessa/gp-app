@@ -1,6 +1,6 @@
 $animation-time:                0.5s;
 $grid-gutter-width:             30px;
-$child-margin:                  $grid-gutter-width / 3 * 2;
+$item-margin:                  $grid-gutter-width / 3 * 2;
 
 $brand-primary:             #3193c6;
 $brand-secondary:           #40d7b9;
@@ -50,7 +50,7 @@ $btn-light-border: #fff;
 
 
 // Basics of a navbar
-$navbar-margin-bottom:             $child-margin;
+$navbar-margin-bottom:             $item-margin;
 
 $navbar-default-color:             inherit;
 $navbar-default-bg:                #fff;

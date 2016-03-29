@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./child.controller');
+var controller = require('./item.controller');
 import * as auth from '../../auth/auth.service';
 
 var router = express.Router();

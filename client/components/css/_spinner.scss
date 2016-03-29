@@ -1,0 +1,35 @@
+.spinner{
+  position: relative;
+  height: 64px;
+  width: 64px;
+  border: 4px solid transparent;
+  border-top-color: $brand-primary;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  margin: 50px auto;
+
+  &:before, &:after{
+    content:'';
+    position: absolute;
+    border: 4px solid transparent;
+    border-radius: 50%;
+  }
+
+  &:before{
+    border-top-color: $brand-secondary;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    animation: spin 3s linear infinite;
+  }
+
+  &:after{
+    border-top-color: #fff;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    animation: spin 4s linear infinite;
+  }
+}
