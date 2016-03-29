@@ -12,52 +12,81 @@ angular
         scope.editMode = editMode;
 
         scope.sortableOption = {
-          'stop' : () => {
-          }
+          'allow_cross' : true
         };
 
         scope.availablechildren = {
           'Widget' : [{
               'icon' : 'fa fa-list',
-              'type' : 'todo-list',
-              'name' : 'Todo List'
+              'type' : 'widget',
+              'subtype' : 'todo-list',
+              'attributes' : {
+                'name' : 'Todo List'
+              }
             },{
               'icon' : 'icon icon-cigarette',
-              'type' : 'cigarette',
-              'name' : 'Cigarette'
+              'type' : 'widget',
+              'subtype' : 'cigarette',
+              'attributes' : {
+                'name' : 'Cigarette'
+              }
             },{
               'icon' : 'fa fa-line-chart',
-              'type' : 'withings',
-              'name' : 'Withings'
+              'type' : 'widget',
+              'subtype' : 'withings',
+              'attributes' : {
+                'name' : 'Withings'
+              }
             },{
               'icon' : 'fa fa-sun-o',
-              'type' : 'buienradar',
-              'name' : 'Buienradar'
+              'type' : 'widget',
+              'subtype' : 'buienradar',
+              'attributes' : {
+                'name' : 'Buienradar'
+              }
             },{
               'icon' : 'fa fa-university',
-              'type' : 'stock',
-              'name' : 'Stocks'
+              'type' : 'widget',
+              'subtype' : 'stock',
+              'attributes' : {
+                'name' : 'Stocks'
+              }
             },{
               'icon' : 'fa fa-exchange',
-              'type' : 'portfolio',
-              'name' : 'Portfolio'
+              'type' : 'widget',
+              'subtype' : 'portfolio',
+              'attributes' : {
+                'name' : 'Portfolio'
+              }
             },{
               'icon' : 'fa fa-line-chart',
-              'type' : 'balance',
-              'name' : 'Balance'
+              'type' : 'widget',
+              'subtype' : 'balance',
+              'attributes' : {
+                'name' : 'Balance'
+              }
             },{
               'icon' : 'fa fa-plus',
-              'type' : 'positive-thing',
-              'name' : 'Positive Thing'
+              'type' : 'widget',
+              'subtype' : 'positive-thing',
+              'attributes' : {
+                'name' : 'Positive Thing'
+              }
             },{
               'icon' : 'fa fa-sun-o',
-              'type' : 'forecast',
-              'name' : 'Forecast'
+              'type' : 'widget',
+              'subtype' : 'forecast',
+              'attributes' : {
+                'name' : 'Forecast'
+              }
           }],
           'Container' : [{
               'icon' : 'fa fa-square-o',
-              'type' : 'basic',
-              'name' : 'Basic'
+              'type' : 'container',
+              'subtype' : 'basic',
+              'attributes' : {
+                'name' : 'Basic'
+              }
           }]
         };
       }

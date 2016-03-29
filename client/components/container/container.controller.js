@@ -21,17 +21,14 @@
 
   class ContainerController {
 
-    constructor(ContainerResource) {
-      this.container = new ContainerResource(this.container);
+    constructor(ChildResource) {
+      this.container = new ChildResource(this.container);
 
       this.schema = angular.copy(schema);
       this.formcontrols = formcontrols;
 
       this.sortableOption = {
         'allow_cross' : true,
-        'update' : () => {
-          debugger;
-        },
         'stop' : (children, dropped_index) => {
           this.container.$save();
         }

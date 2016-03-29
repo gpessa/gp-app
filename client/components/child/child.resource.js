@@ -2,8 +2,8 @@
 
 (function() {
 
-  function ContainerResource($resource) {
-    return $resource('/api/container/:id', {'id' : '@_id'}, {
+  function ChildResource($resource) {
+    return $resource('/api/childs/:id', {'id' : '@_id'}, {
       save: {
         method: 'PUT'
       },
@@ -14,6 +14,6 @@
   }
 
   angular.module('gpAppApp')
-         .factory('ContainerResource', ContainerResource);
+         .factory('ChildResource', ChildResource);
 
 })();

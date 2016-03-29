@@ -11,7 +11,7 @@
 
 import _ from 'lodash';
 import Page from './page.model';
-import Container from '../widget/widget.model';
+import Child from '../child/child.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -34,10 +34,13 @@ function saveUpdates(updates) {
       page.set('id', id);
 
       if(!page.child){
-        var container = new Container({
-          'user' : entity.user
+        var child = new Child({
+          'user' : entity.user,
+          'type' : 'container',
+          'subtype' : 'base',
+          'children' : []
         });
-        page.set('child', container);
+        page.set('child', child);
       }
     })
 

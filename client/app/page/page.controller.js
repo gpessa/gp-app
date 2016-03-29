@@ -8,10 +8,14 @@ class PageController {
     var pageid = $route.current.params.name;
 
     app.$get().then(() => {
-      var page = $filter('filter')(app.pages, {'id' : pageid});
-      var child = page.length ? page[0].child : app.pages[0].child;
-      this.child = {
-        '_id' : child
+      this.noPageCreated = app.pages.length === 0;
+
+      if(!this.noPageCreated){
+        var page = $filter('filter')(app.pages, {'id' : pageid});
+        var child = page.length ? page[0].child : app.pages[0].child;
+        this.child = {
+          '_id' : child
+        }
       }
     })
 

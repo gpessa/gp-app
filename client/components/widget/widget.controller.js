@@ -3,18 +3,24 @@
 (function () {
 
   var schema = {
-      'type' : 'object',
-      'properties' : {
-          'name' : {
-            'type'  : 'string',
-            'title' : 'Name'
-          },
-          'dimension' : {
-            'type'  : 'number',
-            'title' : 'Dimension',
-            'enum' : [1,2,3,4,5,6,7,8,9,10,11,12]
+    'type' : 'object',
+    'properties' : {
+        'attributes' : {
+          'title' : 'Attributes',
+          'type' : 'object',
+          'properties' : {
+            'name' : {
+              'type'  : 'string',
+              'title' : 'Name'
+            },
+            'dimension' : {
+              'type'  : 'number',
+              'title' : 'Dimension',
+              'enum' : [1,2,3,4,5,6,7,8,9,10,11,12]
+            }
           }
-      }
+        }
+    }
   };
 
   var formcontrols = ['*', {
@@ -25,8 +31,8 @@
 
   class WidgetController {
 
-    constructor(WidgetResource) {
-      this.widget = new WidgetResource(this.widget);
+    constructor(ChildResource) {
+      this.widget = new ChildResource(this.widget);
 
       this.schema = angular.copy(schema);
       this.formcontrols = formcontrols;
@@ -61,6 +67,7 @@
     }
 
     save(){
+      debugger;
       this.widget.$save();
       this.toggleSettings();
     }

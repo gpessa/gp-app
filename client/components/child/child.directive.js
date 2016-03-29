@@ -10,7 +10,7 @@ angular
       },
       replace : true,
       link : function(scope, element){
-        var html ='<' + scope.data.__t + ' data="data"></' + scope.data.__t + '>';
+        var html ='<' + scope.data.type + ' data="data"></' + scope.data.__t + '>';
         var e = $compile(html)(scope);
         element.append(e);
       }
