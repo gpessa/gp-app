@@ -1,3 +1,5 @@
+<!-- <pre>{{$ctrl.child | json}}</pre> -->
+
 <alert type="warning" ng-if="$ctrl.noPageCreated">You have to create a page</alert>
 
-<container data="$ctrl.child" ng-if="$ctrl.child && !$ctrl.noPageCreated"/>
+<item model="$ctrl.child" ng-if="$ctrl.child && !$ctrl.noPageCreated" getmodel="true"></item>

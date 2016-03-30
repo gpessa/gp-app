@@ -29,16 +29,20 @@
       style: 'btn btn-block btn-primary'
   }];
 
-  class WidgetController {
+  class ItemController {
 
     constructor(ItemResource) {
-      this.widget = new ItemResource(this.widget);
+      this.model = new ItemResource(this.model);
 
       this.schema = angular.copy(schema);
       this.formcontrols = formcontrols;
 
-      this.isWidgetLoading = false;
+      this.isItemLoading = false;
       this.isSettingsOpen = false;
+
+      if(this.getmodel){
+        this.get();
+      }
     }
 
     addConfigurations(property){
@@ -50,30 +54,37 @@
       angular.extend(this.schema.properties.configuration.properties, property);
     }
 
-    getConfiguration() {
-      return this.widget.configuration;
-    }
-
     toggleSettings() {
       this.isSettingsOpen = !this.isSettingsOpen;
     };
 
     toggleLoading() {
-      this.isWidgetLoading = !this.isWidgetLoading;
+      this.isItemLoading = !this.isItemLoading;
     };
 
+    saveSettings(form) {
+      if (form.$valid) {
+        this.model.$save();
+        this.toggleSettings();
+      }
+    }
+
+    get(){
+      this.model.$get();
+    }
+
     remove(){
-      this.widget.$remove();
+      this.parent.model.children.remove(this.model);
+      this.parent.save();
+      this.model.$remove();
     }
 
     save(){
-      debugger;
-      this.widget.$save();
-      this.toggleSettings();
+      this.model.$save();
     }
   }
 
   angular.module('gpAppApp')
-         .controller('WidgetController', WidgetController);
+         .controller('ItemController', ItemController);
 
 })();

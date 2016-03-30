@@ -5,20 +5,16 @@ angular
   .directive('widgetTodoList', (socket, todoListService) => {
     return {
       'templateUrl' : 'components/widgets/todo-list/todo-list.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function(scope, element, attr, widget) {
-        scope.$on('$destroy', () => {
-          socket.unsyncUpdates('todo-list');
-        });
-
+      'link' : function(scope, element, attr, item) {
         scope.createItem = function(todoList, todoListForm){
           if(todoListForm.$valid){
-            var item = angular.copy(todoList.item);
-            delete todoList.item;
+            var newItem = angular.copy(todoList.newItem);
+            delete todoList.newItem;
 
-            todoList.list.push(item);
+            todoList.list.push(newItem);
             todoListService.update(todoList);
           }
         };
@@ -41,13 +37,14 @@ angular
         };
 
         scope.get = function(){
-          widget.toggleLoading();
-          todoListService.get()
+          item.toggleLoading();
+          todoListService
+            .get()
             .then((lists) => {
               scope.todoLists = lists;
               socket.syncUpdates('todo-list');
             })
-            .finally(() => widget.toggleLoading());
+            .finally(() => item.toggleLoading());
         };
 
         scope.get();

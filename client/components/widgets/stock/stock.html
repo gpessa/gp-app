@@ -1,4 +1,4 @@
-<div ng-show="!error">
+<div ng-if="!error">
   <div class="widget-body-top-button">
     <button class="btn btn-primary btn-block" ng-init="openAdd = false;" ng-click="openAdd = !openAdd">Add Stock</button>
     <button class="btn btn-secondary" ng-click="get()" icon="fa fa-refresh"></button>
@@ -75,6 +75,6 @@
   </ul>
 </div>
 
-<error error="" class="error" ng-show="error">
+<alert type="danger" ng-show="error">
   <p>{{error.message}}</p>
-</error>
+</alert>

@@ -1,27 +1,29 @@
 <div class="widget">
 
+  <!-- <pre>{{item | json}}</pre> -->
+
   <div class="widget-header">
       <h4>
-        {{$ctrl.widget.attributes.name}} &nbsp;
+        {{item.model.attributes.name}} &nbsp;
         <div class="widget-header-buttons">
-          <a class="btn btn-link btn-sm" icon="fa fa-cog"   ng-click="$ctrl.toggleSettings()"> </a>
-          <a class="btn btn-link btn-sm" icon="fa fa-times" ng-click="remove()" ></a>
+          <a class="btn btn-link btn-sm" icon="fa fa-cog"   ng-click="item.toggleSettings()"> </a>
+          <a class="btn btn-link btn-sm" icon="fa fa-times" ng-click="item.remove()" ></a>
         </div>
     </h4>
   </div>
 
-  <div class="widget-body" ng-show="!$ctrl.isSettingsOpen && !$ctrl.isWidgetLoading"></div>
+  <div class="widget-body" ng-show="!item.isSettingsOpen && !item.isItemLoading"></div>
 
   <form name="form"
         class="widget-settings"
-        ng-if="$ctrl.isSettingsOpen"
-        sf-schema="$ctrl.schema"
-        sf-form="$ctrl.formcontrols"
-        sf-model="$ctrl.widget"
-        ng-submit="$ctrl.save(form)">
+        ng-if="item.isSettingsOpen"
+        sf-schema="item.schema"
+        sf-form="item.formcontrols"
+        sf-model="item.model"
+        ng-submit="item.saveSettings(form)">
   </form>
 
-  <div class="widget-loading" ng-if="$ctrl.isWidgetLoading">
+  <div class="widget-loading" ng-if="item.isItemLoading">
     <div class="spinner"></div>
   </div>
 

@@ -5,13 +5,15 @@ angular
   .directive('widgetBuienradar', ($geolocation, buienradarService, userStatus, chartConfiguration, formats) => {
     return {
       'templateUrl' : 'components/widgets/buienradar/buienradar.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function(scope, element, attr, widget) {
+      'link' : function(scope, element, attr, item) {
         scope.chartConfiguration = chartConfiguration;
 
         scope.get = function(coordinates) {
+          item.toggleLoading();
+          
           buienradarService
             .get({
               'lat' : coordinates.coords.latitude,
@@ -24,11 +26,10 @@ angular
             .catch((error) => {
               scope.error = error;
             })
-            .finally(() => widget.toggleLoading());
+            .finally(() => item.toggleLoading());
         };
 
         scope.createChart = function(){
-          widget.toggleLoading();
           $geolocation
             .getCurrentPosition()
             .then(scope.get)
@@ -36,7 +37,6 @@ angular
               scope.error = exception.error;
             });
         };
-
 
         userStatus.focus(scope.createChart);
         scope.createChart();

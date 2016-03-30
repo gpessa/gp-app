@@ -8,6 +8,7 @@ $brand-success:             #48B74A;
 $brand-info:                #5bc0de;
 $brand-warning:             #f0ad4e;
 $brand-danger:              #FB6D69;
+
 $semi-transparent-bg:       rgba(255,255,255,0.3);
 $semi-transparent-bg-light: rgba(255,255,255,0.9);
 
@@ -90,7 +91,7 @@ $state-warning-bg:               #fcf8e3;
 $state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%);
 
 $state-danger-text:              $brand-danger;
-$state-danger-bg:                #f2dede;
+$state-danger-bg:                #f2dede; 
 $state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%);
 
 

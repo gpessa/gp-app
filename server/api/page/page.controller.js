@@ -33,16 +33,28 @@ function saveUpdates(updates) {
       var id = page.title.toLowerCase().replace(/ /g,"-");
       page.set('id', id);
 
+      console.log('SON QUI');
+
       if(!page.child){
+        console.log('CREO CONTAINER');
+
         var item = new Item({
           'type' : 'container',
           'subtype' : 'base',
           'children' : []
         });
+        item.save();
 
-        page.set('child', item);
+        console.log(item);
+
+        page.set('child', item._id);
       }
     })
+
+
+    console.log('updated');
+
+    console.log(updated);
 
     return updated.saveAsync()
       .spread(updated => {
@@ -94,6 +106,7 @@ export function show(req, res) {
     .findOne({
       'user' : req.user
     })
+    .populate('pages.child')
     .execAsync()
     .then(handleEntityNotFoundCreateOne(req, res))
     .then(respondWithResult(res))

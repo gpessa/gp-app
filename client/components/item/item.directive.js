@@ -1,16 +1,24 @@
+
 'use strict';
 
 angular
   .module('gpAppApp')
   .directive('item', ($compile) => {
     return {
-      'restrict' : 'E',
-      'scope' : {
-        'data' : '='
+      'controller'  : 'ItemController',
+      'bindToController' : {
+        'model' : '=',
+        'getmodel' : '='
       },
+      'controllerAs' : '$ctrl',
+      'restrict' : 'E',
+      'scope' : {},
+      'require' : '^^?item',
       replace : true,
-      link : function(scope, element){
-        var html ='<' + scope.data.type + ' data="data"></' + scope.data.__t + '>';
+      link : function(scope, element, attrs, parent){
+        scope.$ctrl.parent = parent;
+
+        var html ='<' + scope.$ctrl.model.type + ' model="$ctrl.model"></' + scope.$ctrl.model.type + '>';
         var e = $compile(html)(scope);
         element.append(e);
       }

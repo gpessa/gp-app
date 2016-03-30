@@ -1,34 +1,18 @@
 'use strict';
 
-angular.module('gpAppApp').directive('widget', ($compile) => {
-  return {
-    'templateUrl' : 'components/widget/widget.html',
-    'require' : '^^?container',
-    'bindToController' : true,
-    'controllerAs' : '$ctrl',
-    'restrict' : 'E',
-    'replace' : true,
-    'scope' : {
-      'widget' : '=data'
-    },
-    'prority' : -1,
-    'controller'  : 'WidgetController',
-    'link' : function(scope, element, attr, container){
-      var widgetBody = angular.element(element[0].querySelector('.widget-body')).addClass('widget-' + scope.$ctrl.widget.subtype);
-      $compile(widgetBody)(scope);
+angular
+  .module('gpAppApp')
+  .directive('widget', ($compile) => {
+    return {
+      'templateUrl' : 'components/widget/widget.html',
+      'require' : '^^item',
+      'restrict' : 'E',
+      'replace' : true,
+      'link' : function(scope, element, attr, item){
+        scope.item = item;
 
-      scope.remove = () => {
-        container.unlinkChild(scope.$ctrl.widget);
-        scope.$ctrl.remove();
-      };
-
-      scope.update = function(form){
-        if (form.$valid) {
-          scope.$ctrl.save();
-          scope.$ctrl.toggleSettings();
-        }
-      };
-
-    }
-  };
-});
+        var widgetBody = angular.element(element[0].querySelector('.widget-body')).addClass('widget-' + scope.item.model.subtype);
+        $compile(widgetBody)(scope);
+      }
+    };
+  });

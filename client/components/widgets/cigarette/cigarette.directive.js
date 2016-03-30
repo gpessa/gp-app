@@ -5,13 +5,13 @@ angular
   .directive('widgetCigarette', (cigaretteService) => {
     return {
       'templateUrl' : 'components/widgets/cigarette/cigarette.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function (scope, attr, element, widget) {
-        scope.widget = widget.getConfiguration();
+      'link' : function (scope, attr, element, item) {
+        scope.item = item;
 
-        widget.addConfigurations({
+        item.addConfigurations({
           'threshold' : {
             type: 'number',
             title: 'Threshold'
@@ -19,15 +19,20 @@ angular
         });
 
         scope.smoke = function(){
-          cigaretteService.create()
+          cigaretteService
+            .create()
             .then(scope.render);
         };
 
         scope.render = function(){
-          cigaretteService.get()
+          item.toggleLoading();
+
+          cigaretteService
+            .get()
             .then((cigarettes) => {
               scope.cigarettes = cigarettes;
-            });
+            })
+            .finally(() => item.toggleLoading());
         };
 
         scope.render();

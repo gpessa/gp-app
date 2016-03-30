@@ -2,10 +2,9 @@
   <a ng-click="smoke()" class="btn btn-primary btn-block" icon="">Smoke</a>
 </div>
 
-
 <div class="text-center">
   <h5>Today smoked</h5>
-  <h1 ng-class="{'text-danger' : cigarettes[0].count > widget.threshold}">{{cigarettes[0].count || 0}}</h1>
+  <h1 ng-class="{'text-danger' : cigarettes[0].count > item.model.configuration.threshold}">{{cigarettes[0].count || 0}}</h1>
 </div>
 
 <hr  ng-if="cigarettes.length"/>

@@ -1,32 +1,33 @@
 <div class="app-container container-fluid">
 
-  <!-- <pre>{{$ctrl.container | json}}</pre> -->
+  <!-- <pre>{{item | json}}</pre> -->
 
   <!-- <div class="app-container-header-buttons text-right">
-    <a class="btn btn-link-light btn-sm" icon="fa fa-cog"   ng-click="$ctrl.toggleSettings()"> </a>
+    <a class="btn btn-link-light btn-sm" icon="fa fa-cog"   ng-click="toggleSettings()"> </a>
     <a class="btn btn-link-light btn-sm" icon="fa fa-times" ng-click="remove()" ></a>
   </div> -->
 
-  <div ng-show="!$ctrl.isSettingsOpen"
-       html-sortable="$ctrl.sortableOption"
-       ng-model="$ctrl.container.children"
-       ng-if="$ctrl.container.children"
+  <div html-sortable="sortableOption"
+       ng-model="item.model.children"
+       ng-if="item.model.children"
        ng-class="{ 'editable' : editMode.enabled }"
        class="row" >
 
-    <alert type="warning" class="col-md-12" ng-show="$ctrl.container.children == 0 && editMode.enabled">Drag &amp; drop here an item</alert>
+    <div  class="app-container-child col-md-12" ng-show="item.model.children == 0 && editMode.enabled">
+      <alert type="warning">Drag &amp; drop here an item</alert>
+    </div>
 
-    <item class="app-container-item col-md-{{child.attributes.dimension}}" data="child" ng-repeat="child in $ctrl.container.children"></child>
+    <item class="app-container-child col-md-{{child.attributes.dimension}}" model="child" ng-repeat="child in item.model.children"></item>
 
   </div>
 
-  <form ng-if="$ctrl.isSettingsOpen"
+  <form ng-if="isSettingsOpen"
         name="form"
         class="widget-settings clearfix"
-        sf-schema="$ctrl.schema"
-        sf-form="$ctrl.formcontrols"
-        sf-model="$ctrl.container"
-        ng-submit="$ctrl.save(form)">
+        sf-schema="schema"
+        sf-form="formcontrols"
+        sf-model="container"
+        ng-submit="save(form)">
   </form>
 
 </div>

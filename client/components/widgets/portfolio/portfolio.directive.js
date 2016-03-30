@@ -5,21 +5,19 @@ angular
   .directive('widgetPortfolio', function ($window, $interval, socket, userStatus, portfolioService) {
     return {
       'templateUrl' : 'components/widgets/portfolio/portfolio.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function(scope, element, attr, widget) {
+      'link' : function(scope, element, attr, item) {
         var removeWatch = angular.noop;
 
-        widget.addConfigurations({
+        item.addConfigurations({
           'taxation' : {
             'type' : 'number',
             'title' : 'Taxation',
             'default' : 26
           }
         });
-
-        scope.taxation = widget.getConfiguration().taxation || 0;
 
         scope.operations = [{
           id: 'sell',
@@ -33,7 +31,7 @@ angular
         }];
 
         scope.get = function(){
-          widget.toggleLoading();
+          item.toggleLoading();
           portfolioService.get()
             .then((portfolios) => {
               scope.portfolios = portfolios;
@@ -42,7 +40,7 @@ angular
             .catch(error => {
               scope.error = error;
             })
-            .finally(() => widget.toggleLoading());
+            .finally(() => item.toggleLoading());
         };
 
         scope.create = function(){
@@ -97,8 +95,6 @@ angular
           portfolio.newTransaction.quantitymax = portfolio.newTransaction.quantity;
           portfolio.newTransaction.date = new Date();
         };
-
-        scope.configuration = widget.getConfiguration();
 
         scope.get();
       }

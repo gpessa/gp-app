@@ -5,10 +5,10 @@ angular
   .directive('widgetWithings', ($filter, chartConfiguration, Withings, formats) => {
     return {
       'templateUrl' : 'components/widgets/withings/withings.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function(scope, element, attr, widget) {
+      'link' : function(scope, element, attr, item) {
         scope.chartConfiguration = angular.copy(chartConfiguration);
 
         scope.types = [{
@@ -58,11 +58,11 @@ angular
               });
             })
             .catch(error => {scope.error = error;})
-            .finally(() => widget.toggleLoading());
+            .finally(() => item.toggleLoading());
         };
 
         scope.select = function(type){
-          widget.toggleLoading();
+          item.toggleLoading();
           scope.selectedType = type;
           scope.createChart();
         };

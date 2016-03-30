@@ -5,19 +5,20 @@ angular
   .directive('widgetStock', function (socket, stockService, userStatus) {
     return {
       'templateUrl' : 'components/widgets/stock/stock.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function(scope, element, attr, widget) {
+      'link' : function(scope, element, attr, item) {
         scope.create = function(form){
           scope.submitted = true;
 
           if (form.$valid) {
-            stockService.create(scope.newStock)
-            .then(() => {
-              scope.get();
-              scope.resetForm();
-            });
+            stockService
+              .create(scope.newStock)
+              .then(() => {
+                scope.get();
+                scope.resetForm();
+              });
           }
         };
 
@@ -32,15 +33,16 @@ angular
         };
 
         scope.get = function(){
-          widget.toggleLoading();
-          stockService.get()
+          item.toggleLoading();
+          stockService
+            .get()
             .then(stocks => {
               scope.stocks = stocks;
             })
             .catch(error => {
               scope.error = error;
             })
-            .finally(() => widget.toggleLoading());
+            .finally(() => item.toggleLoading());
         };
 
         userStatus.focus(scope.get);

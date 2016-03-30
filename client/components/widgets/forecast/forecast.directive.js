@@ -5,10 +5,10 @@ angular
   .directive('widgetForecast', ($geolocation, forecastService, userStatus, formats) => {
     return {
       'templateUrl' : 'components/widgets/forecast/forecast.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function(scope, element, attr, widget) {
+      'link' : function(scope, element, attr, item) {
         scope.formats = formats;
 
         scope.getIcon = function(icon){
@@ -33,11 +33,11 @@ angular
           .catch((error) => {
             scope.error = error;
           })
-          .finally(() => widget.toggleLoading());
+          .finally(() => item.toggleLoading());
         };
 
         scope.getData = function(){
-          widget.toggleLoading();
+          item.toggleLoading();
           $geolocation.getCurrentPosition()
                       .then(scope.get)
                       .catch((exception) => {

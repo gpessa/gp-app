@@ -78,7 +78,9 @@ function responseWithDecoratedResult(res, statusCode){
       }, function (err, result) {
 
         if(!result){
-          res.status(200).json(entity);
+          res.status(404).json({
+            'message' : 'Service not available'
+          });
           return null;
         }
 

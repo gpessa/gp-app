@@ -3,23 +3,20 @@
 angular.module('gpAppApp').directive('container', (editMode) => {
   return {
     'templateUrl' : 'components/container/container.html',
-    'require' : '^^?container',
-    'bindToController' : true,
-    'controllerAs' : '$ctrl',
+    'require' : '^^item',
     'restrict' : 'E',
     'replace' : true,
-    'scope' : {
-      'container' : '=data'
-    },
-    'controller' : 'ContainerController',
-    'link' : function(scope, element, attr, container){
+    'link' : function(scope, element, attr, item){
+      scope.item = item;
       scope.editMode = editMode;
 
-      scope.remove = () => {
-        container.unlinkChild(scope.$ctrl.container);
-        scope.$ctrl.remove();
+      scope.sortableOption = {
+        'allow_cross' : true,
+        'stop' : (children, dropped_index) => {
+          // debugger;
+          scope.item.save();
+        }
       };
-
     }
   };
 });

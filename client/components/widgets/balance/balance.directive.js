@@ -5,10 +5,10 @@ angular
   .directive('widgetBalance', ($filter, balanceService, socket, formats,chartConfiguration) => {
     return {
       'templateUrl' : 'components/widgets/balance/balance.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function(scope, element, attr, widget) {
+      'link' : function(scope, element, attr, item) {
         scope.chartConfiguration = angular.copy(chartConfiguration);
 
         angular.extend(scope.chartConfiguration.options, {
@@ -23,7 +23,7 @@ angular
         });
 
         scope.get = function(){
-          widget.toggleLoading();
+          item.toggleLoading();
           balanceService.get()
             .then((balances) => {
               if(balances.length === 0){
@@ -36,7 +36,7 @@ angular
             .catch(error => {
               scope.error = error;
             })
-            .finally(() => widget.toggleLoading());
+            .finally(() => item.toggleLoading());
         };
 
         scope.create = function(){

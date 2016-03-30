@@ -6,11 +6,11 @@ angular
   .directive('widgetPositiveThing', function ($window, $interval, socket, positiveThingService) {
     return {
       'templateUrl' : 'components/widgets/positive-thing/positive-thing.html',
-      'require' : '^^widget',
+      'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
-      'link' : function(scope, element, attr, widget) {
-        widget.addConfigurations({
+      'link' : function(scope, element, attr, item) {
+        item.addConfigurations({
           'Thing' : {
             type: 'number',
             title: 'Positive things to show'
@@ -18,7 +18,7 @@ angular
         });
 
         scope.get = function(){
-          widget.toggleLoading();
+          item.toggleLoading();
           positiveThingService.get()
             .then((positiveThings) => {
               scope.positiveThings = positiveThings;
@@ -27,19 +27,24 @@ angular
             .catch(error => {
               scope.error = error;
             })
-            .finally(() => widget.toggleLoading());
+            .finally(() => item.toggleLoading());
         };
 
         scope.create = function(){
-          positiveThingService.create().then(scope.get);
+          positiveThingService
+            .create()
+            .then(scope.get);
         };
 
         scope.update = function(positiveThing){
-          positiveThingService.update(positiveThing);
+          positiveThingService
+            .update(positiveThing);
         };
 
         scope.remove = function(positiveThing){
-          positiveThingService.remove(positiveThing).then(scope.get);
+          positiveThingService
+            .remove(positiveThing)
+            .then(scope.get);
         };
 
         scope.addThing = function(positiveThing, form){
@@ -59,8 +64,6 @@ angular
           positiveThing.list.remove(thing);
           portfolioService.update(positiveThing).then(scope.get);
         };
-
-        scope.configuration = widget.getConfiguration();
 
         scope.get();
       }
