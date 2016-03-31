@@ -2,14 +2,11 @@
 
 var express = require('express');
 var controller = require('./cigarette.controller');
+import * as auth from '../../auth/auth.service';
 
 var router = express.Router();
 
-router.get('/', controller.index);
-router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.update);
-router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
+router.get('/', auth.isAuthenticated(), controller.index);
+router.put('/:id', auth.isAuthenticated(), controller.smoke);
 
 module.exports = router;

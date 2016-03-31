@@ -4,18 +4,19 @@
 
 <div class="text-center">
   <h5>Today smoked</h5>
-  <h1 ng-class="{'text-danger' : cigarettes[0].count > item.model.configuration.threshold}">{{cigarettes[0].count || 0}}</h1>
+
+  <h1 ng-class="{'text-danger' : cigarettes.days[0].count > item.model.configuration.threshold}">{{cigarettes.days[0].count || 0}}</h1>
 </div>
 
-<hr  ng-if="cigarettes.length"/>
+<hr  ng-if="cigarettes.days[0].length"/>
 
 <ul class="list">
-  <li class="list_item" ng-repeat="cigarette in cigarettes" ng-if="$index != 0">
+  <li class="list_item" ng-repeat="day in cigarettes.days" ng-if="$index != 0">
     <div class="list_item_data">
       <div class="row">
-        <div class="col-md-9">{{cigarette._id | date: dateFormat.date}}</div>
+        <div class="col-md-9">{{day.date | date: dateFormat.date}}</div>
         <div class="col-md-3 text-right">
-          <strong>{{cigarette.count}}</strong>
+          <strong>{{day.count}}</strong>
         </div>
       </div>
     </div>

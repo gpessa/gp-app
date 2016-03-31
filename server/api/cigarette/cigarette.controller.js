@@ -38,6 +38,15 @@ function handleEntityNotFound(res) {
   };
 }
 
+function handleEntityNotFoundCreateOne(req, res) {
+  return function(entity) {
+    if (!entity) {
+      exports.create(req, res);
+    }
+    return entity;
+  };
+}
+
 function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
@@ -48,129 +57,63 @@ function saveUpdates(updates) {
   };
 }
 
-function removeEntity(res) {
+function addCigarette() {
   return function(entity) {
-    if (entity) {
-      return entity.removeAsync()
-        .then(function() {
-          res.status(204).end();
-        });
+    var updates =  _.clone(entity.toObject());
+    var date = new Date(new Date().setHours(0,0,0,0));
+    var dateItem = _.find(updates.days , function(o) { return o.date.toString() === date.toString(); });
+
+
+    if (dateItem){
+      var index = updates.days.indexOf(dateItem);
+      updates.days[index].count = updates.days[index].count + 1;
+    } else {
+      updates.days.push({
+        'date' : date,
+        'count'  : 1
+      });
     }
+
+    var updated = _.merge(entity, updates);
+
+    return updated.saveAsync()
+      .spread(function(updated) {
+        return updated;
+      });
   };
 }
 
 // Gets a list of Cigarettes
 exports.index = function(req, res) {
-  var end = new Date();
-  var start = new Date(end.getTime() - (60*60*24*7*1000));
-
-  Cigarette.aggregate([
-    {
-        "$match": {
-            "date": {
-                "$gt": start,
-                "$lt": end
-            }
-        }
-    }, {
-        "$project": {
-            "date": "$date",
-            "_id": 0,
-            "h": {
-                "$hour": "$date"
-            },
-            "m": {
-                "$minute": "$date"
-            },
-            "s": {
-                "$second": "$date"
-            },
-            "ml": {
-                "$millisecond": "$date"
-            }
-        }
-    }, {
-        "$project": {
-            "date": {
-                "$subtract": [
-                    "$date", {
-                        "$add": [
-                            "$ml", {
-                                "$multiply": [
-                                    "$s",
-                                    1000
-                                ]
-                            }, {
-                                "$multiply": [
-                                    "$m",
-                                    60,
-                                    1000
-                                ]
-                            }, {
-                                "$multiply": [
-                                    "$h",
-                                    60,
-                                    60,
-                                    1000
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    }, {
-        "$group": {
-            "_id": "$date",
-            "count": {
-                "$sum": 1
-            }
-        }
-    }, {
-        "$sort": {
-            "_id": -1
-        }
-    }
-  ], function (err, result) {
-    if(err) { return handleError(res, err); }
-    if(!result) { return res.status(404).send('Not Found'); }
-    return res.json(result);
-  })
-
-
-};
-
-// Gets a single Cigarette from the DB
-exports.show = function(req, res) {
-  Cigarette.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
+  Cigarette.findOne({
+      'user' : req.user._id
+    })
+    .then(handleEntityNotFoundCreateOne(req, res))
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
+
+
 
 // Creates a new Cigarette in the DB
-exports.create = function(req, res) {
-  Cigarette.createAsync(req.body)
+export function create(req, res) {
+  req.body = {
+    'user' : req.user._id,
+    'days' : []
+  }
+
+  Cigarette
+    .createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
-};
+}
 
-// Updates an existing Cigarette in the DB
-exports.update = function(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
+
+// Gets a single Cigarette from the DB
+exports.smoke = function(req, res) {
   Cigarette.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
+    .then(addCigarette(res))
     .then(responseWithResult(res))
-    .catch(handleError(res));
-};
-
-// Deletes a Cigarette from the DB
-exports.destroy = function(req, res) {
-  Cigarette.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
     .catch(handleError(res));
 };

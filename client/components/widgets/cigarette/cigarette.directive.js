@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetCigarette', (cigaretteService) => {
+  .directive('widgetCigarette', (CigaretteResource) => {
     return {
       'templateUrl' : 'components/widgets/cigarette/cigarette.html',
       'require' : '^^item',
@@ -19,23 +19,20 @@ angular
         });
 
         scope.smoke = function(){
-          cigaretteService
-            .create()
-            .then(scope.render);
+          scope.cigarettes.$smoke();
         };
 
-        scope.render = function(){
+        scope.get = function(){
           item.toggleLoading();
 
-          cigaretteService
-            .get()
-            .then((cigarettes) => {
-              scope.cigarettes = cigarettes;
-            })
+          scope.cigarettes = new CigaretteResource();
+          scope.cigarettes
+            .$get()
+            .catch(error => scope.error = error)
             .finally(() => item.toggleLoading());
         };
 
-        scope.render();
+        scope.get();
       }
     };
   });
