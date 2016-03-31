@@ -44,11 +44,10 @@ function handleError(res, statusCode) {
 
 // Gets a list of Forecasts
 export function index(req, res) {
-
-  Geocoder.reverseGeocode(req.body.params.lat, req.body.params.lon, function ( err, data ) {
+  Geocoder.reverseGeocode(req.body.lat, req.body.lon, function ( err, data ) {
     var city = data.results[4].formatted_address;
 
-    forecast.get([req.body.params.lat, req.body.params.lon], function(err, weather) {
+    forecast.get([req.body.lat, req.body.lon], function(err, weather) {
       if(err) res.status(500).send(err);
 
       weather.city = city;

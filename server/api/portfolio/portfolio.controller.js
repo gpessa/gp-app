@@ -30,9 +30,9 @@ function responseWithResult(res, statusCode) {
 }
 
 function responseWithDecoratedResult(res, statusCode){
-  statusCode = statusCode || 200;
   return function(portfolios) {
-    if (portfolios) {
+
+    if (portfolios.length) {
 
       var transactions = _.flattenDeep(portfolios.map(function(portfolio){
         return portfolio.transactions;
@@ -44,55 +44,60 @@ function responseWithDecoratedResult(res, statusCode){
 
       var FIELDS = ['b'];
 
-      yahooFinance.snapshot({
-        fields: FIELDS,
-        symbols: SYMBOLS
-      }, function (err, result) {
-        if (err) {
-          res.status(404).send({
-            'message' : 'Service not available'
-          });
-        } else {
+      if(SYMBOLS.length){
 
-          // var portfolios = entity.toObject();
+        yahooFinance.snapshot({
+          fields: FIELDS,
+          symbols: SYMBOLS
+        }, function (err, result) {
+          if (err) {
+            res.status(404).send({
+              'message' : 'Service not available'
+            });
+          } else {
+            portfolios = portfolios.map(function(portfolio, index){
+              portfolio.transactions = portfolio.transactions.map(function(transaction){
+                var marketprice = _.filter(result, {'symbol' : transaction.symbol})[0].bid;
+                var value  = (transaction.sellprice || marketprice);
+                var total  = (transaction.operation === 'sell') ? 0 : (value * transaction.quantity);
+                var status = (transaction.operation === 'sell' || transaction.quantity === 0) ? 'close' : 'open';
+                var delta  = (value - transaction.buyprice) * transaction.quantity;
 
-          portfolios = portfolios.map(function(portfolio, index){
-            portfolio.transactions = portfolio.transactions.map(function(transaction){
-              var marketprice = _.filter(result, {'symbol' : transaction.symbol})[0].bid;
-              var value  = (transaction.sellprice || marketprice);
-              var total  = (transaction.operation === 'sell') ? 0 : (value * transaction.quantity);
-              var status = (transaction.operation === 'sell' || transaction.quantity === 0) ? 'close' : 'open';
-              var delta  = (value - transaction.buyprice) * transaction.quantity;
+                transaction = transaction.toObject();
+                transaction = _.extend(transaction, {
+                  'marketprice' : marketprice,
+                  'value' : value,
+                  'total' : total,
+                  'delta' : delta,
+                  'status' : status
+                })
+                return transaction;
+              });
 
-              transaction = transaction.toObject();
-              transaction = _.extend(transaction, {
-                'marketprice' : marketprice,
-                'value' : value,
+              var txcost = _.sum(portfolio.transactions, function(t) { return t.txcost; });
+              var total = _.sum(portfolio.transactions, function(t) { return t.total; });
+              var delta = _.sum(portfolio.transactions, function(t) { return t.delta; });
+              var overralreturn = delta - txcost;
+
+              portfolio.recap = {
+                'txcost' : txcost,
                 'total' : total,
                 'delta' : delta,
-                'status' : status
-              })
-              return transaction;
+                'overralreturn' : overralreturn
+              }
+
+              return portfolio;
             });
 
-            var txcost = _.sum(portfolio.transactions, function(t) { return t.txcost; });
-            var total = _.sum(portfolio.transactions, function(t) { return t.total; });
-            var delta = _.sum(portfolio.transactions, function(t) { return t.delta; });
-            var overralreturn = delta - txcost;
+            res.status(200).json(portfolios);
+          }
 
-            portfolio.recap = {
-              'txcost' : txcost,
-              'total' : total,
-              'delta' : delta,
-              'overralreturn' : overralreturn
-            }
-
-            return portfolio;
-          });
-
-          res.status(200).json(portfolios);
-        }
-      });
+        });
+      } else {
+        res.status(200).json(portfolios);
+      }
+    } else {
+      res.status(200).json(portfolios);
     }
   };
 }
@@ -152,17 +157,19 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.user = req.user._id;
 
-  Portfolio.createAsync(req.body)
+  Portfolio
+    .createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 }
 
 // Updates an existing Portfolio in the DB
 export function update(req, res) {
-  Portfolio.findByIdAsync(req.params.id)
+  Portfolio
+    .findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
+    .then(responseWithDecoratedResult(res))
     .catch(handleError(res));
 }
 

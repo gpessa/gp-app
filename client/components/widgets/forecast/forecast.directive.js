@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetForecast', ($geolocation, forecastService, userStatus, formats) => {
+  .directive('widgetForecast', ($geolocation, ForecastResource, userStatus, formats) => {
     return {
       'templateUrl' : 'components/widgets/forecast/forecast.html',
       'require' : '^^item',
@@ -14,6 +14,7 @@ angular
         scope.getIcon = function(icon){
           return {
             'clear-day'           : 'iw-sun-1',
+            'clear-night'         : 'iw-moon-1',
             'snow'                : 'iw-snow',
             'partly-cloudy-day'   : 'iw-partly-cloudy-1',
             'partly-cloudy-night' : 'iw-partly-cloudy-3',
@@ -23,26 +24,27 @@ angular
         }
 
         scope.get = function(coordinates) {
-          forecastService.get({
+          item.toggleLoading();
+
+          scope.forecast = new ForecastResource({
             'lat' : coordinates.coords.latitude,
             'lon' : coordinates.coords.longitude
-          })
-          .then(forecast => {
-            scope.forecast = forecast;
-          })
-          .catch((error) => {
-            scope.error = error;
-          })
-          .finally(() => item.toggleLoading());
+          });
+
+          scope.forecast
+            .$get()
+            .catch(error => scope.error = error)
+            .finally(() => item.toggleLoading());
         };
 
         scope.getData = function(){
           item.toggleLoading();
-          $geolocation.getCurrentPosition()
-                      .then(scope.get)
-                      .catch((exception) => {
-                        scope.error = exception.error;
-                      });
+
+          $geolocation
+            .getCurrentPosition()
+            .then(scope.get)
+            .catch(exception => scope.error = exception.error)
+            .finally(() => item.toggleLoading());
         };
 
 

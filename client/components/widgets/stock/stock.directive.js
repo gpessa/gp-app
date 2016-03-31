@@ -2,19 +2,21 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetStock', function (socket, stockService, userStatus) {
+  .directive('widgetStock', function (socket, StockResource, userStatus) {
     return {
       'templateUrl' : 'components/widgets/stock/stock.html',
       'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
+
         scope.create = function(form, stock){
           scope.submitted = true;
 
           if (form.$valid) {
-            stockService
-              .create(scope.newStock)
+            var stock = new StockResource(scope.newStock);
+            stock
+              .$create()
               .then(() => {
                 scope.get();
                 scope.resetForm();
@@ -29,20 +31,14 @@ angular
         };
 
         scope.remove = function(stock){
-          stockService.remove(stock).then(scope.get);
+          stock
+            .$remove()
+            .then(() => scope.get());
         };
 
         scope.get = function(){
           item.toggleLoading();
-          stockService
-            .get()
-            .then(stocks => {
-              scope.stocks = stocks;
-            })
-            .catch(error => {
-              scope.error = error;
-            })
-            .finally(() => item.toggleLoading());
+          scope.stocks = StockResource.query({}, () => item.toggleLoading());
         };
 
         userStatus.focus(scope.get);

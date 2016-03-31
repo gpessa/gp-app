@@ -31,13 +31,6 @@ class NavbarController {
         return Auth.isLoggedIn()
       }
     },{
-      'title': 'Logout',
-      'link' : '/logout',
-      'icon' : 'fa fa-sign-out',
-      'show' : function(){
-        return Auth.isLoggedIn()
-      }
-    },{
       'title': 'Sign up',
       'link' : '/signup',
       'icon' : 'fa fa-user-plus',
@@ -50,6 +43,13 @@ class NavbarController {
       'icon' : 'fa fa-sign-in',
       'show' : function(){
         return !Auth.isLoggedIn()
+      }
+    },{
+      'title': 'Logout',
+      'link' : '/logout',
+      'icon' : 'fa fa-sign-out',
+      'show' : function(){
+        return Auth.isLoggedIn()
       }
     }];
   }

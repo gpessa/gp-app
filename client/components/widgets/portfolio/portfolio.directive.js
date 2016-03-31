@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetPortfolio', function ($window, $interval, socket, userStatus, portfolioService) {
+  .directive('widgetPortfolio', function ($window, $interval, socket, userStatus, PortfolioResource) {
     return {
       'templateUrl' : 'components/widgets/portfolio/portfolio.html',
       'require' : '^^item',
@@ -33,27 +33,25 @@ angular
 
         scope.get = function(){
           item.toggleLoading();
-          portfolioService.get()
-            .then((portfolios) => {
-              scope.portfolios = portfolios;
-              socket.syncUpdates('portfolios');
-            })
-            .catch(error => {
-              scope.error = error;
-            })
-            .finally(() => item.toggleLoading());
+          scope.portfolios = PortfolioResource.query({}, () => item.toggleLoading());
         };
 
         scope.create = function(){
-          portfolioService.create().then(scope.get);
+          var portfolio = new PortfolioResource();
+          portfolio
+            .$create()
+            .then(() => scope.get());
         };
 
         scope.update = function(portfolio){
-          portfolioService.update(portfolio);
+          portfolio
+            .$save();
         };
 
         scope.remove = function(portfolio){
-          portfolioService.remove(portfolio).then(scope.get);
+          portfolio
+            .$remove()
+            .then(() => scope.get());
         };
 
         scope.addTransaction = function(portfolio, form){
@@ -64,7 +62,9 @@ angular
             var newTransaction = angular.copy(portfolio.newTransaction);
             delete portfolio.newTransaction;
             portfolio.transactions.push(newTransaction);
-            portfolioService.update(portfolio).then(scope.get);
+            portfolio
+              .$save()
+              .then(() => scope.get());
 
             form.submitted = false;
           }
@@ -72,7 +72,8 @@ angular
 
         scope.removeTransaction = function(portfolio, transaction){
           portfolio.transactions.remove(transaction);
-          portfolioService.update(portfolio).then(scope.get);
+          portfolio
+            .$save();
         };
 
         scope.updateTransaction = function(portfolio, transaction){
