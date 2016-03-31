@@ -20,7 +20,7 @@
 
       <ul class="navbar-right nav navbar-nav">
 
-        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}" ng-show="item.show">
+        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}" ng-show="item.show()">
             <a ng-href="{{item.link}}">
               <i class="{{item.icon}}"></i>
               <small>{{item.title}}</small>
@@ -33,7 +33,7 @@
             <small>Edit</small>
           </edit-mode>
         </li>
-        
+
       </ul>
 
       <navigation class="navbar-right"/>

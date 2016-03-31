@@ -1,4 +1,4 @@
-<ul class="list" ng-repeat="balance in balances">
+<ul class="list" >
 
   <li class="list_item header">
     <div class="list_item_btn">
@@ -20,16 +20,16 @@
     </div>
 
     <div class="list_item_data">
-      <form ng-submit="addReport(balance, forms['form' + $index])" name="forms.form{{$index}}" novalidate>
+      <form ng-submit="addReport(form)" name="form" novalidate>
         <div class="row">
-          <div class="col-md-3" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].date.$error}">
-            <input type="text" placeholder="Date" class="form-control" uib-datepicker-popup ng-model="balance.newReport.date" is-open="open" ng-focus="open = true" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          <div class="col-md-3" ng-class="{'has-error' : form.submitted && form.date.$error}">
+            <input type="text" placeholder="Date" class="form-control" uib-datepicker-popup ng-model="newReport.date" is-open="open" ng-focus="open = true" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
           </div>
-          <div class="col-md-3" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].current.$error}">
-            <input class="form-control" placeholder="Current Account" ng-model="balance.newReport.current" name="current" type="number" required/>
+          <div class="col-md-3" ng-class="{'has-error' : form.submitted && form.current.$error}">
+            <input class="form-control" placeholder="Current Account" ng-model="newReport.current" name="current" type="number" required/>
           </div>
-          <div class="col-md-3" ng-class="{'has-error' : forms.form{{$index}}.submitted && forms['form' + $index].current.$error}">
-            <input class="form-control" placeholder="Saving Account" ng-model="balance.newReport.saving" name="saving" type="number" required/>
+          <div class="col-md-3" ng-class="{'has-error' : form.submitted && form.current.$error}">
+            <input class="form-control" placeholder="Saving Account" ng-model="newReport.saving" name="saving" type="number" required/>
           </div>
         </div>
         <input type="submit" class="hidden"/>
@@ -48,21 +48,20 @@
           <div class="col-md-3">{{report.saving | currency}}</div>
           <div class="col-md-3 text-right"
                ng-init="report.total = (report.saving + report.current)"
-               title="{{report.total - balance.reports[$index-1].total | currency}}">
+               title="{{report.total - reports[$index-1].total | currency}}">
             {{report.total | currency}}
           </div>
       </div>
     </div>
   </li>
-
-  <li class="list_item extra" ng-init="balance.chart = getChartData(balance);">
+  
+  <li class="list_item extra">
     <canvas class="chart chart-line"
             chart-data="[balance.chart.data]"
             chart-labels="balance.chart.labels"
             chart-options="chartConfiguration.options"
             chart-colours="chartConfiguration.colours"
             ng-if="balance.reports.length">
-
     </canvas>
   </li>
 

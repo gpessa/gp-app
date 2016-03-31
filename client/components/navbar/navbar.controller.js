@@ -13,32 +13,44 @@ class NavbarController {
       'title': 'Admin',
       'link' : '/admin',
       'icon' : 'fa fa-users',
-      'show' : this.isAdmin()
+      'show' : function(){
+        return Auth.isAdmin()
+      }
     },{
       'title': 'Link',
       'link' : '/link',
       'icon' : 'fa fa fa-compress',
-      'show' : this.isLoggedIn()
+      'show' : function(){
+        return Auth.isLoggedIn()
+      }
     },{
       'title': 'Settings',
       'link' : '/settings',
       'icon' : 'fa fa-cogs',
-      'show' : this.isLoggedIn()
+      'show' : function(){
+        return Auth.isLoggedIn()
+      }
     },{
       'title': 'Logout',
       'link' : '/logout',
       'icon' : 'fa fa-sign-out',
-      'show' : this.isLoggedIn()
+      'show' : function(){
+        return Auth.isLoggedIn()
+      }
     },{
       'title': 'Sign up',
       'link' : '/signup',
       'icon' : 'fa fa-user-plus',
-      'show' : !this.isLoggedIn()
+      'show' : function(){
+        return !Auth.isLoggedIn()
+      }
     },{
       'title': 'Login',
       'link' : '/login',
       'icon' : 'fa fa-sign-in',
-      'show' : !this.isLoggedIn()
+      'show' : function(){
+        return !Auth.isLoggedIn()
+      }
     }];
   }
 

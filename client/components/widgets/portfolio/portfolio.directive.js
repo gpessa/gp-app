@@ -9,6 +9,7 @@ angular
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
+        scope.item = item;
         var removeWatch = angular.noop;
 
         item.addConfigurations({

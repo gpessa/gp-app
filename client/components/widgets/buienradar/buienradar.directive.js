@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetBuienradar', ($geolocation, buienradarService, userStatus, chartConfiguration, formats) => {
+  .directive('widgetBuienradar', ($geolocation, BuienradarResource, userStatus, chartConfiguration, formats) => {
     return {
       'templateUrl' : 'components/widgets/buienradar/buienradar.html',
       'require' : '^^item',
@@ -14,33 +14,29 @@ angular
         scope.get = function(coordinates) {
           item.toggleLoading();
           
-          buienradarService
-            .get({
-              'lat' : coordinates.coords.latitude,
-              'lon' : coordinates.coords.longitude
-            })
-            .then(buienradar => {
-              scope.labels = buienradar.labels;
-              scope.rainfalls = buienradar.rainfalls;
-            })
-            .catch((error) => {
-              scope.error = error;
-            })
+          scope.buienradar = new BuienradarResource({
+            'lat' : coordinates.coords.latitude,
+            'lon' : coordinates.coords.longitude
+          });
+
+          scope.buienradar
+            .$get()
+            .catch(error => scope.error = error)
             .finally(() => item.toggleLoading());
         };
 
         scope.createChart = function(){
+          item.toggleLoading();
+
           $geolocation
             .getCurrentPosition()
             .then(scope.get)
-            .catch((exception) => {
-              scope.error = exception.error;
-            });
+            .catch(exception => scope.error = exception.error)
+            .finally(() => item.toggleLoading());
         };
 
         userStatus.focus(scope.createChart);
         scope.createChart();
-
       }
     };
   });

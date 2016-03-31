@@ -32,29 +32,16 @@ function saveUpdates(updates) {
     updated.pages.forEach(function(page){
       var id = page.title.toLowerCase().replace(/ /g,"-");
       page.set('id', id);
-
-      console.log('SON QUI');
-
       if(!page.child){
-        console.log('CREO CONTAINER');
-
         var item = new Item({
           'type' : 'container',
           'subtype' : 'base',
           'children' : []
         });
         item.save();
-
-        console.log(item);
-
         page.set('child', item._id);
       }
     })
-
-
-    console.log('updated');
-
-    console.log(updated);
 
     return updated.saveAsync()
       .spread(updated => {

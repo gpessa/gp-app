@@ -160,7 +160,7 @@
         <dd>{{portfolio.recap.txcost | currency}}</dd>
 
         <dt>Portfolio taxes</dt>
-        <dd ng-init="portfolio.tax = ((portfolio.recap.overralreturn - portfolio.recap.txcost) / 100 * taxation)">{{portfolio.tax | currency}}</dd>
+        <dd ng-init="portfolio.tax = ((portfolio.recap.overralreturn - portfolio.recap.txcost) / 100 * item.model.configuration.taxation)">{{portfolio.tax | currency}}</dd>
 
         <dt>Portfolio NET overral return<dt>
         <dd val="(portfolio.recap.overralreturn - portfolio.tax)" filter="currency"></dd>

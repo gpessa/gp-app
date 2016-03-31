@@ -1,50 +1,40 @@
 'use strict';
 
-angular.module('gpAppApp')
-  .service('balanceService', function Auth($http, $q) {
-    return {
-      get : function() {
-        var deferred = $q.defer();
+(function() {
 
-        $http.get('/api/balances').
-        success(function(data) {
-          deferred.resolve(data);
-        }).
-        error(err => {
-          deferred.reject(err);
-        });
+  function BalanceResource($resource, $filter, formats) {
 
-        return deferred.promise;
-    },
-    create : function(){
-        var deferred = $q.defer();
+    var addChartData = function(response){
+      var labels = response.reports.map(function(report){
+        return $filter('date')(report.date, formats.month) ;
+      });
 
-        $http.post('/api/balances/', {}).
-        success(function(data) {
-          deferred.resolve(data);
-        });
+      var data = response.reports.map(function(report){
+        return (report.current + report.saving);
+      });
 
-        return deferred.promise;
-    },
-    update  : function(balance){
-        var deferred = $q.defer();
+      response.chart = {
+        'data' : data,
+        'labels' : labels
+      }
 
-        $http.put('/api/balances/' + balance._id, balance)
-             .success(function(data) {
-                deferred.resolve(data);
-             });
-
-        return deferred.promise;
-    },
-    remove  : function(balance){
-        var deferred = $q.defer();
-
-        $http.delete('/api/balances/' + balance._id, balance)
-             .success(function(data) {
-                deferred.resolve(data);
-             });
-
-        return deferred.promise;
+      return response;
     }
-  };
-});
+
+    return $resource('/api/balances/:id', {'id' : '@_id'}, {
+      get : {
+        transformResponse : addChartData,
+        responseType : 'json'
+      },
+      save: {
+        transformResponse : addChartData,
+        responseType : 'json',
+        method: 'PUT'
+      }
+    });
+  }
+
+  angular.module('gpAppApp')
+         .factory('BalanceResource', BalanceResource);
+
+})();

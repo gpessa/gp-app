@@ -9,7 +9,7 @@ angular
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
-        scope.create = function(form){
+        scope.create = function(form, stock){
           scope.submitted = true;
 
           if (form.$valid) {
@@ -25,7 +25,7 @@ angular
         scope.resetForm = function(){
           scope.submitted = false;
           scope.openAdd = false;
-          scope.newStock.symbol = '';
+          scope.newStock = {};
         };
 
         scope.remove = function(stock){

@@ -38,6 +38,15 @@ function handleEntityNotFound(res) {
   };
 }
 
+function handleEntityNotFoundCreateOne(req, res) {
+  return function(entity) {
+    if (!entity) {
+      exports.create(req, res);
+    }
+    return entity;
+  };
+}
+
 function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
@@ -50,34 +59,20 @@ function saveUpdates(updates) {
   };
 }
 
-function removeEntity(res) {
-  return function(entity) {
-    if (entity) {
-      return entity.removeAsync()
-        .then(() => {
-          res.status(204).end();
-        });
-    }
-  };
-}
-
 // Gets a list of Balances
 export function index(req, res) {
-  Balance.findAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
-}
-
-// Gets a single Balance from the DB
-export function show(req, res) {
-  Balance.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
+  Balance.findOne({
+      'user' : req.user._id
+    })
+    .then(handleEntityNotFoundCreateOne(req, res))
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
 
 // Creates a new Balance in the DB
 export function create(req, res) {
+  req.body.user = req.user._id;
+  
   Balance.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
@@ -92,13 +87,5 @@ export function update(req, res) {
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(responseWithResult(res))
-    .catch(handleError(res));
-}
-
-// Deletes a Balance from the DB
-export function destroy(req, res) {
-  Balance.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
     .catch(handleError(res));
 }

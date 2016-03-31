@@ -67,6 +67,9 @@ function responseWithDecoratedResult(res, statusCode){
       var SYMBOLS = entity.map((stock) => { return stock.symbol; })
                           .filter((stock) => { return stock != undefined; });
 
+console.log('SYMBOLS');
+console.log(SYMBOLS);
+
       if(SYMBOLS.length == 0){
         res.status(200).json(entity);
         return null;

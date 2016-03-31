@@ -13,7 +13,7 @@
        ng-class="{ 'editable' : editMode.enabled }"
        class="row" >
 
-    <div  class="app-container-child col-md-12" ng-show="item.model.children == 0 && editMode.enabled">
+    <div  class="app-container-child col-md-12" ng-show="item.model.children == 0 && editMode.enabled" ng-if="item.model.children == 0">
       <alert type="warning">Drag &amp; drop here an item</alert>
     </div>
 

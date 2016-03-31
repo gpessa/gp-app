@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetBalance', ($filter, balanceService, socket, formats,chartConfiguration) => {
+  .directive('widgetBalance', ($filter, BalanceResource, socket, chartConfiguration) => {
     return {
       'templateUrl' : 'components/widgets/balance/balance.html',
       'require' : '^^item',
@@ -24,64 +24,30 @@ angular
 
         scope.get = function(){
           item.toggleLoading();
-          balanceService.get()
-            .then((balances) => {
-              if(balances.length === 0){
-                scope.create();
-              } else {
-                scope.balances = balances;
-              }
-              socket.syncUpdates('balances');
-            })
-            .catch(error => {
-              scope.error = error;
-            })
+
+          scope.balance = new BalanceResource();
+          scope.balance
+            .$get()
+            .catch(error => scope.error = error)
             .finally(() => item.toggleLoading());
         };
 
-        scope.create = function(){
-          balanceService.create().then(scope.get);
-        };
-
-        scope.update = function(balance){
-          balanceService.update(balance);
-        };
-
-        scope.addReport = function(balance, form){
+        scope.addReport = function(form){
           form.submitted = true;
 
           if(form.$valid){
-            var newReport = angular.copy(balance.newReport);
-            delete balance.newReport;
-            balance.reports.push(newReport);
-            balanceService.update(balance).then(scope.get);
+            var newReport = angular.copy(scope.newReport);
+            scope.newReport = {};
+            scope.balance.reports.push(newReport);
+            scope.balance.$save();
 
             form.submitted = false;
           }
         };
 
         scope.removeReport = function(balance, report){
-          balance.reports.remove(report);
-          balanceService.update(balance).then(scope.get);
-        };
-
-        scope.getReportData = function(balance){
-          return balance.reports.map(function(report){
-            return (report.current + report.saving);
-          });
-        };
-
-        scope.getReportLabels = function(balance){
-          return balance.reports.map(function(report){
-            return $filter('date')(report.date, formats.month) ;
-          });
-        };
-
-        scope.getChartData = function(balance){
-          return {
-            data : scope.getReportData(balance),
-            labels : scope.getReportLabels(balance)
-          };
+          scope.balance.reports.remove(report);
+          scope.balance.$save();
         };
 
         scope.get();

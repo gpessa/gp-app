@@ -31,7 +31,7 @@ function parseResponse(response){
 
 // Gets a list of Cigarettes
 exports.index = function(req, res) {
-  var urlrequest = "http://gps.buienradar.nl/getrr.php?lat=" + req.body.params.lat + "&lon=" + req.body.params.lon;
+  var urlrequest = "http://gps.buienradar.nl/getrr.php?lat=" + req.body.lat + "&lon=" + req.body.lon;
 
   request({
     json:false,
