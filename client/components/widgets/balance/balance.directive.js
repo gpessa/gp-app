@@ -9,17 +9,11 @@ angular
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
-        scope.chartConfiguration = angular.copy(chartConfiguration);
-
-        angular.extend(scope.chartConfiguration.options, {
+        scope.chartConfiguration = angular.extend(chartConfiguration.options, {
           scaleStartValue : 0,
           showTooltips : true,
-          tooltipTemplate: function(obj){
-            return $filter('currency')(obj.value);
-          },
-          scaleLabel: function(obj){
-            return $filter('currency')(obj.value);
-          }
+          tooltipTemplate: (obj) => return $filter('currency')(obj.value),
+          scaleLabel: (obj) => return $filter('currency')(obj.value)
         });
 
         scope.get = function(){

@@ -28,7 +28,7 @@ angular.module('gpAppApp', [
   $locationProvider.html5Mode(true);
 })
 
-.constant('chartConfiguration', {
+.constant('chartConfiguration', return angular.copy({
   options : {
     bezierCurve : false,
     scaleFontColor: '#fff',
@@ -53,7 +53,7 @@ angular.module('gpAppApp', [
     pointStrokeColor: 'rgba(65, 215, 185, 1)',
     strokeColor: 'rgba(255, 255, 255, 1)'
   }]
-})
+}))
 
 .constant('formats', {
   time : 'H:MM',
