@@ -33,15 +33,13 @@ angular
         };
 
         scope.addReport = function(form){
-          form.submitted = true;
-
           if(form.$valid){
             var newReport = angular.copy(scope.newReport);
-            scope.newReport = {};
             scope.balance.reports.push(newReport);
             scope.balance.$save();
 
-            form.submitted = false;
+            scope.newReport = {};
+            form.$setPristine();
           }
         };
 

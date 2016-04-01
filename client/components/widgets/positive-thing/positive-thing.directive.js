@@ -17,19 +17,19 @@ angular
           }
         });
 
-        scope.createItem = function(positiveThing, form) {
+        scope.addThing = function(positiveThing, form) {
           if (form.$valid) {
-            var newItem = angular.copy(positiveThing.newItem);
-            delete positiveThing.newItem;
+            var newThing = angular.copy(positiveThing.newThing);
+            delete positiveThing.newThing;
 
-            positiveThing.list.push(newItem);
+            positiveThing.list.push(newThing);
             positiveThing
               .$save()
               .then(scope.get);
           }
         };
 
-        scope.deleteItem = function(positiveThing, item) {
+        scope.removeThing = function(positiveThing, item) {
           positiveThing.list.remove(item);
           positiveThing
             .$save();
@@ -42,7 +42,7 @@ angular
             .then(scope.get);
         };
 
-        scope.delete = function(positiveThing) {
+        scope.remove = function(positiveThing) {
           positiveThing
             .$remove()
             .then(scope.get);

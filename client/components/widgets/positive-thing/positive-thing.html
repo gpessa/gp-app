@@ -21,7 +21,9 @@
 
     <div class="list_item_data">
       <form ng-submit="addThing(positiveThing, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
-        <input class="form-control" placeholder="Item name" ng-model="positiveThing.newThing.name" name="name" type="text" required/>
+        <div class="form-group">
+          <input class="form-control" placeholder="Item name" ng-model="positiveThing.newThing.name" name="name" type="text" required/>
+        </div>
       </form>
     </div>
   </li>

@@ -22,13 +22,13 @@
     <div class="list_item_data">
       <form ng-submit="addReport(form)" name="form" novalidate>
         <div class="row">
-          <div class="col-md-3" ng-class="{'has-error' : form.submitted && form.date.$error}">
+          <div class="col-md-3 form-group">
             <input type="text" placeholder="Date" class="form-control" uib-datepicker-popup ng-model="newReport.date" is-open="open" ng-focus="open = true" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
           </div>
-          <div class="col-md-3" ng-class="{'has-error' : form.submitted && form.current.$error}">
+          <div class="col-md-3 form-group">
             <input class="form-control" placeholder="Current Account" ng-model="newReport.current" name="current" type="number" required/>
           </div>
-          <div class="col-md-3" ng-class="{'has-error' : form.submitted && form.current.$error}">
+          <div class="col-md-3 form-group">
             <input class="form-control" placeholder="Saving Account" ng-model="newReport.saving" name="saving" type="number" required/>
           </div>
         </div>
@@ -48,13 +48,13 @@
           <div class="col-md-3">{{report.saving | currency}}</div>
           <div class="col-md-3 text-right"
                ng-init="report.total = (report.saving + report.current)"
-               title="{{report.total - reports[$index-1].total | currency}}">
+               title="{{report.total - balance.reports[$index-1].total | currency}}">
             {{report.total | currency}}
           </div>
       </div>
     </div>
   </li>
-  
+
   <li class="list_item extra">
     <canvas class="chart chart-line"
             chart-data="[balance.chart.data]"

@@ -11,23 +11,18 @@ angular
       'link' : function(scope, element, attr, item) {
 
         scope.create = function(form, stock){
-          scope.submitted = true;
-
           if (form.$valid) {
             var stock = new StockResource(scope.newStock);
             stock
               .$create()
               .then(() => {
                 scope.get();
-                scope.resetForm();
+
+                scope.openAdd = false;
+                scope.newStock = {};
+                form.$setPristine();
               });
           }
-        };
-
-        scope.resetForm = function(){
-          scope.submitted = false;
-          scope.openAdd = false;
-          scope.newStock = {};
         };
 
         scope.remove = function(stock){

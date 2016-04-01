@@ -12,7 +12,9 @@
 
       <div class="list_item_data">
         <form ng-submit="create(form)" name="form" novalidate ng-show="openAdd" ng-init="newStock = {}">
-          <input type="text" placeholder="Stock symbol" class="form-control" name="symbol"  ng-model="newStock.symbol" required>
+          <div class="form-group">
+            <input type="text" placeholder="Stock symbol" class="form-control" name="symbol"  ng-model="newStock.symbol" required>
+          </div>
         </form>
       </div>
     </li>

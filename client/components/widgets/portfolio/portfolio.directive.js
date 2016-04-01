@@ -55,8 +55,6 @@ angular
         };
 
         scope.addTransaction = function(portfolio, form){
-          form.submitted = true;
-
           if(form.$valid){
             removeWatch();
             var newTransaction = angular.copy(portfolio.newTransaction);
@@ -66,7 +64,8 @@ angular
               .$save()
               .then(() => scope.get());
 
-            form.submitted = false;
+            portfolio.newTransaction = {};
+            form.$setPristine();
           }
         };
 

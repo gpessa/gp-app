@@ -21,7 +21,9 @@
 
     <div class="list_item_data">
       <form ng-submit="createItem(todoList, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
-        <input class="form-control" placeholder="Item name" ng-model="todoList.newItem.name" name="item" type="text" required/>
+        <div class="form-group">
+          <input class="form-control" placeholder="Item name" ng-model="todoList.newItem.name" name="item" type="text" required/>
+        </div>
       </form>
     </div>
   </li>
