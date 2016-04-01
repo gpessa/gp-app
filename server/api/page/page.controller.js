@@ -112,10 +112,10 @@ export function create(req, res) {
 
 // Updates an existing Page in the DB
 export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  Page.findByIdAsync(req.params.id)
+  console.log(req.params.id);
+
+  Page
+    .findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))

@@ -9,7 +9,7 @@ angular
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
-        scope.chartConfiguration = chartConfiguration;
+        scope.chartConfiguration = angular.copy(chartConfiguration);
 
         scope.get = function(coordinates) {
           item.toggleLoading();

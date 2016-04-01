@@ -2,7 +2,7 @@
 
 (function() {
 
-function AuthService($location, $http, $cookies, $cacheFactory, $q, appConfig, Util, User) {
+function AuthService($location, $window, $http, $cookies, $cacheFactory, $q, appConfig, Util, User) {
   var safeCb = Util.safeCb;
   var currentUser = {};
   var userRoles = appConfig.userRoles || [];
@@ -46,8 +46,9 @@ function AuthService($location, $http, $cookies, $cacheFactory, $q, appConfig, U
      */
     logout() {
       $cookies.remove('token');
-      $cacheFactory.get('$http').removeAll(); //clean the $http cache to reset the cache 
+      $cacheFactory.get('$http').removeAll(); //clean the $http cache to reset the cache
       currentUser = {};
+      // $window.location.reload();
     },
 
     /**

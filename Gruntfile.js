@@ -337,7 +337,7 @@ module.exports = function (grunt) {
         htmlmin: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,
-          removeAttributeQuotes: true,
+          removeAttributeQuotes: false,
           removeEmptyAttributes: true,
           removeRedundantAttributes: true,
           removeScriptTypeAttributes: true,
@@ -436,7 +436,7 @@ module.exports = function (grunt) {
       ],
       test: [
         'newer:babel:client',
-        'sass', 
+        'sass',
       ],
       debug: {
         tasks: [

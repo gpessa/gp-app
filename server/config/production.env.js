@@ -6,11 +6,11 @@
 // You will need to set these on the server you deploy to.
 
 module.exports = {
-  DOMAIN: 'http://localhost:9000',
+  DOMAIN: 'https://gp-app.herokuapp.com',
   SESSION_SECRET: 'gpapp-secret',
 
-  FACEBOOK_ID: '1682487461988337',
-  FACEBOOK_SECRET: '2763fd386451a8216266b30937932159',
+  FACEBOOK_ID: '498987300273296',
+  FACEBOOK_SECRET: '63576130736fc2c732ab3036845c5f8f',
 
   TWITTER_ID: 'app-id',
   TWITTER_SECRET: 'secret',
