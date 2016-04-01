@@ -10,7 +10,7 @@
     </div>
 
     <div class="list_item_data">
-      <input type="text" class="form-control" ng-model="todoList.name" ng-blur="update(todoList)" placeholder="Name"/>
+      <input type="text" class="form-control" ng-model="todoList.name" ng-blur="save(todoList)" placeholder="Name" />
     </div>
   </li>
 
@@ -28,7 +28,7 @@
 
   <li class="list_item" ng-repeat="item in todoList.list">
     <div class="list_item_btn">
-      <a class="btn btn-link-light" ng-click="deleteItem(todoList, item)" icon="fa fa-trash-o"  ></a>
+      <a class="btn btn-link-light" ng-click="deleteItem(todoList, item)" icon="fa fa-trash-o"></a>
     </div>
 
     <div class="list_item_data">

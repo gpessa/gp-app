@@ -3,7 +3,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetPositiveThing', function ($window, $interval, socket, positiveThingService) {
+  .directive('widgetPositiveThing', function ($window, $interval, socket, PositiveThingResource) {
     return {
       'templateUrl' : 'components/widgets/positive-thing/positive-thing.html',
       'require' : '^^item',
@@ -17,52 +17,45 @@ angular
           }
         });
 
-        scope.get = function(){
-          item.toggleLoading();
-          positiveThingService.get()
-            .then((positiveThings) => {
-              scope.positiveThings = positiveThings;
-              socket.syncUpdates('positive-things');
-            })
-            .catch(error => {
-              scope.error = error;
-            })
-            .finally(() => item.toggleLoading());
-        };
+        scope.createItem = function(positiveThing, form) {
+          if (form.$valid) {
+            var newItem = angular.copy(positiveThing.newItem);
+            delete positiveThing.newItem;
 
-        scope.create = function(){
-          positiveThingService
-            .create()
-            .then(scope.get);
-        };
-
-        scope.update = function(positiveThing){
-          positiveThingService
-            .update(positiveThing);
-        };
-
-        scope.remove = function(positiveThing){
-          positiveThingService
-            .remove(positiveThing)
-            .then(scope.get);
-        };
-
-        scope.addThing = function(positiveThing, form){
-          form.submitted = true;
-
-          if(form.$valid){
-            var newThing = angular.copy(positiveThing.newThing);
-            delete positiveThing.newThing;
-            positiveThing.list.push(newThing);
-            positiveThingService.update(positiveThing).then(scope.get);
-
-            form.submitted = false;
+            positiveThing.list.push(newItem);
+            positiveThing
+              .$save()
+              .then(scope.get);
           }
         };
 
-        scope.removeThing = function(positiveThing, thing){
-          positiveThing.list.remove(thing);
-          portfolioService.update(positiveThing).then(scope.get);
+        scope.deleteItem = function(positiveThing, item) {
+          positiveThing.list.remove(item);
+          positiveThing
+            .$save();
+        };
+
+        scope.create = function() {
+          var positiveThing = new PositiveThingResource({});
+          positiveThing
+            .$create()
+            .then(scope.get);
+        };
+
+        scope.delete = function(positiveThing) {
+          positiveThing
+            .$remove()
+            .then(scope.get);
+        };
+
+        scope.save = function(positiveThing) {
+          positiveThing
+            .$save();
+        };
+
+        scope.get = function() {
+          item.toggleLoading();
+          scope.positiveThings = PositiveThingResource.query({}, () => item.toggleLoading());
         };
 
         scope.get();
