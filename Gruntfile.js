@@ -436,7 +436,7 @@ module.exports = function (grunt) {
       ],
       test: [
         'newer:babel:client',
-        'sass',
+        'sass', 
       ],
       debug: {
         tasks: [
