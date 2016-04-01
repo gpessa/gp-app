@@ -8,7 +8,7 @@ angular
       'restrict': 'EA',
       'replace': true,
       'scope': true,
-      'link': function(scope, element, attrs) {
+      'link': function(scope) {
         scope.editMode = editMode;
 
         scope.sortableOption = {

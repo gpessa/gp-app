@@ -4,9 +4,9 @@ angular
   .module('gpAppApp')
   .directive('val', ($filter) => {
     return {
-      'template': '<span ng-if="value"><i class="dot" ng-class="cls"></i> {{value}}</span>',
-      'restrict': 'A',
-      'scope': {
+      'template' : '<span ng-if="value"><i class="dot" ng-class="cls"></i> {{value}}</span>',
+      'restrict' : 'A',
+      'scope' : {
         val: '=',
         isPositive: '=',
         filter: '@'
@@ -42,10 +42,10 @@ angular
   .directive('subMenuBtn', () => {
     return {
       /*jshint multistr: true */
-      'template': '<span uib-dropdown dropdown-append-to-body>\
-                        <a class="btn btn-link-light sub-menu-btn_toggle" icon="fa fa-ellipsis-h" uib-dropdown-toggle title="Show actions menu" on-toggle="toggled(open)"></a>\
-                        <ul class="sub-menu-btn_dropdown" uib-dropdown-menu ng-transclude></ul>\
-                      </span>',
+      'template' : '<span uib-dropdown dropdown-append-to-body>\
+                      <a class="btn btn-link-light sub-menu-btn_toggle" icon="fa fa-ellipsis-h" uib-dropdown-toggle title="Show actions menu" on-toggle="toggled(open)"></a>\
+                      <ul class="sub-menu-btn_dropdown" uib-dropdown-menu ng-transclude></ul>\
+                    </span>',
       'restrict': 'C',
       'transclude': true,
       'replace': true
@@ -72,9 +72,9 @@ angular
 
   .directive('form', function() {
     return {
-      restrict: "E",
-      require: 'form',
-      link: function(scope, element, attrs, formCtrl) {
+      'restrict' : 'E',
+      'require' : 'form',
+      'link' : function(scope, element, attrs, formCtrl) {
         var form = element[0];
         var groups = form.querySelectorAll('.form-group');
 

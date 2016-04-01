@@ -12,7 +12,7 @@ angular
 
         scope.create = function(form, stock){
           if (form.$valid) {
-            var stock = new StockResource(scope.newStock);
+            stock = new StockResource(scope.newStock);
             stock
               .$create()
               .then(() => {

@@ -5,7 +5,7 @@ angular.module('gpAppApp')
     return {
       templateUrl: 'components/test/test.html',
       restrict: 'EA',
-      link: function (scope, element, attrs) {
+      link: function () {
       }
     };
   });

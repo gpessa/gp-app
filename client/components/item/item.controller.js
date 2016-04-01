@@ -56,11 +56,11 @@
 
     toggleSettings() {
       this.isSettingsOpen = !this.isSettingsOpen;
-    };
+    }
 
     toggleLoading() {
       this.isItemLoading = !this.isItemLoading;
-    };
+    }
 
     saveSettings(form) {
       if (form.$valid) {

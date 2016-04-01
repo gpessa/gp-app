@@ -16,10 +16,10 @@
       response.chart = {
         'data' : data,
         'labels' : labels
-      }
+      };
 
       return response;
-    }
+    };
 
     return $resource('/api/balances/:id', {'id' : '@_id'}, {
       get : {

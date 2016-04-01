@@ -27,11 +27,11 @@ function saveUpdates(updates) {
   return function(entity) {
 
     var updated = _.merge(entity, updates, function(oldVal, newVal, key){
-      if(key == 'children'){
+      if(key === 'children'){
 
         newVal = newVal.map(function(item){
           if(!item._id){
-            var item = new Item(item);
+            item = new Item(item);
             item.save();
           }
 

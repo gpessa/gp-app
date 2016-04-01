@@ -28,7 +28,7 @@ angular.module('gpAppApp', [
   $locationProvider.html5Mode(true);
 })
 
-.constant('chartConfiguration', return angular.copy({
+.constant('chartConfiguration', angular.copy({
   options : {
     bezierCurve : false,
     scaleFontColor: '#fff',

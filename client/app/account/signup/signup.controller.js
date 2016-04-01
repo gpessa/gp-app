@@ -16,7 +16,7 @@ class SignupController {
       email: 'nomeecognome@gmail.com',
       password: 'password',
       confirmPassword: 'password'
-    }
+    };
   }
 
   register(form) {

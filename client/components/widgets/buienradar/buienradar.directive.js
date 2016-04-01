@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetBuienradar', ($geolocation, BuienradarResource, userStatus, chartConfiguration, formats) => {
+  .directive('widgetBuienradar', ($geolocation, BuienradarResource, userStatus, chartConfiguration) => {
     return {
       'templateUrl' : 'components/widgets/buienradar/buienradar.html',
       'require' : '^^item',
@@ -13,7 +13,7 @@ angular
 
         scope.get = function(coordinates) {
           item.toggleLoading();
-          
+
           scope.buienradar = new BuienradarResource({
             'lat' : coordinates.coords.latitude,
             'lon' : coordinates.coords.longitude

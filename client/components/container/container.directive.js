@@ -12,8 +12,7 @@ angular.module('gpAppApp').directive('container', (editMode) => {
 
       scope.sortableOption = {
         'allow_cross' : true,
-        'stop' : (children, dropped_index) => {
-          // debugger;
+        'stop' : () => {
           scope.item.save();
         }
       };

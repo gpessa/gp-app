@@ -5,7 +5,6 @@
 class PageController {
   constructor($route, $filter, PagesResource) {
     var app = new PagesResource();
-    this.app = app;
     var pageid = $route.current.params.name;
 
     app.$get().then(() => {
@@ -15,9 +14,7 @@ class PageController {
         var page = $filter('filter')(app.pages, {'id' : pageid});
         this.child = page.length ? page[0].child : app.pages[0].child;
       }
-    })
-
-
+    });
   }
 }
 

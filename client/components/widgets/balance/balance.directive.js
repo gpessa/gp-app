@@ -12,8 +12,8 @@ angular
         scope.chartConfiguration = angular.extend(chartConfiguration.options, {
           scaleStartValue : 0,
           showTooltips : true,
-          tooltipTemplate: (obj) => return $filter('currency')(obj.value),
-          scaleLabel: (obj) => return $filter('currency')(obj.value)
+          tooltipTemplate: (obj) => { return $filter('currency')(obj.value); },
+          scaleLabel: (obj) => { return $filter('currency')(obj.value); }
         });
 
         scope.get = function(){

@@ -9,5 +9,5 @@ angular
         controller: 'PageController',
         controllerAs: '$ctrl',
         authenticate: true
-      })
+      });
   });

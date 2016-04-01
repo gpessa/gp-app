@@ -9,10 +9,10 @@ angular
       'restrict' : 'CAE',
       'replace' : true,
       'scope' : true,
-      'link' : function(scope, attrs, element){
+      'link' : function(scope){
         scope.toggle = function(){
           editMode.toggle();
-        }
+        };
       }
     };
   });

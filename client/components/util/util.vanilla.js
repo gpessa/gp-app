@@ -4,7 +4,7 @@
 // if that function is already defined in "Array.prototype",
 // then "Object.defineProperty" will throw an exception
 
-Object.defineProperty(Array.prototype, "remove", {
+Object.defineProperty(Array.prototype, 'remove', {
     // Specify "enumerable" as "false" to prevent function enumeration
     enumerable: false,
 

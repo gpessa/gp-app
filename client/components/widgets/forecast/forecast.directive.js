@@ -21,7 +21,7 @@ angular
             'rain'                : 'iw-heavy-rain-1',
             'cloudy'              : 'iw-mostly-cloudy-2'
           }[icon];
-        }
+        };
 
         scope.get = function(coordinates) {
           item.toggleLoading();
