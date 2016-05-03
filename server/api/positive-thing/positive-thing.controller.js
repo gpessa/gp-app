@@ -64,7 +64,10 @@ function handleError(res, statusCode) {
 
 // Gets a list of PositiveThings
 export function index(req, res) {
-  PositiveThing.findAsync()
+  var limit = req.params.limit || 5;
+
+  PositiveThing.find()
+    .limit(limit)
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

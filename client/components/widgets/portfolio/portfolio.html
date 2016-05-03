@@ -93,7 +93,7 @@
       </div>
     </li>
 
-    <li class="list_item" ng-repeat="transaction in portfolio.transactions"  ng-class="{'disabled' : transaction.status == 'close'}">
+    <li class="list_item" ng-repeat="transaction in (portfolio.transactions | order)"  ng-class="{'disabled' : transaction.status == 'close'}">
       <!-- <pre>{{transaction | json}}</pre> -->
       <div class="list_item_btn">
         <ul class="sub-menu-btn">
@@ -118,7 +118,7 @@
             {{transaction.symbol}}
           </div>
           <div class="col-md-1">
-            {{transaction.date | date}}
+            {{transaction.date | date:formats.date}}
           </div>
           <div class="col-md-1">
             {{transaction.operation | operation:operations}}
@@ -142,7 +142,7 @@
             {{transaction.total | currency}}
           </div>
           <div class="col-md-2 text-right">
-            <span val="transaction.delta" filter="currency"></span>
+            <value-indicator value="transaction.delta" filter="currency"></value-indicator>
           </div>
         </div>
       </div>
@@ -154,7 +154,9 @@
         <dd ng-bind="portfolio.recap.total | currency"></dd> -->
 
         <dt>Portfolio overral return</dt>
-        <dd val="portfolio.recap.overralreturn" filter="currency"></dd>
+        <dd>
+          <value-indicator value="portfolio.recap.overralreturn" filter="currency"></value-indicator>
+        </dd>
 
         <dt>Portfolio transactions cost</dt>
         <dd>{{portfolio.recap.txcost | currency}}</dd>
@@ -163,7 +165,9 @@
         <dd ng-init="portfolio.tax = ((portfolio.recap.overralreturn - portfolio.recap.txcost) / 100 * item.model.configuration.taxation)">{{portfolio.tax | currency}}</dd>
 
         <dt>Portfolio NET overral return<dt>
-        <dd val="(portfolio.recap.overralreturn - portfolio.tax)" filter="currency"></dd>
+        <dd>
+          <value-indicator value="(portfolio.recap.overralreturn - portfolio.tax)" filter="currency"></value-indicator>
+        </dd>
       </dl>
     </li>
 

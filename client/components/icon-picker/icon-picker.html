@@ -5,9 +5,9 @@
   <ul uib-dropdown-menu>
     <li>
       <a class="btn"
-         icon="fa {{icon}}"
          ng-click="select(icon)"
-         ng-repeat="icon in icons | offset: currentPage * iconsPerPage | limitTo: iconsPerPage"></a>
+         ng-repeat="icon in icons | offset: currentPage * iconsPerPage | limitTo: iconsPerPage">
+      </a>
     </li>
 
     <li>

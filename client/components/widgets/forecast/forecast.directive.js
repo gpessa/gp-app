@@ -11,7 +11,7 @@ angular
       'link' : function(scope, element, attr, item) {
         scope.formats = formats;
 
-        scope.getIcon = function(icon){
+        scope.getIcon = (icon) => {
           return {
             'clear-day'           : 'iw-sun-1',
             'clear-night'         : 'iw-moon-1',
@@ -23,7 +23,7 @@ angular
           }[icon];
         };
 
-        scope.get = function(coordinates) {
+        scope.get = (coordinates) => {
           item.toggleLoading();
 
           scope.forecast = new ForecastResource({
@@ -37,7 +37,7 @@ angular
             .finally(() => item.toggleLoading());
         };
 
-        scope.getData = function(){
+        scope.getData = () => {
           item.toggleLoading();
 
           $geolocation

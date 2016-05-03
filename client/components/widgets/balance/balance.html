@@ -43,7 +43,7 @@
     </div>
     <div class="list_item_data">
       <div class="row">
-          <div class="col-md-3">{{report.date | date}}</div>
+          <div class="col-md-3">{{report.date | date:formats.date}}</div>
           <div class="col-md-3">{{report.current | currency}}</div>
           <div class="col-md-3">{{report.saving | currency}}</div>
           <div class="col-md-3 text-right"

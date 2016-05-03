@@ -11,13 +11,13 @@ angular
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
         item.addConfigurations({
-          'Thing' : {
+          'limit' : {
             type: 'number',
             title: 'Positive things to show'
           }
         });
 
-        scope.addThing = function(positiveThing, form) {
+        scope.addThing = (positiveThing, form) => {
           if (form.$valid) {
             var newThing = angular.copy(positiveThing.newThing);
             delete positiveThing.newThing;
@@ -29,33 +29,33 @@ angular
           }
         };
 
-        scope.removeThing = function(positiveThing, item) {
+        scope.removeThing = (positiveThing, item) => {
           positiveThing.list.remove(item);
           positiveThing
             .$save();
         };
 
-        scope.create = function() {
+        scope.create = () => {
           var positiveThing = new PositiveThingResource({});
           positiveThing
             .$create()
             .then(scope.get);
         };
 
-        scope.remove = function(positiveThing) {
+        scope.remove = (positiveThing) => {
           positiveThing
             .$remove()
             .then(scope.get);
         };
 
-        scope.save = function(positiveThing) {
+        scope.save = (positiveThing) => {
           positiveThing
             .$save();
         };
 
-        scope.get = function() {
+        scope.get = () => {
           item.toggleLoading();
-          scope.positiveThings = PositiveThingResource.query({}, () => item.toggleLoading());
+          scope.positiveThings = PositiveThingResource.query(item.model.configuration, () => item.toggleLoading());
         };
 
         scope.get();

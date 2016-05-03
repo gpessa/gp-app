@@ -1,4 +1,4 @@
-.dot{
+.value-indicator{
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -7,10 +7,10 @@
   position: relative;
   top: 1px;
 
-  &.dot-success{
+  &.value-indicator-success{
     background: $brand-success;
   }
-  &.dot-danger{
+  &.value-indicator-danger{
     background: $brand-danger;
   }
 }

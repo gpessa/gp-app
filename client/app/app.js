@@ -57,9 +57,9 @@ angular.module('gpAppApp', [
 
 .constant('formats', {
   time : 'H:MM',
-  date : 'dd MMM yyyy',
-  month : 'MMM yyyy',
-  dateTime : 'dd MMM yyyy h:mm:ss a'
+  date : 'dd MMM yy',
+  month : 'MMM yy',
+  dateTime : 'dd MMM yy h:mm:ss a'
 })
 
 .config(function (uibDatepickerConfig, uibDatepickerPopupConfig, formats) {

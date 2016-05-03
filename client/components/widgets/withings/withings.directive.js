@@ -19,7 +19,7 @@ angular
           'value': 'fats'
         }];
 
-        scope.createChart = function() {
+        scope.createChart = () => {
           var withings = new WithingsResource();
 
           withings
@@ -68,7 +68,7 @@ angular
             .finally(() => item.toggleLoading());
         };
 
-        scope.select = function(type) {
+        scope.select = (type) => {
           item.toggleLoading();
           scope.selectedType = type;
           scope.createChart();

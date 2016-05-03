@@ -2,6 +2,14 @@
 
 angular
   .module('gpAppApp')
+
+  .filter('offset', function() {
+    return function(input, start) {
+      start = parseInt(start, 10);
+      return input.slice(start);
+    };
+  })
+
   .directive('iconPicker', ($timeout) => {
     return {
       'templateUrl' : 'components/icon-picker/icon-picker.html',

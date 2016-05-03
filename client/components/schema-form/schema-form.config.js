@@ -1,30 +1,25 @@
 // 'use strict';
-// angular.module("schemaForm").run(["$templateCache", function($templateCache) {
 //
-// angular.module('schemaForm').config(function(schemaFormProvider,  schemaFormDecoratorsProvider, sfPathProvider) {
+// angular
+//   .module("schemaForm")
+//   .run(function($templateCache) {
 //
-//     var percentage = function(name, schema, options) {
-//       if (schema.type === 'string' && (schema.format === 'percentage')) {
+//   })
+//   .config(function(schemaFormProvider,  schemaFormDecoratorsProvider, sfPathProvider) {
+//
+//     var range = function(name, schema, options) {
+//       if (schema.type === 'string' && (schema.format === 'range')) {
 //         var f = schemaFormProvider.stdFormObj(name, schema, options);
 //         f.key  = options.path;
-//         f.type = 'percentage';
+//         f.type = 'range';
 //         options.lookup[sfPathProvider.stringify(options.path)] = f;
 //         return f;
 //       }
 //     };
 //
-//     schemaFormProvider.defaults.string.unshift(percentage);
+//     schemaFormProvider.defaults.string.unshift(range);
 //
-//     //Add to the bootstrap directive
-//     schemaFormDecoratorsProvider.addMapping(
-//       'bootstrapDecorator',
-//       'percentage',
-//       'schema-form/template/percentage.html'
-//     );
+//     schemaFormDecoratorsProvider.addMapping('bootstrapDecorator', 'range', 'components/schema-form/range.html');
+//     schemaFormDecoratorsProvider.createDirective('range','components/schema-form/range.html');
 //
-//     schemaFormDecoratorsProvider.createDirective(
-//       'percentage',
-//       'schema-form/template/percentage.html'
-//     );
-//   }
-// );
+//   });

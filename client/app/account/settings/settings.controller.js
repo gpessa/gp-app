@@ -3,7 +3,6 @@
 class SettingsController {
   //start-non-standard
   errors = {};
-  submitted = false;
   //end-non-standard
 
   constructor($filter, Auth) {
@@ -11,8 +10,6 @@ class SettingsController {
   }
 
   changePassword(form) {
-    this.submitted = true;
-
     if (form.$valid) {
       this.Auth.changePassword(this.user.oldPassword, this.user.newPassword)
         .then(() => {

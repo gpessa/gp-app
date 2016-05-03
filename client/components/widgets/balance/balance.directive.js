@@ -2,13 +2,14 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetBalance', ($filter, BalanceResource, socket, chartConfiguration) => {
+  .directive('widgetBalance', ($filter, BalanceResource, socket, chartConfiguration, formats) => {
     return {
       'templateUrl' : 'components/widgets/balance/balance.html',
       'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
+        scope.formats = formats;
         scope.chartConfiguration = angular.copy(chartConfiguration);
 
         angular.extend(scope.chartConfiguration.options, chartConfiguration.options, {
@@ -18,7 +19,7 @@ angular
           scaleLabel: (obj) => { return $filter('currency')(obj.value); }
         });
 
-        scope.get = function(){
+        scope.get = () => {
           item.toggleLoading();
 
           scope.balance = new BalanceResource();
@@ -28,7 +29,7 @@ angular
             .finally(() => item.toggleLoading());
         };
 
-        scope.addReport = function(form){
+        scope.addReport = (form) => {
           if(form.$valid){
             var newReport = angular.copy(scope.newReport);
             scope.balance.reports.push(newReport);
@@ -39,7 +40,7 @@ angular
           }
         };
 
-        scope.removeReport = function(balance, report){
+        scope.removeReport = (balance, report) => {
           scope.balance.reports.remove(report);
           scope.balance.$save();
         };

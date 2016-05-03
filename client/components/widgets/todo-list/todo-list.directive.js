@@ -10,7 +10,7 @@ angular
       'scope': true,
       'link': function(scope, element, attr, item) {
 
-        scope.createItem = function(todoList, todoListForm) {
+        scope.createItem = (todoList, todoListForm) => {
           if (todoListForm.$valid) {
             var newItem = angular.copy(todoList.newItem);
             delete todoList.newItem;
@@ -22,31 +22,31 @@ angular
           }
         };
 
-        scope.deleteItem = function(todoList, item) {
+        scope.deleteItem = (todoList, item) => {
           todoList.list.remove(item);
           todoList
             .$save();
         };
 
-        scope.create = function() {
+        scope.create = () => {
           var todoList = new TodoListResource({});
           todoList
             .$create()
             .then(scope.get);
         };
 
-        scope.delete = function(todoList) {
+        scope.delete = (todoList) => {
           todoList
             .$remove()
             .then(scope.get);
         };
 
-        scope.save = function(todoList) {
+        scope.save = (todoList) => {
           todoList
             .$save();
         };
 
-        scope.get = function() {
+        scope.get = () => {
           item.toggleLoading();
           scope.todoLists = TodoListResource.query({}, () => item.toggleLoading());
         };

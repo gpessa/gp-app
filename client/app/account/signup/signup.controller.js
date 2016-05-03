@@ -4,7 +4,6 @@ class SignupController {
   //start-non-standard
   user = {};
   errors = {};
-  submitted = false;
   //end-non-standard
 
   constructor(Auth, $location) {
@@ -20,8 +19,6 @@ class SignupController {
   }
 
   register(form) {
-    this.submitted = true;
-
     if (form.$valid) {
       this.Auth.createUser({
         name: this.user.name,

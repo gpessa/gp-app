@@ -2,14 +2,16 @@
 
 angular
   .module('gpAppApp')
-  .directive('widgetPortfolio', function ($window, $interval, socket, userStatus, PortfolioResource) {
+  .directive('widgetPortfolio', function ($window, $interval, socket, userStatus, PortfolioResource, formats) {
     return {
       'templateUrl' : 'components/widgets/portfolio/portfolio.html',
       'require' : '^^item',
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
+        scope.formats = formats;
         scope.item = item;
+
         var removeWatch = angular.noop;
 
         item.addConfigurations({

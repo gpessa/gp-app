@@ -18,11 +18,11 @@ angular
           }
         });
 
-        scope.smoke = function(){
+        scope.smoke = () => {
           scope.cigarettes.$smoke();
         };
 
-        scope.get = function(){
+        scope.get = () => {
           item.toggleLoading();
 
           scope.cigarettes = new CigaretteResource();

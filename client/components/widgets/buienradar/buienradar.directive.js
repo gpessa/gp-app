@@ -11,7 +11,7 @@ angular
       'link' : function(scope, element, attr, item) {
         scope.chartConfiguration = angular.copy(chartConfiguration);
 
-        scope.get = function(coordinates) {
+        scope.get = (coordinates) => {
           item.toggleLoading();
 
           scope.buienradar = new BuienradarResource({
@@ -25,7 +25,7 @@ angular
             .finally(() => item.toggleLoading());
         };
 
-        scope.createChart = function(){
+        scope.createChart = () => {
           item.toggleLoading();
 
           $geolocation

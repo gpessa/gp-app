@@ -32,11 +32,11 @@
           <div class="col-md-6">{{stock.data.name | capitalize}} ({{stock.symbol}})</div>
 
           <div class="col-md-2 text-right">
-            <span val="stock.data.change" filter="currency"></span>
+            <value-indicator value="stock.data.change" filter="currency"></value-indicator>
           </div>
 
           <div class="col-md-2 text-right">
-            <span val="stock.data.changeInPercent" filter="percentage"></span>
+            <value-indicator value="stock.data.changeInPercent" filter="percentage"></value-indicator>
           </div>
 
           <div class="col-md-2 text-right">

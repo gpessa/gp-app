@@ -4,42 +4,42 @@
 
   <form class="form" name="form" ng-submit="vm.register(form)" novalidate>
 
-    <div class="form-group" ng-class="{ 'has-error': form.name.$invalid && vm.submitted }">
+    <div class="form-group" ng-class="{ 'has-error': form.name.$invalid && form.$submitted }">
       <label class="control-label">Name</label>
       <input type="text" name="name" class="form-control" ng-model="vm.user.name" required/>
 
-      <div ng-messages="form.name.$error" ng-if="vm.submitted" class="help-block">
+      <div ng-messages="form.name.$error" ng-if="form.$submitted" class="help-block">
         <div ng-message="required">This is required.</div>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error': form.email.$invalid && vm.submitted }">
+    <div class="form-group" ng-class="{ 'has-error': form.email.$invalid && form.$submitted }">
       <label class="control-label">Email</label>
       <input type="email" name="email" class="form-control" ng-model="vm.user.email" required mongoose-error/>
 
-      <div ng-messages="form.email.$error" ng-if="vm.submitted" class="help-block">
+      <div ng-messages="form.email.$error" ng-if="form.$submitted" class="help-block">
         <div ng-message="email">Doesn't look like a valid email.</div>
         <div ng-message="required">What's your email address?</div>
         <div ng-message="mongoose">{{ errors.email }}</div>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && vm.submitted }">
+    <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && form.$submitted }">
       <label class="control-label">Password</label>
       <input type="password" name="password" class="form-control" ng-model="vm.user.password" ng-minlength="3" required mongoose-error/>
 
-      <div ng-messages="form.password.$error" ng-if="vm.submitted" class="help-block">
+      <div ng-messages="form.password.$error" ng-if="form.$submitted" class="help-block">
         <div ng-message="minlength">Password must be at least 3 characters.</div>
         <div ng-message="required">Password must be at least 3 characters.</div>
         <div ng-message="mongoose">{{ errors.password }}</div>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error': form.confirmPassword.$invalid && vm.submitted }">
+    <div class="form-group" ng-class="{ 'has-error': form.confirmPassword.$invalid && form.$submitted }">
       <label class="control-label">Confirm Password</label>
       <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.password" ng-minlength="3" required/>
 
-      <div ng-messages="form.confirmPassword.$error" ng-if="vm.submitted" class="help-block">
+      <div ng-messages="form.confirmPassword.$error" ng-if="form.$submitted" class="help-block">
         <div ng-message="minlength">Password must be at least 3 characters.</div>
         <div ng-message="required">Password must be at least 3 characters.</div>
         <div ng-message="match">Passwords must match.</div>
