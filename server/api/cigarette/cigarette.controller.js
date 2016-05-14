@@ -9,34 +9,9 @@
 
 'use strict';
 
-var _ = require('lodash');
-var Cigarette = require('./cigarette.model');
-
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
-}
-
-function responseWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
-      res.status(statusCode).json(entity);
-    }
-  };
-}
-
-function handleEntityNotFound(res) {
-  return function(entity) {
-    if (!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
-}
+import _ from 'lodash';
+import * as defaultHandlers from '../handlers';
+import Cigarette from './cigarette.model';
 
 function handleEntityNotFoundCreateOne(req, res) {
   return function(entity) {
@@ -47,73 +22,73 @@ function handleEntityNotFoundCreateOne(req, res) {
   };
 }
 
-function saveUpdates(updates) {
-  return function(entity) {
-    var updated = _.merge(entity, updates);
-    return updated.saveAsync()
-      .spread(function(updated) {
-        return updated;
-      });
-  };
-}
 
-function addCigarette() {
+function smokeCigarette(updates) {
   return function(entity) {
-    var updates =  _.clone(entity.toObject());
     var date = new Date(new Date().setHours(0,0,0,0));
-    var dateItem = _.find(updates.days , function(o) { return o.date.toString() === date.toString(); });
-
+    var dateItem = _.find(entity.days , function(o) {
+      return o.date.toString() === date.toString();
+    });
 
     if (dateItem){
-      var index = updates.days.indexOf(dateItem);
-      updates.days[index].count = updates.days[index].count + 1;
+      var index = entity.days.indexOf(dateItem);
+      entity.days[index].count += 1;
     } else {
-      updates.days.push({
+      entity.days.unshift({
         'date' : date,
         'count'  : 1
       });
     }
 
-    var updated = _.merge(entity, updates);
-
-    return updated.saveAsync()
-      .spread(function(updated) {
+    return entity
+      .save()
+      .then(updated => {
         return updated;
       });
-  };
+  }
 }
 
+
+function reorder(){
+  return function(entity){
+    var e = entity.toObject();
+    e.days.sort(function(m1, m2) {
+      return m1.date < m2.date;
+    });
+    return e;
+  }
+}
+
+
 // Gets a list of Cigarettes
-exports.index = function(req, res) {
-  Cigarette.findOne({
-      'user' : req.user._id
-    })
+export function index(req, res) {
+  return Cigarette
+    .findOne({'user' : req.user._id})
     .then(handleEntityNotFoundCreateOne(req, res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+    .then(defaultHandlers.respondWithResult(res))
+    .catch(defaultHandlers.handleError(res));
 };
 
 
 
 // Creates a new Cigarette in the DB
 export function create(req, res) {
-  req.body = {
-    'user' : req.user._id,
-    'days' : []
-  }
+  req.body.user = req.user._id;
+  req.body.days = [];
 
-  Cigarette
-    .createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  return Cigarette
+    .create(req.body)
+    .then(defaultHandlers.respondWithResult(res, 201))
+    .catch(defaultHandlers.handleError(res));
 }
 
 
 // Gets a single Cigarette from the DB
-exports.smoke = function(req, res) {
-  Cigarette.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(addCigarette(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+export function smoke(req, res) {
+  return Cigarette
+    .findById(req.params.id)
+    .then(defaultHandlers.handleEntityNotFound(res))
+    .then(smokeCigarette(res))
+    .then(defaultHandlers.respondWithResult(res))
+    .catch(defaultHandlers.handleError(res));
 };

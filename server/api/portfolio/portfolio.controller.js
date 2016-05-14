@@ -10,24 +10,10 @@
 'use strict';
 
 import _ from 'lodash';
-var Portfolio = require('./portfolio.model');
 import yahooFinance from 'yahoo-finance';
+import Portfolio from './portfolio.model';
+import * as defaultHandlers from '../handlers';
 
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
-}
-
-function responseWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
-      res.status(statusCode).json(entity);
-    }
-  };
-}
 
 function responseWithDecoratedResult(res, statusCode){
   return function(portfolios) {
@@ -56,6 +42,7 @@ function responseWithDecoratedResult(res, statusCode){
             });
           } else {
             portfolios = portfolios.map(function(portfolio, index){
+
               portfolio.transactions = portfolio.transactions.map(function(transaction){
                 var marketprice = _.filter(result, {'symbol' : transaction.symbol})[0].bid;
                 var value  = (transaction.sellprice || marketprice);
@@ -74,10 +61,12 @@ function responseWithDecoratedResult(res, statusCode){
                 return transaction;
               });
 
-              var txcost = _.sum(portfolio.transactions, function(t) { return t.txcost; });
-              var total = _.sum(portfolio.transactions, function(t) { return t.total; });
-              var delta = _.sum(portfolio.transactions, function(t) { return t.delta; });
+              var txcost = _.sumBy(portfolio.transactions, function(t) { return t.txcost; });
+              var total = _.sumBy(portfolio.transactions, function(t) { return t.total; });
+              var delta = _.sumBy(portfolio.transactions, function(t) { return t.delta; });
               var overralreturn = delta - txcost;
+
+              portfolio = portfolio.toObject();
 
               portfolio.recap = {
                 'txcost' : txcost,
@@ -88,10 +77,8 @@ function responseWithDecoratedResult(res, statusCode){
 
               return portfolio;
             });
-
-            res.status(200).json(portfolios);
           }
-
+          res.status(200).json(portfolios);
         });
       } else {
         res.status(200).json(portfolios);
@@ -102,81 +89,50 @@ function responseWithDecoratedResult(res, statusCode){
   };
 }
 
-function handleEntityNotFound(res) {
-  return function(entity) {
-    if (!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
-}
 
-function saveUpdates(updates) {
-  return function(entity) {
-    var updated = _.merge(entity, updates);
-    updated.transactions =  updates.transactions;
-
-    return updated.saveAsync()
-      .spread(updated => {
-        return updated;
-      });
-  };
-}
-
-function removeEntity(res) {
-  return function(entity) {
-    if (entity) {
-      return entity.removeAsync()
-        .then(() => {
-          res.status(204).end();
-        });
-    }
-  };
-}
 
 // Gets a list of Portfolios
 export function index(req, res) {
-  Portfolio
-    .findAsync({
-      'user' : req.user._id
-    })
+  return Portfolio
+    .find({'user' : req.user._id})
     .then(responseWithDecoratedResult(res))
-    .catch(handleError(res));
+    .catch(defaultHandlers.handleError(res));
 }
 
 // Gets a single Portfolio from the DB
 export function show(req, res) {
-  Portfolio.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  return Portfolio
+    .findById(req.params.id)
+    .then(defaultHandlers.handleEntityNotFound(res))
+    .then(responseWithDecoratedResult(res))
+    .catch(defaultHandlers.handleError(res));
 }
 
 // Creates a new Portfolio in the DB
 export function create(req, res) {
   req.body.user = req.user._id;
 
-  Portfolio
-    .createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  return Portfolio
+    .create(req.body)
+    .then(responseWithDecoratedResult(res, 201))
+    .catch(defaultHandlers.handleError(res));
 }
 
 // Updates an existing Portfolio in the DB
 export function update(req, res) {
-  Portfolio
-    .findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
+  return Portfolio
+    .findById(req.params.id)
+    .then(defaultHandlers.handleEntityNotFound(res))
+    .then(defaultHandlers.saveUpdates(req.body))
     .then(responseWithDecoratedResult(res))
-    .catch(handleError(res));
+    .catch(defaultHandlers.handleError(res));
 }
 
 // Deletes a Portfolio from the DB
 export function destroy(req, res) {
-  Portfolio.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  return Portfolio
+    .findById(req.params.id)
+    .then(defaultHandlers.handleEntityNotFound(res))
+    .then(defaultHandlers.removeEntity(res))
+    .catch(defaultHandlers.handleError(res));
 }

@@ -5,7 +5,7 @@ var controller = require('./positive-thing.controller');
 
 var router = express.Router();
 
-router.get('/limit/:limit', controller.index);
+router.get('/limit/:limit*?', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/tests', require('./api/test'));
   app.use('/api/items', require('./api/item'));
   app.use('/api/pages', require('./api/page'));
   app.use('/api/forecast', require('./api/forecast'));
@@ -19,10 +20,10 @@ export default function(app) {
   app.use('/api/buienradar', require('./api/buienradar'));
   app.use('/api/cigarette', require('./api/cigarette'));
   app.use('/api/withings', require('./api/withings'));
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/stock', require('./api/stock'));
   app.use('/api/users', require('./api/user'));
-  app.use('/auth', require('./auth'));
+
+  app.use('/auth', require('./auth').default);
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

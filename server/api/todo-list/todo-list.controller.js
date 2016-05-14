@@ -1,65 +1,56 @@
 'use strict';
 
-var _ = require('lodash');
-var TodoList = require('./todo-list.model');
+import _ from 'lodash';
+import TodoList from './todo-list.model';
+import * as defaultHandlers from '../handlers';
 
-// Get list of todoLists
-exports.index = function(req, res) {
-  TodoList.find({}).sort('-date').exec(function (err, todoLists) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(todoLists);
-  });
-};
 
-// Get a single todoList
-exports.show = function(req, res) {
-  TodoList.findById(req.params.id, function (err, todoList) {
-    if(err) { return handleError(res, err); }
-    if(!todoList) { return res.status(404).send('Not Found'); }
-    return res.json(todoList);
-  });
-};
+
+// Gets a list of todoList
+export function index(req, res) {
+  return TodoList
+    .find({'user' : req.user._id})
+    .exec()
+    .then(defaultHandlers.respondWithResult(res))
+    .catch(defaultHandlers.handleError(res));
+}
+
+
 
 // Creates a new todoList in the DB.
-exports.create = function(req, res) {
-  req.body.lastupdate = new Date();
-  TodoList.create(req.body, function(err, todoList) {
-    if(err) { return handleError(res, err); }
-    return res.status(201).json(todoList);
-  });
+export function create(req, res) {
+  req.body.user = req.user._id;
+
+  return TodoList
+    .create(req.body)
+    .then(defaultHandlers.respondWithResult(res, 201))
+    .catch(defaultHandlers.handleError(res));
 };
+
+
+
+// Deletes a todoList from the DB
+export function destroy(req, res) {
+  return TodoList
+    .findById(req.params.id)
+    .exec()
+    .then(defaultHandlers.handleEntityNotFound(res))
+    .then(defaultHandlers.removeEntity(res))
+    .catch(defaultHandlers.handleError(res));
+}
+
+
 
 // Updates an existing todoList in the DB.
-exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  TodoList.findById(req.params.id, function (err, todoList) {
-    if (err) { return handleError(res, err); }
-    if(!todoList) { return res.status(404).send('Not Found'); }
-
-    // var updated = _.merge(todoList, req.body);
-    todoList.name = req.body.name;
-    todoList.list = req.body.list;
-    todoList.lastupdate = new Date();
-
-    todoList.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(todoList);
-    });
-  });
+export function update(req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  return TodoList
+    .findById(req.params.id)
+    .exec()
+    .then(defaultHandlers.handleEntityNotFound(res))
+    .then(defaultHandlers.saveUpdates(req.body))
+    .then(defaultHandlers.respondWithResult(res))
+    .catch(defaultHandlers.handleError(res));
 };
-
-// Deletes a todoList from the DB.
-exports.destroy = function(req, res) {
-  TodoList.findById(req.params.id, function (err, todoList) {
-    if(err) { return handleError(res, err); }
-    if(!todoList) { return res.status(404).send('Not Found'); }
-    todoList.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.status(204).send('No Content');
-    });
-  });
-};
-
-function handleError(res, err) {
-  return res.status(500).send(err);
-}

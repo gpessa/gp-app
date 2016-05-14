@@ -1,8 +1,7 @@
 'use strict';
 
-var WithingsService = require('./withings.service');
-var _ = require('lodash');
-
+import _ from 'lodash';
+import WithingsService from './withings.service';
 
 
 var getMeasure = function(measures, type) {

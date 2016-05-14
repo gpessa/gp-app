@@ -1,7 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
-var request = require('request');
+import request from 'request';
 
 function parseResponse(response){
   var labels =[];

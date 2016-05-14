@@ -1,21 +1,26 @@
 'use strict';
 
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+import mongoose from 'mongoose';
+
+var SinglePageSchema = new mongoose.Schema({
+  title : String,
+  icon : String,
+  child : {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Item'
+  }
+});
 
 var PageSchema = new mongoose.Schema({
   user : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  pages : [{
-    id: String,
-    title : String,
-    icon : String,
-    child : {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Item'
-    }
-  }]
+  pages : [SinglePageSchema]
 });
 
+SinglePageSchema
+  .virtual('url')
+  .get(() => { return this.title.toLowerCase().replace(/ /g,"-");});
+  
 export default mongoose.model('Page', PageSchema);

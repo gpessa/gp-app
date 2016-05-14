@@ -39,7 +39,7 @@ function saveUpdates(updates) {
     entity.transactions = updates.transactions;
     var updated = entity;
 
-    return updated.saveAsync()
+    return updated.save()
       .spread(updated => {
         return updated;
       });
@@ -49,7 +49,7 @@ function saveUpdates(updates) {
 function removeEntity(res) {
   return function(entity) {
     if (entity) {
-      return entity.removeAsync()
+      return entity.remove()
         .then(() => {
           res.status(204).end();
         });
@@ -102,7 +102,7 @@ function responseWithDecoratedResult(res, statusCode){
 // Gets a list of Stocks
 export function index(req, res) {
   Stock
-    .findAsync({
+    .find({
       'user' : req.user._id
     })
     .then(responseWithDecoratedResult(res))
@@ -111,7 +111,7 @@ export function index(req, res) {
 
 // Gets a single Stock from the DB
 export function show(req, res) {
-  Stock.findByIdAsync(req.params.id)
+  Stock.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -121,7 +121,7 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.user = req.user._id;
 
-  Stock.createAsync(req.body)
+  Stock.create(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 }
@@ -132,7 +132,7 @@ export function update(req, res) {
     delete req.body._id;
   }
 
-  Stock.findByIdAsync(req.params.id)
+  Stock.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(responseWithResult(res))
@@ -141,7 +141,7 @@ export function update(req, res) {
 
 // Deletes a Stock from the DB
 export function destroy(req, res) {
-  Stock.findByIdAsync(req.params.id)
+  Stock.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

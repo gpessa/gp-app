@@ -8,7 +8,7 @@
   <h1 ng-class="{'text-danger' : cigarettes.days[0].count > item.model.configuration.threshold}">{{cigarettes.days[0].count || 0}}</h1>
 </div>
 
-<hr  ng-if="cigarettes.days[0].length"/>
+<hr ng-if="cigarettes.days[0].length"/>
 
 <ul class="list">
   <li class="list_item" ng-repeat="day in cigarettes.days" ng-if="$index != 0">

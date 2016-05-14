@@ -1,7 +1,8 @@
 'use strict';
 
 import crypto from 'crypto';
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+import mongoose from 'mongoose';
+mongoose.Promise = require('bluebird');
 import {Schema} from 'mongoose';
 
 const authTypes = ['withings', 'twitter', 'facebook', 'google'];
@@ -16,7 +17,16 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
-  password: String,
+  password: {
+    type: String,
+    required: function() {
+      if (authTypes.indexOf(this.provider) === -1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
   provider: String,
   salt: String,
   facebook: {},
@@ -78,7 +88,7 @@ UserSchema
   .path('email')
   .validate(function(value, respond) {
     var self = this;
-    return this.constructor.findOneAsync({ email: value })
+    return this.constructor.findOne({ email: value }).exec()
       .then(function(user) {
         if (user) {
           if (self.id === user.id) {
@@ -107,19 +117,23 @@ UserSchema
       return next();
     }
 
-    if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {
-      next(new Error('Invalid password'));
+    if (!validatePresenceOf(this.password)) {
+      if (authTypes.indexOf(this.provider) === -1) {
+        return next(new Error('Invalid password'));
+      } else {
+        return next();
+      }
     }
 
     // Make salt with a callback
     this.makeSalt((saltErr, salt) => {
       if (saltErr) {
-        next(saltErr);
+        return next(saltErr);
       }
       this.salt = salt;
       this.encryptPassword(this.password, (encryptErr, hashedPassword) => {
         if (encryptErr) {
-          next(encryptErr);
+          return next(encryptErr);
         }
         this.password = hashedPassword;
         next();
@@ -202,7 +216,11 @@ UserSchema.methods = {
    */
   encryptPassword(password, callback) {
     if (!password || !this.salt) {
-      return null;
+      if (!callback) {
+        return null;
+      } else {
+        return callback('Missing password or salt');
+      }
     }
 
     var defaultIterations = 10000;

@@ -11,44 +11,39 @@ export function setup(User, config) {
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {
-
     if(!req.query.state){
-      console.log('LOGIN o REGISTRAZIONE');
-
-      User.findOneAsync({'facebook.id': profile.id})
-          .then(user => {
-            if (user) {
-              return done(null, user);
-            }
-            user = new User({
-              name: profile.displayName,
-              email: profile.emails[0].value,
-              role: 'user',
-              provider: 'facebook',
-              facebook: profile._json
-            });
-            user.saveAsync()
-              .then(user => done(null, user))
-              .catch(err => done(err));
-          })
-          .catch(err => done(err));
-
-    } else {
-      console.log('CONNECT');
-
-      var user = JSON.parse(req.query.state);
-
-      User.findById(user._id)
-          .then(function(user) { //then here do what you want! :)
-            if (!user) {
-              console.log('UTENTE IN SESSION NON TROVATO');
-            } else {
-              user.facebook = profile._json;
-              user.saveAsync()
+      User.findOne({'facebook.id': profile.id}).exec()
+            .then(user => {
+              if (user) {
+                return done(null, user);
+              }
+              user = new User({
+                name: profile.displayName,
+                email: profile.emails[0].value,
+                role: 'user',
+                provider: 'facebook',
+                facebook: profile._json
+              });
+              user.save()
                 .then(user => done(null, user))
                 .catch(err => done(err));
-            }
-          })
+            })
+            .catch(err => done(err));
+
+      } else {
+        var user = JSON.parse(req.query.state);
+
+        User.findById(user._id)
+            .then(function(user) { //then here do what you want! :)
+              if (!user) {
+                console.log('UTENTE IN SESSION NON TROVATO');
+              } else {
+                user.facebook = profile._json;
+                user.save()
+                  .then(user => done(null, user))
+                  .catch(err => done(err));
+              }
+            })
     }
   }));
 }
