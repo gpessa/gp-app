@@ -11,8 +11,10 @@ var ItemSchema = new mongoose.Schema({
     "type" : mongoose.Schema.Types.ObjectId,
     "ref" : 'Item',
     set: function(item){
-      var item = new Item(item);
-      item.save();
+      if(!item._id){
+        item = new Item(item);
+        item.save();
+      }
       return item;
     }
   }],

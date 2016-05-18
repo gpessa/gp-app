@@ -10,71 +10,64 @@ angular
       'scope': true,
       'link': function(scope, element, attr, item) {
         scope.chartConfiguration = angular.copy(chartConfiguration);
+        scope.formats = formats;
 
-        scope.types = [{
-          'label': 'Weight',
-          'value': 'weights'
-        }, {
-          'label': 'Fat',
-          'value': 'fats'
+        item.addConfigurations({
+          'limit' : {
+            type: 'number',
+            title: 'Limit'
+          }
+        });
+
+        // Chart
+        scope.formatDate = (value) => {
+          return $filter('date')(value, scope.formats.date);
+        };
+
+        scope.formatWeight = (value) => {
+          return value + 'kg.';
+        };
+
+        scope.colors = () => {
+          return undefined;
+        };
+
+        scope.columns = [{
+          id : 'weight',
+          type : 'area',
+          name : 'Weight'
+        },{
+          id : 'fat',
+          type : 'area',
+          name : 'Fat'
         }];
 
+        scope.x = {
+          id : 'date',
+          type : 'area',
+          name : 'Total'
+        };
+
         scope.createChart = () => {
-          var withings = new WithingsResource();
+          item.toggleLoading();
 
-          withings
-            .$get()
-            .then((result) => {
-              scope.measures = result.measures[scope.selectedType.value];
+          scope.withing = new WithingsResource({
+            'limit' : (item.model.configuration ? item.model.configuration.limit : undefined)
+          });
 
-              function getLastMeasure(measures) {
-                var index = measures.length;
-                while (!measures[index]) {
-                  index = index - 1;
-                }
-                return index;
-              }
-              var lastMeasure = getLastMeasure(scope.measures);
+          scope.withing
+            .$get(() => {
+              var lastweight = $filter('filter')(scope.withing.measuregrps, function(m){ return !!m.weight; });
+              scope.lastweight = lastweight[lastweight.length - 1];
 
-              var unit = {
-                'fats': '%',
-                'weights': ' kg.'
-              }[scope.selectedType.value];
-
-              scope.lastMeasure = scope.measures[lastMeasure] + unit;
-              scope.lastMeasureDate = result.labels[lastMeasure];
-
-              scope.labels = result.labels.map(function(e, index) {
-                var dateNew = new Date(e);
-                var dateOld = new Date(result.labels[index - 1]);
-                return (dateNew.getMonth() !== dateOld.getMonth() ? $filter('date')(dateNew, formats.month) : '');
-              }.bind(this));
-
-              var min = _.min(scope.measures, function(val) {
-                if (val) {
-                  return val;
-                }
-              });
-              var max = _.max(scope.measures);
-
-              angular.extend(scope.chartConfiguration.options, {
-                'scaleOverride': true,
-                'scaleLabel': '<%= value %>' + unit,
-                'scaleStartValue': min,
-                'scaleSteps': Math.floor(max - min) + 1
-              });
+              var lastfat = $filter('filter')(scope.withing.measuregrps, function(m){ return !!m.fat; });
+              scope.lastfat = lastfat[lastfat.length - 1];
             })
             .catch(error => scope.error = error)
             .finally(() => item.toggleLoading());
         };
 
-        scope.select = (type) => {
-          item.toggleLoading();
-          scope.selectedType = type;
-          scope.createChart();
-        };
-
-        scope.select(scope.types[0]);
+        scope.createChart();
       }
     };
   });

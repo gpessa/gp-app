@@ -1,3 +1,9 @@
+.list-empty{
+  padding-top: 10px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
 ul.list{
   @include  list-unstyled;
   margin: 0;

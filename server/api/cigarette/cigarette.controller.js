@@ -67,7 +67,7 @@ export function index(req, res) {
     .then(handleEntityNotFoundCreateOne(req, res))
     .then(defaultHandlers.respondWithResult(res))
     .catch(defaultHandlers.handleError(res));
-};
+}
 
 
 
@@ -91,4 +91,4 @@ export function smoke(req, res) {
     .then(smokeCigarette(res))
     .then(defaultHandlers.respondWithResult(res))
     .catch(defaultHandlers.handleError(res));
-};
+}

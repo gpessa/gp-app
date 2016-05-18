@@ -2,7 +2,6 @@
 
 angular
   .module('gpAppApp')
-
   .directive('subMenuBtn', () => {
     return {
       'templateUrl' : 'components/sub-menu-btn/sub-menu-btn.html',
@@ -10,4 +9,4 @@ angular
       'transclude': true,
       'replace': true
     };
-  }) 
+  });

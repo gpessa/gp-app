@@ -3,7 +3,7 @@
 (function() {
 
   function PositiveThingResource($resource) {
-    return $resource('/api/positive-things/:id/limit/:limit', {
+    return $resource('/api/positive-things/:id', {
       'id': '@_id'
     }, {
       save: {

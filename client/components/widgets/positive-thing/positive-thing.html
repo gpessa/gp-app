@@ -2,6 +2,11 @@
   <a class="btn btn-block btn-primary" ng-click="create()">Add Positive Thing</a>
 </div>
 
+<div class="list-empty" ng-hide="positiveThings.length">
+  No positive things saved, for now...
+</div>
+
+
 <ul class="list" ng-repeat="positiveThing in positiveThings">
 
   <li class="list_item active">

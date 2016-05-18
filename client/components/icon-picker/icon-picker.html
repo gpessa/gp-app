@@ -6,6 +6,7 @@
     <li>
       <a class="btn"
          ng-click="select(icon)"
+         icon="fa {{icon}}"
          ng-repeat="icon in icons | offset: currentPage * iconsPerPage | limitTo: iconsPerPage">
       </a>
     </li>

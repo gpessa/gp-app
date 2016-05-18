@@ -25,7 +25,7 @@ export function create(req, res) {
     .create(req.body)
     .then(defaultHandlers.respondWithResult(res, 201))
     .catch(defaultHandlers.handleError(res));
-};
+}
 
 
 
@@ -53,4 +53,4 @@ export function update(req, res) {
     .then(defaultHandlers.saveUpdates(req.body))
     .then(defaultHandlers.respondWithResult(res))
     .catch(defaultHandlers.handleError(res));
-};
+}

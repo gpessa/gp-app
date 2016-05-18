@@ -19,14 +19,33 @@ angular
           scaleLabel: (obj) => { return $filter('currency')(obj.value); }
         });
 
+        scope.columns = [{
+          id : 'total',
+          type : 'area',
+          name : 'Total'
+        }];
+
+        scope.x = {
+          id : 'date',
+          type : 'area',
+          name : 'Total'
+        };
+
+        scope.formatDate = (value) => { return $filter('date')(value, scope.formats.date); };
+        scope.formatTotal = (value) => { return $filter('currency')(value); };
+        scope.colors = () => { return undefined; };
+
         scope.get = () => {
           item.toggleLoading();
 
           scope.balance = new BalanceResource();
           scope.balance
             .$get()
+            .then(() => {
+              scope.min = _.minBy(scope.balance.reports, (o) => { return o.total; }).total;
+            })
             .catch(error => scope.error = error)
-            .finally(() => item.toggleLoading());
+            .finally(() => { item.toggleLoading(); });
         };
 
         scope.addReport = (form) => {

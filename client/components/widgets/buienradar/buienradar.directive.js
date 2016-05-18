@@ -11,6 +11,23 @@ angular
       'link' : function(scope, element, attr, item) {
         scope.chartConfiguration = angular.copy(chartConfiguration);
 
+        // Chart
+        scope.colors = () => {
+          return undefined;
+        };
+
+        scope.columns = [{
+          id : 'rainfall',
+          type : 'area',
+          name : 'Rainfall'
+        }];
+
+        scope.x = {
+          id : 'time',
+          type : 'area',
+          name : 'Total'
+        };
+
         scope.get = (coordinates) => {
           item.toggleLoading();
 

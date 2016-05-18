@@ -4,29 +4,27 @@ import _ from 'lodash';
 import request from 'request';
 
 function parseResponse(response){
-  var labels =[];
-  var rainfalls = [];
+  var result = {};
+  result.data = [];
 
-  var results = response.split(/\n/);
+  response = response.split(/\n/);
 
-  results.forEach((result) => {
-    result = result.trim().split('|');
+  response.forEach((r) => {
+    r = r.trim().split('|');
 
-    if(result[1]){
-      let rainfall = parseFloat(result[0]);
-      let label = result[1];
-
+    if(r[1]){
+      let rainfall = parseFloat(r[0]);
+      let label = r[1];
       rainfall = Math.pow(10, ((rainfall -109) / 32)) ;
 
-      labels.push( label );
-      rainfalls.push( rainfall );
+      result.data.push({
+        'time' : label,
+        'rainfall' : rainfall
+      })
     }
   });
 
-  return {
-    rainfalls,
-    labels
-  }
+  return result;
 }
 
 // Gets a list of Cigarettes

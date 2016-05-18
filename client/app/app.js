@@ -13,11 +13,11 @@ angular.module('gpAppApp', [
   'btford.socket-io',
   'ui.bootstrap',
   'validation.match',
-  'chart.js',
   'html5.sortable',
   'schemaForm',
   'angular-click-outside',
-  'puElasticInput'
+  'puElasticInput',
+  'gridshore.c3js.chart'
 ])
 
 .config(function($routeProvider, $locationProvider) {
@@ -58,6 +58,7 @@ angular.module('gpAppApp', [
 .constant('formats', {
   time : 'H:MM',
   date : 'dd MMM yy',
+  dateChart : 'dd MMM yy',
   month : 'MMM yy',
   dateTime : 'dd MMM yy h:mm:ss a'
 })

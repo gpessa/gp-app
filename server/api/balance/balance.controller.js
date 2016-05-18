@@ -23,7 +23,6 @@ function handleEntityNotFoundCreateOne(req, res) {
 }
 
 
-
 // Gets a list of Balances
 export function index(req, res) {
   return Balance
@@ -34,7 +33,6 @@ export function index(req, res) {
 }
 
 
-
 // Creates a new Balance in the DB
 export function create(req, res) {
   req.body.user = req.user._id;
@@ -42,9 +40,8 @@ export function create(req, res) {
   return Balance
     .create(req.body)
     .then(defaultHandlers.respondWithResult(res, 201))
-    .catch(handleError(res));
+    .catch(defaultHandlers.handleError(res));
 }
-
 
 
 // Updates an existing Balance in the DB

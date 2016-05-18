@@ -1,29 +1,81 @@
-<div class="row" ng-if="!error" ng-show="!error">
-  <div class="col-md-10 col-sm-9">
-    <canvas class="chart chart-line"
-            chart-data="[measures]"
-            chart-labels="labels"
-            chart-options="chartConfiguration.options"
-            chart-colours="chartConfiguration.colours"
-            ng-if="measures.length">
-    </canvas>
+<div ng-if="!error" ng-show="!error">
+
+  <div class="row">
+    <div class="col-md-2 widget-withings_report">
+      <h5 class="text-uppercase">Last Weight
+        <small>({{lastweight.date | date:format.date}})</small></h5>
+      <div>{{lastweight.weight}} Kg.</div>
+    </div>
+
+    <div class="col-md-2 widget-withings_report">
+      <h5 class="text-uppercase">
+        Last Fat
+        <small>({{lastfat.date | date:format.date.date}})</small>
+      </h5>
+      <div>{{lastfat.fat}} %</div>
+    </div>
+
+    <div class="col-md-2 widget-withings_report">
+      <h5 class="text-uppercase">
+        Max Weight
+        <small>({{withing.max.weight.date | date:format.date.date}})</small>
+      </h5>
+      <div>{{withing.max.weight.weight}} Kg.</div>
+    </div>
+
+    <div class="col-md-2 widget-withings_report">
+      <h5 class="text-uppercase">
+        Min Weight
+        <small>({{withing.min.weight.date | date:format.date.date}})</small>
+      </h5>
+      <div>{{withing.min.weight.weight}} Kg.</div>
+    </div>
+
+    <div class="col-md-2 widget-withings_report">
+      <h5 class="text-uppercase">
+        Max Fat
+        <small>({{withing.max.fat.date | date:format.date.date}})</small>
+      </h5>
+      <div>{{withing.max.fat.fat}} %</div>
+    </div>
+
+    <div class="col-md-2 widget-withings_report">
+      <h5 class="text-uppercase">
+        Min Fat
+        <small>({{withing.min.fat.date | date:format.date.date}})</small>
+      </h5>
+      <div>{{withing.min.fat.fat}} %</div>
+    </div>
   </div>
 
-  <div class="col-md-2 col-sm-3">
-    <div class="withings-widget_last-measure">
-      <p>Last measure</p>
-      <h1>{{lastMeasure}}</h1>
-      <p class="small">{{lastMeasureDate | date: formats.date}}</p>
-    </div>
+  <div>
+    <c3chart ng-if="withing.measuregrps.length"
+             bindto-id="withings"
+             chart-x="x"
+             enable-zoom="false"
+             show-labels="false"
+             connect-null="true"
+             chart-columns="columns"
+             chart-data="withing.measuregrps"
+             padding-top="20"
+             padding-bottom="20"/>
+      <chart-legend show-legend="false" />
+      <chart-tooltip show-tooltip="false" />
+      <chart-colors color-function="colors"/>
+      <chart-points point-radius="2"/>
+      <chart-line connect-null="true"/>
+      <chart-axis>
+        <chart-axes values-x="date" y="weight" y2="fat"/>
 
-    <div class="withings-widget_selector">
-      <button class="btn btn-sm btn-block btn-light"
-              ng-class="{'active' : type == selectedType}"
-              ng-repeat="type in types"
-              ng-click="select(type)">
-              {{type.label}}
-      </button>
-    </div>
+        <chart-axis-x axis-type="timeseries"/>
+        <chart-axis-x-tick tick-format-function="formatDate"/>
+
+        <chart-axis-y axis-type="number" axis-id="y" axis-min="{{withing.min.weight.weight}}" axis-max="{{withing.max.weight.weight}}"/>
+        <chart-axis-y-tick  axis-id="y" tick-format-function="formatWeight"/>
+
+        <chart-axis-y axis-type="number" axis-id="y2" axis-min="{{withing.min.fat.fat}}" axis-max="{{withing.max.fat.fat + 15}}"/>
+      </chart-axis>
+    </c3chart>
   </div>
 </div>
 

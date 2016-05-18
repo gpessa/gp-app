@@ -5,6 +5,6 @@ var controller = require('./buienradar.controller');
 
 var router = express.Router();
 
-router.post('/', controller.index);
+router.get('/', controller.index);
 
 module.exports = router;

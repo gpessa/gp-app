@@ -5,7 +5,7 @@
   function BuienradarResource($resource) {
     return $resource('/api/buienradar', {}, {
       get: {
-        method: 'POST'
+        method: 'GET'
       }
     });
   }

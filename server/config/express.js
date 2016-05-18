@@ -19,7 +19,7 @@ import passport from 'passport';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
-var mongoStore = connectMongo(session);
+var MongoStore = connectMongo(session);
 import User from '../api/user/user.model';
 
 export default function(app) {
@@ -41,7 +41,7 @@ export default function(app) {
     secret: config.secrets.session,
     saveUninitialized: true,
     resave: false,
-    store: new mongoStore({
+    store: new MongoStore({
       mongooseConnection: mongoose.connection,
       db: 'gp-app'
     })

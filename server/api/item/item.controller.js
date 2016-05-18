@@ -14,18 +14,6 @@ import Item from './item.model';
 import mongoose from 'mongoose';
 import * as defaultHandlers from '../handlers';
 
-
-function handleEntityNotFoundCreateOne(req, res) {
-  return (entity) => {
-    if (!entity) {
-      req.body = {'_id' : req.params._id};
-      exports
-        .create(req, res);
-    }
-    return entity;
-  };
-}
-
 // Gets a list of Items
 export function index(req, res) {
   return Item
@@ -40,7 +28,7 @@ export function show(req, res) {
     .findOne({ '_id': req.params._id })
     .populate('children')
     .exec()
-    .then(handleEntityNotFoundCreateOne(req, res))
+    .then(defaultHandlers.handleEntityNotFound(req, res))
     .then(defaultHandlers.respondWithResult(res))
     .catch(defaultHandlers.handleError(res));
 }

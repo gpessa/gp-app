@@ -148,7 +148,7 @@
       </div>
     </li>
 
-    <li class="list_item extra">
+    <li class="list_item extra" ng-if="portfolio.transactions.length">
       <dl class="dl-horizontal">
         <!-- <dt>Portfolio market value</dt>
         <dd ng-bind="portfolio.recap.total | currency"></dd> -->
@@ -159,14 +159,14 @@
         </dd>
 
         <dt>Portfolio transactions cost</dt>
-        <dd>{{portfolio.recap.txcost | currency}}</dd>
+        <dd>-{{portfolio.recap.txcost | currency}}</dd>
 
         <dt>Portfolio taxes</dt>
-        <dd ng-init="portfolio.tax = ((portfolio.recap.overralreturn - portfolio.recap.txcost) / 100 * item.model.configuration.taxation)">{{portfolio.tax | currency}}</dd>
+        <dd ng-init="portfolio.tax = ((portfolio.recap.overralreturn) / 100 * item.model.configuration.taxation)">{{portfolio.tax | currency}}</dd>
 
         <dt>Portfolio NET overral return<dt>
         <dd>
-          <value-indicator value="(portfolio.recap.overralreturn - portfolio.tax)" filter="currency"></value-indicator>
+          <value-indicator value="(portfolio.recap.overralreturn - portfolio.tax - portfolio.recap.txcost)" filter="currency"></value-indicator>
         </dd>
       </dl>
     </li>

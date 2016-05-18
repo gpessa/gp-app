@@ -1,11 +1,23 @@
-<canvas class="chart chart-line"
-        chart-data="[buienradar.rainfalls]"
-        chart-labels="buienradar.labels"
-        chart-options="chartConfiguration.options"
-        chart-colours="chartConfiguration.colours"
-        ng-if="buienradar.rainfalls.length"
-        ng-show="!error">
-</canvas>
+<div ng-if="buienradar.data.length">
+  <c3chart bindto-id="buienradar"
+           chart-x="x"
+           show-labels="false"
+           chart-columns="columns"
+           chart-data="buienradar.data"
+           padding-top="20"
+           padding-bottom="20"/>
+    <chart-legend show-legend="false" />
+    <chart-tooltip show-tooltip="false" />
+    <chart-colors color-function="colors"/>
+    <chart-points point-radius="2"/>
+    <chart-axis>
+      <chart-axis-x axis-type="category"/>
+      <chart-axis-y axis-type="string" axis-min="{{min}}" />
+      <chart-axis-x-tick tick-format-function="formatDate"/>
+      <chart-axis-y-tick tick-format-function="formatTotal"/>
+    </chart-axis>
+  </c3chart>
+</div>
 
 <alert type="danger" ng-show="error">
   <p>{{error.message}}</p>

@@ -3,7 +3,7 @@
 (function() {
 
   function WithingsResource($resource) {
-    return $resource('/api/withings/:id', {}, {
+    return $resource('/api/withings/limit/:limit', {'limit' : '@limit'}, {
       'get' : {
         'cache' : true
       }

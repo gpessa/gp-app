@@ -2,7 +2,6 @@
 
 angular
   .module('gpAppApp')
-
   .directive('icon', () => {
     return {
       'restrict': 'A',
@@ -12,4 +11,4 @@ angular
         }
       }
     };
-  })
+  });

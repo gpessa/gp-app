@@ -1,11 +1,20 @@
-.withings-widget {
-  canvas {
-    width: 100%;
-    height: 400px;
-  }
-  .withings-widget_last-measure {
-    h1 {
-      margin: 0;
+.widget-withings {
+  .widget-withings_report{
+    text-align: center;
+    margin: 10px 0 15px;
+
+    h5{
+      margin-bottom: 0;
+    }
+
+    border-right: 1px solid $hr-border;
+
+    &:last-child{
+      border-right: none;
     }
   }
+}
+
+.c3 .c3-area.c3-area-fat{
+  fill:$brand-primary;
 }

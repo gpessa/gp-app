@@ -14,7 +14,7 @@
       <a>
         <icon-picker icon="page.icon" on-select="save($parent.pages)"></icon-picker>
         <small>
-          <input type="text" class="navigation-page-input" placeholder="Name" ng-model="page.title" required="" pu-elastic-input=""/>
+          <input type="text" class="navigation-page-input" ng-blur="save(pages)" placeholder="Name" ng-model="page.title" required="" pu-elastic-input=""/>
         </small>
       </a>
     </li>

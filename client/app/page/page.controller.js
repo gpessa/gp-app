@@ -3,7 +3,7 @@
 (function() {
 
 class PageController {
-  constructor($route, $scope, $filter, PagesResource, Auth) {
+  constructor($route, $scope, $filter, PagesResource) {
     var app = new PagesResource();
     var pageid = $route.current.params.name;
 

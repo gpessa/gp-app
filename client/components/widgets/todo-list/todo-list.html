@@ -2,6 +2,10 @@
   <a class="btn btn-block btn-primary" ng-click="create()">Add List</a>
 </div>
 
+<div class="list-empty" ng-hide="todoLists.length">
+  No task
+</div>
+
 <ul class="list" ng-repeat="todoList in todoLists | orderBy : '-lastupdate'">
 
   <li class="list_item active">

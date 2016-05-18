@@ -30,6 +30,8 @@ $headings-font-family:      'Roboto Condensed', sans-serif;
 
 $headings-font-weight:      400;
 
+$headings-small-color:      darken($text-color, 5%);
+
 $border-radius-base:        0;
 $border-radius-large:       0;
 $border-radius-small:       0;
@@ -91,7 +93,7 @@ $state-warning-bg:               #fcf8e3;
 $state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%);
 
 $state-danger-text:              $brand-danger;
-$state-danger-bg:                #f2dede; 
+$state-danger-bg:                #f2dede;
 $state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%);
 
 

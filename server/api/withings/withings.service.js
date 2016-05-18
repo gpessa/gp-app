@@ -34,37 +34,47 @@ var WithingsService = (function() {
     }
 
     return {
-        getData: function(user) {
-            var param = {
-                "action": 'getmeas',
-                "oauth_consumer_key": config.withings.clientID,
-                "oauth_nonce": nonce(10)(),
-                "oauth_signature_method": 'HMAC-SHA1',
-                "oauth_timestamp": new Date().getTime(),
-                "oauth_token": user.oauth_token,
-                "oauth_version": '1.0',
-                "userid": user.userid,
-                "category": 1
-            };
+        getData: function(user, days) {
 
-            var consumerSecret = param.oauth_consumer_key;
-            var tokenSecret = config.withings.WITHINGS_SECRET;
-            var baseString = generateOAuthBaseString(protocol, host, resource, param);
-            var oAuthSecret = config.withings.clientSecret + "&" + user.refresh_token;
-            param.oauth_signature = encodeURIComponent(CryptoJS.HmacSHA1(baseString, oAuthSecret).toString(CryptoJS.enc.Base64));
-            var urlrequest = protocol + "://" + host + "/" + resource + getQueryString(param);
-            var promise = new Promise(function(resolve, reject) {
-                request({
-                    json: true,
-                    url: urlrequest, //URL to hit
-                    method: 'GET'
-                }, function(err, res, body) {
-                    if (err) reject(err);
-                    else resolve(body);
-                });
-            });
-            return promise;
-        }
+          var param = {
+            "action": 'getmeas',
+            "oauth_consumer_key": config.withings.clientID,
+            "oauth_nonce": nonce(10)(),
+            "oauth_signature_method": 'HMAC-SHA1',
+            "oauth_timestamp": new Date().getTime(),
+            "oauth_token": user.oauth_token,
+            "oauth_version": '1.0',
+            "userid": user.userid,
+            "category": 1
+          };
+
+          if(days){
+            var d = new Date(); // today!
+            d.setDate(d.getDate() - parseInt(days));
+            var startdate = parseInt(d.valueOf() / 1000); //(d.getTime() / 1000);
+            param.startdate = startdate;
+          }
+
+          var consumerSecret = param.oauth_consumer_key;
+          var tokenSecret = config.withings.WITHINGS_SECRET;
+          var baseString = generateOAuthBaseString(protocol, host, resource, param);
+          var oAuthSecret = config.withings.clientSecret + "&" + user.refresh_token;
+          param.oauth_signature = encodeURIComponent(CryptoJS.HmacSHA1(baseString, oAuthSecret).toString(CryptoJS.enc.Base64));
+          var urlrequest = protocol + "://" + host + "/" + resource + getQueryString(param);
+          var promise = new Promise(function(resolve, reject) {
+
+          request({
+            json: true,
+            url: urlrequest, //URL to hit
+            method: 'GET'
+          }, function(err, res, body) {
+            if (err) reject(err);
+            else resolve(body);
+          });
+
+        });
+        return promise;
+      }
     }
 })();
 module.exports = WithingsService;

@@ -17,7 +17,6 @@ import * as defaultHandlers from '../handlers';
 
 function responseWithDecoratedResult(res, statusCode){
   return function(portfolios) {
-
     if (portfolios.length) {
 
       var transactions = _.flattenDeep(portfolios.map(function(portfolio){
@@ -79,12 +78,15 @@ function responseWithDecoratedResult(res, statusCode){
             });
           }
           res.status(200).json(portfolios);
+          return portfolios;
         });
       } else {
         res.status(200).json(portfolios);
+        return portfolios;
       }
     } else {
       res.status(200).json(portfolios);
+      return portfolios;
     }
   };
 }

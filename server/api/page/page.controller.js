@@ -14,33 +14,6 @@ import Page from './page.model';
 import Item from '../item/item.model';
 import * as defaultHandlers from '../handlers';
 
-function saveUpdates(updates) {
-  return function(entity) {
-    var updated = _.mergeWith(entity, updates, function(oldVal, newVal){ return newVal; });
-    updated.pages.forEach(function(page){
-
-      if(!page.child){
-
-        var item = new Item({
-          'type' : 'container',
-          'subtype' : 'base',
-          'children' : []
-        });
-
-        item.save();
-
-        page.set('child', item._id);
-      }
-    })
-
-    return updated
-      .save()
-      .then(updated => {
-        return updated;
-      });
-  };
-}
-
 function handleEntityNotFoundCreateOne(req, res) {
   return function(entity) {
     if (!entity) {
@@ -88,7 +61,7 @@ export function update(req, res) {
     .findById(req.params.id)
     .exec()
     .then(defaultHandlers.handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
+    .then(defaultHandlers.saveUpdates(req.body))
     .then(defaultHandlers.respondWithResult(res))
     .catch(defaultHandlers.handleError(res));
 }

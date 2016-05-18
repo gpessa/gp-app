@@ -6,6 +6,6 @@ import * as auth from '../../auth/auth.service';
 
 var router = express.Router();
 
-router.get('/', auth.isAuthenticated(), controller.index);
+router.get('/limit/:limit*?', auth.isAuthenticated(), controller.index);
 
 module.exports = router;

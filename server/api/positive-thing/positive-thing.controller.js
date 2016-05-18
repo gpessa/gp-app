@@ -19,7 +19,7 @@ export function index(req, res) {
   var limit = req.params.limit || 5;
 
   return PositiveThing
-    .find()
+    .find({'user' : req.user._id})
     .limit(limit)
     .then(defaultHandlers.respondWithResult(res))
     .catch(defaultHandlers.handleError(res));
@@ -36,6 +36,8 @@ export function show(req, res) {
 
 // Creates a new PositiveThing in the DB
 export function create(req, res) {
+  req.body.user = req.user._id;
+
   return PositiveThing
     .create(req.body)
     .then(defaultHandlers.respondWithResult(res, 201))

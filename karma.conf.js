@@ -19,8 +19,6 @@ module.exports = function(config) {
       'client/bower_components/angular-route/angular-route.js',
       'client/bower_components/angular-messages/angular-messages.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'client/bower_components/Chart.js/Chart.js',
-      'client/bower_components/angular-chart.js/dist/angular-chart.js',
       'client/bower_components/lodash/lodash.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
@@ -35,6 +33,9 @@ module.exports = function(config) {
       'client/bower_components/ifvisible.js/src/ifvisible.js',
       'client/bower_components/angular-click-outside/clickoutside.directive.js',
       'client/bower_components/angular-elastic-input/dist/angular-elastic-input.min.js',
+      'client/bower_components/d3/d3.js',
+      'client/bower_components/c3/c3.js',
+      'client/bower_components/c3-angular/c3-angular.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',
