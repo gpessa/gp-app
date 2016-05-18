@@ -4,7 +4,7 @@ angular
   .module('gpAppApp')
   .config(function($routeProvider) {
     $routeProvider
-      .when('/:name', {
+      .when('/page/:name', {
         templateUrl: 'app/page/page.html',
         controller: 'PageController',
         controllerAs: '$ctrl',
