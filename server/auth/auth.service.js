@@ -85,7 +85,7 @@ export function setTokenCookie(req, res) {
     return res.status(404).send('It looks like you aren\'t logged in, please try again.');
   }
 
-  req.user = req.user.length ? req.user[0] : req.user;
+  // req.user = req.user.length ? req.user[0] : req.user;
   var token = signToken(req.user._id, req.user.role);
   res.cookie('token', token);
   res.redirect('/');

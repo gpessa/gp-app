@@ -1,19 +1,16 @@
 'use strict';
 
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+import mongoose from 'mongoose';
+var Schema = mongoose.Schema;
 
-var BalanceReportSchema  = new mongoose.Schema({
+var BalanceReportSchema  = new Schema({
   saving : Number,
   current : Number,
   date : Date
 });
 
-
 BalanceReportSchema
-  .set('toJSON', {
-     virtuals: true
-  });
-
+  .set('toJSON', { virtuals: true });
 
 BalanceReportSchema
   .virtual('total')
@@ -21,7 +18,7 @@ BalanceReportSchema
 
 
 
-var BalanceSchema = new mongoose.Schema({
+var BalanceSchema = new Schema({
   user : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

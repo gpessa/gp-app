@@ -19,4 +19,4 @@ router
     passReqToCallback: true
   }), auth.setTokenCookie);
 
-module.exports = router;
+export default router;

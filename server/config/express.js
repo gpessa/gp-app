@@ -55,7 +55,6 @@ export default function(app) {
   passport.serializeUser(function(user, done) {
       //console.log('SERIALIZE USER');
       user = user.length ? user[0] : user;
-      console.log(user);
 
       done(null, user._id);
   });
@@ -72,7 +71,7 @@ export default function(app) {
    * Lusca - express server security
    * https://github.com/krakenjs/lusca
    */
-  if ('test' !== env) {
+  if (env !== 'test' && !process.env.SAUCE_USERNAME) {
     app.use(lusca({
       csrf: {
         angular: true

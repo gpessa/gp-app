@@ -16,6 +16,8 @@ function onConnect(socket) {
     socket.log(JSON.stringify(data, null, 2));
   });
 
+  // Insert sockets below
+
 }
 
 export default function(socketio) {

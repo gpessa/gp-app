@@ -17,16 +17,10 @@ import * as defaultHandlers from '../handlers';
 
 function responseWithDecoratedResult(res, statusCode){
   return function(portfolios) {
-    if (portfolios.length) {
+    // if (portfolios.length) {
+      var transactions = _.flattenDeep(portfolios.map((portfolio) => { return portfolio.transactions; }));
 
-      var transactions = _.flattenDeep(portfolios.map(function(portfolio){
-        return portfolio.transactions;
-      }));
-
-      var SYMBOLS = _.uniq(transactions.map(function(transaction){
-        return transaction.symbol;
-      }));
-
+      var SYMBOLS = _.uniq(transactions.map((transaction) => { return transaction.symbol; }));
       var FIELDS = ['b'];
 
       if(SYMBOLS.length){
@@ -76,18 +70,18 @@ function responseWithDecoratedResult(res, statusCode){
 
               return portfolio;
             });
+            res.status(200).json(portfolios);
+            return portfolios;
           }
-          res.status(200).json(portfolios);
-          return portfolios;
         });
       } else {
         res.status(200).json(portfolios);
         return portfolios;
       }
-    } else {
-      res.status(200).json(portfolios);
-      return portfolios;
-    }
+    // } else {
+    //   res.status(200).json(portfolios);
+    //   return portfolios;
+    // }
   };
 }
 

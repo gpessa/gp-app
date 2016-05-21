@@ -1,9 +1,10 @@
 'use strict';
 
-import mongoose from 'mongoose';
 import Item from '../item/item.model';
+import mongoose from 'mongoose';
+var Schema = mongoose.Schema;
 
-var SinglePageSchema = new mongoose.Schema({
+var SinglePageSchema = new Schema({
   title : String,
   icon : String,
   child : {
@@ -21,19 +22,15 @@ var SinglePageSchema = new mongoose.Schema({
   }
 });
 
-
 SinglePageSchema
-  .set('toJSON', {
-     virtuals: true
-  });
-
+  .set('toJSON', { virtuals: true });
 
 SinglePageSchema
   .virtual('url')
   .get(function(){ return this.title.toLowerCase().replace(/ /g,"-"); });
 
 
-var PageSchema = new mongoose.Schema({
+var PageSchema = new Schema({
   user : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

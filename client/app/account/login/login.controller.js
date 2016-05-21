@@ -1,13 +1,10 @@
 'use strict';
 
 class LoginController {
-  //start-non-standard
-  user = {};
-  errors = {};
-  submitted = false;
-  //end-non-standard
-
   constructor(Auth, $location) {
+    this.user = {};
+    this.errors = {};
+    this.submitted = false;
     this.Auth = Auth;
     this.$location = $location;
   }

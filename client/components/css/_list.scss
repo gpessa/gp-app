@@ -20,6 +20,7 @@ ul.list{
     .list_item_data{
       flex-grow: 1;
       line-height: 33px;
+      white-space: nowrap;
       margin-left: $grid-gutter-width / 2;
       margin-right: $grid-gutter-width / 2;
 

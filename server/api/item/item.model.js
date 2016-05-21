@@ -1,10 +1,11 @@
 'use strict';
 
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 import Item from './item.model';
 import _ from 'lodash';
+import mongoose from 'mongoose';
+var Schema = mongoose.Schema;
 
-var ItemSchema = new mongoose.Schema({
+var ItemSchema = new Schema({
   "type" : String,
   "subtype" : String,
   "children" : [{

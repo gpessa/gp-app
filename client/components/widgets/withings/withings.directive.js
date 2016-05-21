@@ -58,10 +58,10 @@ angular
           scope.withing
             .$get(() => {
               var lastweight = $filter('filter')(scope.withing.measuregrps, function(m){ return !!m.weight; });
-              scope.lastweight = lastweight[lastweight.length - 1];
+              scope.lastweight = lastweight[0];
 
               var lastfat = $filter('filter')(scope.withing.measuregrps, function(m){ return !!m.fat; });
-              scope.lastfat = lastfat[lastfat.length - 1];
+              scope.lastfat = lastfat[0];
             })
             .catch(error => scope.error = error)
             .finally(() => item.toggleLoading());

@@ -1,8 +1,9 @@
 'use strict';
 
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+import mongoose from 'mongoose';
+var Schema = mongoose.Schema;
 
-var StockSchema = new mongoose.Schema({
+var StockSchema = new Schema({
   user : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

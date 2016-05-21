@@ -1,7 +1,12 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+var Schema = mongoose.Schema;
+
+var TodoListItemSchema = new Schema({
+  name : { type: String, required: true, trim: true },
+  archivied : { type: Boolean, default: false }
+});
 
 var TodoListSchema = new Schema({
   user : {
@@ -9,10 +14,7 @@ var TodoListSchema = new Schema({
     ref: 'User'
   },
   name: { type: String },
-  list: [{
-    name : { type: String, required: true, trim: true },
-    archivied : { type: Boolean, default: false }
-  }]
+  list: [TodoListItemSchema]
 });
 
 module.exports = mongoose.model('TodoList', TodoListSchema);

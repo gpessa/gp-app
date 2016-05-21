@@ -1,12 +1,10 @@
 'use strict';
 
 class SettingsController {
-  //start-non-standard
-  errors = {};
-  //end-non-standard
 
-  constructor($filter, Auth) {
+  constructor(Auth) {
     this.Auth = Auth;
+    this.errors = {};
   }
 
   changePassword(form) {

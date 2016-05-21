@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('navigation', function ($location, PagesResource, editMode) {
+  .directive('navigation', function ($location, Auth, PagesResource, editMode) {
     return {
       'templateUrl' : 'components/navigation/navigation.html',
       'controllerAs' : '$ctrl',
@@ -11,8 +11,15 @@ angular
       'scope' : true,
       'link' : function(scope){
         scope.editMode = editMode;
-        scope.app = new PagesResource();
-        scope.app.$get();
+
+        scope.$watch(() => { return Auth.isLoggedIn(); }, function(loggedIn){
+            if(loggedIn){
+              scope.app = new PagesResource();
+              scope.app.$get();
+            } else {
+              scope.app = undefined;
+            }
+        });
 
         scope.add = function(){
           scope.app.pages.push({});

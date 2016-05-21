@@ -48,6 +48,64 @@
     stroke-width: 0;
     opacity: 0.2;
   }
+
+  /*-- Bar --*/
+  .c3-bar {
+    fill: rgba($brand-secondary, 0.2);
+    stroke-width: 0;
+    stroke: white;
+    stroke-width: 1px;
+  }
+
+  .c3-bar._expanded_ {
+    fill-opacity: 0.75;
+  }
+
+
+  /*-- Tooltip --*/
+  .c3-tooltip-container {
+    z-index: 10; }
+
+  .c3-tooltip {
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: $semi-transparent-bg-light;
+    color:#000;
+    empty-cells: show;
+    opacity: 0.9;
+
+    tr {
+    }
+
+    th {
+      font-size: 14px;
+      padding: 2px 5px;
+      text-align: left;
+    }
+
+    td {
+      font-size: 13px;
+      padding: 3px 6px;
+      background-color: #fff;
+    }
+
+    td > span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 6px;
+      display: none;
+    }
+
+    td.name{
+      text-align: left;
+    }
+
+    td.value {
+      text-align: right;
+    }
+  }
+
 }
 
 .c3-legend-item-tile,
@@ -82,12 +140,6 @@
 
 
 
-/*-- Bar --*/
-.c3-bar {
-  stroke-width: 0; }
-
-.c3-bar._expanded_ {
-  fill-opacity: 0.75; }
 
 /*-- Focus --*/
 .c3-target.c3-focused {
@@ -126,44 +178,7 @@
 .c3-title {
   font: 14px sans-serif; }
 
-/*-- Tooltip --*/
-.c3-tooltip-container {
-  z-index: 10; }
 
-.c3-tooltip {
-  border-collapse: collapse;
-  border-spacing: 0;
-  background-color: #fff;
-  empty-cells: show;
-  -webkit-box-shadow: 7px 7px 12px -9px #777777;
-  -moz-box-shadow: 7px 7px 12px -9px #777777;
-  box-shadow: 7px 7px 12px -9px #777777;
-  opacity: 0.9; }
-
-.c3-tooltip tr {
-  border: 1px solid #CCC; }
-
-.c3-tooltip th {
-  background-color: #aaa;
-  font-size: 14px;
-  padding: 2px 5px;
-  text-align: left;
-  color: #FFF; }
-
-.c3-tooltip td {
-  font-size: 13px;
-  padding: 3px 6px;
-  background-color: #fff;
-  border-left: 1px dotted #999; }
-
-.c3-tooltip td > span {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 6px; }
-
-.c3-tooltip td.value {
-  text-align: right; }
 
 /*-- Area --*/
 

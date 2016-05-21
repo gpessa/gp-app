@@ -1,4 +1,4 @@
-<div class="app-container container-fluid">
+<div class="container-fluid">
 
   <!-- <pre>{{item | json}}</pre> -->
 
@@ -11,7 +11,7 @@
        ng-model="item.model.children"
        ng-if="item.model.children"
        ng-class="{ 'editable' : editMode.enabled }"
-       class="row" >
+       class="row app-container" >
 
     <div  class="app-container-child col-md-12" ng-show="item.model.children == 0 && editMode.enabled" ng-if="item.model.children == 0">
       <alert type="warning">Drag &amp; drop here an item</alert>

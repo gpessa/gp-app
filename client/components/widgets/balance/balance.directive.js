@@ -21,13 +21,13 @@ angular
 
         scope.columns = [{
           id : 'total',
-          type : 'area',
+          type : 'bar',
           name : 'Total'
         }];
 
         scope.x = {
           id : 'date',
-          type : 'area',
+          type : 'bar',
           name : 'Total'
         };
 

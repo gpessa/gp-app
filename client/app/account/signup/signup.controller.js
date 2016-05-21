@@ -1,22 +1,13 @@
 'use strict';
 
 class SignupController {
-  //start-non-standard
-  user = {};
-  errors = {};
   //end-non-standard
 
   constructor(Auth, $location) {
-    this.Auth = Auth;
-    this.$location = $location;
-
-    this.user = {
-      name: 'Gaetano Pessa',
-      email: 'nomeecognome@gmail.com',
-      password: 'password',
-      confirmPassword: 'password'
-    };
-  }
+      this.Auth = Auth;
+      this.$location = $location;
+    }
+    //start-non-standard
 
   register(form) {
     if (form.$valid) {

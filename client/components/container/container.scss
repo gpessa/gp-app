@@ -1,31 +1,21 @@
 .app-container{
 
   .app-container-child {
+    margin-bottom:  $item-margin;
+
     &.over{
       opacity: 0.6;
     }
-
-    &.moving{
-      // opacity: 0.6;
-    }
   }
-
 
   > .container-fluid{
     margin-right: 0;
     margin-left: 0;
-    transition: margin $animation-time;
   }
 
-  .app-container-child{
-    margin-bottom:  $item-margin;
+  &.editable{
+    border: 2px dashed $semi-transparent-bg-light;
+    padding-top: $item-margin - 2;
+    margin: 0;
   }
-
-}
-
-
-.editable{
-  border: 2px dashed $semi-transparent-bg-light;
-  padding-top: $item-margin - 2;
-  margin: 0;
 }
