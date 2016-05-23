@@ -87,6 +87,13 @@ angular
             'attributes': {
               'name': 'Basic'
             }
+          },{
+            'icon': 'fa fa-columns',
+            'type': 'container',
+            'subtype': 'columns',
+            'attributes': {
+              'name': 'Columns'
+            }
           }]
         };
       }

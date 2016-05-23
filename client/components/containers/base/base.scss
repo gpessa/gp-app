@@ -1,6 +1,6 @@
-.app-container{
+.container-base{
 
-  .app-container-child {
+  .container-base_child {
     margin-bottom:  $item-margin;
 
     &.over{
@@ -13,7 +13,7 @@
     margin-left: 0;
   }
 
-  &.editable{
+  .html5-sortable.editable{
     border: 2px dashed $semi-transparent-bg-light;
     padding-top: $item-margin - 2;
     margin: 0;

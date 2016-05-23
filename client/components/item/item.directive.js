@@ -20,6 +20,9 @@ angular
 
         var html ='<' + scope.$ctrl.model.type + ' model="$ctrl.model"></' + scope.$ctrl.model.type + '>';
         var e = $compile(html)(scope);
+
+        console.log(scope.$ctrl.model);
+
         element.append(e);
       }
     };

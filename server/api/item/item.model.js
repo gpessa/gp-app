@@ -34,4 +34,13 @@ var ItemSchema = new Schema({
   }
 });
 
+var autoPopulateChildren = function(next) {
+  this.populate('children');
+  next();
+};
+
+ItemSchema.
+  pre('findOne', autoPopulateChildren).
+  pre('find', autoPopulateChildren);
+
 export default mongoose.model('Item', ItemSchema);
