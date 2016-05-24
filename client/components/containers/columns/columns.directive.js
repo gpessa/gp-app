@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('containerColumns', (editMode) => {
+  .directive('containerColumns', ($filter, editMode, availableItems) => {
     return {
       'templateUrl' : 'components/containers/columns/columns.html',
       'require' : '^^item',
@@ -11,20 +11,14 @@ angular
       'link' : function(scope, element, attr, item){
         scope.item = item;
         scope.editMode = editMode;
+        var basicContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'base'})[0];
 
         scope.addColumn = function(){
-          scope.item.model.children.push({
-            'icon': 'fa fa-square-o',
-            'type': 'container',
-            'subtype': 'base',
-            'attributes': {
-              'name': 'Basic'
-            }
-          });
+          scope.item.model.children.push(basicContainer);
           item.save();
         }
 
-        scope.deleteColumn = function(column){
+        scope.removeColumn = function(column){
           scope.item.model.children.remove(column);
           item.save();
         }

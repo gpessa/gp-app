@@ -1,13 +1,12 @@
-<div class="container-fluid">
-  <a ng-click="addColumn()" icon="fa fa-plus" class="btn btn-link-light" ng-if="editMode.enabled">Add column</a>
+<div class="row">
 
-  <div class="row">
-    <div class="col-md-{{12 / item.model.children.length}}" ng-repeat="child in item.model.children">
-      <div class="container-columns_child">
-        <a ng-click="deleteColumn(child)" class="btn btn-link-light" icon="fa fa-minus" ng-if="editMode.enabled">Delete column</a>
-        <item model="child"></item>
-
-      </div>
-    </div>
+  <div class="col-md-12">
+    <a ng-click="addColumn()" icon="fa fa-plus" class="btn btn-link-light" ng-if="editMode.enabled">Add column</a>
   </div>
+
+  <div class="col-md-{{12 / item.model.children.length}}" ng-repeat="child in item.model.children">
+      <a ng-click="removeColumn(child)" class="btn btn-link-light" icon="fa fa-minus" ng-if="editMode.enabled">Delete column</a>
+      <item model="child"></item>
+  </div>
+
 </div>

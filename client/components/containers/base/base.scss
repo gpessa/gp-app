@@ -1,21 +1,21 @@
-.container-base{
-
-  .container-base_child {
-    margin-bottom:  $item-margin;
-
-    &.over{
-      opacity: 0.6;
-    }
-  }
-
-  > .container-fluid{
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .html5-sortable.editable{
-    border: 2px dashed $semi-transparent-bg-light;
-    padding-top: $item-margin - 2;
-    margin: 0;
-  }
-}
+// .container-base{
+//
+//   .container-base_child {
+//     margin-bottom:  $item-margin;
+//
+//     &.over{
+//       opacity: 0.6;
+//     }
+//   }
+//
+//   > .container-fluid{
+//     margin-right: 0;
+//     margin-left: 0;
+//   }
+//
+//   .html5-sortable.editable{
+//     border: 2px dashed $semi-transparent-bg-light;
+//     padding-top: $item-margin - 2;
+//     margin: 0;
+//   }
+// }

@@ -1,0 +1,9 @@
+.html5-sortable{
+  &.editable{
+    background: red;
+  }
+
+  > item{
+    padding-bottom: $item-margin - 2;
+  }
+}

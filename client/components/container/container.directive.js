@@ -10,7 +10,7 @@ angular
       'replace' : true,
       'link' : function(scope, element, attr, item){
         scope.item = item;
-        var containerBody = angular.element(element[0]).addClass('container-' + scope.item.model.subtype);
+        var containerBody = element.addClass('container-' + scope.item.model.subtype);
         $compile(containerBody)(scope);
       }
     };

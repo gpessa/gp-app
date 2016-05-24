@@ -18,9 +18,6 @@ angular
             scope.item.save();
           }
         };
-
-        console.log('model');
-        console.log(scope.item);
       }
     };
   });

@@ -35,7 +35,7 @@
         "angular-locale_it-it.js"
       ]
     },
-    "c3" : {
+    "c3": {
       "main": [
         "c3.js"
       ]
