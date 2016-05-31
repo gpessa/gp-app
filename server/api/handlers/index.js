@@ -29,13 +29,29 @@ export function removeEntity(res) {
 
 export function saveUpdates(updates) {
   return function(entity) {
+
+    // console.log('NUOVO VALORE ' + updates.children.length);
+    // updates.children.forEach(function(child){
+    //   console.log(child._id, child.attributes.dimension)
+    // })
+
     var updated = _.mergeWith(entity, updates, function(oldVal, newVal){
       return newVal;
     });
 
+    // console.log('VALORE MERGIATO ' + updated.children.length);
+    // updated.children.forEach(function(child){
+    //   console.log(child._id, child.attributes.dimension)
+    // })
+
+
     return updated
       .save()
       .then(updated => {
+        // console.log('VALORE SALVATO ' + updated.children.length);
+        // updated.children.forEach(function(child){
+        //   console.log(child._id, child.attributes.dimension)
+        // })
         return updated;
       });
   };
@@ -56,7 +72,6 @@ export function handleEntityNotFound(res) {
 export function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return (err) => {
-    console.log(err);
     res
       .status(statusCode)
       .send(err);
