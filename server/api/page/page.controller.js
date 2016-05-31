@@ -38,7 +38,6 @@ export function show(req, res) {
     .findOne({
       'user' : req.user
     })
-    .populate('pages.child')
     .exec()
     .then(handleEntityNotFoundCreateOne(req, res))
     .then(defaultHandlers.respondWithResult(res))
@@ -57,6 +56,10 @@ export function create(req, res) {
 
 // Updates an existing Page in the DB
 export function update(req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+
   return Page
     .findById(req.params.id)
     .exec()

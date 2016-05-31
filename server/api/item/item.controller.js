@@ -26,7 +26,6 @@ export function index(req, res) {
 export function show(req, res) {
   return Item
     .findOne({ '_id': req.params._id })
-    .populate('children')
     .exec()
     .then(defaultHandlers.handleEntityNotFound(req, res))
     .then(defaultHandlers.respondWithResult(res))
@@ -50,7 +49,7 @@ export function update(req, res) {
     .findOne({ '_id': req.params._id })
     .then(defaultHandlers.handleEntityNotFound(res))
     .then(defaultHandlers.saveUpdates(req.body))
-    .then(() => { exports.show(req, res) });
+    .then(defaultHandlers.respondWithResult(res))
 }
 
 // Deletes a Item from the DB
