@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('navigation', function ($location, Auth, PagesResource, editMode) {
+  .directive('navigation', function ($location, $filter, Auth, PagesResource, editMode, availableItems) {
     return {
       'templateUrl' : 'components/navigation/navigation.html',
       'controllerAs' : '$ctrl',
@@ -11,6 +11,7 @@ angular
       'scope' : true,
       'link' : function(scope){
         scope.editMode = editMode;
+        var basicContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'base'})[0];
 
         scope.$watch(() => { return Auth.isLoggedIn(); }, function(loggedIn){
             if(loggedIn){
