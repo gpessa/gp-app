@@ -23,7 +23,7 @@ angular
         });
 
         scope.add = function(){
-          scope.app.pages.push(simpleContainer);
+          scope.app.pages.push(angular.copy(simpleContainer));
         };
 
         scope.save = function(page){

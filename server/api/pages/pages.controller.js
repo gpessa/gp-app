@@ -67,18 +67,31 @@ export function update(req, res) {
 
   results.then(data =>{
       return Pages
-        .findOneAndUpdate({
-            '_id' : req.body._id
-          }, req.body ,{
-            'new' : true,   // return new doc if one is upserted
-            'upsert' : true // insert the document if it does not exist
+        .findById(req.body._id)
+        .exec()
+        .then(function(model){
+          var deleted = _.differenceWith(model.pages, req.body.pages, function(a,b){
+            return a._id == b;
+          });
+          deleted.forEach(d => {
+            d.remove();
+          });
+
+          var updated = _.merge(model, req.body, function(oldVal, newVal){
+            return newVal;
+          });
+
+          return Pages
+            .findOneAndUpdate({
+              '_id' : req.body._id
+            }, req.body ,{
+              'new' : true,   // return new doc if one is upserted
+              'upsert' : true // insert the document if it does not exist
+            });
         })
-        .exec(function(err, model){
-          if (err){
-            res.status(500).send(err);
-          } else{
-            res.status(200).send(model);
-          }
-        });
-  });
+        .then(function(model){
+          res.status(200).send(model);
+          return model;
+        })
+    })
 }
