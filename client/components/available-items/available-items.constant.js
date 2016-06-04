@@ -70,6 +70,13 @@ angular
     'Container': [{
       'icon': 'fa fa-square-o',
       'type': 'container',
+      'subtype': 'simple',
+      'attributes': {
+        'name': ''
+      }
+    },{
+      'icon': 'fa fa-square-o',
+      'type': 'container',
       'subtype': 'base',
       'attributes': {
         'name': 'Base'

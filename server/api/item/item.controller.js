@@ -42,7 +42,7 @@ export function create(req, res) {
 
 // Updates an existing Item in the DB
 export function update(req, res) {
-  
+
   var toupdate = [];
 
   req.body.children = req.body.children.map(function(child){
@@ -57,8 +57,6 @@ export function update(req, res) {
   });
 
   var update = function(child){
-    console.log('update');
-
     return Item
       .findOneAndUpdate({
           '_id' : child._id
@@ -72,9 +70,6 @@ export function update(req, res) {
   var results = Promise.all(actions);
 
   results.then(data =>{
-      console.log('FINITO');
-      console.log(data)
-
       return Item
         .findOneAndUpdate({
             '_id' : req.body._id

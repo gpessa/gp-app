@@ -27,7 +27,6 @@ export function show(req, res) {
         'upsert' : true // insert the document if it does not exist
     })
     .populate('pages')
-    .populate('pages.child')
     .exec(function(err, model){
       if (err){
         res.status(500).send(err);
@@ -35,4 +34,51 @@ export function show(req, res) {
         res.status(200).send(model);
       }
     });
+}
+
+// Updates an existing Item in the DB
+export function update(req, res) {
+
+  var toupdate = [];
+
+  req.body.pages = req.body.pages.map(function(child){
+    if(child._id){
+      toupdate.push(child);
+      return child._id;
+    } else {
+      var child = new Item(child);
+      child.save();
+      return child._id;
+    }
+  });
+
+  var update = function(child){
+    return Item
+      .findOneAndUpdate({
+          '_id' : child._id
+        }, child ,{
+          'new' : true,   // return new doc if one is upserted
+          'upsert' : true // insert the document if it does not exist
+      })
+  };
+
+  var actions = toupdate.map(update);
+  var results = Promise.all(actions);
+
+  results.then(data =>{
+      return Pages
+        .findOneAndUpdate({
+            '_id' : req.body._id
+          }, req.body ,{
+            'new' : true,   // return new doc if one is upserted
+            'upsert' : true // insert the document if it does not exist
+        })
+        .exec(function(err, model){
+          if (err){
+            res.status(500).send(err);
+          } else{
+            res.status(200).send(model);
+          }
+        });
+  });
 }

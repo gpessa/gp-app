@@ -11,7 +11,7 @@ angular
       'scope' : true,
       'link' : function(scope){
         scope.editMode = editMode;
-        var basicContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'base'})[0];
+        var simpleContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'simple'})[0];
 
         scope.$watch(() => { return Auth.isLoggedIn(); }, function(loggedIn){
             if(loggedIn){
@@ -23,19 +23,11 @@ angular
         });
 
         scope.add = function(){
-          scope.app.pages.push({});
+          scope.app.pages.push(simpleContainer);
         };
 
         scope.save = function(page){
-          if(!page.child){
-            var item = new ItemResource(basicContainer);
-            item.$create().then(function(){
-              page.child = item._id;
-              scope.app.$save();
-            })
-          } else {
-            scope.app.$save();
-          }
+          scope.app.$save();
         };
 
         scope.remove = function(page){
