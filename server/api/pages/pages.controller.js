@@ -17,39 +17,22 @@ import * as defaultHandlers from '../handlers';
 
 // Gets a single Page from the DB
 export function show(req, res) {
+  req.body.user = req.user;
+
   return Pages
-    .findOneOrCreate({
-      'user' : req.user
-    },{
-      'user' : req.user
-    }, function(err, model){
-      if (err){
-        res.status(500).send(err);
-      } else{
-        // console.log(model.populate);
-        model.populate('pages');
-        // console.log(model);
-
-        res.status(200).send(model);
-      }
-    });
-}
-
-
-// Updates an existing Page in the DB
-export function update(req, res) {
-  return Pages
-    .findOneAndUpdate({_id : req.params.id}, req.body,{
-      upsert: false,
-      multi: true,
-      new: true
+    .findOneAndUpdate({
+        'user' : req.user
+      }, req.body ,{
+        'new' : true,   // return new doc if one is upserted
+        'upsert' : true // insert the document if it does not exist
     })
     .populate('pages')
+    .populate('pages.child')
     .exec(function(err, model){
       if (err){
         res.status(500).send(err);
       } else{
         res.status(200).send(model);
       }
-    })
+    });
 }

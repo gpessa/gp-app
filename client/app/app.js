@@ -23,7 +23,7 @@ angular.module('gpAppApp', [
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
     .otherwise({
-      redirectTo: '/page/index'
+      redirectTo: '/login'
     });
   $locationProvider.html5Mode(true);
 })

@@ -37,8 +37,7 @@
     "nonce": "latest",
     "yahoo-finance": "latest",
     "forecast" : "latest",
-    "geocoder" : "latest",
-    "mongoose-find-one-or-create" : "latest"
+    "geocoder" : "latest"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.0",

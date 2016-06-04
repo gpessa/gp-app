@@ -1,5 +1,4 @@
 <form name="pages" ng-submit="save(pages)">
-
   <ul class="nav navbar-nav navigation">
 
     <li ng-if="editMode.enabled">
@@ -12,9 +11,9 @@
     <li ng-if="editMode.enabled" class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: isActive('/' + page.id)}">
       <a class="navigation-page-delete" icon="fa fa-times-circle" ng-click="remove(page)"></a>
       <a>
-        <icon-picker icon="page.icon" on-select="save($parent.pages)"></icon-picker>
+        <icon-picker icon="page.icon" on-select="save(page)"></icon-picker>
         <small>
-          <input type="text" class="navigation-page-input" ng-blur="save(pages)" placeholder="Name" ng-model="page.title" required="" pu-elastic-input=""/>
+          <input autofocus type="text" class="navigation-page-input" ng-blur="save(page)" placeholder="Name" ng-model="page.title" required="" pu-elastic-input=""/>
         </small>
       </a>
     </li>

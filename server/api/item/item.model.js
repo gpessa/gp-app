@@ -11,22 +11,6 @@ var ItemSchema = new Schema({
   "children" : [{
     "type" : mongoose.Schema.Types.ObjectId,
     "ref" : 'Item',
-    "set" : function(item){
-      // console.log('-----');
-      // console.log(item);
-      // console.log('-----');
-
-      if(!item._id){
-        // console.log('creo');
-
-        item = new Item(item);
-        item.save();
-
-        // console.log(item);
-        // console.log('-----');
-      }
-      return item;
-    }
   }],
   "attributes" : {
     "dimension"  : { type: Number, default: 12 },
@@ -43,34 +27,46 @@ var ItemSchema = new Schema({
 });
 
 var autoPopulateChildren = function(next) {
-  // console.log('populate');
-  // console.log(this);
   this.populate('children');
   next();
 };
+//
+// ItemSchema.pre('find', autoPopulateChildren);
+// ItemSchema.pre('findOne', autoPopulateChildren)
+// ItemSchema.pre('update', autoPopulateChildren)
+// ItemSchema.pre('create', autoPopulateChildren)
+// ItemSchema.pre('init', autoPopulateChildren)
 
+
+// ItemSchema
+//   .pre('findOneAndUpdate', function(next) {
+//     // var toUpdate = this.children.length;
+//     console.log('pre save');
+//     console.log(this);
+//     this.children = this.children.map(function(child){
+//       return child._id;
+//     })
+//     console.log(this);
+//
+//     // this.children.forEach(function(child){
+//     //   Item.findOneAndUpdate({_id : child._id}, {attributes : {dimension : child.attributes.dimension}}, function(){
+//     //     toUpdate--;
+//     //     console.log('update');
+//     //     if(toUpdate == 0){
+//     //       console.log('next');
+//     //       this.populate('children');
+//     //       // next();
+//     //     }
+//     //   })
+//     //   next();
+//     // });
+//     next();
+//   })
 ItemSchema
-  .pre('save', function(next) {
-    var toUpdate = this.children.length;
-    console.log('pre save');
-    this.children.forEach(function(child){
-      Item.findOneAndUpdate({_id : child._id}, {attributes : {dimension : child.attributes.dimension}}, function(){
-        toUpdate--;
-        console.log('update');
-        if(toUpdate == 0){
-          console.log('next');
-          this.populate('children');
-          // next();
-        }
-      })
-      next();
-    });
-  })
   .pre('findOneAndUpdate', autoPopulateChildren)
   .pre('findOne', autoPopulateChildren)
   .pre('find', autoPopulateChildren)
   .pre('save', autoPopulateChildren)
-  // .post('update', autoPopulateChildren)
-
+  .post('update', autoPopulateChildren)
 
 export default mongoose.model('Item', ItemSchema);

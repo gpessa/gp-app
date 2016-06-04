@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('navigation', function ($location, $filter, Auth, PagesResource, editMode, availableItems) {
+  .directive('navigation', function ($location, $filter, Auth, PagesResource, editMode, availableItems, ItemResource) {
     return {
       'templateUrl' : 'components/navigation/navigation.html',
       'controllerAs' : '$ctrl',
@@ -26,10 +26,14 @@ angular
           scope.app.pages.push({});
         };
 
-        scope.save = function(form){
-          form.submitted = true;
-
-          if(form.$valid){
+        scope.save = function(page){
+          if(!page.child){
+            var item = new ItemResource(basicContainer);
+            item.$create().then(function(){
+              page.child = item._id;
+              scope.app.$save();
+            })
+          } else {
             scope.app.$save();
           }
         };
