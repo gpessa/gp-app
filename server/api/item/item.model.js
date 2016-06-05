@@ -26,16 +26,26 @@ var ItemSchema = new Schema({
   }
 });
 
-var autoPopulateChildren = function(next) {
+var populateChildren = function(next) {
   this.populate('children');
   next();
 };
 
+var deleteChildren = function(model) {
+  model.children.forEach(child => {
+    child.remove();
+  })
+
+};
+
 ItemSchema
-  .pre('findOneAndUpdate', autoPopulateChildren)
-  .pre('findOne', autoPopulateChildren)
-  .pre('find', autoPopulateChildren)
-  .pre('save', autoPopulateChildren)
-  .post('update', autoPopulateChildren)
+  .post('remove', deleteChildren);
+
+ItemSchema
+  .pre('findOneAndUpdate', populateChildren)
+  .pre('findOne', populateChildren)
+  .pre('find', populateChildren)
+  .pre('save', populateChildren)
+  .post('update', populateChildren);
 
 export default mongoose.model('Item', ItemSchema);
