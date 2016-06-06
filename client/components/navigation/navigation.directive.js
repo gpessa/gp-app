@@ -13,7 +13,7 @@ angular
         scope.editMode = editMode;
         var simpleContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'simple'})[0];
 
-        scope.$watch(() => { return Auth.isLoggedIn(); }, function(loggedIn){
+        scope.$watch(() => { return Auth.isLoggedIn(); }, (loggedIn) => {
             if(loggedIn){
               scope.app = new PagesResource();
               scope.app.$get();
@@ -22,20 +22,20 @@ angular
             }
         });
 
-        scope.add = function(){
+        scope.add = () => {
           scope.app.pages.push(angular.copy(simpleContainer));
         };
 
-        scope.save = function(page){
-          scope.app.$save();
+        scope.save = (page) => {
+          scope.app.$save()
         };
 
-        scope.remove = function(page){
+        scope.remove = (page) => {
           scope.app.pages.remove(page);
           scope.app.$save();
         };
 
-        scope.isActive = function(route){
+        scope.isActive = (route) => {
           return route === $location.path();
         };
       }
