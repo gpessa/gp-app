@@ -14,8 +14,13 @@ angular
 
         scope.sortableOption = {
           'allow_cross' : true,
-          'stop' : () => {
-            scope.item.save();
+          'handle' : '.handle',
+          'stop' : function(list, dropped_index, extra_data, drag_extra_data){
+            if(drag_extra_data){
+              drag_extra_data.children.remove(list[dropped_index]);
+              drag_extra_data.$save();
+            }
+            scope.item.model.$save();
           }
         };
       }

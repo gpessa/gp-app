@@ -9,8 +9,7 @@ angular
       'restrict' : 'E',
       'replace' : true,
       'link' : function(scope, element, attr, item){
-        scope.item = item;
-        var containerBody = angular.element(element[0].querySelector('.body')).addClass('container-' + scope.item.model.subtype);
+        var containerBody = element.addClass('container-' + item.model.subtype);
         $compile(containerBody)(scope);
       }
     };

@@ -1,4 +1,9 @@
-<div html-sortable="sortableOption" ng-model="item.model.children" ng-class="{ 'editable' : editMode.enabled }" ng-if="item.model.children" class="row">
+<div html-sortable="sortableOption"
+     ng-model="item.model.children"
+     ng-class="{ 'editable' : editMode.enabled }"
+     ng-if="item.model.children"
+     class="row"
+     ng-extra-sortable="item.model">
 
     <div class="col-md-12" ng-show="item.model.children == 0 && editMode.enabled" ng-if="item.model.children == 0">
       <alert type="warning">Drag &amp; drop here an item</alert>

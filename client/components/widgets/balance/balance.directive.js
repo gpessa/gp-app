@@ -42,7 +42,9 @@ angular
           scope.balance
             .$get()
             .then(() => {
-              scope.min = _.minBy(scope.balance.reports, (o) => { return o.total; }).total;
+              if(scope.balance.reports.length){
+                scope.min = _.minBy(scope.balance.reports, (o) => { return o.total; }).total;
+              }
             })
             .catch(error => scope.error = error)
             .finally(() => { item.toggleLoading(); });

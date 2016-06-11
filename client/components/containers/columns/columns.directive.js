@@ -11,36 +11,24 @@ angular
       'link' : function(scope, element, attr, item){
         scope.item = item;
         scope.editMode = editMode;
-        var basicContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'base'})[0];
+        var basicContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'simple'})[0];
 
         var calculateColumnsWidth = () => {
-          var columns = scope.item.model.children.length;
-          var dim = parseInt(12 / columns);
-          var dimLast = 12 - (columns * dim);
-
-          angular.forEach(scope.item.model.children, function(child){
+          var dim = parseInt(12 / scope.item.model.children.length);
+          scope.item.model.children = scope.item.model.children.map((child) => {
             child.attributes = child.attributes ? child.attributes : {};
-            return child.attributes.dimension = dim;
-          });
-
-          if(dimLast){
-            scope.item.model.children[columns - 1].attributes.dimension = dimLast;
-          }
-
-          console.log('=========');
-          angular.forEach(scope.item.model.children, function(child, i){
-            console.log('COL' + ' ' + i + ' ' + child.attributes.dimension);
+            child.attributes.dimension = dim;
+            return child;
           });
         };
 
         scope.addColumn = () => {
-          scope.item.model.children.push(basicContainer);
+          scope.item.model.children.push(angular.copy(basicContainer));
           calculateColumnsWidth();
           item.save();
         };
 
         scope.removeColumn = (column) => {
-          console.log('removed column');
           scope.item.model.children.remove(column);
           calculateColumnsWidth();
           item.save();
