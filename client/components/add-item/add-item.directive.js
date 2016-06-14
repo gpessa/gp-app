@@ -10,12 +10,12 @@ angular
       'scope': true,
       'link': function(scope) {
         scope.editMode = editMode;
-
-        scope.sortableOption = {
-          'allow_cross': true
-        };
-
         scope.availableItems = availableItems;
+
+        scope.$watch('availableItems.Widget', function(model) {
+          scope.modelAsJson = angular.toJson(model, true);
+        }, true);
+
       }
     };
   });

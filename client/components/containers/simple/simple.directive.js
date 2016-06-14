@@ -13,17 +13,16 @@ angular
           scope.item = item;
           scope.editMode = editMode;
 
-          scope.sortableOption = {
-            'allow_cross' : true,
-            'handle' : '.handle',
-            'stop' : function(list, dropped_index, extra_data, drag_extra_data){
-              if(drag_extra_data){
-                drag_extra_data.children.remove(list[dropped_index]);
-                drag_extra_data.$save();
-              }
-              scope.item.model.$save();
-            }
-          };
+          scope.add = function(event, index, item, type, external){
+            scope.item.model.children.push(item);
+            scope.item.save();
+            return true;
+          }
+
+          scope.remove = function(child){
+            scope.item.model.children.remove(child);
+            scope.item.save();
+          }
         }
       }
 

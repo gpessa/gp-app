@@ -186,3 +186,7 @@ select{
     color:$dropdown-link-color;
   }
 }
+
+ul[dnd-list], ul[dnd-list] > li {
+    position: relative;
+}

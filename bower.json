@@ -17,7 +17,6 @@
     "lodash": "4.5.1",
     "angular-socket-io": "~0.7.0",
     "angular-validation-match": "~1.5.2",
-    "html5-sortable-angularjs": "latest",
     "angular-schema-form-bootstrap": "*",
     "ngGeolocation": "latest",
     "angular-i18n": "*",
@@ -25,7 +24,9 @@
     "angular-click-outside": "^2.6.1",
     "angular-elastic-input": "*",
     "c3-angular": "^1.2.0",
-    "ng-sortable": "^1.3.6"
+    "ng-sortable": "^1.3.6",
+    "angular-drag-and-drop-lists" : "latest",
+    "html5-sortable-angularjs": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.5"
