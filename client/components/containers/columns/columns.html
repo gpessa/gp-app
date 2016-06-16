@@ -1,11 +1,8 @@
 <div class="row">
 
-<!-- <pre>
-    {{item.model.children | json}}
-</pre> -->
-
   <div class="col-md-12" ng-if="editMode.enabled">
-    <a ng-click="addColumn()" icon="fa fa-plus" class="btn btn-link-light">Add column</a>
+    <a class="btn btn-link-light" icon="fa fa-plus" ng-click="addColumn()">Add column</a>
+    <a class="btn btn-link btn-sm" icon="fa fa-times" ng-click="item.remove()"></a>
   </div>
 
   <div class="col-md-{{child.attributes.dimension}}" ng-repeat="child in item.model.children">

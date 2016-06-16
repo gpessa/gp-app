@@ -13,15 +13,13 @@ angular
           scope.item = item;
           scope.editMode = editMode;
 
-          scope.add = function(event, index, item, type, external){
-            scope.item.model.children.push(item);
+          scope.inserted = function(event, index, item, oldparent){
+            console.log('inserted ' + scope.item.model._id)
             scope.item.save();
-            return true;
           }
 
-          scope.remove = function(child){
-            scope.item.model.children.remove(child);
-            scope.item.save();
+          scope.remove = function(event, index, child, oldparent){
+            console.log('callback ' + scope.item.model._id + ' ' + oldparent._id)
           }
         }
       }

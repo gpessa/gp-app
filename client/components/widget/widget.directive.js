@@ -9,6 +9,7 @@ angular
       'restrict' : 'E',
       'replace' : true,
       'link' : function(scope, element, attr, item){
+        scope.item = item;
         var widgetBody = angular.element(element[0].querySelector('.widget-body')).addClass('widget-' + item.model.subtype);
         $compile(widgetBody)(scope);
       }

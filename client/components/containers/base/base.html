@@ -1,14 +1,15 @@
-<div html-sortable="sortableOption"
-     ng-model="item.model.children"
+<div dnd-list="item.model.children"
+     dnd-drop="add(event, index, item, external, type, 'containerType')"
      ng-class="{ 'editable' : editMode.enabled }"
      ng-if="item.model.children"
-     class="row"
-     ng-extra-sortable="item.model">
+     class="row wrapper">
 
-    <div class="col-md-12" ng-show="item.model.children == 0 && editMode.enabled" ng-if="item.model.children == 0">
-      <alert type="warning">Drag &amp; drop here an item</alert>
-    </div>
+    <div class="col-md-12 dndPlaceholder wrapper-placeholder"></div>
 
-    <item class="container-base_child col-md-{{child.attributes.dimension}}" model="child" ng-repeat="child in item.model.children" ></item>
+    <item class="wrapper-child col-md-{{child.attributes.dimension}}"
+          dnd-draggable="child"
+          dnd-moved="remove(child)"
+          model="child"
+          ng-repeat="child in item.model.children" ></item>
 
 </div>

@@ -1,10 +1,15 @@
-.html5-sortable{
-  &.editable{
-    // background: red;
+.wrapper{
+  min-height:  $item-margin * 2;
+  padding-bottom: $item-margin;
+
+  .wrapper-child{
   }
 
-  > item{
-    padding-bottom: $item-margin - 2;
+  .wrapper-placeholder:after{
+    margin-top: $item-margin;
+    content: '';
+    width: 100%;
+    display: block;
+    border-top: 2px dashed $semi-transparent-bg-light;
   }
 }
- 
