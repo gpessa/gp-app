@@ -1,6 +1,7 @@
 .wrapper{
   min-height:  $item-margin * 2;
   padding-bottom: $item-margin;
+  border: 2px dashed $semi-transparent-bg-light;
 
   .wrapper-child{
   }

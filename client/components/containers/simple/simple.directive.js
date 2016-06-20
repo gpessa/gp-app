@@ -13,21 +13,10 @@ angular
           scope.item = item;
           scope.editMode = editMode;
 
-          scope.inserted = function(event, item, oldparent){
-            console.log('inserted ')
-            console.log(event, scope.item.model._id);
-            scope.item.save();
-          }
-
-          scope.remove = function(event, child, oldparent){
-            console.log('callback ' + scope.item.model._id + ' ' + oldparent._id)
-          }
-
 
           scope.inserted = function(event, index, item){
             console.log('inserted');
-            console.log(event, scope.item.model._id);
-            // scope.item.model.children.push(item);
+            console.log(event, scope.item.model._id, item._id);
             scope.item.save();
             return item;
           }
@@ -42,6 +31,8 @@ angular
           scope.moved = function(event){
             console.log('moved');
             console.log(event, scope.item.model._id);
+            scope.item.model.children.remove(angular.element(event.currentTarget).scope().child);
+            scope.item.save();
           }
 
           scope.copied = function(event){

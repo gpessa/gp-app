@@ -3,12 +3,12 @@
      ng-if="item.model.children"
      class="row wrapper"
      dnd-inserted="inserted(event, index, item)">
-
+    {{item.model._id}}
     <div class="col-md-12 dndPlaceholder wrapper-placeholder"></div>
 
-    <item class="wrapper-child col-md-{{child.attributes.dimension}}"
+    <item class="col-md-{{child.attributes.dimension}}"
           dnd-draggable="child"
-          dnd-moved="moved(event, child)"
+          dnd-moved="moved(event, child, index)"
           dnd-copied="copied(event, child)"
           dnd-dragend="dragend(event, child)"
           model="child"

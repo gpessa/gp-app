@@ -5,7 +5,7 @@
     <a class="btn btn-link btn-sm" icon="fa fa-times" ng-click="item.remove()"></a>
   </div>
 
-  <div class="col-md-{{child.attributes.dimension}}" ng-repeat="child in item.model.children">
+  <div class="col-md-{{child.attributes.dimension}} " ng-repeat="child in item.model.children">
     <a ng-click="removeColumn(child)" class="btn btn-link-light" icon="fa fa-minus" ng-if="editMode.enabled">Delete column</a>
     <item model="child"></item>
   </div>

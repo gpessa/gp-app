@@ -6,10 +6,9 @@
 
     <div class="col-md-12 dndPlaceholder wrapper-placeholder"></div>
 
-    <item class="wrapper-child col-md-{{child.attributes.dimension}}"
-          dnd-draggable="child"
+    <item dnd-draggable="child"
           dnd-moved="remove(child)"
           model="child"
-          ng-repeat="child in item.model.children" ></item>
+          ng-repeat="child in item.model.children"></item>
 
 </div>
