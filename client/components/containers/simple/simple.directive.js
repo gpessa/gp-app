@@ -13,37 +13,13 @@ angular
           scope.item = item;
           scope.editMode = editMode;
 
-
-          scope.inserted = function(event, index, item){
-            console.log('inserted');
-            console.log(event, scope.item.model._id, item._id);
-            scope.item.save();
-            return item;
-          }
-          scope.drop = function(event, item){
-            console.log('drop');
-            // console.log(event, scope.item.model._id);
-            // scope.item.model.children.push(item);
+          scope.added = function(event, index, item){
             scope.item.save();
             return item;
           }
 
-          scope.moved = function(event){
-            console.log('moved');
-            console.log(event, scope.item.model._id);
-            scope.item.model.children.remove(angular.element(event.currentTarget).scope().child);
-            scope.item.save();
-          }
-
-          scope.copied = function(event){
-            console.log('copied');
-            console.log(event, scope.item.model._id);
-          }
-
-          scope.dragend = function(event, item){
-            console.log('dragend');
-            console.log(event, scope.item.model._id);
-            scope.item.model.children.remove(item);
+          scope.removed = function(event, item, index){
+            scope.item.model.children.splice(index, 1);
             scope.item.save();
           }
 

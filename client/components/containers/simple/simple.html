@@ -2,17 +2,14 @@
      ng-class="{ 'editable' : editMode.enabled }"
      ng-if="item.model.children"
      class="row wrapper"
-     dnd-inserted="inserted(event, index, item)">
-    {{item.model._id}}
+     dnd-inserted="added(event, index, item)">
+
     <div class="col-md-12 dndPlaceholder wrapper-placeholder"></div>
 
     <item class="col-md-{{child.attributes.dimension}}"
           dnd-draggable="child"
-          dnd-moved="moved(event, child, index)"
-          dnd-copied="copied(event, child)"
-          dnd-dragend="dragend(event, child)"
+          dnd-moved="removed(event, child, $index)"
           model="child"
-          dnd-effect-allowed="move"
           ng-repeat="child in item.model.children" ></item>
 
 </div>
