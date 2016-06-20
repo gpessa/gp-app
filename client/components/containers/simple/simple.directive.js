@@ -7,7 +7,6 @@ angular
       'templateUrl' : 'components/containers/simple/simple.html',
       'require' : '^^item',
       'restrict' : 'C',
-      'replace' : true,
       'link' : {
         post : function(scope, element, attr, item){
           scope.item = item;

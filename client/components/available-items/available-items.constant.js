@@ -68,18 +68,12 @@ angular
       }
     }],
     'Container': [{
+      'hidden' : true,
       'icon': 'fa fa-square-o',
       'type': 'container',
       'subtype': 'simple',
       'attributes': {
-        'name': ''
-      }
-    },{
-      'icon': 'fa fa-square-o',
-      'type': 'container',
-      'subtype': 'base',
-      'attributes': {
-        'name': 'Base'
+        'name': 'Simple'
       }
     },{
       'icon': 'fa fa-columns',
