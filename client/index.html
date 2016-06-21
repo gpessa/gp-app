@@ -49,6 +49,7 @@
     <![endif]-->
     <!-- build:js({client,node_modules}) app/vendor.js -->
       <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -59,7 +60,6 @@
       <script src="bower_components/lodash/lodash.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
-      <script src="bower_components/html5-sortable-angularjs/lib/html5-sortable.js"></script>
       <script src="bower_components/tv4/tv4.js"></script>
       <script src="bower_components/objectpath/lib/ObjectPath.js"></script>
       <script src="bower_components/angular-schema-form/dist/schema-form.js"></script>
@@ -72,7 +72,8 @@
       <script src="bower_components/angular-elastic-input/dist/angular-elastic-input.min.js"></script>
       <script src="bower_components/d3/d3.js"></script>
       <script src="bower_components/c3/c3.js"></script>
-      <script src="bower_components/c3-angular/c3-angular.js"></script>
+      <script src="bower_components/c3-angular/c3-angular.min.js"></script>
+      <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -82,7 +83,7 @@
       <script src="app/admin/admin.module.js"></script>
       <script src="components/auth/auth.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="components/navigation/navigation.directive.js"></script>
+      <script src="components/pages/page.resource.js"></script>
       <script src="app/account/signup/signup.controller.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/account/account.js"></script>
@@ -98,9 +99,6 @@
       <script src="components/auth/router.decorator.js"></script>
       <script src="components/auth/user.service.js"></script>
       <script src="components/available-items/available-items.constant.js"></script>
-      <script src="components/container/container.directive.js"></script>
-      <script src="components/containers/base/base.directive.js"></script>
-      <script src="components/containers/columns/columns.directive.js"></script>
       <script src="components/edit-mode/edit-mode.directive.js"></script>
       <script src="components/edit-mode/edit-mode.service.js"></script>
       <script src="components/footer/footer.directive.js"></script>
@@ -113,10 +111,10 @@
       <script src="components/mongoose-error/mongoose-error.directive.js"></script>
       <script src="components/navbar/navbar.controller.js"></script>
       <script src="components/navbar/navbar.directive.js"></script>
-      <script src="app/account/link/link.controller.js"></script>
+      <script src="components/navigation/navigation.directive.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
-      <script src="components/pages/page.resource.js"></script>
+      <script src="app/account/link/link.controller.js"></script>
       <script src="components/schema-form/schema-form.config.js"></script>
       <script src="components/socket/socket.service.js"></script>
       <script src="components/sub-menu-btn/sub-menu-btn.js"></script>
@@ -147,6 +145,9 @@
       <script src="components/widgets/todo-list/todo-list.resource.js"></script>
       <script src="components/widgets/withings/withings.directive.js"></script>
       <script src="components/widgets/withings/withings.resource.js"></script>
+      <script src="components/wrapper/wrapper.directive.js"></script>
+      <script src="components/wrappers/columns/columns.directive.js"></script>
+      <script src="components/wrappers/simple/simple.directive.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->
   </body>

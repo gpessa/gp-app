@@ -13,7 +13,7 @@ angular.module('gpAppApp', [
   'btford.socket-io',
   'ui.bootstrap',
   'validation.match',
-  'html5.sortable',
+  'dndLists',
   'schemaForm',
   'angular-click-outside',
   'puElasticInput',
@@ -23,7 +23,7 @@ angular.module('gpAppApp', [
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
     .otherwise({
-      redirectTo: '/page/index'
+      redirectTo: '/login'
     });
   $locationProvider.html5Mode(true);
 })

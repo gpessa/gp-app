@@ -1,0 +1,24 @@
+.wrapper{
+  min-height:  $item-margin * 2;
+  padding-bottom: $item-margin;
+
+  .wrapper-placeholder{
+    border-top: 2px dashed $semi-transparent-bg;
+    margin: $item-margin $grid-gutter-width;
+  }
+
+  .wrapper-list > *{
+      margin-bottom: $item-margin;
+  }
+
+  &.wrapper-edit{
+
+    .weapper-list{
+      min-height: 80px;
+    }
+
+    &.wrapper-empty{
+      border: 2px dashed $semi-transparent-bg;
+    }
+  }
+}

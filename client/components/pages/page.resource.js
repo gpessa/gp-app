@@ -6,9 +6,6 @@
     return $resource('/api/pages/:id', { 'id': '@_id' }, {
       save: {
         method: 'PUT'
-      },
-      create: {
-        method: 'POST'
       }
     });
   }

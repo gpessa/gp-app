@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('navigation', function ($location, Auth, PagesResource, editMode) {
+  .directive('navigation', function ($location, $filter, Auth, PagesResource, editMode, availableItems, ItemResource) {
     return {
       'templateUrl' : 'components/navigation/navigation.html',
       'controllerAs' : '$ctrl',
@@ -11,8 +11,9 @@ angular
       'scope' : true,
       'link' : function(scope){
         scope.editMode = editMode;
+        var simpleWrapper = $filter('filter')(availableItems.Wrapper, { 'subtype' : 'simple'})[0];
 
-        scope.$watch(() => { return Auth.isLoggedIn(); }, function(loggedIn){
+        scope.$watch(() => { return Auth.isLoggedIn(); }, (loggedIn) => {
             if(loggedIn){
               scope.app = new PagesResource();
               scope.app.$get();
@@ -21,24 +22,20 @@ angular
             }
         });
 
-        scope.add = function(){
-          scope.app.pages.push({});
+        scope.add = () => {
+          scope.app.pages.push(angular.copy(simpleWrapper));
         };
 
-        scope.save = function(form){
-          form.submitted = true;
-
-          if(form.$valid){
-            scope.app.$save();
-          }
+        scope.save = (page) => {
+          scope.app.$save()
         };
 
-        scope.remove = function(page){
+        scope.remove = (page) => {
           scope.app.pages.remove(page);
           scope.app.$save();
         };
 
-        scope.isActive = function(route){
+        scope.isActive = (route) => {
           return route === $location.path();
         };
       }

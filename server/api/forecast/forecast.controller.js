@@ -26,32 +26,22 @@ var forecast = new Forecast({
     }
 });
 
-function respondWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
-      res.status(statusCode).json(entity);
-    }
-  };
-}
-
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
-}
-
 // Gets a list of Forecasts
 export function index(req, res) {
   Geocoder.reverseGeocode(req.body.lat, req.body.lon, function ( err, data ) {
-    var city = data.results[4].formatted_address;
+    var city = data.results[0].formatted_address;
 
     forecast.get([req.body.lat, req.body.lon], function(err, weather) {
-      if(err) res.status(500).send(err);
+      if(err) {
+        res.status(500).send({
+          'message' : 'An error happend'
+        });
+        return err;
+      }
 
       weather.city = city;
       res.status(200).json(weather);
+      return weather;
     });
 
   });

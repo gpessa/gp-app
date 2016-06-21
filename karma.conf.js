@@ -18,6 +18,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
+      'client/bower_components/jquery/dist/jquery.js',
       'client/bower_components/angular/angular.js',
       'client/bower_components/angular-resource/angular-resource.js',
       'client/bower_components/angular-cookies/angular-cookies.js',
@@ -28,7 +29,6 @@ module.exports = function(config) {
       'client/bower_components/lodash/lodash.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
-      'client/bower_components/html5-sortable-angularjs/lib/html5-sortable.js',
       'client/bower_components/tv4/tv4.js',
       'client/bower_components/objectpath/lib/ObjectPath.js',
       'client/bower_components/angular-schema-form/dist/schema-form.js',
@@ -41,7 +41,8 @@ module.exports = function(config) {
       'client/bower_components/angular-elastic-input/dist/angular-elastic-input.min.js',
       'client/bower_components/d3/d3.js',
       'client/bower_components/c3/c3.js',
-      'client/bower_components/c3-angular/c3-angular.js',
+      'client/bower_components/c3-angular/c3-angular.min.js',
+      'client/bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

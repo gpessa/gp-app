@@ -19,7 +19,7 @@ export function setup(User, config) {
           refreshToken : refreshToken,
         }
 
-        req.user.saveAsync()
+        req.user.save()
           .then(function(user) {
             return done(null, user);
           })
@@ -45,7 +45,7 @@ export function setup(User, config) {
             provider: 'withings',
           });
 
-          user.saveAsync()
+          user.save()
             .then(function(user) {
               return done(null, user);
             })

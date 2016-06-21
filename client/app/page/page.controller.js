@@ -13,8 +13,7 @@ class PageController {
         this.noPageCreated = app.pages.length === 0;
 
         if(!this.noPageCreated){
-          var page = $filter('filter')(app.pages, {'url' : pageid});
-          this.child = page.length ? page[0].child : app.pages[0].child;
+          this.child = $filter('filter')(app.pages, {'_id' : pageid})[0];
         }
     });
   }
