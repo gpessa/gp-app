@@ -2,9 +2,8 @@
 
 class NavbarController {
 
-  constructor($location, Auth) {
+  constructor(Auth) {
     this.isCollapsed = true;
-    this.$location = $location;
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
     this.getCurrentUser = Auth.getCurrentUser;
@@ -54,9 +53,6 @@ class NavbarController {
     }];
   }
 
-  isActive(route) {
-    return route === this.$location.path();
-  }
 }
 
 angular.module('gpAppApp')

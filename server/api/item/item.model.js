@@ -19,6 +19,14 @@ var ItemSchema = new Schema({
   "configuration" : Object
 },{
   "toObject" : {
+    "virtuals" : true,
+    "transform" : function (doc, ret, game) {
+      delete ret.user;
+      delete ret.__v;
+    }
+  },
+  "toJSON" : {
+    "virtuals" : true,
     "transform" : function (doc, ret, game) {
       delete ret.user;
       delete ret.__v;

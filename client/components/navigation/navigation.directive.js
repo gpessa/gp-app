@@ -24,6 +24,7 @@ angular
 
         scope.add = () => {
           scope.app.pages.push(angular.copy(simpleWrapper));
+          scope.app.$save();
         };
 
         scope.save = () => {

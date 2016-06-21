@@ -21,7 +21,6 @@
     });
   }
 
-angular.module('gpAppApp.auth')
-  .factory('User', UserResource);
-
+  angular.module('gpAppApp.auth')
+    .factory('User', UserResource);
 })();

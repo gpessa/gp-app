@@ -20,8 +20,8 @@
 
       <ul class="navbar-right nav navbar-nav">
 
-        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}" ng-show="item.show()">
-            <a ng-href="{{item.link}}">
+        <li ng-repeat="item in nav.menu" ui-sref-active="active" ng-show="item.show()">
+            <a ui-sref="{{item.link}}">
               <i class="{{item.icon}}"></i>
               <small>{{item.title}}</small>
             </a>
