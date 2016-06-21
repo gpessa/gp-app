@@ -14,7 +14,7 @@ angular
       'restrict' : 'E',
       'scope' : {},
       'require' : '^^?item',
-      link:{
+      'link' :{
         pre : function(scope, element, attrs, parent){
           scope.$ctrl.parent = parent;
 
@@ -24,13 +24,5 @@ angular
           element.append(e);
         }
       }
-      // link : function(scope, element, attrs, parent){
-      //   scope.$ctrl.parent = parent;
-      //
-      //   var html ='<div><' + scope.$ctrl.model.type + ' model="$ctrl.model"></' + scope.$ctrl.model.type + '></div>';
-      //   var e = $compile(html)(scope);
-      //
-      //   element.append(e);
-      // }
     };
   });

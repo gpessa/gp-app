@@ -50,7 +50,7 @@ export function update(req, res) {
       toupdate.push(child);
       return child._id;
     } else {
-      var child = new Item(child);
+      child = new Item(child);
       child.save();
       return child._id;
     }
