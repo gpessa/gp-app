@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('navigation', function ($location, $filter, Auth, PagesResource, editMode, availableItems, ItemResource) {
+  .directive('navigation', function ($location, $filter, Auth, PagesResource, editMode, availableItems) {
     return {
       'templateUrl' : 'components/navigation/navigation.html',
       'controllerAs' : '$ctrl',
@@ -26,8 +26,8 @@ angular
           scope.app.pages.push(angular.copy(simpleWrapper));
         };
 
-        scope.save = (page) => {
-          scope.app.$save()
+        scope.save = () => {
+          scope.app.$save();
         };
 
         scope.remove = (page) => {
