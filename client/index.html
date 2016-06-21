@@ -28,7 +28,7 @@
 
     <navbar></navbar>
 
-    <div ng-view="" class="container-fluid"></div>
+    <div ui-view="" class="container-fluid"></div>
 
     <add-item></add-item>
 
@@ -68,6 +68,7 @@
       <script src="bower_components/ngGeolocation/ngGeolocation.js"></script>
       <script src="bower_components/angular-i18n/angular-locale_it-it.js"></script>
       <script src="bower_components/ifvisible.js/src/ifvisible.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-click-outside/clickoutside.directive.js"></script>
       <script src="bower_components/angular-elastic-input/dist/angular-elastic-input.min.js"></script>
       <script src="bower_components/d3/d3.js"></script>
@@ -83,17 +84,18 @@
       <script src="app/admin/admin.module.js"></script>
       <script src="components/auth/auth.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="components/pages/page.resource.js"></script>
+      <script src="app/account/account.js"></script>
+      <script src="app/account/link/link.controller.js"></script>
+      <script src="app/account/login/login.controller.js"></script>
+      <script src="app/account/settings/settings.controller.js"></script>
       <script src="app/account/signup/signup.controller.js"></script>
       <script src="app/admin/admin.controller.js"></script>
-      <script src="app/account/account.js"></script>
       <script src="app/admin/admin.router.js"></script>
       <script src="app/app.constant.js"></script>
       <script src="app/page/page.controller.js"></script>
       <script src="app/page/page.js"></script>
       <script src="components/add-item/add-item.directive.js"></script>
       <script src="components/alert/alert.directive.js"></script>
-      <script src="app/account/login/login.controller.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/interceptor.service.js"></script>
       <script src="components/auth/router.decorator.js"></script>
@@ -114,14 +116,13 @@
       <script src="components/navigation/navigation.directive.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
-      <script src="app/account/link/link.controller.js"></script>
+      <script src="components/pages/page.resource.js"></script>
       <script src="components/schema-form/schema-form.config.js"></script>
       <script src="components/socket/socket.service.js"></script>
       <script src="components/sub-menu-btn/sub-menu-btn.js"></script>
       <script src="components/user-status/user-status.service.js"></script>
       <script src="components/user/user.directive.js"></script>
       <script src="components/util/util.filter.js"></script>
-      <script src="app/account/settings/settings.controller.js"></script>
       <script src="components/util/util.service.js"></script>
       <script src="components/util/util.vanilla.js"></script>
       <script src="components/value-indicator/value-indicator.directive.js"></script>

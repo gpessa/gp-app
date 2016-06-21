@@ -17,8 +17,19 @@ var PagesSchema = new Schema({
     "default" : []
   }
 },{
+  "toObject" : {
+    "virtuals" : true,
+    "transform" : function (doc, ret, game) {
+      delete ret.user;
+      delete ret.__v;
+    }
+  },
   "toJSON" : {
-    "virtuals" : true
+    "virtuals" : true,
+    "transform" : function (doc, ret, game) {
+      delete ret.user;
+      delete ret.__v;
+    }
   }
 });
 
@@ -29,6 +40,7 @@ var autoPopulatePages = function(next) {
 
 PagesSchema
   .pre('findOneAndUpdate', autoPopulatePages)
+  .pre('findById', autoPopulatePages)
   .pre('findOne', autoPopulatePages)
   .pre('find', autoPopulatePages)
   .pre('save', autoPopulatePages)

@@ -3,9 +3,9 @@
 (function() {
 
   angular.module('gpAppApp.auth')
-    .run(function($rootScope, $location, Auth) {
+    .run(function($rootScope, $state, Auth) {
       // Redirect to login if route requires auth and the user is not logged in, or doesn't have required role
-      $rootScope.$on('$routeChangeStart', function(event, next) {
+      $rootScope.$on('$stateChangeStart', function(event, next) {
         if (!next.authenticate) {
           return;
         }
@@ -20,7 +20,7 @@
               event.preventDefault();
               return Auth.isLoggedIn(_.noop)
                 .then(is => {
-                  $location.path(is ? '/' : '/login');
+                  $state.go(is ? 'main' : 'login');
                 });
             });
         } else {
@@ -31,7 +31,7 @@
               }
 
               event.preventDefault();
-              $location.path('/');
+              $state.go('main');
             });
         }
       });

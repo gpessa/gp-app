@@ -2,7 +2,7 @@
 
 (function() {
 
-  function AuthService($location, $http, $cookies, $cacheFactory, $q, appConfig, Util, User) {
+  function AuthService($location, $http, $cookies, $q, $cacheFactory, appConfig, Util, User) {
     var safeCb = Util.safeCb;
     var currentUser = {};
     var userRoles = appConfig.userRoles || [];
@@ -44,15 +44,14 @@
           });
       },
 
-
-    /**
-     * Delete access token and user info
-     */
-    logout() {
-      $cookies.remove('token');
-      $cacheFactory.get('$http').removeAll(); //clean the $http cache to reset the cache
-      currentUser = {};
-    },
+      /**
+       * Delete access token and user info
+       */
+      logout() {
+        $cookies.remove('token');
+      	$cacheFactory.get('$http').removeAll(); //clean the $http cache to reset the cache
+        currentUser = {};
+      },
 
       /**
        * Create a new user
@@ -107,54 +106,53 @@
           return currentUser;
         }
 
-      var value = (currentUser.hasOwnProperty('$promise')) ?
-        currentUser.$promise : currentUser;
-      return $q.when(value)
-        .then(user => {
-          safeCb(callback)(user);
-          return user;
-        }, () => {
-          safeCb(callback)({});
-          return {};
-        });
-    },
+        var value = currentUser.hasOwnProperty('$promise') ? currentUser.$promise : currentUser;
+        return $q.when(value)
+          .then(user => {
+            safeCb(callback)(user);
+            return user;
+          }, () => {
+            safeCb(callback)({});
+            return {};
+          });
+      },
 
-    /**
-     * Check if a user is logged in
-     *   (synchronous|asynchronous)
-     *
-     * @param  {Function|*} callback - optional, function(is)
-     * @return {Bool|Promise}
-     */
-    isLoggedIn(callback) {
-      if (arguments.length === 0) {
-        return currentUser.hasOwnProperty('role');
-      }
+      /**
+       * Check if a user is logged in
+       *   (synchronous|asynchronous)
+       *
+       * @param  {Function|*} callback - optional, function(is)
+       * @return {Bool|Promise}
+       */
+      isLoggedIn(callback) {
+        if (arguments.length === 0) {
+          return currentUser.hasOwnProperty('role');
+        }
 
-      return Auth.getCurrentUser(null)
-        .then(user => {
-          var is = user.hasOwnProperty('role');
-          safeCb(callback)(is);
-          return is;
-        });
-    },
+        return Auth.getCurrentUser(null)
+          .then(user => {
+            var is = user.hasOwnProperty('role');
+            safeCb(callback)(is);
+            return is;
+          });
+      },
 
-     /**
-      * Check if a user has a specified role or higher
-      *   (synchronous|asynchronous)
-      *
-      * @param  {String}     role     - the role to check against
-      * @param  {Function|*} callback - optional, function(has)
-      * @return {Bool|Promise}
-      */
-    hasRole(role, callback) {
-      var hasRole = function(r, h) {
-        return userRoles.indexOf(r) >= userRoles.indexOf(h);
-      };
+      /**
+       * Check if a user has a specified role or higher
+       *   (synchronous|asynchronous)
+       *
+       * @param  {String}     role     - the role to check against
+       * @param  {Function|*} callback - optional, function(has)
+       * @return {Bool|Promise}
+       */
+      hasRole(role, callback) {
+        var hasRole = function(r, h) {
+          return userRoles.indexOf(r) >= userRoles.indexOf(h);
+        };
 
-      if (arguments.length < 2) {
-        return hasRole(currentUser.role, role);
-      }
+        if (arguments.length < 2) {
+          return hasRole(currentUser.role, role);
+        }
 
         return Auth.getCurrentUser(null)
           .then(user => {
@@ -175,20 +173,19 @@
         return Auth.hasRole.apply(Auth, [].concat.apply(['admin'], arguments));
       },
 
-    /**
-     * Get auth token
-     *
-     * @return {String} - a token string used for authenticating
-     */
-    getToken() {
-      return $cookies.get('token');
-    }
-  };
+      /**
+       * Get auth token
+       *
+       * @return {String} - a token string used for authenticating
+       */
+      getToken() {
+        return $cookies.get('token');
+      }
+    };
 
-  return Auth;
-}
+    return Auth;
+  }
 
-angular.module('gpAppApp.auth')
-  .factory('Auth', AuthService);
-
+  angular.module('gpAppApp.auth')
+    .factory('Auth', AuthService);
 })();
