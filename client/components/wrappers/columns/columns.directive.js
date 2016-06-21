@@ -2,16 +2,16 @@
 
 angular
   .module('gpAppApp')
-  .directive('containerColumns', ($filter, editMode, availableItems) => {
+  .directive('wrapperColumns', ($filter, editMode, availableItems) => {
     return {
-      'templateUrl' : 'components/containers/columns/columns.html',
+      'templateUrl' : 'components/wrappers/columns/columns.html',
       'require' : '^^item',
       'restrict' : 'C',
       'replace' : true,
       'link' : function(scope, element, attr, item){
         scope.item = item;
         scope.editMode = editMode;
-        var basicContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'simple'})[0];
+        var basicWrapper = $filter('filter')(availableItems.Wrapper, { 'subtype' : 'simple'})[0];
 
         var calculateColumnsWidth = () => {
           var dim = parseInt(12 / scope.item.model.children.length);
@@ -23,7 +23,7 @@ angular
         };
 
         scope.addColumn = () => {
-          scope.item.model.children.push(angular.copy(basicContainer));
+          scope.item.model.children.push(angular.copy(basicWrapper));
           calculateColumnsWidth();
           item.save();
         };

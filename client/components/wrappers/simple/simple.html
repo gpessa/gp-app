@@ -1,12 +1,11 @@
 <div dnd-list="item.model.children"
-     ng-class="{ 'editable' : editMode.enabled }"
      ng-if="item.model.children"
-     class="row wrapper"
+     class="row wrapper-list"
      dnd-inserted="added(event, index, item)">
 
-    <div class="col-md-12 dndPlaceholder wrapper-placeholder"></div>
+    <hr class="dndPlaceholder wrapper-placeholder"></hr>
 
-    <item class="wrapper-column col-md-{{child.attributes.dimension}}"
+    <item class="col-md-{{child.attributes.dimension}}"
           dnd-draggable="child"
           dnd-moved="removed(event, child, $index)"
           model="child"

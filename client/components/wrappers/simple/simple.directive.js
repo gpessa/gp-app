@@ -2,9 +2,9 @@
 
 angular
   .module('gpAppApp')
-  .directive('containerSimple', (editMode) => {
+  .directive('wrapperSimple', (editMode) => {
     return {
-      'templateUrl' : 'components/containers/simple/simple.html',
+      'templateUrl' : 'components/wrappers/simple/simple.html',
       'require' : '^^item',
       'restrict' : 'C',
       'link' : {

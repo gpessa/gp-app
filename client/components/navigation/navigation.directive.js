@@ -11,7 +11,7 @@ angular
       'scope' : true,
       'link' : function(scope){
         scope.editMode = editMode;
-        var simpleContainer = $filter('filter')(availableItems.Container, { 'subtype' : 'simple'})[0];
+        var simpleWrapper = $filter('filter')(availableItems.Wrapper, { 'subtype' : 'simple'})[0];
 
         scope.$watch(() => { return Auth.isLoggedIn(); }, (loggedIn) => {
             if(loggedIn){
@@ -23,7 +23,7 @@ angular
         });
 
         scope.add = () => {
-          scope.app.pages.push(angular.copy(simpleContainer));
+          scope.app.pages.push(angular.copy(simpleWrapper));
         };
 
         scope.save = (page) => {

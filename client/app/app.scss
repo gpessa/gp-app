@@ -13,9 +13,6 @@ $weather-font-path:    "../assets/fonts";
 @import 'page/page.scss';
 @import '../components/add-item/add-item.scss';
 @import '../components/alert/alert.scss';
-@import '../components/container/container.scss';
-@import '../components/containers/columns/columns.scss';
-@import '../components/containers/simple/simple.scss';
 @import '../components/css/_buttons.scss';
 @import '../components/css/_c3.scss';
 @import '../components/css/_icons.scss';
@@ -25,6 +22,7 @@ $weather-font-path:    "../assets/fonts";
 @import '../components/css/_weather-icon.scss';
 @import '../components/footer/footer.scss';
 @import '../components/icon-picker/icon-picker.scss';
+@import '../components/icons/font/_flaticon.scss';
 @import '../components/item/item.scss';
 @import '../components/modal/modal.scss';
 @import '../components/navbar/navbar.scss';
@@ -44,11 +42,13 @@ $weather-font-path:    "../assets/fonts";
 @import '../components/widgets/stock/stock.scss';
 @import '../components/widgets/todo-list/todo-list.scss';
 @import '../components/widgets/withings/withings.scss';
+@import '../components/wrapper/wrapper.scss';
+@import '../components/wrappers/columns/columns.scss';
+@import '../components/wrappers/simple/simple.scss';
 /* endinject */
 
 // Font
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700,300italic,400italic,700italic|Roboto:400,500,100,100italic);
-
 
 
 
