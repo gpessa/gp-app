@@ -1,4 +1,5 @@
 <div class="col-md-4 col-md-offset-4">
+
   <h3>Settings</h3>
 
   <form class="form" name="form" ng-submit="vm.changePassword(form)" novalidate>
@@ -26,7 +27,7 @@
 
     <div class="form-group" ng-class="{ 'has-error': form.confirmPassword.$invalid && form.$submitted }">
       <label class="control-label">Confirm New Password</label>
-      <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.newPassword" ng-minlength="3" required=""/>
+      <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.newPassword" ng-minlength="3" required="" />
 
       <div ng-messages="form.confirmPassword.$error" ng-if="form.$submitted" class="help-block">
         <div ng-message="required">Password must be at least 3 characters.</div>
@@ -39,5 +40,4 @@
     </div>
 
   </form>
-
 </div>

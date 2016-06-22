@@ -9,6 +9,8 @@ $weather-font-path:    "../assets/fonts";
 
 // Component styles are injected through grunt
 /* inject:scss */
+@import 'account/login/login';
+@import 'account/signup/signup';
 @import 'admin/admin';
 @import 'page/page';
 @import '../components/add-item/add-item';

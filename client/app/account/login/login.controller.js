@@ -1,18 +1,15 @@
 'use strict';
 
 class LoginController {
+
   constructor(Auth, $state) {
-    this.user = {};
     this.errors = {};
-    this.submitted = false;
 
     this.Auth = Auth;
     this.$state = $state;
   }
 
   login(form) {
-    this.submitted = true;
-
     if (form.$valid) {
       this.Auth.login({
           email: this.user.email,
@@ -27,6 +24,7 @@ class LoginController {
         });
     }
   }
+  
 }
 
 angular.module('gpAppApp')
