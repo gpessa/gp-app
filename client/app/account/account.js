@@ -32,7 +32,7 @@ angular.module('gpAppApp')
         controllerAs: 'vm',
         authenticate: true
       })
-      .state('/link', {
+      .state('link', {
         url: '/link',
         templateUrl: 'app/account/link/link.html',
         controller: 'LinkController',
