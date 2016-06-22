@@ -36,7 +36,7 @@ export function saveUpdates(updates) {
 
     //console.log(updates);
     //console.log(updated);
-
+console.log(updated);
 
     return updated
       .save()

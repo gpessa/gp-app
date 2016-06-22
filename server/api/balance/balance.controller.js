@@ -46,13 +46,25 @@ export function create(req, res) {
 
 // Updates an existing Balance in the DB
 export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
   return Balance
-    .findById(req.params.id)
-    .then(defaultHandlers.handleEntityNotFound(res))
-    .then(defaultHandlers.saveUpdates(req.body))
-    .then(defaultHandlers.respondWithResult(res))
-    .catch(defaultHandlers.handleError(res));
+    .findOneAndUpdate({
+        '_id' : req.body._id
+      }, req.body ,{
+        'new' : true,   // return new doc if one is upserted
+        'upsert' : true // insert the document if it does not exist
+    })
+    .then(function(model){
+      res.status(200).send(model);
+      return model;
+    })
+
+  // if (req.body._id) {
+  //   delete req.body._id;
+  // }
+  // return Balance
+  //   .findById(req.params.id)
+  //   .then(defaultHandlers.handleEntityNotFound(res))
+  //   .then(defaultHandlers.saveUpdates(req.body))
+  //   .then(defaultHandlers.respondWithResult(res))
+  //   .catch(defaultHandlers.handleError(res));
 }

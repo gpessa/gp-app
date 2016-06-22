@@ -20,9 +20,13 @@
     </li>
   </ul>
 
-  <ul class="list" ng-repeat="stock in stocks">
-      <!-- <pre>{{stock}}</pre> -->
-    <li class="list_item active">
+  <ul class="list" >
+
+    <li class="list-empty" ng-if="stocks.length == 0">
+      No stocks available
+    </li>
+
+    <li class="list_item active" ng-repeat-start="stock in stocks">
       <div class="list_item_btn">
         <a class="btn btn-secondary" ng-click="remove(stock)" icon="fa fa-trash-o"></a>
       </div>
@@ -46,7 +50,7 @@
       </div>
     </li>
 
-    <li class="list_item extra" ng-if="stock.data">
+    <li class="list_item extra" ng-if="stock.data" ng-repeat-end>
 
       <div class="row">
 

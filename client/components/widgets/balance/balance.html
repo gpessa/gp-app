@@ -1,4 +1,4 @@
-<ul class="list" >
+<ul class="list">
 
   <li class="list_item header">
     <div class="list_item_btn">
@@ -6,10 +6,10 @@
     </div>
     <div class="list_item_data">
       <div class="row">
-          <div class="col-md-3">Date</div>
-          <div class="col-md-3 text-right">Current account</div>
-          <div class="col-md-3 text-right">Saving account</div>
-          <div class="col-md-3 text-right">Total</div>
+        <div class="col-md-3">Date</div>
+        <div class="col-md-3 text-right">Current account</div>
+        <div class="col-md-3 text-right">Saving account</div>
+        <div class="col-md-3 text-right">Total</div>
       </div>
     </div>
   </li>
@@ -32,7 +32,7 @@
             <input class="form-control text-right" placeholder="Saving Account" ng-model="newReport.saving" name="saving" type="number" required/>
           </div>
         </div>
-        <input type="submit" class="hidden"/>
+        <input type="submit" class="hidden" />
       </form>
     </div>
   </li>
@@ -43,33 +43,28 @@
     </div>
     <div class="list_item_data">
       <div class="row">
-          <div class="col-md-3">{{report.date | date:formats.date}}</div>
-          <div class="col-md-3 text-right">{{report.current | currency}}</div>
-          <div class="col-md-3 text-right">{{report.saving | currency}}</div>
-          <div class="col-md-3 text-right" title="{{report.total - balance.reports[$index-1].total | currency}}">
-            {{report.total | currency}}
-          </div>
+        <div class="col-md-3">{{report.date | date:formats.date}}</div>
+        <div class="col-md-3 text-right">{{report.current | currency}}</div>
+        <div class="col-md-3 text-right">{{report.saving | currency}}</div>
+        <div class="col-md-3 text-right" title="{{report.total - balance.reports[$index-1].total | currency}}">
+          {{report.total | currency}}
+        </div>
       </div>
     </div>
   </li>
 
   <li class="list_item extra" ng-if="balance.reports.length">
-    <c3chart bindto-id="balance"
-             chart-x="x"
-             show-labels="false"
-             chart-columns="columns"
-             chart-data="balance.reports"
-             padding-top="20"/>
-      <chart-size chart-height="200"/>
+    <c3chart bindto-id="balance" chart-x="x" show-labels="false" chart-columns="columns" chart-data="balance.reports" padding-top="20" >
+      <chart-size chart-height="200" />
       <chart-legend show-legend="false" />
       <chart-tooltip show-tooltip="true" />
-      <chart-colors color-function="colors"/>
-      <chart-points point-radius="2"/>
+      <chart-colors color-function="colors" />
+      <chart-points point-radius="2" />
       <chart-axis>
-        <chart-axis-x axis-type="timeseries"/>
+        <chart-axis-x axis-type="timeseries" />
         <chart-axis-y axis-type="number" axis-min="{{min}}" />
-        <chart-axis-x-tick tick-format-function="formatDate"/>
-        <chart-axis-y-tick tick-format-function="formatTotal"/>
+        <chart-axis-x-tick tick-format-function="formatDate" />
+        <chart-axis-y-tick tick-format-function="formatTotal" />
       </chart-axis>
     </c3chart>
   </li>

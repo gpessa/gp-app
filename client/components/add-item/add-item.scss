@@ -1,16 +1,20 @@
-.add-item{
+.add-item {
   position: fixed;
   width: 100%;
   bottom: 0;
-  animation:appear $animation-time;
-  animation-iteration-count:1;
-
+  animation: appear $animation-time;
+  animation-iteration-count: 1;
   @keyframes appear {
-    from {transform: translateY(100%)}
-    to {transform: translateY(0%)}
+    from {
+      transform: translateY(100%);
+    }
+
+    to {
+      transform: translateY(0%);
+    }
   }
 
-  .add-item-item{
+  .add-item-item {
     @include button-variant($dropdown-link-color, transparent, transparent);
   }
 
@@ -18,7 +22,7 @@
     border: none;
 
     > li {
-      margin-bottom: 0px;
+      margin-bottom: 0;
 
       > a {
         color: $dropdown-link-color;
@@ -31,21 +35,21 @@
 
       &.active > a {
         &,
-        &:hover,
-        &:focus {
+        &:focus,
+        &:hover {
           color: $dropdown-link-color;
           background: $semi-transparent-bg-light;
-          border-bottom-color:transparent;
+          border-bottom-color: transparent;
         }
       }
     }
   }
 
-  .tab-content{
+  .tab-content {
     background: $semi-transparent-bg-light;
-    color:$dropdown-link-color;
+    color: $dropdown-link-color;
 
-    .list-inline{
+    .list-inline {
       margin-bottom: 0;
     }
   }

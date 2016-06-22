@@ -4,9 +4,12 @@
     <a class="btn btn-secondary" icon="fa fa-refresh" ng-click="get()"></a>
   </div>
 
-  <ul class="list" ng-repeat="portfolio in portfolios">
+  <ul class="list">
+    <li class="list-empty" ng-if="portfolios.length == 0">
+      No portfolio available
+    </li>
 
-    <li class="list_item active">
+    <li class="list_item active"  ng-repeat-start="portfolio in portfolios">
       <div class="list_item_btn">
         <a class="btn btn-secondary" ng-click="remove(portfolio)" icon="fa fa-trash"></a>
       </div>
@@ -94,7 +97,7 @@
     </li>
 
     <li class="list_item" ng-repeat="transaction in (portfolio.transactions | order)"  ng-class="{'disabled' : transaction.status == 'close'}">
-      <!-- <pre>{{transaction | json}}</pre> -->
+
       <div class="list_item_btn">
         <ul class="sub-menu-btn">
           <li>
@@ -148,10 +151,8 @@
       </div>
     </li>
 
-    <li class="list_item extra" ng-if="portfolio.transactions.length">
+    <li class="list_item extra" ng-if="portfolio.transactions.length"  ng-repeat-end>
       <dl class="dl-horizontal">
-        <!-- <dt>Portfolio market value</dt>
-        <dd ng-bind="portfolio.recap.total | currency"></dd> -->
 
         <dt>Portfolio overral return</dt>
         <dd>
