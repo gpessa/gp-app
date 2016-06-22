@@ -42,15 +42,15 @@ export function update(req, res) {
   var toupdate = [];
 
   req.body.pages = req.body.pages.map(function(child){
-    console.log('---------');
+    // console.log('---------');
     if(child._id){
-      console.log('update ' + child._id);
+      // console.log('update ' + child._id);
       toupdate.push(child);
       return child._id;
     } else {
       let c = new Item(child);
       c.save();
-      console.log('create ' + c._id);
+      // console.log('create ' + c._id);
       return c._id;
     }
   });
@@ -74,20 +74,20 @@ export function update(req, res) {
         .exec()
         .then(function(model){
 
-          console.log(model.pages);
-          console.log(req.body.pages);
+          // console.log(model.pages);
+          // console.log(req.body.pages);
 
-          var deleted = _.differenceWith(model.pages, req.body.pages, function(a,b){
-            return a._id === b;
-          });
+          // var deleted = _.differenceWith(model.pages, req.body.pages, function(a,b){
+          //   return a._id === b;
+          // });
 
-          console.log('deleted');
-          console.log(deleted);
+          // console.log('deleted');
+          // console.log(deleted);
 
-
-          deleted.forEach(d => {
-            d.remove();
-          });
+          //
+          // deleted.forEach(d => {
+          //   d.remove();
+          // });
 
           var updated = _.merge(model, req.body, function(oldVal, newVal){
             return newVal;
