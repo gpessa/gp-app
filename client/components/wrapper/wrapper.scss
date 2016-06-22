@@ -2,6 +2,12 @@
   min-height:  $item-margin * 2;
   padding-bottom: $item-margin;
 
+  .wrapper-btn{
+    @include button-variant($semi-transparent-bg-light, $semi-transparent-bg, transparent);
+    @extend .btn;
+    @extend .btn-xs;
+  }
+
   .wrapper-placeholder{
     border-top: 2px dashed $semi-transparent-bg;
     margin: $item-margin $grid-gutter-width;

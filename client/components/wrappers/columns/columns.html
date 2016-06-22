@@ -1,13 +1,13 @@
 <div class="row">
 
   <div class="col-md-12 text-right" ng-if="editMode.enabled">
-    <a class="btn btn-link-light" icon="fa fa-plus" ng-click="addColumn()"></a>
-    <a class="btn btn-link-light" icon="fa fa-times" ng-click="item.remove()"></a>
+    <a class="wrapper-btn" icon="fa fa-plus" ng-click="addColumn()" title="Add Column"></a>
+    <a class="wrapper-btn" icon="fa fa-times" ng-click="item.remove()" title="Remove container"></a>
   </div>
 
   <div class="col-md-{{child.attributes.dimension}}" ng-repeat="child in item.model.children">
     <div class="text-right" ng-if="editMode.enabled">
-      <a ng-click="removeColumn(child)" class="btn btn-link-light" icon="fa fa-minus" ng-if="editMode.enabled"></a>
+      <a ng-click="removeColumn(child)" class="wrapper-btn" icon="fa fa-minus" ng-if="editMode.enabled" title="Remove column"></a>
     </div>
     <item model="child"></item>
   </div>

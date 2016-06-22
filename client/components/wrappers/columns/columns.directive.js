@@ -23,6 +23,7 @@ angular
         };
 
         scope.addColumn = () => {
+          scope.item.model.children = scope.item.model.children ? scope.item.model.children : [];
           scope.item.model.children.push(angular.copy(basicWrapper));
           calculateColumnsWidth();
           item.save();
@@ -34,7 +35,7 @@ angular
           item.save();
         };
 
-        if(!scope.item.model.children.length) {
+        if(!scope.item.model.children) {
           scope.addColumn();
         }
 

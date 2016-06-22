@@ -1,14 +1,13 @@
-<div class="btn-social-container">
-  <a ng-click="OauthButtons.loginOauth('facebook')" class="btn btn-link btn-facebook">
-    <i class="fa fa-2x fa-fw fa-facebook-square"></i>
-  </a>
-  <a ng-click="OauthButtons.loginOauth('google')" class="btn btn-link btn-google">
-    <i class="fa fa-2x fa-fw fa-google-plus-square"></i>
-  </a>
-  <a ng-click="OauthButtons.loginOauth('twitter')" class="btn btn-link btn-twitter">
-    <i class="fa fa-2x fa-fw fa-twitter-square"></i>
-  </a>
-  <a ng-click="OauthButtons.loginOauth('withings')" class="btn btn-link btn-withings">
-    <i class="fa fa-2x fa-fw">W</i>
-  </a>
+<div class="btn-social-container row">
+  <div class='col-md-4'>
+    <a ng-click="OauthButtons.loginOauth('facebook')" class="btn btn-block btn-facebook">Facebook</a>
+  </div>
+
+  <div class='col-md-4'>
+    <a ng-click="OauthButtons.loginOauth('google')" class="btn btn-block btn-google">Google</a>
+  </div>
+
+  <div class='col-md-4'>
+    <a ng-click="OauthButtons.loginOauth('withings')" class="btn btn-block btn-withings">Withings</a>
+  </div>
 </div>

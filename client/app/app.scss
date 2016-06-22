@@ -140,9 +140,10 @@ footer{
 
 
 hr {
-  margin-top:    $line-height-computed / 2;
-  margin-bottom: $line-height-computed / 2;
+  margin-top:    $item-margin;
+  margin-bottom: $item-margin;
 }
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

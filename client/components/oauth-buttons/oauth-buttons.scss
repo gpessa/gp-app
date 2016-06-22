@@ -1,12 +1,15 @@
-.btn-social-container{
-  text-align: center;
-  margin-top:20px;
-
-  .btn{
-    color:#fff;
-
-    &:hover{
-      color:darken(#fff, 20);
-    }
-  }
+.btn-facebook{
+  @include button-variant(#fff, #3b5998, #3b5998);
 }
+
+.btn-google{
+  @include button-variant(#fff, #d14836, #d14836);
+}
+
+.btn-withings{
+  @include button-variant(#fff, #009ee3, #009ee3);
+}
+
+// .btn-twitter{
+//   @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+// }
