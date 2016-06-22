@@ -2,7 +2,7 @@
 
 angular
   .module('gpAppApp')
-  .directive('navigation', function ($location, $filter, PagesResource, editMode, availableItems) {
+  .directive('navigation', function ($location, $filter, $state, PagesResource, editMode, availableItems) {
     return {
       'templateUrl' : 'components/navigation/navigation.html',
       'controllerAs' : '$ctrl',
@@ -10,6 +10,7 @@ angular
       'replace' :true,
       'scope' : true,
       'link' : function(scope){
+        this.$state = $state;
         scope.editMode = editMode;
         var simpleWrapper = $filter('filter')(availableItems.Wrapper, { 'subtype' : 'simple'})[0];
 
@@ -18,7 +19,11 @@ angular
 
         scope.add = () => {
           scope.app.pages.push(angular.copy(simpleWrapper));
-          scope.app.$save();
+          scope.app
+            .$save()
+            .then(function(page){
+              this.$state.href('/page/' + page._id);
+            }.bind(this))
         };
 
         scope.save = () => {
