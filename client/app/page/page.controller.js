@@ -3,9 +3,9 @@
 (function() {
 
 class PageController {
-  constructor($route, $scope, $filter, PagesResource) {
+  constructor($stateParams, $scope, $filter, PagesResource) {
     var app = new PagesResource();
-    var pageid = $route.current.params.name;
+    var pageid = $stateParams.name;
 
     app
       .$get()

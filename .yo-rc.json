@@ -1,6 +1,6 @@
 {
   "generator-angular-fullstack": {
-    "generatorVersion": "3.7.3",
+    "generatorVersion": "3.7.6",
     "endpointDirectory": "server/api/",
     "insertRoutes": true,
     "registerRoutesFile": "server/routes.js",
@@ -19,7 +19,7 @@
       "flow": false,
       "html": true,
       "sass": true,
-      "ngroute": true,
+      "uirouter": true,
       "bootstrap": true,
       "uibootstrap": true,
       "socketio": true,
@@ -31,7 +31,7 @@
       "googleAuth": true,
       "facebookAuth": true,
       "twitterAuth": true,
-      "grunt": true,
+      "gulp": true,
       "mocha": true,
       "jasmine": false,
       "should": false,
@@ -48,10 +48,10 @@
     "moduleName": "",
     "modulePrompt": true,
     "filters": [
-      "ngroute",
+      "uirouter",
       "mocha",
       "expect",
-      "ngroute",
+      "uirouter",
       "es6"
     ],
     "extensions": [

@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController" ng-if="nav.isLoggedIn()">
   <div class="container-fluid">
 
     <div class="navbar-header">
@@ -20,8 +20,8 @@
 
       <ul class="navbar-right nav navbar-nav">
 
-        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}" ng-show="item.show()">
-            <a ng-href="{{item.link}}">
+        <li ng-repeat="item in nav.menu" ui-sref-active="active" ng-show="item.show()">
+            <a ui-sref="{{item.state}}">
               <i class="{{item.icon}}"></i>
               <small>{{item.title}}</small>
             </a>

@@ -4,7 +4,7 @@ angular.module('gpAppApp.auth', [
   'gpAppApp.constants',
   'gpAppApp.util',
   'ngCookies',
-  'ngRoute'
+  'ui.router'
 ])
   .config(function($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');

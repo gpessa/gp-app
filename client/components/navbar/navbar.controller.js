@@ -2,51 +2,50 @@
 
 class NavbarController {
 
-  constructor($location, Auth) {
+  constructor(Auth) {
     this.isCollapsed = true;
-    this.$location = $location;
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
     this.getCurrentUser = Auth.getCurrentUser;
 
     this.menu = [{
       'title': 'Admin',
-      'link' : '/admin',
+      'state' : 'admin',
       'icon' : 'fa fa-users',
       'show' : function(){
         return Auth.isAdmin();
       }
     },{
       'title': 'Link',
-      'link' : '/link',
+      'state' : 'link',
       'icon' : 'fa fa fa-compress',
       'show' : function(){
         return Auth.isLoggedIn();
       }
     },{
       'title': 'Settings',
-      'link' : '/settings',
+      'state' : 'settings',
       'icon' : 'fa fa-cogs',
       'show' : function(){
         return Auth.isLoggedIn();
       }
     },{
       'title': 'Sign up',
-      'link' : '/signup',
+      'state' : 'signup',
       'icon' : 'fa fa-user-plus',
       'show' : function(){
         return !Auth.isLoggedIn();
       }
     },{
       'title': 'Login',
-      'link' : '/login',
+      'state' : 'login',
       'icon' : 'fa fa-sign-in',
       'show' : function(){
         return !Auth.isLoggedIn();
       }
     },{
       'title': 'Logout',
-      'link' : '/logout',
+      'state' : 'logout',
       'icon' : 'fa fa-sign-out',
       'show' : function(){
         return Auth.isLoggedIn();
@@ -54,9 +53,6 @@ class NavbarController {
     }];
   }
 
-  isActive(route) {
-    return route === this.$location.path();
-  }
 }
 
 angular.module('gpAppApp')

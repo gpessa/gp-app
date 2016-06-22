@@ -7,12 +7,12 @@ angular.module('gpAppApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute',
   'ngMessages',
   'ngGeolocation',
   'btford.socket-io',
   'ui.bootstrap',
   'validation.match',
+  'ui.router',
   'dndLists',
   'schemaForm',
   'angular-click-outside',
@@ -20,13 +20,11 @@ angular.module('gpAppApp', [
   'gridshore.c3js.chart'
 ])
 
-.config(function($routeProvider, $locationProvider) {
-  $routeProvider
-    .otherwise({
-      redirectTo: '/login'
-    });
+.config(function($urlRouterProvider, $locationProvider) {
+  $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
 })
+
 
 .constant('chartConfiguration', {
   options : {
