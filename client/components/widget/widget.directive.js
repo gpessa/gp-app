@@ -5,9 +5,9 @@ angular
   .directive('widget', () => {
     return {
       'templateUrl' : 'components/widget/widget.html',
+      'transclude' : true,
       'require' : '^^item',
       'restrict' : 'C',
-      'transclude' : true,
       'link' : function(scope, element, attr, item){
         scope.item = item;
       }

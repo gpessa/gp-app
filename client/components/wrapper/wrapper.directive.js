@@ -5,14 +5,15 @@ angular
   .directive('wrapper', ($compile, editMode) => {
     return {
       'templateUrl' : 'components/wrapper/wrapper.html',
+      'transclude' : true,
       'require' : '^^item',
       'restrict' : 'C',
       'link' : function(scope, element, attr, item){
         scope.editMode = editMode;
         scope.item = item;
 
-        var wrapperBody = element.addClass('wrapper-' + item.model.subtype);
-        $compile(wrapperBody)(scope);
+        //var wrapperBody = element.addClass('wrapper-' + item.model.subtype);
+        //$compile(wrapperBody)(scope);
       }
     };
   });
