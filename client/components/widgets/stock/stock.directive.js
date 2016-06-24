@@ -9,7 +9,7 @@ angular
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
-
+        
         scope.create = function(form, stock){
           if (form.$valid) {
             stock = new StockResource(scope.newStock);

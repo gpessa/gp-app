@@ -6,8 +6,7 @@ angular
     return {
       'templateUrl' : 'components/wrapper/wrapper.html',
       'require' : '^^item',
-      'restrict' : 'E',
-      'replace' : true,
+      'restrict' : 'C',
       'link' : function(scope, element, attr, item){
         scope.editMode = editMode;
         scope.item = item;

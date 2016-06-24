@@ -2,17 +2,14 @@
 
 angular
   .module('gpAppApp')
-  .directive('widget', ($compile) => {
+  .directive('widget', () => {
     return {
       'templateUrl' : 'components/widget/widget.html',
       'require' : '^^item',
-      'restrict' : 'E',
-      'replace' : true,
+      'restrict' : 'C',
+      'transclude' : true,
       'link' : function(scope, element, attr, item){
         scope.item = item;
-        
-        var widgetBody = angular.element(element[0].querySelector('.widget-body')).addClass('widget-' + item.model.subtype);
-        $compile(widgetBody)(scope);
       }
     };
   });
