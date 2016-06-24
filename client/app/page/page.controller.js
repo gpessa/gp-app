@@ -5,7 +5,7 @@
 class PageController {
   constructor($stateParams, $scope, $filter, PagesResource) {
     var app = new PagesResource();
-    var pageid = $stateParams.name;
+    var status = $stateParams.status;
 
     app
       .$get()
@@ -13,7 +13,7 @@ class PageController {
         this.noPageCreated = app.pages.length === 0;
 
         if(!this.noPageCreated){
-          this.child = $filter('filter')(app.pages, {'_id' : pageid})[0];
+          this.child = $filter('filter')(app.pages, {'status' : status})[0];
         }
     });
   }

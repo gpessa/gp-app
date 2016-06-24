@@ -19,7 +19,7 @@
     </li>
 
     <li ng-if="!editMode.enabled" class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: isActive('/page/' + page.id)}">
-      <a ng-href="/page/{{page._id}}">
+      <a ng-href="/page/{{page.status}}">
         <i class="{{page.configuration.icon || 'fa fa-file-o'}}"></i>
         <small>
           {{page.attributes.name}}

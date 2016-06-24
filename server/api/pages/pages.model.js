@@ -17,18 +17,14 @@ var PagesSchema = new Schema({
     "default" : []
   }
 },{
-  "toObject" : {
-    "virtuals" : true,
-    "transform" : function (doc, ret, game) {
-      delete ret.user;
-      delete ret.__v;
-    }
-  },
   "toJSON" : {
-    "virtuals" : true,
     "transform" : function (doc, ret, game) {
       delete ret.user;
       delete ret.__v;
+      ret.pages = ret.pages.map((page) => {
+        page.status = page.attributes.name.toLowerCase().replace(/ /g, '+');
+        return page;
+      })
     }
   }
 });
