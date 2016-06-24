@@ -6,143 +6,78 @@ import Stock from './stock.model';
 import yahooFinance from 'yahoo-finance';
 
 
-
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
-}
-
-function responseWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
-      res.status(statusCode).json(entity);
-    }
-  };
-}
-
-function handleEntityNotFound(res) {
-  return function(entity) {
-    if (!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
-}
-
-function saveUpdates(updates) {
-  return function(entity) {
-    // var updated = _.merge(entity, updates);
-    entity.transactions = updates.transactions;
-    var updated = entity;
-
-    return updated.save()
-      .spread(updated => {
-        return updated;
-      });
-  };
-}
-
-function removeEntity(res) {
-  return function(entity) {
-    if (entity) {
-      return entity.remove()
-        .then(() => {
-          res.status(204).end();
-        });
-    }
-  };
-}
-
-function responseWithDecoratedResult(res, statusCode){
-  statusCode = statusCode || 200;
-
-  return function(entity) {
-
-    if (entity) {
-      var FIELDS = ['n', 'c6', 'c1', 'c', 'p2', 'b', 'v', 'a2', 't1', 'g', 'h', 'b3'];
-      var SYMBOLS = entity.map((stock) => { return stock.symbol; })
-                          .filter((stock) => { return stock !== undefined; });
-
-      if(SYMBOLS.length === 0){
-        res.status(200).json(entity);
-        return null;
-      }
-
-      yahooFinance.snapshot({
-        fields: FIELDS,
-        symbols: SYMBOLS
-      }, function (err, result) {
-
-        if(!result){
-          res.status(404).json({
-            'message' : 'Service not available'
-          });
-          return null;
-        }
-
-        entity = entity.map(function(stock, index){
-          stock = stock.toObject();
-          stock.data = result.find(function(s){
-            return s.symbol === stock.symbol;
-          });
-          return stock;
+function decorateResult(stocks){
+  if (stocks) {
+    var FIELDS = ['n', 'c6', 'c1', 'c', 'p2', 'b', 'v', 'a2', 't1', 'g', 'h', 'b3'];
+    var SYMBOLS = stocks.map(stock => stock.symbol).filter(stock => { return !!stock; });
+    var promise = new Promise(function(resolve, reject) {
+      yahooFinance
+        .snapshot({
+          fields: FIELDS,
+          symbols: SYMBOLS
         })
-
-        res.status(200).json(entity);
-      });
-
-    }
-  };
+        .then(function(result) {
+          stocks = stocks.map(function(stock, index) {
+            stock = stock.toObject();
+            let data = result.find(s => s.symbol === stock.symbol);
+            if(data){
+              stock.data = {};
+              stock.data = _.assign(stock.data, data);
+            }
+            return stock;
+          })
+          resolve(stocks);
+        })
+        .catch(function(){
+          resolve(stocks);
+        })
+    });
+    return promise;
+  }
 }
+
 
 // Gets a list of Stocks
 export function index(req, res) {
-  Stock
-    .find({
-      'user' : req.user._id
-    })
-    .then(responseWithDecoratedResult(res))
-    .catch(handleError(res));
+  return Stock
+    .find({'user': req.user._id})
+    .exec(function(err, model) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        decorateResult(model).then(model => {
+          res.status(200).send(model);
+        })
+      }
+    });
 }
 
-// Gets a single Stock from the DB
-export function show(req, res) {
-  Stock.findById(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
-}
 
 // Creates a new Stock in the DB
 export function create(req, res) {
   req.body.user = req.user._id;
 
-  Stock.create(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  let stock = new Stock(req.body);
+  stock.save(function(err, model) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(model);
+    }
+  });
 }
 
-// Updates an existing Stock in the DB
-export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
 
-  Stock.findById(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
-}
 
 // Deletes a Stock from the DB
 export function destroy(req, res) {
-  Stock.findById(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  return Stock
+    .findOneAndRemove(req.params.id)
+    .exec(function(err, model) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(model);
+      }
+    });
 }

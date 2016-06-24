@@ -7,8 +7,7 @@ angular
     return {
       'controller'  : 'ItemController',
       'bindToController' : {
-        'model' : '=',
-        'getmodel' : '='
+        'model' : '='
       },
       'controllerAs' : '$ctrl',
       'restrict' : 'E',
@@ -22,6 +21,13 @@ angular
           var e = $compile(html)(scope);
 
           element.append(e);
+
+          // scope.$ctrl.parent = parent;
+          //
+          // var html ='<div class="' + scope.$ctrl.model.type + '-' + scope.$ctrl.model.subtype + '"></div>';
+          // var e = $compile(html)(scope);
+          //
+          // element.append(e);
         }
       }
     };
