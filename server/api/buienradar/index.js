@@ -5,6 +5,6 @@ var controller = require('./buienradar.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.get('/latitude/:latitude/longitude/:longitude', controller.index);
 
 module.exports = router;

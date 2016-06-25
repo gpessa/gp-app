@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import request from 'request';
 
-function parseResponse(response){
+function parseResponse(response) {
   var result = {};
   result.data = [];
 
@@ -12,14 +12,14 @@ function parseResponse(response){
   response.forEach((r) => {
     r = r.trim().split('|');
 
-    if(r[1]){
+    if (r[1]) {
       let rainfall = parseFloat(r[0]);
       let label = r[1];
-      rainfall = Math.pow(10, ((rainfall -109) / 32)) ;
+      rainfall = Math.pow(10, ((rainfall - 109) / 32));
 
       result.data.push({
-        'time' : label,
-        'rainfall' : rainfall
+        'time': label,
+        'rainfall': rainfall
       })
     }
   });
@@ -29,20 +29,21 @@ function parseResponse(response){
 
 // Gets a list of Cigarettes
 exports.index = function(req, res) {
-  var urlrequest = "http://gps.buienradar.nl/getrr.php?lat=" + req.body.lat + "&lon=" + req.body.lon;
+  var urlrequest = "http://gps.buienradar.nl/getrr.php?lat=" + req.params.latitude + "&lon=" + req.params.longitude;
 
   request({
-    json:false,
+    json: false,
     url: urlrequest, //URL to hit
     method: 'GET'
-  }, function(error, response, body){
+  }, function(error, response, body) {
 
-    if(error)
+    if (error) {
       res.status(404).send({
-        'message' : 'Service not available'
+        'message': 'Service not available'
       });
-
-    response.body = parseResponse(response.body);
-    res.status(response.statusCode).json(response.body);
+    } else {
+      response.body = parseResponse(response.body);
+      res.status(response.statusCode).json(response.body);
+    }
   });
 };

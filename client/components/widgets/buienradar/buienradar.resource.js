@@ -3,10 +3,9 @@
 (function() {
 
   function BuienradarResource($resource) {
-    return $resource('/api/buienradar', {}, {
-      get: {
-        method: 'GET'
-      }
+    return $resource('/api/buienradar/latitude/:latitude/longitude/:longitude', {
+      latitude : '@latitude',
+      longitude : '@longitude'
     });
   }
 

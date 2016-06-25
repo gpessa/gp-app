@@ -1,14 +1,11 @@
 .list-empty{
-  padding-top: 10px;
-  padding-bottom: 4px;
+  padding: 10px 0;
   text-align: center;
 }
 
 ul.list{
   @include  list-unstyled;
   margin: 0;
-  margin-left: -$padding-base-horizontal;
-  margin-right: -$padding-base-horizontal;
 
   &:not(.ng-hide) + .list:not(.ng-hide){
     margin-top: $line-height-computed;
@@ -31,10 +28,8 @@ ul.list{
 
     &.extra{
       display: block;
-      padding: 10px 0;
+      padding: $grid-gutter-width / 2;
       font-size: $font-size-small;
-      margin-left: ($grid-gutter-width / 2) + 38;
-      margin-right: $grid-gutter-width / 2;
     }
 
     &.header{

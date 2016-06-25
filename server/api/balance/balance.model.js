@@ -3,33 +3,33 @@
 import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 
-var BalanceReportSchema  = new Schema({
-  saving : Number,
-  current : Number,
-  date : Date
+var BalanceReportSchema = new Schema({
+  'saving': Number,
+  'current': Number,
+  'date': Date
+}, {
+  'toJSON': {
+    'virtuals': true
+  }
 });
 
 BalanceReportSchema
-  .set('toJSON', { virtuals: true });
-
-BalanceReportSchema
   .virtual('total')
-  .get(function() { return this.saving + this.current; });
-
-
+  .get(function() {
+    return this.saving + this.current; });
 
 var BalanceSchema = new Schema({
-  user : {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  reports : {
+  reports: {
     type: [BalanceReportSchema],
     default: []
   }
-},{
+}, {
   toObject: {
-    transform: function (doc, ret, options) {
+    transform: function(doc, ret, options) {
       delete ret.user;
     }
   }

@@ -31,13 +31,15 @@ angular
         scope.get = (coordinates) => {
           item.toggleLoading();
 
-          scope.buienradar = new BuienradarResource({
-            'lat' : coordinates.coords.latitude,
-            'lon' : coordinates.coords.longitude
-          });
-
-          scope.buienradar
-            .$get()
+          scope.buienradar = BuienradarResource
+            .get({
+              'latitude' : coordinates.coords.latitude,
+              'longitude' : coordinates.coords.longitude
+            })
+            .$promise
+            .then((result) => {
+              scope.buienradar.data = result.data;
+            })
             .catch(error => scope.error = error)
             .finally(() => item.toggleLoading());
         };

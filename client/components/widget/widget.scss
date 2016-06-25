@@ -23,13 +23,15 @@ $widget-background : #fff;
     }
   }
 
+  .widget-loading{
+
+    padding: 50px 0;
+  }
+
   .widget-body{
     position: relative;
 
     .widget-body-top-button{
-      margin-left: -$padding-base-horizontal;
-      margin-right: -$padding-base-horizontal;
-      margin-top: -$padding-base-vertical;
     }
   }
 
@@ -37,7 +39,6 @@ $widget-background : #fff;
   .widget-body,
   .widget-settings{
     background: $semi-transparent-bg;
-    padding: $padding-base-vertical $padding-base-horizontal;
   }
 
   .widget-footer{

@@ -28,7 +28,8 @@ function responseWithDecoratedResult(res, statusCode){
         yahooFinance.snapshot({
           fields: FIELDS,
           symbols: SYMBOLS
-        }, function (err, result) {
+        })
+        .then(function(result) {
           if (err) {
             res.status(404).send({
               'message' : 'Service not available'

@@ -54,16 +54,19 @@
   </li>
 
   <li class="list_item extra" ng-if="balance.reports.length">
-    <c3chart bindto-id="balance" chart-x="x" show-labels="false" chart-columns="columns" chart-data="balance.reports" padding-top="20" >
+    <c3chart bindto-id="balance"
+             chart-x="x"
+             chart-columns="columns"
+             chart-data="balance.reports"
+             padding-left="75" >
       <chart-size chart-height="200" />
       <chart-legend show-legend="false" />
-      <chart-tooltip show-tooltip="true" />
       <chart-colors color-function="colors" />
-      <chart-points point-radius="2" />
       <chart-axis>
-        <chart-axis-x axis-type="timeseries" />
-        <chart-axis-y axis-type="number" axis-min="{{min}}" />
+        <chart-axis-x axis-type="timeseries"/>
         <chart-axis-x-tick tick-format-function="formatDate" />
+
+        <chart-axis-y axis-type="number" axis-min="{{min}}"/>
         <chart-axis-y-tick tick-format-function="formatTotal" />
       </chart-axis>
     </c3chart>
