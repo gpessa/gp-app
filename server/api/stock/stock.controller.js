@@ -10,6 +10,7 @@ function decorateResult(stocks){
   if (stocks) {
     var FIELDS = ['n', 'c6', 'c1', 'c', 'p2', 'b', 'v', 'a2', 't1', 'g', 'h', 'b3'];
     var SYMBOLS = stocks.map(stock => stock.symbol).filter(stock => { return !!stock; });
+
     var promise = new Promise(function(resolve, reject) {
       yahooFinance
         .snapshot({
@@ -59,11 +60,9 @@ export function create(req, res) {
 
   let stock = new Stock(req.body);
   stock.save(function(err, model) {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(model);
-    }
+    let response = err ? err : model;
+    let code = err ? 500 : 200;
+    res.status(code).send(response);
   });
 }
 
@@ -74,10 +73,8 @@ export function destroy(req, res) {
   return Stock
     .findOneAndRemove(req.params.id)
     .exec(function(err, model) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).send(model);
-      }
+      let response = err ? err : model;
+      let code = err ? 500 : 200;
+      res.status(code).send(response);
     });
 }

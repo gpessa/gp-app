@@ -13,13 +13,13 @@ angular
 
         scope.getIcon = (icon) => {
           return {
-            'clear-day'           : 'iw-sun-1',
-            'clear-night'         : 'iw-moon-1',
-            'snow'                : 'iw-snow',
-            'partly-cloudy-day'   : 'iw-partly-cloudy-1',
-            'partly-cloudy-night' : 'iw-partly-cloudy-3',
-            'rain'                : 'iw-heavy-rain-1',
-            'cloudy'              : 'iw-mostly-cloudy-2'
+            'clear-day'           : 'wi wi-day-sunny',
+            'clear-night'         : 'wi wi-night-clear',
+            'snow'                : 'wi wi-snow',
+            'partly-cloudy-day'   : 'wi wi-day-cloudy',
+            'partly-cloudy-night' : 'wi wi-night-alt-cloudy',
+            'rain'                : 'wi wi-rain',
+            'cloudy'              : 'wi wi-cloudy'
           }[icon];
         };
 

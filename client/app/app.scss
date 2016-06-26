@@ -1,11 +1,12 @@
 $icon-font-path:       "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 $fa-font-path:         "../bower_components/font-awesome/fonts";
-$weather-font-path:    "../assets/fonts";
+$wi-path:              "../bower_components/weather-icons/font";
 
 
 @import '../components/css/_variables.scss';
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 @import '../bower_components/font-awesome/scss/font-awesome';
+@import '../bower_components/weather-icons/sass/weather-icons.scss';
 
 // Component styles are injected through grunt
 /* inject:scss */
@@ -21,7 +22,6 @@ $weather-font-path:    "../assets/fonts";
 @import '../components/css/list';
 @import '../components/css/mixins';
 @import '../components/css/variables';
-@import '../components/css/weather-icon';
 @import '../components/footer/footer';
 @import '../components/icon-picker/icon-picker';
 @import '../components/item/item';

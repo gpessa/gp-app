@@ -1,7 +1,7 @@
 <div ng-show="!error">
-  <div class="row">
+  <div class="widget-forecast__header row">
     <div class="col-md-3">
-      <i class="iw iw-4x {{getIcon(forecast.currently.icon)}}"></i>
+      <i class="widget-forecast__big_icon {{getIcon(forecast.currently.icon)}}"></i>
     </div>
 
     <div class="col-md-9">
@@ -30,7 +30,7 @@
       <div class="list_item_data">
         <div class="row">
           <div class="col-md-1">
-            <i class="iw {{getIcon(day.icon)}}"></i>
+            <i class="{{getIcon(day.icon)}}"></i>
           </div>
           <div class="col-md-7">{{day.time * 1000 | date:'EEEE' | capitalize}}</div>
           <div class="col-md-2 text-right">{{day.temperatureMin | number : 0}}°</div>
