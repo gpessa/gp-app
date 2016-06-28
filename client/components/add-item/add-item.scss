@@ -26,7 +26,7 @@
 
       > a {
         color: $dropdown-link-color;
-        background: $semi-transparent-bg;
+        background: $semi-transparent-bg-light;
 
         &:hover {
           border-color: $nav-tabs-link-hover-border-color $nav-tabs-link-hover-border-color $nav-tabs-border-color;
@@ -38,7 +38,7 @@
         &:focus,
         &:hover {
           color: $dropdown-link-color;
-          background: $semi-transparent-bg-light;
+          background: $semi-transparent-bg-lighter;
           border-bottom-color: transparent;
         }
       }
@@ -46,7 +46,7 @@
   }
 
   .tab-content {
-    background: $semi-transparent-bg-light;
+    background: $semi-transparent-bg-lighter;
     color: $dropdown-link-color;
 
     .list-inline {

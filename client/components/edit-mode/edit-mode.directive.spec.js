@@ -23,26 +23,12 @@ describe('Directive: editMode', function() {
     sinon.spy(editMode, 'toggle');
   }));
 
-  it('should create a link', function() {
-    compileDirective('<edit-mode></edit-mode>');
-
-    expect(element.find('a').length)
-      .to.equal(1);
-  });
-
   it('should toggle the editMode on click on the link', function() {
-    compileDirective('<edit-mode></edit-mode>');
-    element.find('a').click();
+    compileDirective('<a edit-mode>test</a>');
+    element.click();
 
     expect(editMode.toggle.calledOnce)
       .to.equal(true);
-  });
-
-  it('should have the appropriate content', function() {
-    compileDirective('<edit-mode>test</edit-mode>');
-
-    expect(element.find('a').text())
-      .to.equal('test');
   });
 
 });

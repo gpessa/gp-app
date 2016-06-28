@@ -9,8 +9,8 @@ $brand-info:                #5bc0de;
 $brand-warning:             #f0ad4e;
 $brand-danger:              #FB6D69;
 
-$semi-transparent-bg:       rgba(255,255,255,0.3);
-$semi-transparent-bg-light: rgba(255,255,255,0.9);
+$semi-transparent-bg-light:       rgba(255,255,255,0.3);
+$semi-transparent-bg-lighter: rgba(255,255,255,0.9);
 
 $input-bg:                  rgba(255, 255, 255, 0.3);
 $input-group-addon-bg:      rgba(255, 255, 255, 0.4);
@@ -118,7 +118,7 @@ $grid-gutter-width:         30px;
 
 
 //== Dropdowns
-$dropdown-bg:                    $semi-transparent-bg-light;
+$dropdown-bg:                    $semi-transparent-bg-lighter;
 $dropdown-border:                transparent;
 $dropdown-fallback-border:       transparent;
 $dropdown-divider-bg:            #e5e5e5;

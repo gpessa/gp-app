@@ -3,13 +3,13 @@
   padding-bottom: $item-margin;
 
   .wrapper-btn{
-    @include button-variant($semi-transparent-bg-light, $semi-transparent-bg, transparent);
+    @include button-variant($semi-transparent-bg-lighter, $semi-transparent-bg-light, transparent);
     @extend .btn;
     @extend .btn-xs;
   }
 
   .wrapper-placeholder{
-    border-top: 2px dashed $semi-transparent-bg;
+    border-top: 2px dashed $semi-transparent-bg-light;
     margin: $item-margin $grid-gutter-width;
   }
 
@@ -24,7 +24,7 @@
     }
 
     &.wrapper-empty{
-      border: 2px dashed $semi-transparent-bg;
+      border: 2px dashed $semi-transparent-bg-light;
     }
   }
 }
