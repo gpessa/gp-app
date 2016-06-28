@@ -21,9 +21,9 @@ angular
           scope.app.pages.push(angular.copy(simpleWrapper));
           scope.app
             .$save()
-            .then(function(page){
-              this.$state.href('/page/' + page._id);
-            }.bind(this))
+            .then((page) => {
+              scope.changeState(page._id);
+            });
         };
 
         scope.save = () => {
@@ -33,6 +33,10 @@ angular
         scope.remove = (page) => {
           scope.app.pages.remove(page);
           scope.app.$save();
+        };
+
+        scope.changeState = (state) => {
+          this.$state.href('/page/' + state);
         };
 
         scope.isActive = (route) => {

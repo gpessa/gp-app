@@ -19,7 +19,21 @@ describe('Controller: OauthButtonsCtrl', function() {
   }));
 
   it('should attach loginOauth', function() {
-    expect(OauthButtonsCtrl.loginOauth)
-      .to.be.a('function');
+    expect(OauthButtonsCtrl.loginOauth).to.be.a('function');
   });
+
+  it('should redirect to the right login page', function() {
+    OauthButtonsCtrl.type = 'connect';
+    OauthButtonsCtrl.loginOauth('facebook');
+
+    expect($window.location.href).to.equal('/auth/facebook/connect');
+  });
+
+  it('should redirect to the right connect page', function() {
+    OauthButtonsCtrl.type = 'login';
+    OauthButtonsCtrl.loginOauth('facebook');
+
+    expect($window.location.href).to.equal('/auth/facebook');
+  });
+
 });

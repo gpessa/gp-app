@@ -11,11 +11,6 @@ angular
       'link': function(scope) {
         scope.editMode = editMode;
         scope.availableItems = availableItems;
-
-        scope.$watch('availableItems.Widget', function(model) {
-          scope.modelAsJson = angular.toJson(model, true);
-        }, true);
-
       }
     };
   });

@@ -23,32 +23,8 @@ describe('Directive: oauthButtons', function() {
 
   it('should contain anchor buttons', function() {
     compileDirective('<oauth-buttons></oauth-buttons>');
-    expect(element.find('a.btn.btn-social')
-        .length)
+    expect(element.find('a.btn').length)
       .to.be.at.least(1);
   });
 
-  it('should evaluate and bind the classes attribute to scope.classes', function() {
-    parentScope.scopedClass = 'scopedClass1';
-    compileDirective('<oauth-buttons classes="testClass1 {{scopedClass}}"></oauth-buttons>');
-    expect(elementScope.classes)
-      .to.equal('testClass1 scopedClass1');
-  });
-
-  it('should bind scope.classes to class names on the anchor buttons', function() {
-    compileDirective('<oauth-buttons></oauth-buttons>');
-    // Add classes
-    elementScope.classes = 'testClass1 testClass2';
-    elementScope.$digest();
-    expect(element.find('a.btn.btn-social.testClass1.testClass2')
-        .length)
-      .to.be.at.least(1);
-
-    // Remove classes
-    elementScope.classes = '';
-    elementScope.$digest();
-    expect(element.find('a.btn.btn-social.testClass1.testClass2')
-        .length)
-      .to.equal(0);
-  });
 });

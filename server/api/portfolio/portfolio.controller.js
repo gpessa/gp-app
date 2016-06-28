@@ -72,61 +72,6 @@ function decorateResult(portfolios){
   });
 
   return promise;
-  /**
-  if(SYMBOLS.length){
-
-    yahooFinance.snapshot({
-      fields: FIELDS,
-      symbols: SYMBOLS
-    })
-    .then(function(result) {
-      if (err) {
-        res.status(404).send({
-          'message' : 'Service not available'
-        });
-      } else {
-        portfolios = portfolios.map(function(portfolio, index){
-
-          portfolio.transactions = portfolio.transactions.map(function(transaction){
-            var marketprice = _.filter(result, {'symbol' : transaction.symbol})[0].bid;
-            var value  = (transaction.sellprice || marketprice);
-            var total  = (transaction.operation === 'sell') ? 0 : (value * transaction.quantity);
-            var status = (transaction.operation === 'sell' || transaction.quantity === 0) ? 'close' : 'open';
-            var delta  = (value - transaction.buyprice) * transaction.quantity;
-
-            transaction = transaction.toObject();
-            transaction = _.extend(transaction, {
-              'marketprice' : marketprice,
-              'value' : value,
-              'total' : total,
-              'delta' : delta,
-              'status' : status
-            })
-            return transaction;
-          });
-
-          var txcost = _.sumBy(portfolio.transactions, function(t) { return t.txcost; });
-          var total = _.sumBy(portfolio.transactions, function(t) { return t.total; });
-          var delta = _.sumBy(portfolio.transactions, function(t) { return t.delta; });
-          var overralreturn = delta - txcost;
-
-          portfolio = portfolio.toObject();
-
-          portfolio.recap = {
-            'txcost' : txcost,
-            'total' : total,
-            'delta' : delta,
-            'overralreturn' : overralreturn
-          }
-
-          return portfolio;
-        });
-        res.status(200).json(portfolios);
-        return portfolios;
-      }
-    });
-  }
-  **/
 }
 
 
