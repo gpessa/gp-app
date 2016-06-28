@@ -14,7 +14,7 @@
     }
   }
 
-  .add-item-item {
+  .add-item__item {
     @include button-variant($dropdown-link-color, transparent, transparent);
   }
 

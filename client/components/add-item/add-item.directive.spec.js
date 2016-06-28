@@ -49,7 +49,7 @@ describe('Directive: addItem', function() {
 
     it('should have at least a widget', function() {
       compileDirective('<add-item></add-item>');
-      expect(element.find('.add-item-item').length)
+      expect(element.find('.add-item__item').length)
         .to.be.at.least(1);
     });
   });

@@ -4,7 +4,7 @@
     <uib-tab index="$index" heading="{{key}}" ng-repeat="(key, itemren) in availableItems">
       <ul class="list-inline"  ng-if="itemren.length" dnd-list="itemren" dnd-disable-if="true">
         <li ng-repeat="item in itemren" dnd-draggable="item" ng-if="!item.hidden">
-          <a class="btn add-item-item" >
+          <a class="btn add-item__item" >
             <i class="fa-fw {{item.icon}}"></i>
             <div class="small">{{item.attributes.name}}</div>
           </a>
