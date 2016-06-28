@@ -10,10 +10,9 @@ angular
         'onSelect' : '&',
         'icon' : '='
       },
-      'replace' : true,
       'link' : function(scope){
 
-        scope.open = function (size) {
+        scope.open = function () {
           var modalInstance = $uibModal.open({
             templateUrl: 'icon-picker-modal.html',
             controller: 'IconPickerModalController',
@@ -24,7 +23,7 @@ angular
 
           modalInstance.result.then(function (icon) {
             scope.icon = 'fa ' + icon;
-            scope.onSelect(100);
+            scope.onSelect();
           });
         };
       }

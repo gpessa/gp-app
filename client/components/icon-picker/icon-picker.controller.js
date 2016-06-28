@@ -7,5 +7,5 @@ angular
 
     this.select = (icon) => {
       $uibModalInstance.close(icon);
-    }
-  })
+    };
+  });
