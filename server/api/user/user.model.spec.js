@@ -89,9 +89,9 @@ describe('User Model', function() {
       });
     });
 
-    describe('given user provider is github', function() {
+    describe('given user provider is withings', function() {
       beforeEach(function() {
-        user.provider = 'github';
+        user.provider = 'withings';
       });
 
       it('should succeed when saving without an email', function() {
@@ -172,9 +172,9 @@ describe('User Model', function() {
       });
     });
 
-    describe('given user provider is github', function() {
+    describe('given user provider is withings', function() {
       beforeEach(function() {
-        user.provider = 'github';
+        user.provider = 'withings';
       });
 
       it('should succeed when saving without a password', function() {

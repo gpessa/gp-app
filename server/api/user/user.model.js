@@ -11,7 +11,14 @@ var UserSchema = new Schema({
   name: String,
   email: {
     type: String,
-    lowercase: true
+    lowercase: true,
+    required: function() {
+      if (authTypes.indexOf(this.provider) === -1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   role: {
     type: String,
@@ -88,6 +95,9 @@ UserSchema
   .path('email')
   .validate(function(value, respond) {
     var self = this;
+    if (authTypes.indexOf(this.provider) !== -1) {
+      return respond(true);
+    }
     return this.constructor.findOne({ email: value }).exec()
       .then(function(user) {
         if (user) {
