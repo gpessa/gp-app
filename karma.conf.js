@@ -13,7 +13,7 @@ module.exports = function(config) {
       mocha: {
         timeout: 5000 // set default mocha spec timeout
       }
-    },
+    }, 
 
     // list of files / patterns to load in the browser
     files: [
