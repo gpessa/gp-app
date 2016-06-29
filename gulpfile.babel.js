@@ -621,6 +621,9 @@ gulp.task('mocha:coverage', cb => {
               cb);
 });
 
+gulp.task('pre-commit', ['test']);
+
+
 // Downloads the selenium webdriver
 gulp.task('webdriver_update', webdriver_update);
 
