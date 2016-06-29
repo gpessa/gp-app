@@ -55,5 +55,6 @@ class NavbarController {
 
 }
 
-angular.module('gpAppApp')
+angular
+  .module('gpAppApp')
   .controller('NavbarController', NavbarController);

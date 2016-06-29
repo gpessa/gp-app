@@ -19,8 +19,6 @@
       ng-submit="item.saveSettings(form)">
 </form>
 
-<div class="widget-loading" ng-if="item.isItemLoading">
-  <div class="spinner"></div>
-</div>
+<spinner is-loading="item.isItemLoading">
 
 <div class="widget-footer"></div>

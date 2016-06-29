@@ -13,4 +13,5 @@
   angular
     .module('gpAppApp')
     .factory('PagesResource', PagesResource);
+
 })();

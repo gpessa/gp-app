@@ -1,32 +1,32 @@
 'use strict';
 
-(function () {
+(function() {
 
   var schema = {
-    'type' : 'object',
-    'properties' : {
-        'attributes' : {
-          'title' : 'Attributes',
-          'type' : 'object',
-          'properties' : {
-            'name' : {
-              'type'  : 'string',
-              'title' : 'Name'
-            },
-            'dimension' : {
-              'type'  : 'number',
-              'title' : 'Dimension',
-              'enum' : [1,2,3,4,5,6,7,8,9,10,11,12]
-            }
+    'type': 'object',
+    'properties': {
+      'attributes': {
+        'title': 'Attributes',
+        'type': 'object',
+        'properties': {
+          'name': {
+            'type': 'string',
+            'title': 'Name'
+          },
+          'dimension': {
+            'type': 'number',
+            'title': 'Dimension',
+            'enum': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
           }
         }
+      }
     }
   };
 
   var formcontrols = ['*', {
-      type: 'submit',
-      title: 'Save',
-      style: 'btn btn-block btn-primary'
+    type: 'submit',
+    title: 'Save',
+    style: 'btn btn-block btn-primary'
   }];
 
   class ItemController {
@@ -39,16 +39,12 @@
 
       this.isItemLoading = false;
       this.isSettingsOpen = false;
-
-      if(this.getmodel){
-        this.get();
-      }
     }
 
-    addConfigurations(property){
+    addConfigurations(property) {
       this.schema.properties.configuration = {
-        'type' : 'object',
-        'title' : 'Configuration',
+        'type': 'object',
+        'title': 'Configuration',
         'properties': {}
       };
       angular.extend(this.schema.properties.configuration.properties, property);
@@ -69,22 +65,18 @@
       }
     }
 
-    get(){
-      this.model.$get();
-    }
-
-    remove(){
+    remove() {
       this.parent.model.children.remove(this.model);
       this.parent.save();
       this.model.$remove();
     }
 
-    save(){
+    save() {
       this.model.$save();
     }
   }
 
   angular.module('gpAppApp')
-         .controller('ItemController', ItemController);
+    .controller('ItemController', ItemController);
 
 })();
