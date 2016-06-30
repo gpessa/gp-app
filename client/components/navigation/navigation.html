@@ -8,7 +8,7 @@
       </a>
     </li>
 
-    <li ng-if="editMode.enabled" class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: isActive('/' + page.id)}">
+    <li ng-if="editMode.enabled" class="navigation-page" ng-repeat="page in app.pages">
       <a class="navigation-page-delete" icon="fa fa-times-circle" ng-click="remove(page)"></a>
       <a>
         <icon-picker icon="page.settings.icon" on-select="save(page)"></icon-picker>
@@ -18,8 +18,8 @@
       </a>
     </li>
 
-    <li ng-if="!editMode.enabled" class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: isActive('/page/' + page.id)}">
-      <a ng-href="/page/{{page.status}}">
+    <li ng-if="!editMode.enabled" class="navigation-page" ng-repeat="page in app.pages" ui-sref-active="active" >
+      <a ui-sref="page({status : page.status})">
         <i class="{{page.settings.icon || 'fa fa-file-o'}}"></i>
         <small>
           {{page.attributes.name}}

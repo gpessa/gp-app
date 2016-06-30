@@ -11,7 +11,7 @@ angular
         'schema' : '=',
         'onSave' : '='
       },
-      'link' : function(scope, element, attr){
+      'link' : function(scope){
 
         scope.formcontrols = ['*', {
           type: 'submit',
@@ -21,9 +21,9 @@ angular
 
         scope.save = (form) => {
           if (form.$valid) {
-            scope.onSave()
+            scope.onSave();
           }
-        }
+        };
       }
     };
   });

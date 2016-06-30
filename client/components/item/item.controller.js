@@ -66,7 +66,7 @@
       this.toggleLoading();
       this.model.$save().then(() => {
         this.toggleLoading();
-      })
+      });
     }
   }
 

@@ -50,6 +50,19 @@ describe('Controller: ItemController', function() {
       .to.equal(true);
   });
 
+  it('should add the new setting in the schema if addSettings is called', function() {
+    let property = {
+      'threshold' : {
+        type: 'number',
+        title: 'Threshold'
+      }
+    };
+    ItemController.addSettings(property);
+
+    expect(ItemController.schema.properties.settings.properties)
+      .to.deep.equal(property);
+  });
+
 
 
 

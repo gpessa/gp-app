@@ -38,10 +38,6 @@ angular
         scope.changeState = (state) => {
           this.$state.href('/page/' + state);
         };
-
-        scope.isActive = (route) => {
-          return route === $location.path();
-        };
       }
     };
   });
