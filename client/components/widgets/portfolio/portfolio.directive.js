@@ -14,7 +14,7 @@ angular
 
         var removeWatch = angular.noop;
 
-        item.addConfigurations({
+        item.addSettings({
           'taxation' : {
             'type' : 'number',
             'title' : 'Taxation',

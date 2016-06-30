@@ -11,7 +11,7 @@ angular
       'link' : function (scope, attr, element, item) {
         scope.item = item;
 
-        item.addConfigurations({
+        item.addSettings({
           'threshold' : {
             type: 'number',
             title: 'Threshold'

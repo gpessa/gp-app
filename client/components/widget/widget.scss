@@ -2,12 +2,9 @@ $widget-background : #fff;
 
 .widget{
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.35);
+  position: relative;
 
-  &.over{
-    opacity: 0.4;
-  }
-
-  .widget-header{
+  .widget__header{
     background-color: $widget-background;
     padding: $padding-base-vertical $padding-base-horizontal;
 
@@ -16,32 +13,24 @@ $widget-background : #fff;
       color:#000;
     }
 
-    .widget-header-buttons{
-      float: right;
-      margin-top: -$padding-large-vertical / 2;
-      margin-right: -$padding-large-horizontal / 2;
+    .widget__actions{
+      position:absolute;
+      right:0;
+      top:0;
     }
   }
 
-  .widget-loading{
-
-    padding: 50px 0;
-  }
-
-  .widget-body{
+  .widget__body{
+    background: $semi-transparent-bg-light;
     position: relative;
 
-    .widget-body-top-button{
+    .widget__settings{
+      padding: $padding-base-vertical $padding-base-horizontal;
+      display:block;
     }
   }
 
-  .widget-loading,
-  .widget-body,
-  .widget-settings{
-    background: $semi-transparent-bg-light;
-  }
-
-  .widget-footer{
+  .widget__footer{
     background-color: $widget-background;
     padding: $padding-base-vertical $padding-base-horizontal;
 

@@ -5,7 +5,7 @@
 <div class="text-center">
   <h5>Today smoked</h5>
 
-  <h1 ng-class="{'text-danger' : cigarettes.days[0].count > item.model.configuration.threshold}">{{cigarettes.days[0].count || 0}}</h1>
+  <h1 ng-class="{'text-danger' : cigarettes.days[0].count > item.model.settings.threshold}">{{cigarettes.days[0].count || 0}}</h1>
 </div>
 
 <hr ng-if="cigarettes.days[0].length"/>

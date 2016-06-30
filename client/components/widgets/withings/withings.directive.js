@@ -12,7 +12,7 @@ angular
         scope.chartConfiguration = angular.copy(chartConfiguration);
         scope.formats = formats;
 
-        item.addConfigurations({
+        item.addSettings({
           'limit' : {
             type: 'number',
             title: 'Limit'
@@ -52,7 +52,7 @@ angular
           item.toggleLoading();
 
           scope.withing = new WithingsResource({
-            'limit' : (item.model.configuration ? item.model.configuration.limit : undefined)
+            'limit' : (item.model.settings ? item.model.settings.limit : undefined)
           });
 
           scope.withing

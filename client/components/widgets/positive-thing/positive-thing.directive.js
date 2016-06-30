@@ -10,7 +10,7 @@ angular
       'restrict' : 'C',
       'scope'  : true,
       'link' : function(scope, element, attr, item) {
-        item.addConfigurations({
+        item.addSettings({
           'limit' : {
             type: 'number',
             title: 'Positive things to show'
@@ -55,7 +55,7 @@ angular
 
         scope.get = () => {
           item.toggleLoading();
-          scope.positiveThings = PositiveThingResource.query(item.model.configuration, () => item.toggleLoading());
+          scope.positiveThings = PositiveThingResource.query(item.model.settings, () => item.toggleLoading());
         };
 
         scope.get();

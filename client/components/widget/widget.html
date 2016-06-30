@@ -1,24 +1,21 @@
-<div class="widget-header">
+<div class="widget__header">
     <h4>
       {{item.model.attributes.name}} &nbsp;
-      <div class="widget-header-buttons">
+      <div class="widget__actions">
         <a class="btn btn-link btn-sm" icon="fa fa-cog"   ng-click="item.toggleSettings()"> </a>
         <a class="btn btn-link btn-sm" icon="fa fa-times" ng-click="item.remove()" ></a>
       </div>
   </h4>
 </div>
 
-<div class="widget-body" ng-show="!item.isSettingsOpen && !item.isItemLoading" ng-transclude=""></div>
+<div class="widget__body">
 
-<form name="form"
-      class="widget-settings"
-      ng-if="item.isSettingsOpen"
-      sf-schema="item.schema"
-      sf-form="item.formcontrols"
-      sf-model="item.model"
-      ng-submit="item.saveSettings(form)">
-</form>
+  <div ng-transclude="" ng-show="!item.isSettingsOpen && !item.isItemLoading"></div>
 
-<spinner is-loading="item.isItemLoading">
+  <spinner is-loading="item.isItemLoading"></spinner>
 
-<div class="widget-footer"></div>
+  <settings model="item.model" schema="item.schema" on-save="item.saveSettings" ng-if="item.isSettingsOpen" class="widget__settings"></settings>
+
+</div>
+
+<div class="widget__footer"></div>

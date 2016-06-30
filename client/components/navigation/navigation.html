@@ -11,7 +11,7 @@
     <li ng-if="editMode.enabled" class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: isActive('/' + page.id)}">
       <a class="navigation-page-delete" icon="fa fa-times-circle" ng-click="remove(page)"></a>
       <a>
-        <icon-picker icon="page.configuration.icon" on-select="save(page)"></icon-picker>
+        <icon-picker icon="page.settings.icon" on-select="save(page)"></icon-picker>
         <small>
           <input type="text" class="navigation-page-input" ng-blur="save(page)" placeholder="Name" ng-model="page.attributes.name" required="" pu-elastic-input=""/>
         </small>
@@ -20,7 +20,7 @@
 
     <li ng-if="!editMode.enabled" class="navigation-page" ng-repeat="page in app.pages" ng-class="{active: isActive('/page/' + page.id)}">
       <a ng-href="/page/{{page.status}}">
-        <i class="{{page.configuration.icon || 'fa fa-file-o'}}"></i>
+        <i class="{{page.settings.icon || 'fa fa-file-o'}}"></i>
         <small>
           {{page.attributes.name}}
         </small>

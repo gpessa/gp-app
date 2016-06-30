@@ -16,7 +16,7 @@ var ItemSchema = new Schema({
     "dimension"  : { type: Number, default: 12 },
     "name"  : String
   },
-  "configuration" : Object
+  "settings" : Object
 },{
   "toObject" : {
     "virtuals" : true,
