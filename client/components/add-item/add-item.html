@@ -1,5 +1,5 @@
 <div class="add-item" ng-show="editMode.enabled">
-{{editMode.enabled}}
+
   <uib-tabset type="tabs">
     <uib-tab index="$index" heading="{{key}}" ng-repeat="(key, itemren) in availableItems">
       <ul class="list-inline"  ng-if="itemren.length" dnd-list="itemren" dnd-disable-if="true">

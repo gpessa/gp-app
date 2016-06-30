@@ -9,11 +9,12 @@ describe('Directive: iconPicker', function() {
   var element, parentScope, elementScope;
 
   var compileDirective = function(template) {
-    inject(function($compile) {
+    inject(function($compile, $httpBackend) {
       element = angular.element(template);
       element = $compile(element)(parentScope);
       parentScope.$digest();
       elementScope = element.isolateScope();
+      $httpBackend.whenGET('app/account/login/login.html').respond(200, '');
     });
   };
 

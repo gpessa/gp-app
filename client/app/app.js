@@ -21,7 +21,25 @@ angular.module('gpAppApp', [
 ])
 
 .config(function($urlRouterProvider, $locationProvider) {
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise(function ($injector) {
+    var $state = $injector.get('$state');
+    var Auth = $injector.get('Auth');
+
+    Auth
+      .isLoggedIn(_.noop)
+      .then(is => {
+        if (is) {
+          $state.go('page');
+        } else {
+          $state.go('login');
+        }
+      });
+
+  });
+
+
+  // +$urlRouterProvider.otherwise('/page');
+
   $locationProvider.html5Mode(true);
 })
 
