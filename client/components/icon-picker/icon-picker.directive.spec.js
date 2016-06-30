@@ -5,6 +5,7 @@ describe('Directive: iconPicker', function() {
   // load the directive's module and view
   beforeEach(module('gpAppApp'));
   beforeEach(module('components/icon-picker/icon-picker.html'));
+  beforeEach(module('app/account/login/login.html'));
 
   var element, parentScope, elementScope;
 
@@ -14,7 +15,6 @@ describe('Directive: iconPicker', function() {
       element = $compile(element)(parentScope);
       parentScope.$digest();
       elementScope = element.isolateScope();
-      $httpBackend.whenGET('app/account/login/login.html').respond(200, '');
     });
   };
 

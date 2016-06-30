@@ -4,6 +4,7 @@ describe('Directive: editMode', function() {
 
   // load the directive's module and view
   beforeEach(module('gpAppApp'));
+  beforeEach(module('app/account/login/login.html'));
 
   var element, parentScope, elementScope, editMode;
 
@@ -13,7 +14,6 @@ describe('Directive: editMode', function() {
       element = $compile(element)(parentScope);
       parentScope.$digest();
       elementScope = element.isolateScope();
-      $httpBackend.whenGET('app/account/login/login.html').respond(200, '');
     });
   };
 
