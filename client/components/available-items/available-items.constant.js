@@ -65,6 +65,13 @@ angular
       'attributes': {
         'name': 'Forecast'
       }
+    }, {
+      'icon': 'fa fa-bolt',
+      'type': 'widget',
+      'subtype': 'program',
+      'attributes': {
+        'name': 'Program'
+      }
     }],
     'Wrapper': [{
       'hidden': true,

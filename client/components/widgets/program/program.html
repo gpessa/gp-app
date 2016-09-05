@@ -1,0 +1,43 @@
+<uib-tabset type="pills" justified="true">
+  <uib-tab index="0" heading="Program">
+  </uib-tab>
+
+  <uib-tab index="1" heading="Programs">
+  </uib-tab>
+</uib-tabset>
+
+
+
+  <div class="widget-body-top-button">
+    <a ng-click="$ctrl.create()" class="btn btn-primary btn-block" icon="">Add program</a>
+  </div>
+
+  <div class="list-empty" ng-hide="$ctrl.programs.length">
+    No program found
+  </div>
+
+  <ul class="list" ng-repeat="program in $ctrl.programs">
+    <li class="list_item active">
+      <div class="list_item_btn">
+        <ul class="sub-menu-btn">
+          <li>
+            <a class="btn" icon="fa fa-trash" ng-click="$ctrl.addExercize(program)">Add exercize</a>
+          </li>
+          <li>
+            <a class="btn" icon="fa fa-star" ng-click="$ctrl.makeActive(program)">Make it active</a>
+          </li>
+          <li>
+            <a class="btn" icon="fa fa-trash" ng-click="$ctrl.remove(program)">Delete program</a>
+          </li>
+        </ul>
+      </div>
+      <div class="list_item_data widget-program__title">
+        <form ng-submit="$ctrl.save(program, forms['list' + $index])" name="forms.list{{$index}}" novalidate>
+          <div class="form-group">
+            <input class="form-control" placeholder="Program name" ng-model="program.name" name="name" type="text" required/>
+            <i class="fa fa-star widget-program__active" ng-if="program.active"></i>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>

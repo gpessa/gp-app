@@ -1,0 +1,12 @@
+.widget-program{
+
+}
+.widget-program__title{
+  position: relative;
+}
+.widget-program__active{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}

@@ -20,6 +20,8 @@ export default function(app) {
   app.use('/api/cigarette', require('./api/cigarette'));
   app.use('/api/withings', require('./api/withings'));
   app.use('/api/stock', require('./api/stock'));
+  app.use('/api/exercize', require('./api/exercize'));
+  app.use('/api/program', require('./api/program'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth').default);

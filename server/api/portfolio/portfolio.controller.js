@@ -23,6 +23,10 @@ function decorateResult(portfolios){
       var FIELDS = ['b'];
       var SYMBOLS = _.uniq(transactions.map(transaction => { return transaction.symbol; }));
 
+      if(!SYMBOLS.length){
+        resolve(portfolios);
+      }
+
       yahooFinance.snapshot({
         fields: FIELDS,
         symbols: SYMBOLS

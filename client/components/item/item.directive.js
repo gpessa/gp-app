@@ -16,7 +16,15 @@ angular
       'link' :{
         pre : function(scope, element, attrs, parent){
           scope.$ctrl.parent = parent;
-          var html = '<div class="' + scope.$ctrl.model.type + '"><div class="' + scope.$ctrl.model.type + '-' + scope.$ctrl.model.subtype + '"></div></div>';
+
+          let type = scope.$ctrl.model.type;
+          let subtype = scope.$ctrl.model.subtype;
+
+          var html = `<div class="${type}">\
+                        <${type}-${subtype} class="${type}-${subtype}">\
+                        </${type}-${subtype}>\
+                      </div>`;
+
           var e = $compile(html)(scope);
           element.append(e);
         }
